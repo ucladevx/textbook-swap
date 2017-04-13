@@ -1,0 +1,34 @@
+{
+  "name": "loops",
+  "version": "1.0.0",
+  "description": "An innovative way for college students to trade textbooks and save money though algorithmically discovered trade circles.",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ucladevx/textbook-swap.git"
+  },
+  "keywords": [
+    "loops",
+    "trade",
+    "textbook",
+    "college",
+    "ucla",
+    "devx"
+  ],
+  "author": "William Shao, Lawrence Chen, Aditya Raju, Karen Li, Suhani Ashok, Jerry Li",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ucladevx/textbook-swap/issues"
+  },
+  "homepage": "https://github.com/ucladevx/textbook-swap",
+  "dependencies": {
+    "chalk": "^1.1.3",
+    "dotenv": "^4.0.0",
+    "express": "^4.15.2",
+    "path": "^0.12.7"
+  }
+}

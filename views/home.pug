@@ -1,0 +1,12 @@
+doctype html
+html
+    head
+        meta(charset='utf-8')
+        title=title
+        link(rel='stylesheet' type="text/css" href="css/home.css")
+    body
+        - for(var i = 0; i < 4; i++){
+            h1(id='heading') #{title} Home Page
+        - }
+        a(href='/auth') Log in with Google
+        script(src='js/home.js')

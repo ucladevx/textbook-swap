@@ -40,8 +40,12 @@ app.use(express.static(path.join(__dirname, 'public')));
  * Primary app routes.
  */
 app.get('/', homeController.index);
-app.get('/auth', authController.login);
 
+
+/*
+ * API routes.
+ */
+// Nothing here for now!
 
 /**
  * Start Express server.

@@ -17,6 +17,11 @@ dotenv.load({ path: '.env' });
 const homeController = require('./controllers/home');
 
 /*
+ * Models (database)
+ */
+const initModel = require('./models/init');
+
+/*
  * API keys and Passport configuration.
  */
 //const passportConfig = require('./config/passport');
@@ -25,6 +30,11 @@ const homeController = require('./controllers/home');
  * Create Express server.
  */
 const app = express();
+
+/*
+ * Database initialization
+ */
+initModel.create_table();
 
 /*
  * Express configuration.

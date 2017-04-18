@@ -5,9 +5,9 @@
 'use strict';
 const pg = require('pg');
 
-exports.create_table = function(){
+exports.create_tables = function(){
     //TODO: Change username whenever you pull
-    const conString = 'postgres://jerrylinew:@localhost/loopsDB';
+    const conString = 'postgres://adityaraju:@localhost/loopsDB';
 
     pg.connect(conString, function (err, client, done) {
         if (err) {
@@ -22,11 +22,10 @@ exports.create_table = function(){
         for(var i = 0; i < queries.length; i++){
             client.query(queries[i], function (err, result) {
                 done();
-
                 if (err) {
                     return console.error('error happened during query', err)
                 }
-                console.log(result.rows);
+                //TODO: talk about error occurring here that all the tables might not be created here and it can go on to the next instruction (probably not a huge deal, because it will only happen once on startup)
             });
         }
     });

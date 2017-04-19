@@ -7,20 +7,21 @@ html
         link(rel='stylesheet' type="text/css" href="css/home.css")
         script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous")
     body
-        div(class="container" id="logo")
-            div(class="jumbotron")
-                h1(class="text-center") Logo
-        div(class="container" id="buttons")
-            span(id="signIn")
-                div(class="col-md-6 text-right")
-                    a(class="btn btn-default" href="/register" role="button") Sign Up
-                div(class="col-md-6 text-left")   
-                    a(class="btn btn-default" href="/login" role="button") Login
-            span(id="about")
-                div(class="col-md-4")
-                div(class="col-md-4 text-center")
-                    a(class="btn btn-default" href="#" role="button") About
-                div(class="col-md-4")
+        div(id="firstpage")
+            div(class="container" id="logo")
+                div(class="jumbotron")
+                    h1(class="text-center") Logo
+            div(class="container" id="buttons")
+                span(id="signIn")
+                    div(class="col-md-6 text-right")
+                        a(class="btn btn-default" href="/register" role="button") Sign Up
+                    div(class="col-md-6 text-left")   
+                        a(class="btn btn-default" href="/login" role="button") Login
+                span(id="about")
+                    div(class="col-md-4")
+                    div(class="col-md-4 text-center")
+                        a(class="btn btn-default" href="#" role="button") About
+                    div(class="col-md-4")
 
         a(href='/auth') Log in with Google
         script(src='js/home.js')

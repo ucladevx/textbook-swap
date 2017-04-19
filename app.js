@@ -36,8 +36,22 @@ const app = express();
 /*
  * Database initialization
  */
+
 initModel.create_tables();
-ownedBooks.add_book('Adi', 2);
+
+/*
+    test usage of the interface
+   also shows how to use next callback
+ */
+ownedBooks.add_book('Adi', 2, test_next);
+
+const ec = require('./error_codes.js');
+
+function test_next(result_code){
+    if (result_code == ec.owned_books_errors.OWNED_BOOK_ALREADY_EXISTS){
+        console.error("testing the use of test_next");
+    }
+}
 
 /*
  * Express configuration.

@@ -45,3 +45,76 @@ exports.add_book = function(user, book, next){
         });
     });
 };
+
+
+exports.remove_book = function(user, book, next){
+    /*
+     TODO: change this whenever you pull - We should think about changing the architecture so that
+     this is set when reading the config somehow
+     */
+    const conString = 'postgres://adityaraju:@localhost/loopsDB';
+
+    pg.connect(conString, function(err, client, done){
+        done();
+        if (err){
+            console.error("Error connection to client while querying owned_books table: ", err);
+            return next(error_codes.owned_books_errors.DB_CONNECTION_ERROR);
+        }
+
+        client.query("DELETE FROM owned_books WHERE user_id=$1::VARCHAR AND book_id=$2::INTEGER", [user, book], function(err, result){
+            if(err){
+                console.error("Error querying database", err);
+                return next(error_codes.owned_books_errors.DB_QUERY_ERROR);
+            }
+            return next(error_codes.owned_books_errors.DB_SUCCESS);
+        });
+    });
+};
+
+exports.get_owned_books = function(user, next){
+    /*
+     TODO: change this whenever you pull - We should think about changing the architecture so that
+     this is set when reading the config somehow
+     */
+    const conString = 'postgres://adityaraju:@localhost/loopsDB';
+
+    pg.connect(conString, function(err, client, done){
+        done();
+        if (err){
+            console.error("Error connection to client while querying owned_books table: ", err);
+            return next(error_codes.owned_books_errors.DB_CONNECTION_ERROR);
+        }
+
+        client.query("SELECT book_id FROM owned_books WHERE user_id=$1::VARCHAR", [user], function(err, result){
+            if(err){
+                console.error("Error querying database", err);
+                return next(error_codes.owned_books_errors.DB_QUERY_ERROR);
+            }
+            return next(error_codes.owned_books_errors.DB_SUCCESS, result.rows);
+        });
+    });
+};
+
+exports.get_owners = function(book, next){
+    /*
+     TODO: change this whenever you pull - We should think about changing the architecture so that
+     this is set when reading the config somehow
+     */
+    const conString = 'postgres://adityaraju:@localhost/loopsDB';
+
+    pg.connect(conString, function(err, client, done){
+        done();
+        if (err){
+            console.error("Error connection to client while querying owned_books table: ", err);
+            return next(error_codes.owned_books_errors.DB_CONNECTION_ERROR);
+        }
+
+        client.query("SELECT user_id FROM owned_books WHERE book_id=$1::INTEGER", [book], function(err, result){
+            if(err){
+                console.error("Error querying database", err);
+                return next(error_codes.owned_books_errors.DB_QUERY_ERROR);
+            }
+            return next(error_codes.owned_books_errors.DB_SUCCESS, result.rows);
+        });
+    });
+};

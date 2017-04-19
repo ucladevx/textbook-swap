@@ -1,3 +1,7 @@
-#heading{
-    color: red;
+#logo {
+	margin-top:50px;
+}
+
+[class*="col-"] {
+    margin-bottom: 15px;
 }

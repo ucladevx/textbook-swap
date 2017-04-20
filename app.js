@@ -68,7 +68,11 @@ app.get('/login/facebook',
 app.get('/login/facebook/return', 
   passport.authenticate('facebook', { failureRedirect: '/login' }),
   function(req, res) {
-    res.redirect('/');
+  	// successful authentication, redirect so user can see their profile
+  	console.log(req.user.displayName); 
+  	console.log(req.user.username);
+  	console.log(req.user.id);
+    res.redirect('/profile');
   });
 
 // TODO: implement "profile" view

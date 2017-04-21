@@ -6,7 +6,12 @@
     margin-bottom: 15px;
 }
 
-#firstpage {
+#first, #second {
 	height:100vh;
 	min-height:100vh;
+}
+
+.btn {
+	min-width: 80px;
+	min-height: 20px;
 }

@@ -6,7 +6,7 @@ const dotenv = require('dotenv'); // loads environment variables
 const path = require('path'); // utilities for working with file and directory paths
 const chalk = require('chalk'); // pretty command line colors
 var passport = require('passport');
-var Strategy = require('passport-facebook').Strategy;
+var FacebookStrategy = require('passport-facebook').Strategy;
 
 /*
  * TODO: Load environment variables from .env file, where API keys and passwords are configured.
@@ -18,11 +18,12 @@ dotenv.load({ path: '.env' });
  */
 const homeController = require('./controllers/home');
 // needed for Facebook authentication
-const passportController = require('./controllers/passport')(passport, Strategy);
+const passportController = require('./controllers/passport');
 
 /*
  * API keys and Passport configuration.
  */
+const passportConfig = require('./config/passport')(passport, FacebookStrategy);
 
 /*
  * Create Express server.
@@ -42,7 +43,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(require('morgan')('combined'));
 app.use(require('cookie-parser')());
 app.use(require('body-parser').urlencoded({ extended: true }));
-app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
+app.use(require('express-session')({ secret: 'keyboard', resave: false, saveUninitialized: false }));
 
 // Initialize Passport and restore authentication state, if any, from the
 // session.
@@ -62,42 +63,23 @@ app.get('/', homeController.index);
 // Redirect the user to Facebook for authentication.  When complete,
 // Facebook will redirect the user back to the application at '/login/facebook/return'
 app.get('/login/facebook',
-  passport.authenticate('facebook'));
+  passport.authenticate('facebook', { scope: ['public_profile', 'email']}));
 
 // Facebook will redirect the user to this URL after approval.  Finish the
 // authentication process by attempting to obtain an access token.  If
 // access was granted, the user will be logged in.  Otherwise,
 // authentication has failed.
 app.get('/login/facebook/return', 
-  passport.authenticate('facebook', { failureRedirect: '/login' }), function(req, res) {
-    // output the user profile info to console to verify
-    // req.user is the authenticated user
-    console.log(req.user.displayName);  // full name
-    console.log(req.user.username);  // username (undefined?)
-    console.log(req.user.id);  // user ID
-    // successful authentication, redirect so user can see their profile
-    res.redirect('/profile');
-});
+  passport.authenticate('facebook', { failureRedirect: '/login', scope: ['public_profile', 'email'] }), passportController.loginReturn);
 
 // Log out the user
-app.get('/logout/facebook', function(req, res){
-  req.logout();
-  res.redirect('/');
-});
+app.get('/logout/facebook', passportController.logout);
 
 // implement "profile" view
 app.get('/profile',
-  require('connect-ensure-login').ensureLoggedIn(),
-  function(req, res){
-    res.render('profile', { user: req.user });
-  });
+  require('connect-ensure-login').ensureLoggedIn(), passportController.profile);
 
-/* 
- * Facebook Authentication
- */
-// require('./controllers/passport')(passport, Strategy);
-
-/**
+/*
  * Start Express server.
  */
 app.listen(app.get('port'), function(){

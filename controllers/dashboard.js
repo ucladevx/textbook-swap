@@ -4,7 +4,5 @@
  */
 
 exports.index = function(req, res) {
-    res.render('dashboard', {
-        title: "Loops - Dashboard"
-    });
+    res.render('dashboard');
 };

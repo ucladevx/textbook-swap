@@ -27,6 +27,7 @@ exports.logout = function(req, res) {
 };
 
  // Strategy
+ // PROBLEM IS THAT WE ARE NOT INCLUDING THE FUNCTIONS ABOVE
 module.exports = function(passport, Strategy) {
   // Configure the Facebook strategy for use by Passport.
   //

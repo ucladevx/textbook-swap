@@ -17,7 +17,8 @@ dotenv.load({ path: '.env' });
  * Controllers (route handlers).
  */
 const homeController = require('./controllers/home');
-const passportController = require('./controllers/passport');
+// needed for Facebook authentication
+const passportController = require('./controllers/passport')(passport, Strategy);
 
 /*
  * API keys and Passport configuration.
@@ -94,8 +95,7 @@ app.get('/profile',
 /* 
  * Facebook Authentication
  */
-require('./controllers/passport')(passport, Strategy);
-
+// require('./controllers/passport')(passport, Strategy);
 
 /**
  * Start Express server.

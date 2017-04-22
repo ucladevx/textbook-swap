@@ -15,6 +15,7 @@ dotenv.load({ path: '.env' });
  * Controllers (route handlers).
  */
 const homeController = require('./controllers/home');
+const dashboardController = require('./controllers/dashboard')
 
 /*
  * API keys and Passport configuration.
@@ -40,7 +41,7 @@ app.use(express.static(path.join(__dirname, 'public')));
  * Primary app routes.
  */
 app.get('/', homeController.index);
-
+app.get('/dashboard', dashboardController.index);
 
 /*
  * API routes.

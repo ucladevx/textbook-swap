@@ -5,13 +5,14 @@ interface to query and modify the table owned_books
 'use strict';
 const pg = require('pg');
 const error_codes = require('../error_codes');
+ const conString = 'postgres://Jayendra:@localhost/loopsDB';
 
 exports.add_book = function(user, book, next){
     /*
     TODO: change this whenever you pull - We should think about changing the architecture so that
     this is set when reading the config somehow
     */
-    const conString = 'postgres://adityaraju:@localhost/loopsDB';
+   
 
     pg.connect(conString, function(err, client, done){
         done();
@@ -52,7 +53,7 @@ exports.remove_book = function(user, book, next){
      TODO: change this whenever you pull - We should think about changing the architecture so that
      this is set when reading the config somehow
      */
-    const conString = 'postgres://adityaraju:@localhost/loopsDB';
+   
 
     pg.connect(conString, function(err, client, done){
         done();
@@ -76,7 +77,6 @@ exports.get_owned_books = function(user, next){
      TODO: change this whenever you pull - We should think about changing the architecture so that
      this is set when reading the config somehow
      */
-    const conString = 'postgres://adityaraju:@localhost/loopsDB';
 
     pg.connect(conString, function(err, client, done){
         done();
@@ -100,7 +100,6 @@ exports.get_owners = function(book, next){
      TODO: change this whenever you pull - We should think about changing the architecture so that
      this is set when reading the config somehow
      */
-    const conString = 'postgres://adityaraju:@localhost/loopsDB';
 
     pg.connect(conString, function(err, client, done){
         done();

@@ -7,7 +7,7 @@ const pg = require('pg');
 
 exports.create_tables = function(){
     //TODO: Change username whenever you pull
-    const conString = 'postgres://adityaraju:@localhost/loopsDB';
+    const conString = 'postgres://Jayendra:@localhost/loopsDB';
 
     pg.connect(conString, function (err, client, done) {
         if (err) {

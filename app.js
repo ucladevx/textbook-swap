@@ -62,20 +62,28 @@ app.get('/login',
     res.render('login');
   });
 
+// Redirect the user to Facebook for authentication.  When complete,
+// Facebook will redirect the user back to the application at '/login/facebook/return'
 app.get('/login/facebook',
   passport.authenticate('facebook'));
 
+// Facebook will redirect the user to this URL after approval.  Finish the
+// authentication process by attempting to obtain an access token.  If
+// access was granted, the user will be logged in.  Otherwise,
+// authentication has failed.
 app.get('/login/facebook/return', 
   passport.authenticate('facebook', { failureRedirect: '/login' }),
   function(req, res) {
+  	// output the user profile info to console to verify
+  	// req.user is the authenticated user
+  	console.log(req.user.displayName);  // full name
+  	console.log(req.user.username);  // username (undefined?)
+  	console.log(req.user.id);  // user ID
   	// successful authentication, redirect so user can see their profile
-  	console.log(req.user.displayName); 
-  	console.log(req.user.username);
-  	console.log(req.user.id);
     res.redirect('/profile');
   });
 
-// TODO: implement "profile" view
+// implement "profile" view
 app.get('/profile',
   require('connect-ensure-login').ensureLoggedIn(),
   function(req, res){

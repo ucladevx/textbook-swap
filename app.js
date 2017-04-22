@@ -17,6 +17,7 @@ dotenv.load({ path: '.env' });
  * Controllers (route handlers).
  */
 const homeController = require('./controllers/home');
+const passportController = require('./controllers/passport');
 
 /*
  * API keys and Passport configuration.
@@ -57,11 +58,6 @@ app.get('/', homeController.index);
  * API routes.
  */
 // Define routes for Facebook authentication
-app.get('/login',
-  function(req, res){
-    res.render('login');
-  });
-
 // Redirect the user to Facebook for authentication.  When complete,
 // Facebook will redirect the user back to the application at '/login/facebook/return'
 app.get('/login/facebook',
@@ -72,16 +68,21 @@ app.get('/login/facebook',
 // access was granted, the user will be logged in.  Otherwise,
 // authentication has failed.
 app.get('/login/facebook/return', 
-  passport.authenticate('facebook', { failureRedirect: '/login' }),
-  function(req, res) {
-  	// output the user profile info to console to verify
-  	// req.user is the authenticated user
-  	console.log(req.user.displayName);  // full name
-  	console.log(req.user.username);  // username (undefined?)
-  	console.log(req.user.id);  // user ID
-  	// successful authentication, redirect so user can see their profile
+  passport.authenticate('facebook', { failureRedirect: '/login' }), function(req, res) {
+    // output the user profile info to console to verify
+    // req.user is the authenticated user
+    console.log(req.user.displayName);  // full name
+    console.log(req.user.username);  // username (undefined?)
+    console.log(req.user.id);  // user ID
+    // successful authentication, redirect so user can see their profile
     res.redirect('/profile');
-  });
+});
+
+// Log out the user
+app.get('/logout/facebook', function(req, res){
+  req.logout();
+  res.redirect('/');
+});
 
 // implement "profile" view
 app.get('/profile',
@@ -94,6 +95,7 @@ app.get('/profile',
  * Facebook Authentication
  */
 require('./controllers/passport')(passport, Strategy);
+
 
 /**
  * Start Express server.

@@ -17,12 +17,11 @@ exports.add_book = function(req, res) {
     var book_id = req.body.book_id;
 
     db.add_book(user_id, book_id, function(status){
-        if (status == ec.owned_books_errors.DB_SUCCESS){
-            console.log("Successfully added book to the database!\n");
-        }
-        if (status == ec.owned_books_errors.OWNED_BOOK_ALREADY_EXISTS){
-            console.log("book is in the database");
-        }
+        if (status == ec.owned_books_errors.DB_SUCCESS)
+            console.log("Successfully added book to the database!");
+        else if (status == ec.owned_books_errors.OWNED_BOOK_ALREADY_EXISTS)
+            console.log("Book is already in the database.");
+
         res.json({status: status});
     });
 };
@@ -38,12 +37,9 @@ exports.remove_book = function(req, res) {
     var book_id = req.body.book_id;
 
     db.remove_book(user_id, book_id, function(status){
-        if (status == ec.owned_books_errors.DB_SUCCESS){
-            console.log("Successfully removed book from the database!\n");
-        }
-        if (status == ec.owned_books_errors.OWNED_BOOK_ALREADY_EXISTS){
-            console.log("book is in the database");
-        }
+        if (status == ec.owned_books_errors.DB_SUCCESS)
+            console.log("Successfully removed book from the database!");
+
         res.json({status: status});
     });
 };
@@ -55,37 +51,28 @@ exports.remove_book = function(req, res) {
 exports.get_books = function(req, res) {
     // TODO: Uncomment this when user authentication is done.
     //var user_id = req.user.username;
-    var user_id = req.body.user_id;
-    var book_id = req.body.book_id;
+    var user_id = req.query.user_id;
 
-    db.get_owned_books(user_id, book_id, function(status){
-        if (status == ec.owned_books_errors.DB_SUCCESS){
-            console.log("Successfully removed book from the database!\n");
-        }
-        if (status == ec.owned_books_errors.OWNED_BOOK_ALREADY_EXISTS){
-            console.log("book is in the database");
-        }
-        res.json({status: status});
+    db.get_owned_books(user_id, function(status, data){
+        if (status == ec.owned_books_errors.DB_SUCCESS)
+            console.log("Successfully found books from the database!");
+
+        res.json({status: status, data: data});
     });
 };
 
 /*
- * Delete an owned book of an user from the database.
- * POST http://localhost:3000/api/owned_books/delete
+ * Gets a list of owners that own a particular book.
+ * GET http://localhost:3000/api/owned_books/get_owners
  */
-exports.delete_book = function(req, res) {
-    // TODO: Uncomment this when user authentication is done.
-    //var user_id = req.user.username;
-    var user_id = req.body.user_id;
-    var book_id = req.body.book_id;
+exports.get_owners = function(req, res) {
+    var book_id = req.query.book_id;
 
-    db.remove_book(user_id, book_id, function(status){
-        if (status == ec.owned_books_errors.DB_SUCCESS){
-            console.log("Successfully removed book from the database!\n");
-        }
-        if (status == ec.owned_books_errors.OWNED_BOOK_ALREADY_EXISTS){
-            console.log("book is in the database");
-        }
-        res.json({status: status});
+    db.get_owners(book_id, function(status, data){
+        if (status == ec.owned_books_errors.DB_SUCCESS)
+            console.log("Successfully found owners from the database!");
+
+        res.json({status: status, data: data});
     });
 };
+

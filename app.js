@@ -88,10 +88,12 @@ app.get('/', homeController.index);
 /*
  * API routes.
  */
+
+// Owned books
 app.post('/api/owned_books/add', ownedBooksController.add_book);
 app.post('/api/owned_books/remove', ownedBooksController.remove_book);
 app.get('/api/owned_books/get_books', ownedBooksController.get_books);
-app.get('/api/owned_books/')
+app.get('/api/owned_books/get_owners', ownedBooksController.get_owners);
 
 
 

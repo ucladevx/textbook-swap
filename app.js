@@ -47,12 +47,15 @@ initModel.create_tables();
 
 ownedBooks.add_book('Adi', 2, test_n);
 ownedBooks.add_book('Adi', 3, test_n);
+ownedBooks.remove_book('Adi', 2, test_n);
 ownedBooks.get_owners(2, test_next);
 
 possibleTrades.add_relation('Jay', 10, 20, test_n);
 possibleTrades.add_relation('Jay', 10, 21, test_n);
 possibleTrades.add_relation('Jay', 15, 20, test_n);
 possibleTrades.add_relation('Jay', 1, 12, test_n);
+possibleTrades.remove_relation('Jay', 1, 12, test_n);
+possibleTrades.remove_relation('Jay', 1, 12, test_n);
 
 const ec = require('./error_codes.js');
 

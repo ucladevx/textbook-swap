@@ -1,16 +1,13 @@
 /*
-interface to query and modify the table owned_books
+ * Interface to query and modify the table owned_books
  */
 
 'use strict';
 const pg = require('pg');
 const error_codes = require('../error_codes');
 
-/*
- TODO: change this whenever you pull - We should think about changing the architecture so that
- this is set when reading the config somehow
- */
-const conString = 'postgres://jerrylinew:@localhost/loopsDB';
+// Form the connection string from envrionmental variables in the .env file.
+const conString = 'postgres://' + process.env.DB_USER + ':@' + process.env.DB_HOST + '/loopsDB';
 
 exports.add_book = function(user, book, next){
     pg.connect(conString, function(err, client, done){

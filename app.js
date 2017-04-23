@@ -5,14 +5,13 @@ const express = require('express'); // express framework for node.js
 const dotenv = require('dotenv'); // loads environment variables
 const path = require('path'); // utilities for working with file and directory paths
 const chalk = require('chalk'); // pretty command line colors
-var bodyParser = require('body-parser'); // parse body of POST requests
-
-const ec = require('./error_codes.js');
+const bodyParser = require('body-parser'); // parse body of POST requests
+const ec = require('./error_codes');
 
 /*
- * TODO: Load environment variables from .env file, where API keys and passwords are configured.
+ * Load environment variables from .env file, where API keys and passwords are configured.
  */
-dotenv.load({ path: '.env' });
+dotenv.config();
 
 /*
  * Controllers (route handlers).

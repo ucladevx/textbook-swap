@@ -5,10 +5,10 @@
 'use strict';
 const pg = require('pg');
 
-exports.create_tables = function(){
-    //TODO: Change username whenever you pull
-    const conString = 'postgres://jerrylinew:@localhost/loopsDB';
+// Form the connection string from envrionmental variables in the .env file.
+const conString = 'postgres://' + process.env.DB_USER + ':@' + process.env.DB_HOST + '/loopsDB';
 
+exports.create_tables = function(){
     pg.connect(conString, function (err, client, done) {
         if (err) {
             return console.error('error fetching client from pool', err)

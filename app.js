@@ -5,19 +5,28 @@ const express = require('express'); // express framework for node.js
 const dotenv = require('dotenv'); // loads environment variables
 const path = require('path'); // utilities for working with file and directory paths
 const chalk = require('chalk'); // pretty command line colors
+const bodyParser = require('body-parser'); // parse body of POST requests
 const passport = require('passport');
 const FacebookStrategy = require('passport-facebook').Strategy;
+const morgan = require('morgan');
+const cookie = require('cookie-parser');
+const session = require('express-session');
 
 /*
- * TODO: Load environment variables from .env file, where API keys and passwords are configured.
+ * Load environment variables from .env file, where API keys and passwords are configured.
  */
-dotenv.load({ path: '.env' });
+dotenv.config();
 
 /*
  * Controllers (route handlers).
  */
-const homeController = require('./controllers/home');
+const homeController = require('./controllers/routes/home');
 const passportController = require('./controllers/passport');
+
+/*
+ * Controllers (API)
+ */
+const ownedBooksController = require('./controllers/api/owned_books');
 
 /*
  * API keys and Passport configuration.
@@ -35,15 +44,16 @@ const app = express();
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
-app.use(express.static(path.join(__dirname, 'public')));
 
 /*
  * Use application-level middleware for common functionality, including logging, parsing, and session handling.
  */
-app.use(require('morgan')('combined'));
-app.use(require('cookie-parser')());
-app.use(require('body-parser').urlencoded({ extended: true }));
-app.use(require('express-session')({ secret: 'keyboard', resave: false, saveUninitialized: false }));
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(bodyParser.json()); // support json encoded bodies
+app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
+app.use(morgan('combined'));
+app.use(cookie());
+app.use(session({ secret: 'keyboard', resave: false, saveUninitialized: false }));
 
 /*
  * Initialize Passport and restore authentication state, if any, from the session.
@@ -56,11 +66,20 @@ app.use(passport.session());
  */
 app.get('/', homeController.index);
 
-
 /*
  * API routes.
  */
 
+// Owned books
+app.post('/api/owned_books/add', ownedBooksController.add_book);
+app.post('/api/owned_books/remove', ownedBooksController.remove_book);
+app.get('/api/owned_books/get_books', ownedBooksController.get_books);
+app.get('/api/owned_books/get_owners', ownedBooksController.get_owners);
+
+/*
+ * Tests
+ */
+const ownedBooksTest = require('./tests/models/owned_books').test();
 
 /*
  * Authentication routes.
@@ -82,7 +101,7 @@ app.get('/login/facebook/return', passport.authenticate('facebook', {
 // Log out the user
 app.get('/logout/facebook', passportController.logout);
 
-// implement "profile" view
+// Implement "profile" view
 app.get('/profile', require('connect-ensure-login').ensureLoggedIn(), passportController.profile);
 
 /*

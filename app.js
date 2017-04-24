@@ -15,7 +15,14 @@ dotenv.load({ path: '.env' });
  * Controllers (route handlers).
  */
 const homeController = require('./controllers/home');
+const db = require('./models/init.js');
 
+/*
+ * Models (database)
+ */
+const initModel = require('./models/init');
+//used to do a quick dirty test of the owned_books interface
+const ownedBooks = require('./models/owned_books');
 /*
  * API keys and Passport configuration.
  */
@@ -25,6 +32,20 @@ const homeController = require('./controllers/home');
  * Create Express server.
  */
 const app = express();
+
+/*
+ * Database initialization
+ */
+
+initModel.create_tables();
+ownedBooks.remove_book('Adi', 2, yo);
+function yo (result){
+
+}
+/*
+    test usage of the interface
+   also shows how to use next callback
+ */
 
 /*
  * Express configuration.

@@ -1,7 +1,7 @@
 'use strict';
 const pg = require('pg');
 const error_codes = require('../error_codes');
-const conString = 'postgres://Jayendra:@localhost/loopsDB';
+const conString = 'postgres://' + process.env.DB_USER + ':@' + process.env.DB_HOST + '/loopsDB';
 
 exports.add_relation = function(user_id, book_have_id, book_want_id, next){
   pg.connect(conString, function(err, client, done){

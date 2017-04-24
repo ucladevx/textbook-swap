@@ -53,9 +53,7 @@ ownedBooks.get_owners(2, test_next);
 possibleTrades.add_relation('Jay', 10, 20, test_n);
 possibleTrades.add_relation('Jay', 10, 21, test_n);
 possibleTrades.add_relation('Jay', 15, 20, test_n);
-possibleTrades.add_relation('Jay', 1, 12, test_n);
-possibleTrades.remove_relation('Jay', 1, 12, test_n);
-possibleTrades.remove_relation('Jay', 1, 12, test_n);
+possibleTrades.add_relation('Jay', 1, 12, test_n_remove);
 
 const ec = require('./error_codes.js');
 
@@ -67,6 +65,17 @@ function test_n(errorcode){
         console.log("relation is in the database");
     }
 }
+
+function test_n_remove(errorcode){
+    if (errorcode == ec.owned_books_errors.OWNED_BOOK_ALREADY_EXISTS){
+        console.log("book is in the database");
+    }
+    if (errorcode == ec.possible_trades_errors.POSSIBLE_TRADE_ALREADY_EXISTS){
+        console.log("relation is in the database");
+    }
+    possibleTrades.remove_relation('Jay', 1, 12, test_n);
+}
+
 
 function test_next(result_code, result){
     if (result_code == ec.owned_books_errors.DB_SUCCESS){

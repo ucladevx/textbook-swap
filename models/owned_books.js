@@ -1,18 +1,15 @@
 /*
-interface to query and modify the table owned_books
+ * Interface to query and modify the table owned_books
  */
 
 'use strict';
 const pg = require('pg');
 const error_codes = require('../error_codes');
 
-exports.add_book = function(user, book, next){
-    /*
-    TODO: change this whenever you pull - We should think about changing the architecture so that
-    this is set when reading the config somehow
-    */
-    const conString = 'postgres://adityaraju:@localhost/loopsDB';
+// Form the connection string from envrionmental variables in the .env file.
+const conString = 'postgres://' + process.env.DB_USER + ':@' + process.env.DB_HOST + '/loopsDB';
 
+exports.add_book = function(user, book, next){
     pg.connect(conString, function(err, client, done){
         done();
         if (err){
@@ -32,7 +29,7 @@ exports.add_book = function(user, book, next){
                 client.query("INSERT INTO owned_books (user_id, book_id) VALUES ($1::VARCHAR, $2::INTEGER)", [user, book], function(err, result){
                     if (err){
                         console.error("Error inserting into owned_books table", err);
-                        return next(error_codes(error_codes.owned_books_errors.DB_QUERY_ERROR));
+                        return next(error_codes.owned_books_errors.DB_QUERY_ERROR);
                     }
 
                     return next(error_codes.owned_books_errors.DB_SUCCESS);
@@ -46,14 +43,7 @@ exports.add_book = function(user, book, next){
     });
 };
 
-
 exports.remove_book = function(user, book, next){
-    /*
-     TODO: change this whenever you pull - We should think about changing the architecture so that
-     this is set when reading the config somehow
-     */
-    const conString = 'postgres://adityaraju:@localhost/loopsDB';
-
     pg.connect(conString, function(err, client, done){
         done();
         if (err){
@@ -72,23 +62,17 @@ exports.remove_book = function(user, book, next){
 };
 
 exports.get_owned_books = function(user, next){
-    /*
-     TODO: change this whenever you pull - We should think about changing the architecture so that
-     this is set when reading the config somehow
-     */
-    const conString = 'postgres://adityaraju:@localhost/loopsDB';
-
     pg.connect(conString, function(err, client, done){
         done();
         if (err){
             console.error("Error connection to client while querying owned_books table: ", err);
-            return next(error_codes.owned_books_errors.DB_CONNECTION_ERROR);
+            return next(error_codes.owned_books_errors.DB_CONNECTION_ERROR, []);
         }
 
         client.query("SELECT book_id FROM owned_books WHERE user_id=$1::VARCHAR", [user], function(err, result){
             if(err){
                 console.error("Error querying database", err);
-                return next(error_codes.owned_books_errors.DB_QUERY_ERROR);
+                return next(error_codes.owned_books_errors.DB_QUERY_ERROR, []);
             }
             return next(error_codes.owned_books_errors.DB_SUCCESS, result.rows);
         });
@@ -96,12 +80,6 @@ exports.get_owned_books = function(user, next){
 };
 
 exports.get_owners = function(book, next){
-    /*
-     TODO: change this whenever you pull - We should think about changing the architecture so that
-     this is set when reading the config somehow
-     */
-    const conString = 'postgres://adityaraju:@localhost/loopsDB';
-
     pg.connect(conString, function(err, client, done){
         done();
         if (err){

@@ -3,10 +3,38 @@ html
     head
         meta(charset='utf-8')
         title=title
+        link(rel='stylesheet' type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous")
         link(rel='stylesheet' type="text/css" href="css/home.css")
+        script(src=src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js")
+        script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous")
     body
-        - for(var i = 0; i < 4; i++){
-            h1(id='heading') #{title} Home Page
-        - }
-        a(href='/auth') Log in with Google
+        div(id="first")
+            div(class="container" id="logo")
+                div(class="col-md-12 text-center")
+                    img(src="http://cdn2.hubspot.net/hub/53/file-23117129-png/blog/images/closed-loop-marketing.png")
+                    h2 An Innovative Way to Trade Textbooks
+            div(class="container bottom-align-text" id="buttons")
+                span()
+                    div(class="col-md-6 text-right")
+                        a(class="btn btn-default" href="/login/facebook" role="button") Sign Up
+                    div(class="col-md-6 text-left")   
+                        a(class="btn btn-default" href="/login/facebook" role="button") Log in
+                span()
+                    div(class="col-md-4")
+                    div(class="col-md-4 text-center")
+                        a(class="btn btn-default" href="#" role="button" id="about") About
+                    div(class="col-md-4")
+        div(id="second")
+            div(class="container" id="aboutpage")
+                div(class="text-center")
+                    img(src="http://cdn2.hubspot.net/hub/53/file-23117129-png/blog/images/closed-loop-marketing.png")
+                div()
+                    div(class="col-md-2")
+                    div(class="col-md-8")
+                        p Lorem ipsum dolor sit amet, consectetur adipiscing elit. In consectetur erat eros, a suscipit lorem dignissim ut. Suspendisse bibendum turpis arcu, vitae accumsan lectus vulputate sollicitudin. Phasellus feugiat mattis mauris at viverra. In eget justo eu nulla ullamcorper rutrum sed eu felis. Cras ut porttitor enim. Nulla varius tincidunt mi, at imperdiet odio vulputate ut. Nullam a felis ante. Integer metus augue, maximus accumsan nisl eu, rutrum sodales ante. Proin eget ex eu felis congue vehicula et nec risus. Sed in varius orci. Aenean tristique ligula id erat egestas tincidunt.
+                        div(class="text-center")
+                            a(class="btn btn-default" href="#" role="button" id="backtotop") Back to Top
+                    div(class="col-md-2")
+
+        a(href='/login/facebook') Log in with Facebook
         script(src='js/home.js')

@@ -6,6 +6,12 @@
 const pg = require('pg');
 const error_codes = require('../error_codes');
 
+/*
+ * Add a relation of {user_id:string , book_have_id:int , book_want_id:int} to the possible_trades table 
+ * Replies with an error_code (either success or the error code itself) value in the callback function correlating
+ * to the success of the table addition
+ */
+
 exports.add_relation = function(user_id, book_have_id, book_want_id, next){
   pg.connect(process.env.DATABASE_URL, function(err, client, done){
       done();
@@ -40,6 +46,11 @@ exports.add_relation = function(user_id, book_have_id, book_want_id, next){
   });
 };
 
+/*
+ * Remove a relation of {user_id:string , book_have_id:int , book_want_id:int} from the possible_trades table 
+ * Replies with an error_code (either success or the error code itself) value in the callback function correlating
+ * to the success of the table deletion
+ */
 
 exports.remove_relation = function(user_id, book_have_id, book_want_id, next){
   pg.connect(process.env.DATABASE_URL, function(err, client, done){
@@ -59,6 +70,12 @@ exports.remove_relation = function(user_id, book_have_id, book_want_id, next){
   });
 };
 
+/*
+ * Remove all relations from possible_trades table containing {user_id:string , book_have_id:int}
+ * Replies with an error_code (either success or the error code itself) value in the callback function correlating
+ * to the success of the table deletion
+ */
+
 exports.remove_relation_have = function(user_id, book_have_id, next){
   pg.connect(process.env.DATABASE_URL, function(err, client, done){
       done();
@@ -77,6 +94,12 @@ exports.remove_relation_have = function(user_id, book_have_id, next){
   });
 };
 
+/*
+ * Remove all relations from possible_trades table containing {user_id:string , book_want_id:int}
+ * Replies with an error_code (either success or the error code itself) value in the callback function correlating
+ * to the success of the database deletion
+ */
+
 exports.remove_relation_want = function(user_id, book_want_id, next){
   pg.connect(process.env.DATABASE_URL, function(err, client, done){
       done();
@@ -94,6 +117,12 @@ exports.remove_relation_want = function(user_id, book_want_id, next){
       });
   });
 };
+
+
+/*
+ * Get the list of all book_wants associated with the relation {user_id:string , book_have_id:int}
+ * Replies with either an error_code or an Object of Javascript Objects (essentially an array)
+ */
 
 exports.get_book_wants = function(user_id, book_have_id, next) {
   pg.connect(process.env.DATABASE_URL, function(err, client, done){

@@ -11,8 +11,7 @@ const db = require('../../models/owned_books');
  * POST http://localhost:3000/api/owned_books/add
  */
 exports.add_book = function(req, res) {
-    // TODO: Uncomment this when user authentication is done.
-    //var user_id = req.user.username;
+    var user_id = req.user.username;
     var user_id = req.body.user_id;
     var book_id = req.body.book_id;
 
@@ -31,8 +30,7 @@ exports.add_book = function(req, res) {
  * POST http://localhost:3000/api/owned_books/remove
  */
 exports.remove_book = function(req, res) {
-    // TODO: Uncomment this when user authentication is done.
-    //var user_id = req.user.username;
+    var user_id = req.user.username;
     var user_id = req.body.user_id;
     var book_id = req.body.book_id;
 
@@ -49,8 +47,7 @@ exports.remove_book = function(req, res) {
  * GET http://localhost:3000/api/owned_books/get_books
  */
 exports.get_books = function(req, res) {
-    // TODO: Uncomment this when user authentication is done.
-    //var user_id = req.user.username;
+    var user_id = req.user.username;
     var user_id = req.query.user_id;
 
     db.get_owned_books(user_id, function(status, data){

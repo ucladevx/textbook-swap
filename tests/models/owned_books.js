@@ -14,7 +14,7 @@ exports.test = function(){
      */
     ownedBooks.add_book('Adi', 2, test_n);
     ownedBooks.add_book('Adi', 3, test_n);
-    ownedBooks.get_owners(2, test_next);
+    ownedBooks.get_users(2, test_next);
 
     function test_n(errorcode){
         if (errorcode == ec.owned_books_errors.OWNED_BOOK_ALREADY_EXISTS){

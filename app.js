@@ -74,13 +74,13 @@ app.get('/', homeController.index);
 app.post('/api/owned_books/add', ownedBooksController.add_book);
 app.post('/api/owned_books/remove', ownedBooksController.remove_book);
 app.get('/api/owned_books/get_books', ownedBooksController.get_books);
-app.get('/api/owned_books/get_owners', ownedBooksController.get_owners);
+app.get('/api/owned_books/get_users', ownedBooksController.get_users);
 
 /*
  * Tests
  */
 const ownedBooksTest = require('./tests/models/owned_books').test();
-
+const possibleTradesTest = require('./tests/models/possible_trades').test();
 /*
  * Authentication routes.
  */

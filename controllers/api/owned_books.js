@@ -7,8 +7,9 @@ const ec = require('../../error_codes');
 const db = require('../../models/owned_books');
 
 /*
- * Add an owned book of an user to the database.
  * POST http://localhost:3000/api/owned_books/add
+ * Add an owned book of an user to the database.
+ * Replies with a json object containing the status of the database operation.
  */
 exports.add_book = function(req, res) {
     // TODO: Uncomment this when user authentication is done.
@@ -27,8 +28,9 @@ exports.add_book = function(req, res) {
 };
 
 /*
- * Remove an owned book of an user from the database.
  * POST http://localhost:3000/api/owned_books/remove
+ * Remove an owned book of an user from the database.
+ * Replies with a json object containing the status of the database operation.
  */
 exports.remove_book = function(req, res) {
     // TODO: Uncomment this when user authentication is done.
@@ -45,8 +47,9 @@ exports.remove_book = function(req, res) {
 };
 
 /*
- * Gets a list of owned books of an user from the database.
  * GET http://localhost:3000/api/owned_books/get_books
+ * Gets a list of owned books of an user from the database.
+ * Replies with a json object containing the status of the database operation and the list of books.
  */
 exports.get_books = function(req, res) {
     // TODO: Uncomment this when user authentication is done.
@@ -62,13 +65,14 @@ exports.get_books = function(req, res) {
 };
 
 /*
+ * GET http://localhost:3000/api/owned_books/get_users
  * Gets a list of owners that own a particular book.
- * GET http://localhost:3000/api/owned_books/get_owners
+ * Replies with a json object containing the status of the database operation and the list of users.
  */
-exports.get_owners = function(req, res) {
+exports.get_users = function(req, res) {
     var book_id = req.query.book_id;
 
-    db.get_owners(book_id, function(status, data){
+    db.get_users(book_id, function(status, data){
         if (status == ec.owned_books_errors.DB_SUCCESS)
             console.log("Successfully found owners from the database!");
 

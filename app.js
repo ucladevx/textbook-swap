@@ -22,6 +22,7 @@ dotenv.config();
  */
 const homeController = require('./controllers/routes/home');
 const passportController = require('./controllers/passport');
+const dashboardController = require('./controllers/dashboard')
 
 /*
  * Controllers (API)
@@ -65,6 +66,7 @@ app.use(passport.session());
  * Primary app routes.
  */
 app.get('/', homeController.index);
+app.get('/dashboard', dashboardController.index);
 
 /*
  * API routes.

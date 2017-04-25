@@ -4,8 +4,5 @@
  */
 
 exports.index = function(req, res) {
-    res.render('home', {
-        title: "Loops",
-        user: req.user
-    });
+    res.render('home');
 };

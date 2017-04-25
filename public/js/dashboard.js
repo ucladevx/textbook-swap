@@ -12,8 +12,6 @@ $(document).ready(function(){
 				console.log('db connection error')
 			else if(response.status === 2)
 				console.log('db query error')
-			else if(response.status === 4){
-				console.log('book does not exist')
 			}
 		}
 	})
@@ -53,8 +51,8 @@ $("body").on("click", ".list-group-item", function(){
 				console.log('db connection error')
 			else if(data.status === 2)
 				console.log('db query error')
-			else if(data.status === 3){
-				console.log('book already exists')
+			else if(data.status === 4){
+				console.log('book does not exist')
 			}
 		},
 		"json"

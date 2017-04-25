@@ -6,11 +6,8 @@
 const pg = require('pg');
 const error_codes = require('../error_codes');
 
-// Form the connection string from envrionmental variables in the .env file.
-const conString = 'postgres://' + process.env.DB_USER + ':@' + process.env.DB_HOST + '/loopsDB';
-
 exports.add_relation = function(user_id, book_have_id, book_want_id, next){
-  pg.connect(process.env.DATABASE_URL || conString, function(err, client, done){
+  pg.connect(process.env.DATABASE_URL, function(err, client, done){
       done();
       if (err){
           console.error("Error connection to client while querying possible_trades table: ", err);
@@ -45,7 +42,7 @@ exports.add_relation = function(user_id, book_have_id, book_want_id, next){
 
 
 exports.remove_relation = function(user_id, book_have_id, book_want_id, next){
-  pg.connect(conString, function(err, client, done){
+  pg.connect(process.env.DATABASE_URL, function(err, client, done){
       done();
       if (err){
       	console.error("Error connection to client while querying possible_trades table: ", err);
@@ -63,7 +60,7 @@ exports.remove_relation = function(user_id, book_have_id, book_want_id, next){
 };
 
 exports.remove_relation_have = function(user_id, book_have_id, next){
-  pg.connect(conString, function(err, client, done){
+  pg.connect(process.env.DATABASE_URL, function(err, client, done){
       done();
       if (err){
       	console.error("Error connection to client while querying possible_trades table: ", err);
@@ -81,7 +78,7 @@ exports.remove_relation_have = function(user_id, book_have_id, next){
 };
 
 exports.remove_relation_want = function(user_id, book_want_id, next){
-  pg.connect(conString, function(err, client, done){
+  pg.connect(process.env.DATABASE_URL, function(err, client, done){
       done();
       if (err){
       	console.error("Error connection to client while querying possible_trades table: ", err);
@@ -99,7 +96,7 @@ exports.remove_relation_want = function(user_id, book_want_id, next){
 };
 
 exports.get_book_wants = function(user_id, book_have_id, next) {
-  pg.connect(conString, function(err, client, done){
+  pg.connect(process.env.DATABASE_URL, function(err, client, done){
     done();
     if (err){
     	console.error("Error connection to client while querying possible_trades table: ", err);

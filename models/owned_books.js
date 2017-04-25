@@ -10,7 +10,7 @@ const error_codes = require('../error_codes');
 const conString = 'postgres://' + process.env.DB_USER + ':@' + process.env.DB_HOST + '/loopsDB';
 
 exports.add_book = function(user, book, next){
-    pg.connect(conString, function(err, client, done){
+    pg.connect(process.env.DATABASE_URL || conString, function(err, client, done){
         done();
         if (err){
             console.error("Error connection to client while querying owned_books table: ", err);

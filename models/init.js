@@ -9,7 +9,7 @@ const pg = require('pg');
 const conString = 'postgres://' + process.env.DB_USER + ':@' + process.env.DB_HOST + '/loopsDB';
 
 exports.create_tables = function(){
-    pg.connect(conString, function (err, client, done) {
+    pg.connect(process.env.DATABASE_URL || conString, function (err, client, done) {
         if (err) {
             return console.error('error fetching client from pool', err)
         }

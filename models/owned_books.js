@@ -8,7 +8,6 @@ const error_codes = require('../error_codes');
 
 exports.add_book = function(user, book, next){
     pg.connect(process.env.DATABASE_URL, function(err, client, done){
-        console.log(process.env.DATABASE_URL);
         done();
         if (err){
             console.error("Error connection to client while querying owned_books table: ", err);

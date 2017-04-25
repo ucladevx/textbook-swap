@@ -11,6 +11,7 @@ const conString = 'postgres://' + process.env.DB_USER + ':@' + process.env.DB_HO
 
 exports.add_book = function(user, book, next){
     pg.connect(process.env.DATABASE_URL || conString, function(err, client, done){
+        console.log(process.env.DATABASE_URL || conString);
         done();
         if (err){
             console.error("Error connection to client while querying owned_books table: ", err);

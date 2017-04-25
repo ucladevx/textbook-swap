@@ -79,7 +79,7 @@ exports.get_owned_books = function(user, next){
     });
 };
 
-exports.get_owners = function(book, next){
+exports.get_users = function(book, next){
     pg.connect(conString, function(err, client, done){
         done();
         if (err){

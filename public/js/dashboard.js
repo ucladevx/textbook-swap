@@ -12,7 +12,6 @@ $(document).ready(function(){
 				console.log('db connection error')
 			else if(response.status === 2)
 				console.log('db query error')
-			}
 		}
 	})
 })

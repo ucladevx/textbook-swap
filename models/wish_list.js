@@ -34,7 +34,7 @@ exports.add_book = function(user, book, next){
             }
             else{
                 console.error("UserID, BookID association already exists in wish_list table");
-                return next(error_codes.wish_list_errors.OWNED_BOOK_ALREADY_EXISTS);
+                return next(error_codes.wish_list_errors.WISH_LIST_BOOK_ALREADY_EXISTS);
             }
         });
     });

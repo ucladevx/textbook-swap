@@ -80,7 +80,7 @@ app.get('/api/owned_books/get_users', ownedBooksController.get_users);
  * Tests
  */
 const ownedBooksTest = require('./tests/models/owned_books').test();
-
+const possibleTradesTest = require('./tests/models/possible_trades').test();
 /*
  * Authentication routes.
  */

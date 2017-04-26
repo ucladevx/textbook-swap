@@ -18,7 +18,7 @@ exports.add_edge = function(user, owned_book, target_user, wanted_book, next){
     pg.connect(process.env.DATABASE_URL, function(err, client, done){
         done();
         if (err){
-            console.error("Error connection to client while querying owned_books table: ", err);
+            console.error("Error connection to client while querying graph_edges table: ", err);
             return next(error_codes.graph_edges_errors.DB_CONNECTION_ERROR);
         }
 
@@ -26,7 +26,7 @@ exports.add_edge = function(user, owned_book, target_user, wanted_book, next){
         client.query("SELECT COUNT(user_id) FROM graph_edges WHERE user_id=$1::VARCHAR AND book_have=$2::INTEGER AND target_id=$3::VARCHAR AND book_want=$4::INTEGER ",
             [user, owned_book, target_user, wanted_book], function(err, result){
             if (err){
-                console.error("Error querying table owned_books", err);
+                console.error("Error querying table graph_edges", err);
                 return next(error_codes.graph_edges_errors.DB_QUERY_ERROR);
             }
 
@@ -35,7 +35,7 @@ exports.add_edge = function(user, owned_book, target_user, wanted_book, next){
                 client.query("INSERT INTO graph_edges (user_id, book_have, target_id, book_want) VALUES ($1::VARCHAR, $2::INTEGER, $3::VARCHAR, $4::INTEGER)",
                     [user, owned_book, target_user, wanted_book], function(err, result){
                     if (err){
-                        console.error("Error inserting into owned_books table", err);
+                        console.error("Error inserting into graph_edges table", err);
                         return next(error_codes.graph_edges_errors.DB_QUERY_ERROR);
                     }
 
@@ -43,7 +43,7 @@ exports.add_edge = function(user, owned_book, target_user, wanted_book, next){
                 });
             }
             else{
-                console.error("UserID, BookID association already exists in owned_books table");
+                console.error("Edge already exists in graph_edges table");
                 return next(error_codes.graph_edges_errors.GRAPH_EDGE_ALREADY_EXISTS);
             }
         });
@@ -60,7 +60,7 @@ exports.remove_edge = function(user, owned_book, target_user, wanted_book, next)
     pg.connect(process.env.DATABASE_URL, function(err, client, done){
         done();
         if (err){
-            console.error("Error connection to client while querying owned_books table: ", err);
+            console.error("Error connection to client while querying graph_edges table: ", err);
             return next(error_codes.graph_edges_errors.DB_CONNECTION_ERROR);
         }
 
@@ -86,7 +86,7 @@ exports.get_graph = function(next){
         done();
 
         if (err){
-            console.error("Error connection to client while querying owned_books table: ", err);
+            console.error("Error connection to client while querying graph_edges table: ", err);
             return next(error_codes.graph_edges_errors.DB_CONNECTION_ERROR, []);
         }
         client.query("SELECT * FROM graph_edges", [], function(err, result){
@@ -99,51 +99,49 @@ exports.get_graph = function(next){
     });
 };
 
-//TODO:
 /*
     Purpose: Remove edges from the graph where the owned_book is a node of an incoming or outgoing edge
     Inputs: user: user_id of the node book_id: book that the user owns, and a callback function
     Outputs: returns a callback function with error code (or success) as a parameter
  */
-
 exports.remove_owned_book = function(user, owned_book, next){
     pg.connect(process.env.DATABASE_URL, function(err, client, done){
         done();
         if (err){
-            console.error("Error connection to client while querying owned_books table: ", err);
+            console.error("Error connection to client while querying graph_edges table: ", err);
             return next(error_codes.owned_books_errors.DB_CONNECTION_ERROR);
         }
 
-        client.query("SELECT user_id FROM owned_books WHERE book_id=$1::INTEGER", [book], function(err, result){
+        client.query("DELETE FROM graph_edges WHERE (user_id=$1::VARCHAR AND book_have=$2::INTEGER) OR (target_id=$1::VARCHAR AND book_want=$2::INTEGER)",
+            [user, owned_book], function(err, result){
             if(err){
                 console.error("Error querying database", err);
-                return next(error_codes.owned_books_errors.DB_QUERY_ERROR);
+                return next(error_codes.graph_edges_errors.DB_QUERY_ERROR);
             }
-            return next(error_codes.owned_books_errors.DB_SUCCESS, result.rows);
+            return next(error_codes.graph_edges_errors.DB_SUCCESS, result.rows);
         });
     });
 };
 
-//TODO:
 /*
  Purpose: Remove edges from the graph where the user wants a specific book
  Inputs: user: user_id who wants a book wanted_book: that book id of the book the user wants, and a callback function
  Outputs: returns a callback function with error code (or success) as parameter
  */
-exports.remove_wanted_book = function(user, owned_book, next){
+exports.remove_wanted_book = function(user, book_want, next){
     pg.connect(process.env.DATABASE_URL, function(err, client, done){
         done();
         if (err){
-            console.error("Error connection to client while querying owned_books table: ", err);
-            return next(error_codes.owned_books_errors.DB_CONNECTION_ERROR);
+            console.error("Error connection to client while querying graph_edges table: ", err);
+            return next(error_codes.graph_edges_errors.DB_CONNECTION_ERROR);
         }
 
-        client.query("SELECT user_id FROM owned_books WHERE book_id=$1::INTEGER", [book], function(err, result){
+        client.query("DELETE FROM graph_edges WHERE user_id=$1::VARCHAR AND book_want=$2::INTEGER", [user, book_want], function(err, result){
             if(err){
                 console.error("Error querying database", err);
-                return next(error_codes.owned_books_errors.DB_QUERY_ERROR);
+                return next(error_codes.graph_edges_errors.DB_QUERY_ERROR);
             }
-            return next(error_codes.owned_books_errors.DB_SUCCESS, result.rows);
+            return next(error_codes.graph_edges_errors.DB_SUCCESS, result.rows);
         });
     });
 };

@@ -8,22 +8,7 @@ html
         script(src=src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js")
         script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous")
     body
-        div(id="first")
-            div(class="container" id="logo")
-                div(class="col-md-12 text-center")
-                    img(src="http://cdn2.hubspot.net/hub/53/file-23117129-png/blog/images/closed-loop-marketing.png")
-                    h2 An Innovative Way to Trade Textbooks
-            div(class="container bottom-align-text" id="buttons")
-                span()
-                    div(class="col-md-6 text-right")
-                        a(class="btn btn-default" href="/login/facebook" role="button") Sign Up
-                    div(class="col-md-6 text-left")   
-                        a(class="btn btn-default" href="/login/facebook" role="button") Log in
-                span()
-                    div(class="col-md-4")
-                    div(class="col-md-4 text-center")
-                        a(class="btn btn-default" href="#" role="button" id="about") About
-                    div(class="col-md-4")
+        include homefirst.pug
         div(id="second")
             div(class="container" id="aboutpage")
                 div(class="text-center")

@@ -83,18 +83,24 @@ app.get('/api/owned_books/get_users', ownedBooksController.get_users);
  */
 const ownedBooksTest = require('./tests/models/owned_books').test();
 const possibleTradesTest = require('./tests/models/possible_trades').test();
+const usersTest = require('./tests/models/users').test();
+
 /*
  * Authentication routes.
  */
-// Define routes for Facebook authentication
-// Redirect the user to Facebook for authentication.  When complete,
-// Facebook will redirect the user back to the application at '/login/facebook/return'
+
+/*
+ * Define routes for Facebook authentication
+ * Redirect the user to Facebook for authentication.  When complete,
+ * Facebook will redirect the user back to the application at '/login/facebook/return'
+ */
 app.get('/login/facebook', passport.authenticate('facebook', { scope: ['public_profile', 'email']}));
 
-// Facebook will redirect the user to this URL after approval.  Finish the
-// authentication process by attempting to obtain an access token.  If
-// access was granted, the user will be logged in.  Otherwise,
-// authentication has failed.
+/*
+ * Facebook will redirect the user to this URL after approval.  Finish the
+ * authentication process by attempting to obtain an access token.  If
+ * access was granted, the user will be logged in.  Otherwise, authentication has failed.
+ */
 app.get('/login/facebook/return', passport.authenticate('facebook', {
     failureRedirect: '/login',
     scope: ['public_profile', 'email']

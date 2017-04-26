@@ -12,9 +12,7 @@ const db = require('../../models/owned_books');
  * Replies with a json object containing the status of the database operation.
  */
 exports.add_book = function(req, res) {
-    // TODO: Uncomment this when user authentication is done.
-    //var user_id = req.user.username;
-    var user_id = req.body.user_id;
+    var user_id = req.user.id;
     var book_id = req.body.book_id;
 
     db.add_book(user_id, book_id, function(status){
@@ -33,9 +31,7 @@ exports.add_book = function(req, res) {
  * Replies with a json object containing the status of the database operation.
  */
 exports.remove_book = function(req, res) {
-    // TODO: Uncomment this when user authentication is done.
-    //var user_id = req.user.username;
-    var user_id = req.body.user_id;
+    var user_id = req.user.id;
     var book_id = req.body.book_id;
 
     db.remove_book(user_id, book_id, function(status){
@@ -52,9 +48,7 @@ exports.remove_book = function(req, res) {
  * Replies with a json object containing the status of the database operation and the list of books.
  */
 exports.get_books = function(req, res) {
-    // TODO: Uncomment this when user authentication is done.
-    //var user_id = req.user.username;
-    var user_id = req.query.user_id;
+    var user_id = req.user.id;
 
     db.get_owned_books(user_id, function(status, data){
         if (status == ec.owned_books_errors.DB_SUCCESS)

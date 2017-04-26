@@ -22,7 +22,6 @@ exports.create_tables = function(){
                 if (err) {
                     return console.error('error happened during query', err)
                 }
-                //TODO: talk about error occurring here that all the tables might not be created here and it can go on to the next instruction (probably not a huge deal, because it will only happen once on startup)
             });
         }
     });

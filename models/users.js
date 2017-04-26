@@ -2,6 +2,11 @@
 const pg = require('pg');
 const error_codes = require('../error_codes');
 
+/*
+ * Add a relation of {user_id:string, user_name:string, user_email:string} to the users table
+ * Replies with an error_code (either success or the error code itself) value in the callback function correlating
+ * to the success of the table addition 
+ */
 exports.add_new_user = function(user_id, user_name, user_email, next) {
 	  pg.connect(process.env.DATABASE_URL, function(err, client, done){
       done();
@@ -35,7 +40,11 @@ exports.add_new_user = function(user_id, user_name, user_email, next) {
   });
 };
 
-//delete user
+/*
+ * Remove a relation of {user_id:string} from the users table
+ * Replies with an error_code (either success or the error code itself) value in the callback function correlating
+ * to the success of the table deletion
+ */
 exports.remove_user = function(user_id, next){
   pg.connect(process.env.DATABASE_URL, function(err, client, done){
       done();
@@ -54,7 +63,10 @@ exports.remove_user = function(user_id, next){
   });
 };
 
-//get user_email
+/*
+ * Get the user_email associated with the input user_id
+ * Replies with either an error_code or a Javascript Object
+ */ 
 exports.get_user_email = function(user_id, next) {
   pg.connect(process.env.DATABASE_URL, function(err, client, done){
     done();
@@ -73,7 +85,10 @@ exports.get_user_email = function(user_id, next) {
   });
 };
 
-//get user_name
+/*
+ * Get the user_name associated with the input user_id
+ * Replies with either an error_code or a Javascript Object
+ */ 
 exports.get_user_name = function(user_id, next) {
   pg.connect(process.env.DATABASE_URL, function(err, client, done){
     done();

@@ -4,8 +4,11 @@
 const ec = require('../../error_codes');
 const graph_edges = require('../../models/graph_edges');
 
-exports.test_add_edge = function(){
+exports.test_add_edges = function(){
+    graph_edges.add_edge('Adi', 2, 'Jay', 1, test_add_next);
+    graph_edges.add_edge('Jay', 3, 'Adi', 2, test_add_next);
     graph_edges.add_edge('Jerry', 12, 'Karen', 15, test_add_next);
+    graph_edges.add_edge('Adi', 12, 'Lawrence', 15, test_add_next);
     function test_add_next(err_code){
         if (err_code == ec.graph_edges_errors.DB_SUCCESS)
             console.log("TEST PASSED");
@@ -80,4 +83,16 @@ exports.test_remove_wanted_book = function(){
             console.log("TEST FAILURE");
         }
     }
+};
+
+exports.cleanup = function(){
+    graph_edges.remove_edge('Adi', 2, 'Jay', 1, next);
+    graph_edges.remove_edge('Jay', 3, 'Adi', 2, next);
+    graph_edges.remove_edge('Jerry', 12, 'Karen', 15, next);
+    graph_edges.remove_edge('Adi', 12, 'Lawrence', 15, next);
+
+    function next(){
+        console.log("cleanup");
+    }
+
 };

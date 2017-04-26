@@ -46,11 +46,11 @@ exports.remove_book = function(req, res) {
  * Gets a list of wanted books of an user from the database.
  * GET http://localhost:3000/api/wish_list/get_books
  */
-exports.get_books = function(req, res) {
+exports.get_wanted_books = function(req, res) {
     var user_id = req.user.username;
     var user_id = req.query.user_id;
 
-    db.get_wish_list(user_id, function(status, data){
+    db.get_wanted_books(user_id, function(status, data){
         if (status == ec.wish_list_errors.DB_SUCCESS)
             console.log("Successfully found books from the database!");
 
@@ -62,10 +62,10 @@ exports.get_books = function(req, res) {
  * Gets a list of owners that want a particular book.
  * GET http://localhost:3000/api/wish_list/get_owners
  */
-exports.get_owners = function(req, res) {
+exports.get_users = function(req, res) {
     var book_id = req.query.book_id;
 
-    db.get_owners(book_id, function(status, data){
+    db.get_users(book_id, function(status, data){
         if (status == ec.wish_list_errors.DB_SUCCESS)
             console.log("Successfully found owners from the database!");
 

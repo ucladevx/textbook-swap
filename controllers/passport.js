@@ -1,7 +1,9 @@
 /*
  * Routes for Facebook Authentication
  */
-
+ 
+const initModel = require('../models/init');
+const users = require('../models/users');
 // output user profile info to console and redirect user to profile page
 exports.loginReturn = function (req, res) {
     // output the user profile info to console to verify
@@ -10,6 +12,7 @@ exports.loginReturn = function (req, res) {
     console.log(req.user.displayName);  // full name
     console.log(req.user.id);  // user ID
     console.log(req.user.emails[0].value);  // email address
+    users.add(req.user.id, req.user.displayName, req.user.emails[0].value);
     // successful authentication, redirect so user can see their profile
     res.redirect('/profile');
 };

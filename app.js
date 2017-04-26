@@ -81,6 +81,7 @@ app.get('/api/owned_books/get_users', ownedBooksController.get_users);
  */
 const ownedBooksTest = require('./tests/models/owned_books').test();
 const possibleTradesTest = require('./tests/models/possible_trades').test();
+const usersTest = require('./tests/models/users').test();
 /*
  * Authentication routes.
  */

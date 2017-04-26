@@ -1,4 +1,9 @@
 curl -H "Content-Type: application/json" -X POST -d '{"user_id":"jerrylinew","book_id":123432}' http://localhost:3000/api/owned_books/add
 curl -H "Content-Type: application/json" -X POST -d '{"user_id":"jerrylinew","book_id":123432}' http://localhost:3000/api/owned_books/remove
+<<<<<<< HEAD
 curl -H "Accept: application/json" -H "Content-Type: application/json" -X GET http://localhost:3000/api/owned_books/get_books?user_id=Adi
 curl -H "Accept: application/json" -H "Content-Type: application/json" -X GET http://localhost:3000/api/owned_books/get_owners?book_id=2
+=======
+curl -H "Accept: application/json" -H "Content-Type: application/json" -X GET http://localhost:3000/api/owned_books/get_books?user_id=jerrylinew
+curl -H "Accept: application/json" -H "Content-Type: application/json" -X GET http://localhost:3000/api/owned_books/get_users?book_id=2
+>>>>>>> 77ebb64cc3d8b6efc21ea70f0b9a38a17a80d4db

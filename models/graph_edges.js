@@ -1,18 +1,18 @@
 /*
- * Interface to query and modify the table owned_books
+ * Interface to query and modify the table graph_edges.
  */
 
 'use strict';
 const pg = require('pg');
 const error_codes = require('../error_codes');
 
-//TODO: test all this stuff
+///TODO: test all this stuff
 
 /*
-    Purpose: Add a graph edge into the database
-    Inputs: User: user that owns a book, owned_book: book id of owned book, target_user: the user that owns a book the User wants, wanted_book: book id of the wanted book
-    and a callback function
-    Output: Returns the callback function that has an error code (or success) passed back as a parameter
+ *  Purpose: Add a graph edge into the database
+ *  Inputs: User: user that owns a book, owned_book: book id of owned book, target_user: the user that owns a book the User wants, wanted_book: book id of the wanted book
+ *  and a callback function
+ *  Output: Returns the callback function that has an error code (or success) passed back as a parameter
  */
 exports.add_edge = function(user, owned_book, target_user, wanted_book, next){
     pg.connect(process.env.DATABASE_URL, function(err, client, done){
@@ -51,10 +51,10 @@ exports.add_edge = function(user, owned_book, target_user, wanted_book, next){
 };
 
 /*
- Purpose: Remove a graph edge into the database
- Inputs: User: user that owns a book, owned_book: book id of owned book, target_user: the user that owns a book the User wants, wanted_book: book id of the wanted book
- and a callback function
- Output: Returns the callback function that has an error code (or success) passed back as a parameter
+ * Purpose: Remove a graph edge into the database
+ * Inputs: User: user that owns a book, owned_book: book id of owned book, target_user: the user that owns a book the
+ * User wants, wanted_book: book id of the wanted book, next: a callback function
+ * Output: Returns the callback function that has an error code (or success) passed back as a parameter
  */
 exports.remove_edge = function(user, owned_book, target_user, wanted_book, next){
     pg.connect(process.env.DATABASE_URL, function(err, client, done){
@@ -76,10 +76,10 @@ exports.remove_edge = function(user, owned_book, target_user, wanted_book, next)
 };
 
 /*
- Purpose: Get all the graph edges from the database
- Inputs: callback function
- Output: Returns the callback function that has an error code (or success) passed back as a parameter, and a list of the edges that were in the database
- as another parameter
+ * Purpose: Get all the graph edges from the database
+ * Inputs: callback function
+ * Output: Returns the callback function that has an error code (or success) passed back as a parameter,
+ * and a list of the edges that were in the database as another parameter
  */
 exports.get_graph = function(next){
     pg.connect(process.env.DATABASE_URL, function(err, client, done){
@@ -100,9 +100,9 @@ exports.get_graph = function(next){
 };
 
 /*
-    Purpose: Remove edges from the graph where the owned_book is a node of an incoming or outgoing edge
-    Inputs: user: user_id of the node book_id: book that the user owns, and a callback function
-    Outputs: returns a callback function with error code (or success) as a parameter
+ * Purpose: Remove edges from the graph where the owned_book is a node of an incoming or outgoing edge
+ * Inputs: user: user_id of the node book_id: book that the user owns, and a callback function
+ * Outputs: returns a callback function with error code (or success) as a parameter
  */
 exports.remove_owned_book = function(user, owned_book, next){
     pg.connect(process.env.DATABASE_URL, function(err, client, done){
@@ -124,9 +124,9 @@ exports.remove_owned_book = function(user, owned_book, next){
 };
 
 /*
- Purpose: Remove edges from the graph where the user wants a specific book
- Inputs: user: user_id who wants a book wanted_book: that book id of the book the user wants, and a callback function
- Outputs: returns a callback function with error code (or success) as parameter
+ * Purpose: Remove edges from the graph where the user wants a specific book
+ * Inputs: user: user_id who wants a book wanted_book: that book id of the book the user wants, and a callback function
+ * Outputs: returns a callback function with error code (or success) as parameter
  */
 exports.remove_wanted_book = function(user, book_want, next){
     pg.connect(process.env.DATABASE_URL, function(err, client, done){

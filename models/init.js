@@ -5,6 +5,9 @@
 'use strict';
 const pg = require('pg');
 
+/*
+ * Initializes the database by creating all the tables if they do not already exist.
+ */
 exports.create_tables = function(){
     pg.connect(process.env.DATABASE_URL, function (err, client, done) {
         if (err) {

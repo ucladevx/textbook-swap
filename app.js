@@ -11,6 +11,7 @@ const FacebookStrategy = require('passport-facebook').Strategy;
 const morgan = require('morgan');
 const cookie = require('cookie-parser');
 const session = require('express-session');
+const require_login = require('connect-ensure-login');
 
 /*
  * Load environment variables from .env file, where API keys and passwords are configured.
@@ -22,7 +23,7 @@ dotenv.config();
  */
 const homeController = require('./controllers/routes/home');
 const passportController = require('./controllers/passport');
-const dashboardController = require('./controllers/dashboard')
+const dashboardController = require('./controllers/routes/dashboard');
 
 /*
  * Controllers (API)
@@ -68,7 +69,7 @@ app.use(passport.session());
  * Primary app routes.
  */
 app.get('/', homeController.index);
-app.get('/dashboard', dashboardController.index);
+app.get('/dashboard', require_login.ensureLoggedIn(), dashboardController.index);
 
 /*
  * API routes.
@@ -98,20 +99,26 @@ app.get('/api/possible_trades/get_book_wants', possibleTradesController.get_book
  */
 const ownedBooksTest = require('./tests/models/owned_books').test();
 const possibleTradesTest = require('./tests/models/possible_trades').test();
+const usersTest = require('./tests/models/users').test();
+
 /*
  * Authentication routes.
  */
-// Define routes for Facebook authentication
-// Redirect the user to Facebook for authentication.  When complete,
-// Facebook will redirect the user back to the application at '/login/facebook/return'
+
+/*
+ * Define routes for Facebook authentication
+ * Redirect the user to Facebook for authentication.  When complete,
+ * Facebook will redirect the user back to the application at '/login/facebook/return'
+ */
 app.get('/login/facebook', passport.authenticate('facebook', { scope: ['public_profile', 'email']}));
 
-// Facebook will redirect the user to this URL after approval.  Finish the
-// authentication process by attempting to obtain an access token.  If
-// access was granted, the user will be logged in.  Otherwise,
-// authentication has failed.
+/*
+ * Facebook will redirect the user to this URL after approval.  Finish the
+ * authentication process by attempting to obtain an access token.  If
+ * access was granted, the user will be logged in.  Otherwise, authentication has failed.
+ */
 app.get('/login/facebook/return', passport.authenticate('facebook', {
-    failureRedirect: '/login',
+    failureRedirect: '/',
     scope: ['public_profile', 'email']
 }), passportController.loginReturn);
 

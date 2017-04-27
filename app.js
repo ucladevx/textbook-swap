@@ -11,6 +11,7 @@ const FacebookStrategy = require('passport-facebook').Strategy;
 const morgan = require('morgan');
 const cookie = require('cookie-parser');
 const session = require('express-session');
+const require_login = require('connect-ensure-login');
 
 /*
  * Load environment variables from .env file, where API keys and passwords are configured.
@@ -22,7 +23,7 @@ dotenv.config();
  */
 const homeController = require('./controllers/routes/home');
 const passportController = require('./controllers/passport');
-const dashboardController = require('./controllers/dashboard')
+const dashboardController = require('./controllers/routes/dashboard');
 
 /*
  * Controllers (API)
@@ -66,7 +67,7 @@ app.use(passport.session());
  * Primary app routes.
  */
 app.get('/', homeController.index);
-app.get('/dashboard', dashboardController.index);
+app.get('/dashboard', require_login.ensureLoggedIn(), dashboardController.index);
 
 /*
  * API routes.
@@ -102,7 +103,7 @@ app.get('/login/facebook', passport.authenticate('facebook', { scope: ['public_p
  * access was granted, the user will be logged in.  Otherwise, authentication has failed.
  */
 app.get('/login/facebook/return', passport.authenticate('facebook', {
-    failureRedirect: '/login',
+    failureRedirect: '/',
     scope: ['public_profile', 'email']
 }), passportController.loginReturn);
 

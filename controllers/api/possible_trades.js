@@ -12,7 +12,7 @@ const db = require('../../models/possible_trades.js');
  * Replies with a json object containing the status of the database operation.
  */
 exports.add_relation = function(req, res) {
-    var user_id = req.body.user_id;
+    var user_id = req.user.id;
     var owned_book_id = req.body.owned_book_id;
     var wanted_book_id = req.body.wanted_book_id;
 
@@ -32,7 +32,7 @@ exports.add_relation = function(req, res) {
  * Replies with a json object containing the status of the database operation.
  */
 exports.remove_relation = function(req, res) {
-    var user_id = req.body.user_id;
+    var user_id = req.user.id;
     var owned_book_id = req.body.owned_book_id;
     var wanted_book_id = req.body.wanted_book_id;
 
@@ -50,7 +50,7 @@ exports.remove_relation = function(req, res) {
  * Replies with a json object containing the status of the database operation.
  */
 exports.remove_relation_have = function(req, res) {
-    var user_id = req.body.user_id;
+    var user_id = req.user.id;
     var owned_book_id = req.body.owned_book_id;
 
     db.remove_relation_have(user_id, owned_book_id, function(status){
@@ -67,7 +67,7 @@ exports.remove_relation_have = function(req, res) {
  * Replies with a json object containing the status of the database operation.
  */
 exports.remove_relation_want = function(req, res) {
-    var user_id = req.body.user_id;
+    var user_id = req.user.id;
     var wanted_book_id = req.body.wanted_book_id;
 
     db.remove_relation_want(user_id, wanted_book_id, function(status){
@@ -83,7 +83,7 @@ exports.remove_relation_want = function(req, res) {
  * Gets a list of wanted books associated with a specific user and owned book.
  */
 exports.get_book_wants = function(req, res) {
-    var user_id = req.body.user_id;
+    var user_id = req.user.id;
     var owned_book_id = req.body.owned_book_id;
 
     db.get_book_wants(user_id, owned_book_id, function(status, data){

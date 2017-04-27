@@ -11,8 +11,7 @@ const db = require('../../models/wish_list');
  * Add a wanted book of an user to the database.
  */
 exports.add_book = function(req, res) {
-    // var user_id = req.user.username;
-    var user_id = req.body.user_id;
+    var user_id = req.user.id;
     var book_id = req.body.book_id;
 
     db.add_book(user_id, book_id, function(status){
@@ -30,8 +29,7 @@ exports.add_book = function(req, res) {
  * Remove an wanted book of an user from the database.
  */
 exports.remove_book = function(req, res) {
-    // var user_id = req.user.username;
-    var user_id = req.body.user_id;
+    var user_id = req.user.id;
     var book_id = req.body.book_id;
 
     db.remove_book(user_id, book_id, function(status){
@@ -47,8 +45,7 @@ exports.remove_book = function(req, res) {
  * Gets a list of wanted books of an user from the database.
  */
 exports.get_books = function(req, res) {
-    // var user_id = req.user.username;
-    var user_id = req.query.user_id;
+    var user_id = req.user.id;
 
     db.get_wanted_books(user_id, function(status, data){
         if (status == ec.wish_list_errors.DB_SUCCESS)

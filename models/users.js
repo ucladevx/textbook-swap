@@ -1,3 +1,7 @@
+/*
+ * Interface to query and modify the table users.
+ */
+
 'use strict';
 const pg = require('pg');
 const error_codes = require('../error_codes');

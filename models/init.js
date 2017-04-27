@@ -5,6 +5,9 @@
 'use strict';
 const pg = require('pg');
 
+/*
+ * Initializes the database by creating all the tables if they do not already exist.
+ */
 exports.create_tables = function(){
     pg.connect(process.env.DATABASE_URL, function (err, client, done) {
         if (err) {
@@ -23,7 +26,6 @@ exports.create_tables = function(){
                 if (err) {
                     return console.error('error happened during query', err)
                 }
-                //TODO: talk about error occurring here that all the tables might not be created here and it can go on to the next instruction (probably not a huge deal, because it will only happen once on startup)
             });
         }
     });

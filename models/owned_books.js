@@ -6,6 +6,11 @@
 const pg = require('pg');
 const error_codes = require('../error_codes');
 
+/*
+Purpose: This function is used to add a user_id, book_id relation to the owned_book database
+Inputs: User_id, book_id to be added, and callback function
+Output: Returns the callback function with a success or error code passed as a parameter
+ */
 exports.add_book = function(user, book, next){
     pg.connect(process.env.DATABASE_URL, function(err, client, done){
         done();
@@ -40,6 +45,11 @@ exports.add_book = function(user, book, next){
     });
 };
 
+/*
+ Purpose: This function is used to remove a user_id, book_id relation from the owned_book database
+ Inputs: User_id, book_id to be removed, and callback function
+ Output: Returns the callback function with a success or error code passed as a parameter
+ */
 exports.remove_book = function(user, book, next){
     pg.connect(process.env.DATABASE_URL, function(err, client, done){
         done();
@@ -58,6 +68,11 @@ exports.remove_book = function(user, book, next){
     });
 };
 
+/*
+ Purpose: This function is used to get all the book_id's that a user_id is related to in the owned_book database
+ Inputs: User_id that you want to know what books he or she owns and callback function
+ Output: Returns the callback function with a success or error code passed as a parameter and a list of the book_ids related to the user
+ */
 exports.get_owned_books = function(user, next){
     pg.connect(process.env.DATABASE_URL, function(err, client, done){
         done();
@@ -75,7 +90,11 @@ exports.get_owned_books = function(user, next){
         });
     });
 };
-
+/*
+    Purpose: The users that own a specific book in the database
+    Inputs: The book_id that you want to get all the users that own it, and callback function
+    Output: Returns a callback function that has an success or error code passed as a parameter and the resulting list of user_ids as another parameter
+ */
 exports.get_users = function(book, next){
     pg.connect(process.env.DATABASE_URL, function(err, client, done){
         done();

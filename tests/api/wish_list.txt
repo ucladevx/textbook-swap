@@ -1,0 +1,4 @@
+curl -H "Content-Type: application/json" -X POST -d '{"user_id":"Karen","book_id":777}' http://localhost:3000/api/wish_list/add
+curl -H "Content-Type: application/json" -X POST -d '{"user_id":"Karen","book_id":777}' http://localhost:3000/api/wish_list/remove
+curl -H "Accept: application/json" -H "Content-Type: application/json" -X GET http://localhost:3000/api/wish_list/get_books?user_id=Karen
+curl -H "Accept: application/json" -H "Content-Type: application/json" -X GET http://localhost:3000/api/wish_list/get_users?book_id=777

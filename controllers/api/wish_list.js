@@ -7,18 +7,18 @@ const ec = require('../../error_codes');
 const db = require('../../models/wish_list');
 
 /*
- * Add a wanted book of an user to the database.
  * POST http://localhost:3000/api/wish_list/add
+ * Add a wanted book of an user to the database.
  */
 exports.add_book = function(req, res) {
-    var user_id = req.user.username;
+    // var user_id = req.user.username;
     var user_id = req.body.user_id;
     var book_id = req.body.book_id;
 
     db.add_book(user_id, book_id, function(status){
         if (status == ec.wish_list_errors.DB_SUCCESS)
             console.log("Successfully added book to the database!");
-        else if (status == ec.wish_list_errors.OWNED_BOOK_ALREADY_EXISTS)
+        else if (status == ec.wish_list_errors.WISH_LIST_BOOK_ALREADY_EXISTS)
             console.log("Book is already in the database.");
 
         res.json({status: status});
@@ -26,11 +26,11 @@ exports.add_book = function(req, res) {
 };
 
 /*
- * Remove an wanted book of an user from the database.
  * POST http://localhost:3000/api/wish_list/remove
+ * Remove an wanted book of an user from the database.
  */
 exports.remove_book = function(req, res) {
-    var user_id = req.user.username;
+    // var user_id = req.user.username;
     var user_id = req.body.user_id;
     var book_id = req.body.book_id;
 
@@ -43,11 +43,11 @@ exports.remove_book = function(req, res) {
 };
 
 /*
- * Gets a list of wanted books of an user from the database.
  * GET http://localhost:3000/api/wish_list/get_books
+ * Gets a list of wanted books of an user from the database.
  */
-exports.get_wanted_books = function(req, res) {
-    var user_id = req.user.username;
+exports.get_books = function(req, res) {
+    // var user_id = req.user.username;
     var user_id = req.query.user_id;
 
     db.get_wanted_books(user_id, function(status, data){
@@ -59,8 +59,8 @@ exports.get_wanted_books = function(req, res) {
 };
 
 /*
+ * GET http://localhost:3000/api/wish_list/get_users
  * Gets a list of owners that want a particular book.
- * GET http://localhost:3000/api/wish_list/get_owners
  */
 exports.get_users = function(req, res) {
     var book_id = req.query.book_id;

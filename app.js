@@ -29,6 +29,8 @@ const dashboardController = require('./controllers/routes/dashboard');
  * Controllers (API)
  */
 const ownedBooksController = require('./controllers/api/owned_books');
+const wishListController = require('./controllers/api/wish_list');
+const possibleTradesController = require('./controllers/api/possible_trades');
 
 /*
  * API keys and Passport configuration.
@@ -78,6 +80,19 @@ app.post('/api/owned_books/add', ownedBooksController.add_book);
 app.post('/api/owned_books/remove', ownedBooksController.remove_book);
 app.get('/api/owned_books/get_books', ownedBooksController.get_books);
 app.get('/api/owned_books/get_users', ownedBooksController.get_users);
+
+// Wanted books
+app.post('/api/wish_list/add', wishListController.add_book);
+app.post('/api/wish_list/remove', wishListController.remove_book);
+app.get('/api/wish_list/get_books', wishListController.get_books);
+app.get('/api/wish_list/get_users', wishListController.get_users);
+
+// Possible trades
+app.post('/api/possible_trades/add', possibleTradesController.add_relation);
+app.post('/api/possible_trades/remove', possibleTradesController.remove_relation);
+app.post('/api/possible_trades/remove_have', possibleTradesController.remove_relation_have);
+app.post('/api/possible_trades/remove_want', possibleTradesController.remove_relation_want);
+app.get('/api/possible_trades/get_book_wants', possibleTradesController.get_book_wants);
 
 /*
  * Tests

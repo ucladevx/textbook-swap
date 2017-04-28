@@ -73,4 +73,3 @@ exports.get_users = function(req, res) {
         res.json({status: status, data: data});
     });
 };
-

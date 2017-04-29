@@ -2,26 +2,30 @@
 	margin-top:50px;
 }
 
-[class*="col-"] {
-    margin-bottom: 15px;
-}
-
 #first, #second {
 	height:100vh;
 	min-height:100vh;
 }
 
 .btn {
-	min-width: 80px;
-	min-height: 20px;
+	min-width: 200px;
+	background-color: white;
+	border: 3px solid #008CBA;
+	color: #008CBA;
+}
+
+.buttons{
+	display:flex;
+	flex-wrap:nowrap;
 }
 
 #about {
-	margin-top:15px;
+	margin-top:50px;
 	-webkit-transform:scale(1.5,1); /* Safari and Chrome */
     -moz-transform:scale(1.5,1); /* Firefox */
     -ms-transform:scale(1.5,1); /* IE 9 */
     -o-transform:scale(1.5,1); /* Opera */
     transform:scale(1.5,1); /* W3C */
 	font-size: 250%;
+	color: #008CBA;
 }

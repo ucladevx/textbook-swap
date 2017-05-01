@@ -6,7 +6,7 @@ myfile = open("classes.csv", 'wb')
 wr = csv.writer(myfile, quoting=csv.QUOTE_ALL)
 
 final = set()
-for i in range(162510, 162617):
+for i in range(160000, 160100):
 	url = "http://ucla.verbacompare.com/comparison?id=" + str(i)
 
 	r  = requests.get(url)
@@ -28,5 +28,6 @@ for i in range(162510, 162617):
 					elements.append(word.split(":")[1].strip('"').decode("unicode-escape"))
 		
 	if len(elements) == 5 and str(elements) not in final:
+		elements.append(str(i))
 		wr.writerow(elements)
 		final.add(str(elements))

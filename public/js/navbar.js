@@ -5,10 +5,12 @@ $(document).ready(function(){
             c = $(window).height();
 
         var scrollPercent = (s / (d-c)) * 100;
-        if (scrollPercent > 90) { // check if user scrolled more than 50 from top of the browser window
-            $(".navbar-fixed-top").css("opacity","0.25"); // if yes, then change the color of class "navbar-fixed-top" to white (#f8f8f8)
+        if (scrollPercent > 95) { // check if user scrolled more than 50 from top of the browser window
+            $(".navbar-fixed-top").css("opacity","0.45");
+            $("nav").css('box-shadow', '0px 1px 8px #555');
         } else {
-            $(".navbar-fixed-top").css("opacity", "1.0"); // if not, change it back to transparent
+            $(".navbar-fixed-top").css("opacity", "1.0");
+            $("nav").css('box-shadow', '0px 1px 8px #AAA');
         }
     });
 });

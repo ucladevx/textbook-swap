@@ -5,6 +5,11 @@
 #first, #second {
 	height:100vh;
 	min-height:100vh;
+	padding-top: 10vh;
+}
+
+#second, #footer {
+	background: linear-gradient(to right, rgba(0,76,153,1),rgba(102,178,255,1));
 }
 
 .btn {
@@ -28,4 +33,31 @@
     transform:scale(1.5,1); /* W3C */
 	font-size: 250%;
 	color: #008CBA;
+}
+
+#backtotop{
+	margin-top:50px;
+	-webkit-transform:scale(1.5,1); /* Safari and Chrome */
+	-moz-transform:scale(1.5,1); /* Firefox */
+	-ms-transform:scale(1.5,1); /* IE 9 */
+	-o-transform:scale(1.5,1); /* Opera */
+	transform:scale(1.5,1); /* W3C */
+	font-size: 250%;
+	color: #DDDDDD;
+}
+
+.about_column{
+	padding-right: 5vh;
+	padding-top: 3vh;
+	color: #EEEEEE;
+	text-align: center;
+}
+
+.about_column p{
+	font-size: 125%;
+}
+
+.about_graphic{
+	text-align: center;
+	padding-top: 12vh;
 }

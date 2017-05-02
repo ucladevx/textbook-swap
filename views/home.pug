@@ -13,16 +13,27 @@ html
     body
         include homefirst.pug
         div(id="second")
-            div(class="container" id="aboutpage")
-                div(class="text-center")
-                    img(src="http://cdn2.hubspot.net/hub/53/file-23117129-png/blog/images/closed-loop-marketing.png")
-                div()
-                    div(class="col-md-2")
-                    div(class="col-md-8")
-                        p Lorem ipsum dolor sit amet, consectetur adipiscing elit. In consectetur erat eros, a suscipit lorem dignissim ut. Suspendisse bibendum turpis arcu, vitae accumsan lectus vulputate sollicitudin. Phasellus feugiat mattis mauris at viverra. In eget justo eu nulla ullamcorper rutrum sed eu felis. Cras ut porttitor enim. Nulla varius tincidunt mi, at imperdiet odio vulputate ut. Nullam a felis ante. Integer metus augue, maximus accumsan nisl eu, rutrum sodales ante. Proin eget ex eu felis congue vehicula et nec risus. Sed in varius orci. Aenean tristique ligula id erat egestas tincidunt.
-                        div(class="text-center")
-                            a(class="btn btn-default" href="#" role="button" id="backtotop") Back to Top
-                    div(class="col-md-2")
+            .container
+                .row
+                    .col-md-7.about_graphic
+                        img(src="/images/logo_1.svg")
+                    .col-md-5.about_column
+                        h2 What is Loop?
+                        br
+                        p Lorem ipsum dolor sit amet, consectetur adipiscing elit. In consectetur erat eros, a suscipit lorem dignissim ut.
+                        br
+                        p Suspendisse bibendum turpis arcu, vitae accumsan lectus vulputate sollicitudin. Phasellus feugiat mattis mauris at viverra. In eget justo eu nulla ullamcorper rutrum sed eu felis.
+                        br
+                        p Cras ut porttitor enim. Nulla varius tincidunt mi, at imperdiet odio vulputate ut. Nullam a felis ante. Integer metus augue, maximus accumsan nisl eu, rutrum sodales ante. Proin eget ex eu felis congue vehicula et nec risus. Sed in varius orci. Aenean tristique ligula id erat egestas tincidunt.
 
-        a(href='/login/facebook') Log in with Facebook
+                div(class="container")
+                    span()
+                        div(class="col-sm-4")
+                        div(class="col-sm-4 text-center")
+                            <span class="glyphicon glyphicon-menu-up" id="backtotop" aria-hidden="true"></span>
+                        div(class="col-sm-4")
+
+        .footer(id="footer")
+            a(href='/login/facebook') Log in with Facebook
+
         script(src='js/home.js')

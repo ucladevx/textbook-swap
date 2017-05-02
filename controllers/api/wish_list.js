@@ -5,6 +5,8 @@
 const request = require('request');
 const ec = require('../../error_codes');
 const db = require('../../models/wish_list');
+const pt = require('../../models/possible_trades');
+const ge = require('../../models/graph_edges');
 
 /*
  * POST http://localhost:3000/api/wish_list/add
@@ -22,6 +24,8 @@ exports.add_book = function(req, res) {
 
         res.json({status: status});
     });
+
+    // TODO: should also add entry into possible_trades and graph_edges?
 };
 
 /*
@@ -39,6 +43,22 @@ exports.remove_book = function(req, res) {
             console.log("Successfully removed book from the database!");
 
         res.json({status: status});
+    });
+
+    // delete all (A,B,C) in possible_trades where A=user_id AND C=book_id
+    pt.remove_relation_want(user_id, book_id, function(status) {
+        if (status == ec.possible_trades_errors.DB_SUCCESS)
+            console.log("Successfully removed relation_want from the database!");
+
+        // res.json({status: status});
+    });
+
+    // delete all (A,B,C,D) in graph_edges where (A=user_id AND B=book_id) OR (C=user_id AND D=book_id)
+    ge.remove_wanted_book(user_id, book_id, function(status) {
+        if (status == ec.graph_edges_errors.DB_SUCCESS)
+            console.log("Successfully removed wanted book for all graph edges from the database!");
+
+        // res.json({status: status});
     });
 };
 

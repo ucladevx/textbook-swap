@@ -90,8 +90,8 @@ app.get('/api/wish_list/get_users', wishListController.get_users);
 // Possible trades
 app.post('/api/possible_trades/add', possibleTradesController.add_relation);
 app.post('/api/possible_trades/remove', possibleTradesController.remove_relation);
-app.post('/api/possible_trades/remove_have', possibleTradesController.remove_relation_have);
-app.post('/api/possible_trades/remove_want', possibleTradesController.remove_relation_want);
+// app.post('/api/possible_trades/remove_have', possibleTradesController.remove_relation_have);
+// app.post('/api/possible_trades/remove_want', possibleTradesController.remove_relation_want);
 app.get('/api/possible_trades/get_book_wants', possibleTradesController.get_book_wants);
 
 /*

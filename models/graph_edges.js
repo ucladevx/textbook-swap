@@ -116,7 +116,7 @@ exports.remove_owned_book = function(user, owned_book, next){
                 console.error("Error querying database", err);
                 return next(error_codes.graph_edges_errors.DB_QUERY_ERROR);
             }
-            return next(error_codes.graph_edges_errors.DB_SUCCESS, result.rows);
+            return next(error_codes.graph_edges_errors.DB_SUCCESS);
         });
     });
 };
@@ -139,7 +139,7 @@ exports.remove_wanted_book = function(user, book_want, next){
                 console.error("Error querying database", err);
                 return next(error_codes.graph_edges_errors.DB_QUERY_ERROR);
             }
-            return next(error_codes.graph_edges_errors.DB_SUCCESS, result.rows);
+            return next(error_codes.graph_edges_errors.DB_SUCCESS);
         });
     });
 };
@@ -164,7 +164,7 @@ exports.remove_user_owned_want = function(user, book_have, book_want, next){
                     console.error("Error querying database", err);
                     return next(error_codes.graph_edges_errors.DB_QUERY_ERROR);
                 }
-                return next(error_codes.graph_edges_errors.DB_SUCCESS, result.rows);
+                return next(error_codes.graph_edges_errors.DB_SUCCESS);
         });
     });
 };

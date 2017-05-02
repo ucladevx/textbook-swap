@@ -23,28 +23,28 @@ exports.add_edge = function(user, owned_book, target_user, wanted_book, next){
         //check if the relation exists already
         client.query("SELECT COUNT(user_id) FROM graph_edges WHERE user_id=$1::VARCHAR AND book_have=$2::INTEGER AND target_id=$3::VARCHAR AND book_want=$4::INTEGER ",
             [user, owned_book, target_user, wanted_book], function(err, result){
-            if (err){
-                console.error("Error querying table graph_edges", err);
-                return next(error_codes.graph_edges_errors.DB_QUERY_ERROR);
-            }
+                if (err){
+                    console.error("Error querying table graph_edges", err);
+                    return next(error_codes.graph_edges_errors.DB_QUERY_ERROR);
+                }
 
-            //if relationship doesn't exist, it inserts it, if it does, it returns and error
-            if(result.rows[0].count == 0){
-                client.query("INSERT INTO graph_edges (user_id, book_have, target_id, book_want) VALUES ($1::VARCHAR, $2::INTEGER, $3::VARCHAR, $4::INTEGER)",
-                    [user, owned_book, target_user, wanted_book], function(err, result){
-                    if (err){
-                        console.error("Error inserting into graph_edges table", err);
-                        return next(error_codes.graph_edges_errors.DB_QUERY_ERROR);
-                    }
+                //if relationship doesn't exist, it inserts it, if it does, it returns and error
+                if(result.rows[0].count == 0){
+                    client.query("INSERT INTO graph_edges (user_id, book_have, target_id, book_want) VALUES ($1::VARCHAR, $2::INTEGER, $3::VARCHAR, $4::INTEGER)",
+                        [user, owned_book, target_user, wanted_book], function(err, result){
+                            if (err){
+                                console.error("Error inserting into graph_edges table", err);
+                                return next(error_codes.graph_edges_errors.DB_QUERY_ERROR);
+                            }
 
-                    return next(error_codes.graph_edges_errors.DB_SUCCESS);
-                });
-            }
-            else{
-                console.error("Edge already exists in graph_edges table");
-                return next(error_codes.graph_edges_errors.GRAPH_EDGE_ALREADY_EXISTS);
-            }
-        });
+                            return next(error_codes.graph_edges_errors.DB_SUCCESS);
+                        });
+                }
+                else{
+                    console.error("Edge already exists in graph_edges table");
+                    return next(error_codes.graph_edges_errors.GRAPH_EDGE_ALREADY_EXISTS);
+                }
+            });
     });
 };
 
@@ -64,12 +64,12 @@ exports.remove_edge = function(user, owned_book, target_user, wanted_book, next)
 
         client.query("DELETE FROM graph_edges WHERE user_id=$1::VARCHAR AND book_have=$2::INTEGER AND target_id=$3::VARCHAR AND book_want=$4::INTEGER",
             [user, owned_book, target_user, wanted_book], function(err, result){
-            if(err){
-                console.error("Error querying database", err);
-                return next(error_codes.graph_edges_errors.DB_QUERY_ERROR);
-            }
-            return next(error_codes.graph_edges_errors.DB_SUCCESS);
-        });
+                if(err){
+                    console.error("Error querying database", err);
+                    return next(error_codes.graph_edges_errors.DB_QUERY_ERROR);
+                }
+                return next(error_codes.graph_edges_errors.DB_SUCCESS);
+            });
     });
 };
 
@@ -112,12 +112,12 @@ exports.remove_owned_book = function(user, owned_book, next){
 
         client.query("DELETE FROM graph_edges WHERE (user_id=$1::VARCHAR AND book_have=$2::INTEGER) OR (target_id=$1::VARCHAR AND book_want=$2::INTEGER)",
             [user, owned_book], function(err, result){
-            if(err){
-                console.error("Error querying database", err);
-                return next(error_codes.graph_edges_errors.DB_QUERY_ERROR);
-            }
-            return next(error_codes.graph_edges_errors.DB_SUCCESS, result.rows);
-        });
+                if(err){
+                    console.error("Error querying database", err);
+                    return next(error_codes.graph_edges_errors.DB_QUERY_ERROR);
+                }
+                return next(error_codes.graph_edges_errors.DB_SUCCESS, result.rows);
+            });
     });
 };
 

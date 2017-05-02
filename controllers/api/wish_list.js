@@ -24,8 +24,6 @@ exports.add_book = function(req, res) {
 
         res.json({status: status});
     });
-
-    // TODO: should also add entry into possible_trades and graph_edges?
 };
 
 /*

@@ -22,7 +22,7 @@ dotenv.config();
  * Controllers (route handlers).
  */
 const homeController = require('./controllers/routes/home');
-const passportController = require('./controllers/passport');
+const passportController = require('./controllers/routes/passport');
 const dashboardController = require('./controllers/routes/dashboard');
 
 /*

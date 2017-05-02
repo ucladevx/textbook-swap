@@ -8,7 +8,8 @@ const db = require('../../models/owned_books');
 
 /*
  * POST http://localhost:3000/api/owned_books/add
- * Add an owned book of an user to the database.
+ * Add an owned book of an user to the owned_books table.
+ * Also should find all (A,B,C) in possible_trades where C=book_id and add (A,B,user_id,C) to the graph_edges table
  * Replies with a json object containing the status of the database operation.
  */
 exports.add_book = function(req, res) {
@@ -27,7 +28,9 @@ exports.add_book = function(req, res) {
 
 /*
  * POST http://localhost:3000/api/owned_books/remove
- * Remove an owned book of an user from the database.
+ * Remove an owned book of an user from the owned_books table.
+ * Also should delete all (A,B,C) in possible_trades where A=user_id AND B=book_id.
+ * Also should delete all (A,B,C,D) in graph_edges where (A=user_id AND B=book_id) OR (C=user_id AND D=book_id)
  * Replies with a json object containing the status of the database operation.
  */
 exports.remove_book = function(req, res) {

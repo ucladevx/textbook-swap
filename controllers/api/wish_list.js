@@ -8,7 +8,7 @@ const db = require('../../models/wish_list');
 
 /*
  * POST http://localhost:3000/api/wish_list/add
- * Add a wanted book of an user to the database.
+ * Add a wanted book of an user to the wish_list table.
  */
 exports.add_book = function(req, res) {
     var user_id = req.user.id;
@@ -26,7 +26,9 @@ exports.add_book = function(req, res) {
 
 /*
  * POST http://localhost:3000/api/wish_list/remove
- * Remove an wanted book of an user from the database.
+ * Remove an wanted book of an user from the wish_list table.
+ * Also should delete all (A,B,C) in possible_trades where A=user_id AND C=book_id.
+ * Also should delete all (A,B,C,D) in graph_edges where A=user_id AND D=book_id
  */
 exports.remove_book = function(req, res) {
     var user_id = req.user.id;

@@ -8,7 +8,8 @@ const db = require('../../models/possible_trades.js');
 
 /*
  * POST http://localhost:3000/api/possible_trades/add
- * Add a trade relation for a user, owned book, and wanted book.
+ * Add a trade relation for a user, owned book, and wanted book to the possible_trades table.
+ * Also should find all (A,B) in the owned_book table where B=book_id and insert (user_id, owned_book_id, A, book_id) into the graph_edges table.
  * Replies with a json object containing the status of the database operation.
  */
 exports.add_relation = function(req, res) {
@@ -28,7 +29,8 @@ exports.add_relation = function(req, res) {
 
 /*
  * POST http://localhost:3000/api/possible_trades/remove
- * Remove a trade relation for a user, owned book, and wanted book.
+ * Remove a trade relation for a user, owned book, and wanted book from the possible_trades table.
+ * Also should delete all (A,B,C,D) in graph_edges where A=user_id AND B=owned_book_id AND D=wanted_book_id
  * Replies with a json object containing the status of the database operation.
  */
 exports.remove_relation = function(req, res) {
@@ -44,39 +46,39 @@ exports.remove_relation = function(req, res) {
     });
 };
 
-/*
- * POST http://localhost:3000/api/possible_trades/remove_have
- * Remove all trade relations for a specific user and owned book.
- * Replies with a json object containing the status of the database operation.
- */
-exports.remove_relation_have = function(req, res) {
-    var user_id = req.user.id;
-    var owned_book_id = req.body.owned_book_id;
-
-    db.remove_relation_have(user_id, owned_book_id, function(status){
-        if (status == ec.possible_trades_errors.DB_SUCCESS)
-            console.log("Successfully removed relation-have from the database!");
-
-        res.json({status: status});
-    });
-};
-
-/*
- * POST http://localhost:3000/api/possible_trades/remove_want
- * Remove all trade relations for a specific user and wanted book.
- * Replies with a json object containing the status of the database operation.
- */
-exports.remove_relation_want = function(req, res) {
-    var user_id = req.user.id;
-    var wanted_book_id = req.body.wanted_book_id;
-
-    db.remove_relation_want(user_id, wanted_book_id, function(status){
-        if (status == ec.possible_trades_errors.DB_SUCCESS)
-            console.log("Successfully removed relation-want from the database!");
-
-        res.json({status: status});
-    });
-};
+// /*
+//  * POST http://localhost:3000/api/possible_trades/remove_have
+//  * Remove all trade relations for a specific user and owned book.
+//  * Replies with a json object containing the status of the database operation.
+//  */
+// exports.remove_relation_have = function(req, res) {
+//     var user_id = req.user.id;
+//     var owned_book_id = req.body.owned_book_id;
+//
+//     db.remove_relation_have(user_id, owned_book_id, function(status){
+//         if (status == ec.possible_trades_errors.DB_SUCCESS)
+//             console.log("Successfully removed relation-have from the database!");
+//
+//         res.json({status: status});
+//     });
+// };
+//
+// /*
+//  * POST http://localhost:3000/api/possible_trades/remove_want
+//  * Remove all trade relations for a specific user and wanted book.
+//  * Replies with a json object containing the status of the database operation.
+//  */
+// exports.remove_relation_want = function(req, res) {
+//     var user_id = req.user.id;
+//     var wanted_book_id = req.body.wanted_book_id;
+//
+//     db.remove_relation_want(user_id, wanted_book_id, function(status){
+//         if (status == ec.possible_trades_errors.DB_SUCCESS)
+//             console.log("Successfully removed relation-want from the database!");
+//
+//         res.json({status: status});
+//     });
+// };
 
 /*
  * GET http://localhost:3000/api/wish_list/get_book_wants

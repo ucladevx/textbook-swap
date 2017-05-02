@@ -6,7 +6,7 @@ myfile = open("classes.csv", 'wb')
 wr = csv.writer(myfile, quoting=csv.QUOTE_ALL)
 
 final = set()
-for i in range(160000, 160100):
+for i in range(100000, 200000):
 	url = "http://ucla.verbacompare.com/comparison?id=" + str(i)
 
 	r  = requests.get(url)

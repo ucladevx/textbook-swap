@@ -4,11 +4,17 @@ nav {
 }
 
 .navbar-fixed-top {
-    transition: background 2.0s ease-out;
-    background: linear-gradient(to right, rgba(255,153,153,1),rgba(255,204,153,1));
+    opacity: 1;
+    transition: all 0.5s ease-out;
+    background: linear-gradient(to right, rgba(0,76,153,1),rgba(102,178,255,1));
     border: 0;
 }
 
 .nav.navbar-nav.navbar-right li a{
     color: white;
+    transition: all 0.5s ease-out;
+}
+
+#navbar_logo{
+    height: 20px;
 }

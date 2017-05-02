@@ -6,8 +6,6 @@
 const pg = require('pg');
 const error_codes = require('../error_codes');
 
-///TODO: test all this stuff
-
 /*
  *  Purpose: Add a graph edge into the database
  *  Inputs: User: user that owns a book, owned_book: book id of owned book, target_user: the user that owns a book the User wants, wanted_book: book id of the wanted book
@@ -118,7 +116,7 @@ exports.remove_owned_book = function(user, owned_book, next){
                 console.error("Error querying database", err);
                 return next(error_codes.graph_edges_errors.DB_QUERY_ERROR);
             }
-            return next(error_codes.graph_edges_errors.DB_SUCCESS, result.rows);
+            return next(error_codes.graph_edges_errors.DB_SUCCESS);
         });
     });
 };
@@ -141,7 +139,32 @@ exports.remove_wanted_book = function(user, book_want, next){
                 console.error("Error querying database", err);
                 return next(error_codes.graph_edges_errors.DB_QUERY_ERROR);
             }
-            return next(error_codes.graph_edges_errors.DB_SUCCESS, result.rows);
+            return next(error_codes.graph_edges_errors.DB_SUCCESS);
+        });
+    });
+};
+
+/*
+ * Purpose: Remove edges from the graph where the user wants a specific book and has a specific book
+ * Inputs: user: user_id who wants a book wanted_book: that book id of the book the user wants, owned_book: book id of the book the user has ,
+ * and a callback function
+ * Outputs: returns a callback function with error code (or success) as parameter
+ */
+exports.remove_user_owned_want = function(user, book_have, book_want, next){
+    pg.connect(process.env.DATABASE_URL, function(err, client, done){
+        done();
+        if (err){
+            console.error("Error connection to client while querying graph_edges table: ", err);
+            return next(error_codes.graph_edges_errors.DB_CONNECTION_ERROR);
+        }
+
+        client.query("DELETE FROM graph_edges WHERE user_id=$1::VARCHAR AND book_have=$2::INTEGER AND book_want=$3::INTEGER", [user, book_have, book_want],
+            function(err, result){
+                if(err){
+                    console.error("Error querying database", err);
+                    return next(error_codes.graph_edges_errors.DB_QUERY_ERROR);
+                }
+                return next(error_codes.graph_edges_errors.DB_SUCCESS);
         });
     });
 };

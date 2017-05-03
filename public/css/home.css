@@ -35,7 +35,9 @@ body{
 }
 
 #bookshelf {
-	margin-top: -10vh;
+	margin-top:-10vh;
+	z-index: -1;
+	position: absolute;
 }
 
 .buttons{

@@ -1,3 +1,7 @@
+body{
+	font-family: 'Lato', sans-serif !important;
+}
+
 #logo {
 	margin-top:50px;
 }
@@ -8,7 +12,7 @@
 	padding-top: 10vh;
 }
 
-#second, #footer {
+#second{
 	background: linear-gradient(to right, rgba(0,76,153,1),rgba(102,178,255,1));
 }
 
@@ -61,3 +65,4 @@
 	text-align: center;
 	padding-top: 12vh;
 }
+

@@ -3,24 +3,37 @@ body{
 }
 
 #logo {
-	margin-top:50px;
+	margin-top: 16vh;
+	margin-bottom: 10vh;
+	max-height: 40vh;
+	min-height: 40vh;
 }
 
 #first, #second {
 	height:100vh;
 	min-height:100vh;
-	padding-top: 10vh;
+    max-height:100vh;
 }
 
 #second{
 	background: linear-gradient(to right, rgba(0,76,153,1),rgba(102,178,255,1));
+	max-height:100vh;
 }
 
 .btn {
-	min-width: 200px;
-	background-color: white;
-	border: 3px solid #008CBA;
-	color: #008CBA;
+	min-width:22vh;
+	max-width:22vh;
+	background-color: #FECF67;
+	border:0px;
+	color: white;
+	box-shadow: 5px 5px 10px #CCCCCC;
+	text-align: center;
+	line-height: 4vh;
+	margin-top: 3vh;
+}
+
+#bookshelf {
+	margin-top: -10vh;
 }
 
 .buttons{

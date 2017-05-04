@@ -97,9 +97,11 @@ app.get('/api/possible_trades/get_book_wants', possibleTradesController.get_book
 /*
  * Tests
  */
-const ownedBooksTest = require('./tests/models/owned_books').test();
-const possibleTradesTest = require('./tests/models/possible_trades').test();
-const usersTest = require('./tests/models/users').test();
+const initTest = require('./models/init').create_tables(function(){
+    const ownedBooksTest = require('./tests/models/owned_books').test();
+    const possibleTradesTest = require('./tests/models/possible_trades').test();
+    const usersTest = require('./tests/models/users').test();
+});
 
 /*
  * Authentication routes.

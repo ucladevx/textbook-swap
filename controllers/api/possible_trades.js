@@ -4,12 +4,14 @@
 
 const request = require('request');
 const ec = require('../../error_codes');
-const db = require('../../models/possible_trades.js');
+const db = require('../../models/possible_trades');
+const ob = require('../../models/owned_books');
+const ge = require('../../models/graph_edges');
 
 /*
  * POST http://localhost:3000/api/possible_trades/add
  * Add a trade relation for a user, owned book, and wanted book to the possible_trades table.
- * Also should find all (A,B) in the owned_book table where B=book_id and insert (user_id, owned_book_id, A, book_id) into the graph_edges table.
+ * Also should find all (A,B) in the owned_book table where B=wanted_book_id and insert (user_id, owned_book_id, A, wanted_book_id) into the graph_edges table.
  * Replies with a json object containing the status of the database operation.
  */
 exports.add_relation = function(req, res) {
@@ -24,6 +26,25 @@ exports.add_relation = function(req, res) {
             console.log("Relation is already in the database.");
 
         res.json({status: status});
+    });
+
+    //find all (A,B) in the owned_book table where B=wanted_book_id and insert (user_id, owned_book_id, A, wanted_book_id) into the graph_
+    ob.get_users(wanted_book_id, function(status, rows){
+        if (status == ec.possible_trades_errors.DB_SUCCESS)
+            console.log("Successfully found possible trades by wanted book in the database!");
+
+        // go through each of the returned rows and add (user_id, owned_book_id, A, wanted_book_id) to graph_edges
+        for (var i = 0; i < rows.length; i++) {
+            ge.add_edge(user_id, owned_book_id, rows[i]["user_id"], wanted_book_id, function(status) {
+
+                if (status == ec.graph_edges_errors.DB_SUCCESS)
+                    console.log("Edge added successfully to the database!");
+                else if (status == ec.graph_edges_errors.GRAPH_EDGE_ALREADY_EXISTS)
+                    console.log("Edge already exists in the database!");
+                else
+                    console.log("Error trying to add edge to database!");
+            });
+        }
     });
 };
 
@@ -43,6 +64,11 @@ exports.remove_relation = function(req, res) {
             console.log("Successfully removed relation from the database!");
 
         res.json({status: status});
+    });
+
+    ge.remove_user_owned_want(user_id, owned_book_id, wanted_book_id, function(status){
+        if (status == ec.possible_trades_errors.DB_SUCCESS)
+            console.log("Successfully removed edges from the database!");
     });
 };
 

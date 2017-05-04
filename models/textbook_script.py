@@ -6,7 +6,7 @@ myfile = open("classes.csv", 'wb')
 wr = csv.writer(myfile, quoting=csv.QUOTE_ALL)
 
 final = set()
-for i in range(100000, 200000):
+for i in range(141535, 141545):
 	print i
 	url = "http://ucla.verbacompare.com/comparison?id=" + str(i)
 	r  = requests.get(url)
@@ -39,6 +39,7 @@ for i in range(100000, 200000):
 					if not 'image' + index in elements:
 						elements['image' + index] = ""
 					elements['title' + index] = word.split(":")[1].strip('"').decode("unicode-escape")
+					elements['title' + index] = elements['title' + index].encode('ascii', 'ignore').decode('ascii')
 				elif 'author' == word.split(":")[0].strip('"'):
 					elements['author' + index] = word.split(":")[1].strip('"').decode("unicode-escape")
 					#once the author field is hit, we've gotten all the data we need for this book

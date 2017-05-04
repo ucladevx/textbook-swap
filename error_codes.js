@@ -38,3 +38,10 @@ exports.graph_edges_errors = Object.freeze({
     DB_QUERY_ERROR : 2,
     GRAPH_EDGE_ALREADY_EXISTS : 3
 });
+
+exports.found_trades_errors = Object.freeze({
+    DB_SUCCESS : 0,
+    DB_CONNECTION_ERROR : 1,
+    DB_QUERY_ERROR : 2,
+    GRAPH_EDGE_ALREADY_EXISTS : 3
+});

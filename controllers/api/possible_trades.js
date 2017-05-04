@@ -62,6 +62,8 @@ exports.remove_relation = function(req, res) {
     db.remove_relation(user_id, owned_book_id, wanted_book_id, function(status){
         if (status == ec.possible_trades_errors.DB_SUCCESS)
             console.log("Successfully removed relation from the database!");
+        else
+            console.log("Error trying to remove relation from database.");
 
         res.json({status: status});
     });
@@ -69,6 +71,8 @@ exports.remove_relation = function(req, res) {
     ge.remove_user_owned_want(user_id, owned_book_id, wanted_book_id, function(status){
         if (status == ec.possible_trades_errors.DB_SUCCESS)
             console.log("Successfully removed edges from the database!");
+        else
+            console.log("Error trying to remove relation from database.");
     });
 };
 

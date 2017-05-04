@@ -5,10 +5,13 @@
 const request = require('request');
 const ec = require('../../error_codes');
 const db = require('../../models/owned_books');
+const pt = require('../../models/possible_trades');
+const ge = require('../../models/graph_edges');
 
 /*
  * POST http://localhost:3000/api/owned_books/add
- * Add an owned book of an user to the database.
+ * Add an owned book of an user to the owned_books table.
+ * Also should find all (A,B,C) in possible_trades where C=book_id and add (A,B,user_id,C) to the graph_edges table
  * Replies with a json object containing the status of the database operation.
  */
 exports.add_book = function(req, res) {
@@ -23,11 +26,31 @@ exports.add_book = function(req, res) {
 
         res.json({status: status});
     });
+
+    // find all (A,B,C) in possible_trades where C=book_id and add (A,B,user_id,C) to the graph_edges table
+    pt.get_rows_by_want(book_id, function(status, rows) {
+        if (status == ec.possible_trades_errors.DB_SUCCESS)
+            console.log("Successfully found possible trades by wanted book in the database!");
+
+        // go through each of the returned rows and add (A, B, user_id, C) to graph_edges 
+        for (var i = 0; i < rows.length; i++) {
+            ge.add_edge(rows[i]["user_id"], rows[i]["book_have"], user_id, book_id, function(status) {
+                if (status == ec.graph_edges_errors.DB_SUCCESS)
+                    console.log("Edge added successfully to the database!");
+                else if (status == ec.graph_edges_errors.GRAPH_EDGE_ALREADY_EXISTS)
+                    console.log("Edge already exists in the database!");
+                else
+                    console.log("Error trying to add edge to database!");
+            });
+        }
+    });
 };
 
 /*
  * POST http://localhost:3000/api/owned_books/remove
- * Remove an owned book of an user from the database.
+ * Remove an owned book of an user from the owned_books table.
+ * Also should delete all (A,B,C) in possible_trades where A=user_id AND B=book_id.
+ * Also should delete all (A,B,C,D) in graph_edges where (A=user_id AND B=book_id) OR (C=user_id AND D=book_id)
  * Replies with a json object containing the status of the database operation.
  */
 exports.remove_book = function(req, res) {
@@ -37,8 +60,26 @@ exports.remove_book = function(req, res) {
     db.remove_book(user_id, book_id, function(status){
         if (status == ec.owned_books_errors.DB_SUCCESS)
             console.log("Successfully removed book from the database!");
+        else if (status == ec.owned_books_errors.OWNED_BOOK_DOES_NOT_EXIST)
+            console.log("Owned book cannot be removed since it is not in the database!");
 
         res.json({status: status});
+    });
+
+    // delete all (A,B,C) in possible_trades where A=user_id AND B=book_id
+    pt.remove_relation_have(user_id, book_id, function(status) {
+        if (status == ec.possible_trades_errors.DB_SUCCESS)
+            console.log("Successfully removed relation_have from the database!");
+
+        // res.json({status: status});
+    });
+
+    // delete all (A,B,C,D) in graph_edges where (A=user_id AND B=book_id) OR (C=user_id AND D=book_id)
+    ge.remove_owned_book(user_id, book_id, function(status) {
+        if (status == ec.graph_edges_errors.DB_SUCCESS)
+            console.log("Successfully removed owned book for all graph edges from the database!");
+
+        // res.json({status: status});
     });
 };
 

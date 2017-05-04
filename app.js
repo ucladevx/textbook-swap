@@ -22,7 +22,7 @@ dotenv.config();
  * Controllers (route handlers).
  */
 const homeController = require('./controllers/routes/home');
-const passportController = require('./controllers/passport');
+const passportController = require('./controllers/routes/passport');
 const dashboardController = require('./controllers/routes/dashboard');
 
 /*
@@ -90,16 +90,14 @@ app.get('/api/wish_list/get_users', wishListController.get_users);
 // Possible trades
 app.post('/api/possible_trades/add', possibleTradesController.add_relation);
 app.post('/api/possible_trades/remove', possibleTradesController.remove_relation);
-app.post('/api/possible_trades/remove_have', possibleTradesController.remove_relation_have);
-app.post('/api/possible_trades/remove_want', possibleTradesController.remove_relation_want);
+// app.post('/api/possible_trades/remove_have', possibleTradesController.remove_relation_have);
+// app.post('/api/possible_trades/remove_want', possibleTradesController.remove_relation_want);
 app.get('/api/possible_trades/get_book_wants', possibleTradesController.get_book_wants);
 
 /*
  * Tests
  */
-const ownedBooksTest = require('./tests/models/owned_books').test();
-const possibleTradesTest = require('./tests/models/possible_trades').test();
-const usersTest = require('./tests/models/users').test();
+const test = require('./tests/test_all').test();
 
 /*
  * Authentication routes.

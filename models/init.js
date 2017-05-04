@@ -8,7 +8,7 @@ const pg = require('pg');
 /*
  * Initializes the database by creating all the tables if they do not already exist.
  */
-exports.create_tables = function(){
+exports.create_tables = function(next){
     pg.connect(process.env.DATABASE_URL, function (err, client, done) {
         if (err) {
             return console.error('error fetching client from pool', err)
@@ -22,11 +22,13 @@ exports.create_tables = function(){
 
         for(var i = 0; i < queries.length; i++){
             client.query(queries[i], function (err, result) {
-                done();
                 if (err) {
-                    return console.error('error happened during query', err)
+                    console.error('error happened during query', err);
+                    return next();
                 }
             });
         }
+        done();
+        return next();
     });
 };

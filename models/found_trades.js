@@ -49,6 +49,79 @@ exports.add_loop_edge = function(loop_id, user_id, owned_book, target_user, want
 };
 
 /*
+ * Purpose: Get all graph edges from the database associated with a trade_id
+ * Inputs: trade_id: id of the loop, next: a callback function
+ * Output: Returns the callback function that has an error code (or success) passed back as a parameter, and a list of edges
+ */
+exports.get_trade_by_id = function(trade_id, next){
+    pg.connect(process.env.DATABASE_URL, function(err, client, done){
+        done();
+        if (err){
+            console.error("Error connection to client while querying found_trades table: ", err);
+            return next(error_codes.found_trades_errors.DB_CONNECTION_ERROR);
+        }
+
+        client.query("SELECT * FROM found_trades WHERE trade_id=$1::INTEGER", [trade_id], function(err, result){
+            if(err){
+                console.error("Error querying database", err);
+                return next(error_codes.found_trades_errors.DB_QUERY_ERROR);
+            }
+            return next(error_codes.found_trades_errors.DB_SUCCESS, result.rows);
+        });
+    });
+};
+
+/*
+ * Purpose: Get a trade with a specific user who wants a book
+ * Inputs:  user_id: user that owns the book, wanted_book: book id that is wanted by the user, next:callback function
+ * Output: Returns the callback function that has an error code (or success) passed back as a parameter, and a list of edges
+ */
+exports.get_trade_by_wanted_book = function(user_id, wanted_book, next){
+    pg.connect(process.env.DATABASE_URL, function(err, client, done){
+        done();
+
+        if (err){
+            console.error("Error connection to client while querying found_trades table: ", err);
+            return next(error_codes.found_trades_errors.DB_CONNECTION_ERROR, []);
+        }
+        client.query("SELECT * FROM found_trades WHERE trade_id IN (SELECT trade_id FROM found_trades WHERE user_id=$1:VARCHAR AND book_want=$2::INTEGER)",
+            [user_id, wanted_book], function(err, result){
+                if(err){
+                    console.error("Error querying database", err);
+                    return next(error_codes.found_trades_errors.DB_QUERY_ERROR, []);
+                }
+                return next(error_codes.found_trades_errors.DB_SUCCESS, result.rows);
+            });
+    });
+};
+
+/*
+ * Purpose: get a trade with a specific user who owns a book
+ * Inputs:  user_id: user that owns the book, owned_book: book id that is owned by the user, next:callback function
+ * Output: Returns the callback function that has an error code (or success) passed back as a parameter, and a list of edges
+ */
+exports.get_trade_by_book_owned = function(user_id, owned_book, next){
+    pg.connect(process.env.DATABASE_URL, function(err, client, done){
+        done();
+
+        if (err){
+            console.error("Error connection to client while querying found_trades table: ", err);
+            return next(error_codes.found_trades_errors.DB_CONNECTION_ERROR, []);
+        }
+        client.query("SELECT * FROM found_trades WHERE trade_id IN (SELECT trade_id FROM found_trades WHERE user_id=$1:VARCHAR AND book_have=$2::INTEGER)",
+            [user_id, owned_book], function(err, result){
+                if(err){
+                    console.error("Error querying database", err);
+                    return next(error_codes.found_trades_errors.DB_QUERY_ERROR, []);
+                }
+                return next(error_codes.found_trades_errors.DB_SUCCESS, result.rows);
+            });
+    });
+};
+
+
+
+/*
  * Purpose: Remove all graph edges from the database associated with a trade_id
  * Inputs: trade_id: id of the loop, next: a callback function
  * Output: Returns the callback function that has an error code (or success) passed back as a parameter
@@ -74,8 +147,7 @@ exports.remove_trade_by_id = function(trade_id, next){
 /*
  * Purpose: remove a trade with a specific user who owns a book
  * Inputs:  user_id: user that owns the book, owned_book: book id that is owned by the user, next:callback function
- * Output: Returns the callback function that has an error code (or success) passed back as a parameter,
- * and a trade_id
+ * Output: Returns the callback function that has an error code (or success) passed back as a parameter
  */
 exports.remove_trade_by_book_owned = function(user_id, owned_book, next){
     pg.connect(process.env.DATABASE_URL, function(err, client, done){
@@ -99,8 +171,7 @@ exports.remove_trade_by_book_owned = function(user_id, owned_book, next){
 /*
  * Purpose: remove a trade with a specific user who wants a book
  * Inputs:  user_id: user that owns the book, wanted_book: book id that is wanted by the user, next:callback function
- * Output: Returns the callback function that has an error code (or success) passed back as a parameter,
- * and a trade_id
+ * Output: Returns the callback function that has an error code (or success) passed back as a parameter
  */
 exports.remove_trade_by_wanted_book = function(user_id, wanted_book, next){
     pg.connect(process.env.DATABASE_URL, function(err, client, done){
@@ -116,7 +187,33 @@ exports.remove_trade_by_wanted_book = function(user_id, wanted_book, next){
                     console.error("Error querying database", err);
                     return next(error_codes.found_trades_errors.DB_QUERY_ERROR, []);
                 }
-                return next(error_codes.found_trades_errors.DB_SUCCESS, result.rows);
+                return next(error_codes.found_trades_errors.DB_SUCCESS);
         });
     });
 };
+
+/*
+ * Purpose: Get the count of loops that exist in the table
+ * Inputs: next:callback function
+ * Output: Returns the callback function that has an error code (or success) passed back as a parameter,
+ * and count of loops in the table
+ */
+
+exports.get_number_of_loops = function(next){
+    pg.connect(process.env.DATABASE_URL, function(err, client, done){
+        done();
+
+        if (err){
+            console.error("Error connection to client while querying found_trades table: ", err);
+            return next(error_codes.found_trades_errors.DB_CONNECTION_ERROR, []);
+        }
+        client.query("SELECT COUNT(DISTINCT trade_id) FROM found_trades)", [], function(err, result){
+            if(err){
+                console.error("Error querying database", err);
+                return next(error_codes.found_trades_errors.DB_QUERY_ERROR, []);
+            }
+            return next(error_codes.found_trades_errors.DB_SUCCESS, result.rows);
+        });
+    });
+};
+

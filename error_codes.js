@@ -45,3 +45,12 @@ exports.found_trades_errors = Object.freeze({
     DB_QUERY_ERROR : 2,
     GRAPH_EDGE_ALREADY_EXISTS : 3
 });
+
+exports.found_trades_id_errors = Object.freeze({
+    DB_SUCCESS : 0,
+    DB_CONNECTION_ERROR : 1,
+    DB_QUERY_ERROR : 2,
+    ID_ALREADY_EXISTS : 3,
+    ID_DNE : 4,
+    MULTIPLE_ID_EXISTS : 5
+});

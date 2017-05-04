@@ -1,5 +1,5 @@
 /*
- * Interface to query and modify the table graph_edges.
+ * Interface to query and modify the table found_trades.
  */
 
 'use strict';

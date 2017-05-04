@@ -38,7 +38,9 @@ exports.remove_book = function(req, res) {
 
     db.remove_book(user_id, book_id, function(status){
         if (status == ec.wish_list_errors.DB_SUCCESS)
-            console.log("Successfully removed book from the database!");
+            console.log("Successfully removed wanted book from the database!");
+        else if (status == ec.wish_list_errors.WISH_LIST_BOOK_DOES_NOT_EXIST) 
+            console.log("Wanted book cannot be removed since it is not in the database!");
 
         res.json({status: status});
     });

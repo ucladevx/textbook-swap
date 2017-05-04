@@ -35,7 +35,6 @@ exports.add_book = function(req, res) {
         // go through each of the returned rows and add (A, B, user_id, C) to graph_edges 
         for (var i = 0; i < rows.length; i++) {
             ge.add_edge(rows[i]["user_id"], rows[i]["book_have"], user_id, book_id, function(status) {
-                
                 if (status == ec.graph_edges_errors.DB_SUCCESS)
                     console.log("Edge added successfully to the database!");
                 else if (status == ec.graph_edges_errors.GRAPH_EDGE_ALREADY_EXISTS)
@@ -61,6 +60,8 @@ exports.remove_book = function(req, res) {
     db.remove_book(user_id, book_id, function(status){
         if (status == ec.owned_books_errors.DB_SUCCESS)
             console.log("Successfully removed book from the database!");
+        else if (status == ec.owned_books_errors.OWNED_BOOK_DOES_NOT_EXIST)
+            console.log("Owned book cannot be removed since it is not in the database!");
 
         res.json({status: status});
     });

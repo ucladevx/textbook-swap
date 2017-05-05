@@ -21,7 +21,7 @@ exports.add_loop_edge = function(loop_id, user_id, owned_book, target_user, want
         }
 
         //check if the relation exists already
-        client.query("SELECT COUNT(user_id) FROM found_trades WHERE trade_id=$5::INTEGER user_id=$1::VARCHAR AND book_have=$2::INTEGER AND target_id=$3::VARCHAR AND book_want=$4::INTEGER ",
+        client.query("SELECT COUNT(user_id) FROM found_trades WHERE trade_id=$5::INTEGER AND user_id=$1::VARCHAR AND book_have=$2::INTEGER AND target_id=$3::VARCHAR AND book_want=$4::INTEGER",
             [user_id, owned_book, target_user, wanted_book, loop_id], function(err, result){
                 if (err){
                     console.error("Error querying table found_trades", err);
@@ -84,7 +84,7 @@ exports.get_trade_by_wanted_book = function(user_id, wanted_book, next){
             console.error("Error connection to client while querying found_trades table: ", err);
             return next(error_codes.found_trades_errors.DB_CONNECTION_ERROR, []);
         }
-        client.query("SELECT * FROM found_trades WHERE trade_id IN (SELECT trade_id FROM found_trades WHERE user_id=$1:VARCHAR AND book_want=$2::INTEGER)",
+        client.query("SELECT * FROM found_trades WHERE trade_id IN (SELECT trade_id FROM found_trades WHERE user_id=$1::VARCHAR AND book_want=$2::INTEGER)",
             [user_id, wanted_book], function(err, result){
                 if(err){
                     console.error("Error querying database", err);
@@ -108,7 +108,7 @@ exports.get_trade_by_book_owned = function(user_id, owned_book, next){
             console.error("Error connection to client while querying found_trades table: ", err);
             return next(error_codes.found_trades_errors.DB_CONNECTION_ERROR, []);
         }
-        client.query("SELECT * FROM found_trades WHERE trade_id IN (SELECT trade_id FROM found_trades WHERE user_id=$1:VARCHAR AND book_have=$2::INTEGER)",
+        client.query("SELECT * FROM found_trades WHERE trade_id IN (SELECT trade_id FROM found_trades WHERE user_id=$1::VARCHAR AND book_have=$2::INTEGER)",
             [user_id, owned_book], function(err, result){
                 if(err){
                     console.error("Error querying database", err);
@@ -157,7 +157,7 @@ exports.remove_trade_by_book_owned = function(user_id, owned_book, next){
             console.error("Error connection to client while querying found_trades table: ", err);
             return next(error_codes.found_trades_errors.DB_CONNECTION_ERROR, []);
         }
-        client.query("DELETE FROM found_trades WHERE trade_id IN (SELECT trade_id FROM found_trades WHERE user_id=$1:VARCHAR AND book_have=$2::INTEGER)",
+        client.query("DELETE FROM found_trades WHERE trade_id IN (SELECT trade_id FROM found_trades WHERE user_id=$1::VARCHAR AND book_have=$2::INTEGER)",
             [user_id, owned_book], function(err, result){
                 if(err){
                     console.error("Error querying database", err);
@@ -181,7 +181,7 @@ exports.remove_trade_by_wanted_book = function(user_id, wanted_book, next){
             console.error("Error connection to client while querying found_trades table: ", err);
             return next(error_codes.found_trades_errors.DB_CONNECTION_ERROR, []);
         }
-        client.query("DELETE FROM found_trades WHERE trade_id IN (SELECT trade_id FROM found_trades WHERE user_id=$1:VARCHAR AND book_want=$2::INTEGER)",
+        client.query("DELETE FROM found_trades WHERE trade_id IN (SELECT trade_id FROM found_trades WHERE user_id=$1::VARCHAR AND book_want=$2::INTEGER)",
             [user_id, wanted_book], function(err, result){
                 if(err){
                     console.error("Error querying database", err);
@@ -207,7 +207,7 @@ exports.get_number_of_loops = function(next){
             console.error("Error connection to client while querying found_trades table: ", err);
             return next(error_codes.found_trades_errors.DB_CONNECTION_ERROR, []);
         }
-        client.query("SELECT COUNT(DISTINCT trade_id) FROM found_trades)", [], function(err, result){
+        client.query("SELECT COUNT(DISTINCT trade_id) FROM found_trades", [], function(err, result){
             if(err){
                 console.error("Error querying database", err);
                 return next(error_codes.found_trades_errors.DB_QUERY_ERROR, []);

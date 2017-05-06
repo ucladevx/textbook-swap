@@ -12,6 +12,7 @@ nav {
 
 .nav.navbar-nav.navbar-right li a{
     color: white;
+    font-size:120%;
 }
 
 .nav.navbar-nav.navbar-right{

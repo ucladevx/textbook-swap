@@ -3,8 +3,8 @@ body{
 }
 
 #logo {
-    padding-top: 16vh;
-	margin-bottom: 10vh;
+    padding-top: 15vh;
+	padding-bottom: 10vh;
 	max-height: 40vh;
 	min-height: 40vh;
 }
@@ -13,7 +13,7 @@ body{
 	height:100vh;
 	min-height:100vh;
     max-height:100vh;
-    padding-bottom: 0;
+    padding-bottom: 0vh;
 }
 
 #second{
@@ -32,17 +32,20 @@ body{
 	text-align: center;
 	line-height: 4vh;
 	margin-top: 3vh;
+	font-size:125%;
 }
 
 #bookshelf {
-	margin-top:-10vh;
+	margin-top: -10vh;
 	z-index: -1;
 	position: absolute;
 }
 
-.buttons{
+#buttons{
 	display:flex;
 	flex-wrap:nowrap;
+	padding-top:3.5vh;
+	padding-bottom:3.5vh;
 }
 
 #about {

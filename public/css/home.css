@@ -35,6 +35,11 @@ body{
 	font-size:125%;
 }
 
+.btn:hover {
+	background-color: #FFDF78;
+	color: white;
+}
+
 #bookshelf {
 	margin-top: -10vh;
 	z-index: -1;

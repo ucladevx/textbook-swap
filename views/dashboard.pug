@@ -11,14 +11,20 @@ html
         div(class="row" id="forms")
             div(class="col-lg-6" id="ownedForm")
                 div(class="input-group")
-                    input(class="form-control", type='text', id="ownedID", placeholder='Book ID of owned book...')
+                    input(class="form-control", type='text', id="ownedInput", placeholder='Book ID of owned book...')
                     span(class="input-group-btn")
                         button(class="btn btn-default" type="button" id="addOwned") Add
             div(class="col-lg-6" id="wantedForm")
                 div(class="input-group")
-                    input(class="form-control", type='text', id="wantedID", placeholder='Book ID of wanted book...')
+                    input(class="form-control", type='text', id="wantedInput", placeholder='Book ID of wanted book...')
                     span(class="input-group-btn")
                         button(class="btn btn-default" type="button" id="addWanted") Request
+
+        div(class="row" id="searchResults")
+            div(class="col-lg-6" id="ownedSearchResultsBox")
+                ul(id = "ownedSearchResultsList").list-group
+            div(class="col-lg-6" id="wantedSearchResultsBox")
+                ul(id = "wantedSearchResultsList").list-group
 
         div(class="row" id="bookLists")
             div(class="col-lg-6" id="ownedBox")

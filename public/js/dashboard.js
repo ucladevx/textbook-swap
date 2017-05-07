@@ -57,3 +57,67 @@ $("body").on("click", ".list-group-item", function(){
 		"json"
 	)
 })
+
+// functions needed for searching for textbooks
+
+// get input from search box as user types, character by character
+$("#ownedInput").keyup(function() {
+	var ownedInput = $("#ownedInput").val();
+	// only query for results if the input is at least three characters long
+	if (ownedInput.length >= 3) {
+		$.get("/api/search/search_textbooks", { search_input: ownedInput }, function(object) {
+			// get the search results
+			var searchResults = object.data;
+
+			// successful query
+			if (object.status == 0) {
+				// new search results found, so display them
+				if (searchResults.length > 0) {
+					$("#ownedSearchResultsList").empty();
+					// display all of the search results on the screen
+					for (var i = 0; i < searchResults.length; i++) {
+						$("#ownedSearchResultsList").append('<li class="list-group-item">'+ searchResults[i]["book_name"] + ', ' + searchResults[i]["class_name"] +'</li>')
+					}
+				}
+			}
+			// error when querying
+			else if (object.status === 2)
+				console.log('db query error')
+		});
+	}
+	else {
+		// input too small to query so clear the search results list
+		$("#ownedSearchResultsList").empty();
+	}
+})
+
+// get input from search box as user types, character by character
+$("#wantedInput").keyup(function() {
+	var wantedInput = $("#wantedInput").val();
+	// only query for results if the input is at least three characters long
+	if (wantedInput.length >= 3) {
+		$.get("/api/search/search_textbooks", { search_input: wantedInput }, function(object) {
+			// get the search results
+			var searchResults = object.data;
+
+			// successful query
+			if (object.status == 0) {
+				// new search results found, so display them
+				if (searchResults.length > 0) {
+					$("#wantedSearchResultsList").empty();
+					// display all of the search results on the screen
+					for (var i = 0; i < searchResults.length; i++) {
+						$("#wantedSearchResultsList").append('<li class="list-group-item">'+ searchResults[i]["book_name"] + ', ' + searchResults[i]["class_name"] +'</li>')
+					}
+				}
+			}
+			// error when querying
+			else if (object.status === 2)
+				console.log('db query error')
+		});
+	}
+	else {
+		// input too small to query so clear the search results list
+		$("#wantedSearchResultsList").empty();
+	}
+})

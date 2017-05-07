@@ -15,7 +15,7 @@ $("#textbookSearchInput").keyup(function() {
 			if (object.status == 0) {
 				// new search results found, so display them
 				if (searchResults.length > 0) {
-					$("ul").empty();
+					$("#searchResultsList").empty();
 					// display all of the search results on the screen
 					for (var i = 0; i < searchResults.length; i++) {
 						$("#searchResultsList").append('<li class="list-group-item">'+ searchResults[i]["book_name"] + ', ' + searchResults[i]["class_name"] +'</li>')
@@ -25,11 +25,10 @@ $("#textbookSearchInput").keyup(function() {
 			// error when querying
 			else if (object.status === 2)
 				console.log('db query error')
-
 		});
 	}
 	else {
 		// input too small to query so clear the search results list
-		$("ul").empty();
+		$("#searchResultsList").empty();
 	}
 })

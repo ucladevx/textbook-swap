@@ -4,6 +4,7 @@
 
 const request = require('request');
 const ec = require('../../error_codes');
+const bt = require('../../models/books');
 
 /*
  * GET http://localhost:3000/api/search/search_textbooks
@@ -15,5 +16,16 @@ exports.search_textbooks = function(req, res) {
     console.log(search_input);
 
     // search the books database for the specified input
+    bt.get_search_results(search_input, function(status, data) {
+    	if (status == ec.books_errors.DB_SUCCESS) {
+            console.log("Successfully found textbook search results in the database!");
+            console.log(data);
+    	}
+        else if (status == ec.books_errors.DB_QUERY_ERROR)
+        	console.log("Error querying database for textbook search results!");
+
+        // must send response to front-end so it knows what you're doing
+    	res.json({status: status, data: data});
+    });
 
 };

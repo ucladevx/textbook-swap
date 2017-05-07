@@ -27,5 +27,4 @@ exports.search_textbooks = function(req, res) {
         // must send response to front-end so it knows what you're doing
     	res.json({status: status, data: data});
     });
-
 };

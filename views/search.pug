@@ -14,4 +14,9 @@ html(lang="en")
 					input(class="form-control", type='text', id="textbookSearchInput", placeholder='Name of textbook...')
 					span(class="input-group-btn")
 						button(class="btn btn-default" type="button" id="searchTextbook") Search
+
+		div(class="row" id="searchResults")
+			div(class="col-lg-6" id="searchResultsBox")
+				ul.list-group(id="searchResultsList")
+
 		script(src="/js/search.js")

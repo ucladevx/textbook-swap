@@ -9,7 +9,7 @@ const error_codes = require('../error_codes');
 /*
     Purpose: Query the database and return top 10 relevant results based on search box input
     Inputs: Search box input typed by user
-    Output: Returns a callback function that has an success or error code passed as a parameter and the resulting list of book_name, class_name, and rank as another parameter
+    Output: Returns a callback function that has an success or error code passed as a parameter and the resulting list of [book_name, class_name, rank] as another parameter
  */
 exports.get_search_results = function(search_input, next){
     pg.connect(process.env.DATABASE_URL, function(err, client, done){

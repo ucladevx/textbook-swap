@@ -12,10 +12,10 @@ const bt = require('../../models/books');
  */
 exports.search_textbooks = function(req, res) {
     var search_input = req.query.search_input;
-    // TODO: remove testing (print the search input)
+    // log user input from search box
     console.log(search_input);
 
-    // search the books database for the specified input
+    // search the books database based on user input
     bt.get_search_results(search_input, function(status, data) {
     	if (status == ec.books_errors.DB_SUCCESS) {
             console.log("Successfully found textbook search results in the database!");
@@ -24,7 +24,6 @@ exports.search_textbooks = function(req, res) {
         else if (status == ec.books_errors.DB_QUERY_ERROR)
         	console.log("Error querying database for textbook search results!");
 
-        // must send response to front-end so it knows what you're doing
     	res.json({status: status, data: data});
     });
 };

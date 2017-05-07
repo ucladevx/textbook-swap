@@ -3,16 +3,12 @@
  */
 
 // get input from search box as user types, character by character
-// TODO: fix bug where AJAX request only sends first 6 results to backend
 $("#textbookSearchInput").keyup(function() {
 	var textbookSearchInput = $("#textbookSearchInput").val();
 	// only query for results if the input is at least three characters long
 	if (textbookSearchInput.length >= 3) {
 		$.get("/api/search/search_textbooks", { search_input: textbookSearchInput }, function(object) {
-			// TODO: remove testing
-			console.log(object.status);
-			console.log(object.data);
-
+			// get the search results
 			var searchResults = object.data;
 
 			// successful query
@@ -33,7 +29,7 @@ $("#textbookSearchInput").keyup(function() {
 		});
 	}
 	else {
-		// input too small to query so clear the results list
+		// input too small to query so clear the search results list
 		$("ul").empty();
 	}
 })

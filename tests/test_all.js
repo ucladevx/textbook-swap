@@ -3,6 +3,6 @@ exports.test = function(){
         // const ownedBooksTest = require('./models/owned_books').test();
         // const possibleTradesTest = require('./models/possible_trades').test();
         // const usersTest = require('./models/users').test();
-        const algorithmTest = require('./algorithm').run_algorithm();
+        const algorithmTest = require('./../models/algorithm').run_algorithm();
     });
 };

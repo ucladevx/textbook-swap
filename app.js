@@ -32,7 +32,7 @@ const searchController = require('./controllers/routes/search');
 const ownedBooksController = require('./controllers/api/owned_books');
 const wishListController = require('./controllers/api/wish_list');
 const possibleTradesController = require('./controllers/api/possible_trades');
-const textbookSearchController = require('./controllers/api/textbook_search');
+const textbookSearchController = require('./controllers/api/search');
 
 /*
  * API keys and Passport configuration.
@@ -98,7 +98,7 @@ app.post('/api/possible_trades/remove', possibleTradesController.remove_relation
 app.get('/api/possible_trades/get_book_wants', possibleTradesController.get_book_wants);
 
 // Textbook search
-app.get('/api/textbook_search/get_search_input', textbookSearchController.get_search_input);
+app.get('/api/search/search_textbooks', textbookSearchController.search_textbooks);
 
 /*
  * Tests

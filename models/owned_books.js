@@ -81,7 +81,7 @@ exports.get_owned_books = function(user, next){
             return next(error_codes.owned_books_errors.DB_CONNECTION_ERROR, []);
         }
 
-        client.query("SELECT book_id FROM owned_books WHERE user_id=$1::VARCHAR", [user], function(err, result){
+        client.query("SELECT book_id, book_name, class_name FROM books WHERE book_id IN (SELECT book_id FROM owned_books WHERE user_id=$1::VARCHAR)", [user], function(err, result){
             if(err){
                 console.error("Error querying database", err);
                 return next(error_codes.owned_books_errors.DB_QUERY_ERROR, []);

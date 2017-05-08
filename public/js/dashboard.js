@@ -1,3 +1,7 @@
+/*
+ * Initializing the owned books and wanted books lists
+ */
+
 $(document).ready(function(){
 	$.ajax({url: "/api/owned_books/get_books",
 		data: { user_id: "user" },
@@ -39,29 +43,8 @@ $(document).ready(function(){
 
 })
 
-// $("body").on("click", ".list-group-item", function(){
-// 	var element = this
-// 	var bookid = this.id
-// 	$.post("/api/owned_books/remove",
-// 		{ user_id: "user", book_id: bookid },
-// 		function(data){
-// 			if(data.status === 0){
-// 				element.remove()
-// 			}
-// 			else if(data.status === 1)
-// 				console.log('db connection error')
-// 			else if(data.status === 2)
-// 				console.log('db query error')
-// 			else if(data.status === 4){
-// 				console.log('book does not exist')
-// 			}
-// 		},
-// 		"json"
-// 	)
-// })
-
 /* 
- * Searching for owned books list
+ * Searching and adding entries to the owned books list
  */ 
 
 // get input from search box as user types, character by character and query the database for textbooks
@@ -83,7 +66,7 @@ $("#ownedInput").keyup(function() {
 						var book_name = searchResults[i]["book_name"];
 						var class_name = searchResults[i]["class_name"];
 						var book_id = searchResults[i]["book_id"];
-						// add search result list element
+						// display each line of the search result
 						$("#ownedSearchResultsList").append('<li class="list-group-item" id="' + book_id + '" data-book-name="' + book_name + '" data-class-name="' + class_name +'">' + book_name + ', ' + class_name +'</li>')
 					}
 				}
@@ -128,7 +111,7 @@ $("#ownedSearchResultsList").on("click", ".list-group-item", function(){
 })
 
 /* 
- * Searching for wanted books list
+ * Searching and adding entries to the wanted books list
  */ 
 
 // get input from search box as user types, character by character and query the database for textbooks
@@ -150,7 +133,7 @@ $("#wantedInput").keyup(function() {
 						var book_name = searchResults[i]["book_name"];
 						var class_name = searchResults[i]["class_name"];
 						var book_id = searchResults[i]["book_id"];
-						// add search result list element
+						// display each line of the search result
 						$("#wantedSearchResultsList").append('<li class="list-group-item" id="' + book_id + '" data-book-name="' + book_name + '" data-class-name="' + class_name +'">' + book_name + ', ' + class_name +'</li>')
 					}
 				}
@@ -188,6 +171,68 @@ $("#wantedSearchResultsList").on("click", ".list-group-item", function(){
 				console.log('db query error')
 			else if(data.status === 3){
 				console.log('book already exists')
+			}
+		},
+		"json"
+	);
+})
+
+/*
+ * Deleting entries from the owned books list
+ */
+
+$("#ownedList").on("click", ".list-group-item", function(){
+	// get data from list element tags
+	var listedBook = this;
+	var book_id = listedBook.id;
+	var book_name = listedBook.dataset.bookName;  
+	var class_name = listedBook.dataset.className;
+
+	console.log(listedBook);
+
+	$.post("/api/owned_books/remove",
+		{ user_id: "user", book_id: book_id },
+		function(data){
+			if(data.status === 0){
+				listedBook.remove();
+			}
+			else if(data.status === 1)
+				console.log('db connection error');
+			else if(data.status === 2)
+				console.log('db query error');
+			else if(data.status === 4){
+				console.log('book does not exist');
+			}
+		},
+		"json"
+	);
+})
+
+/*
+ * Deleting entries from the wanted books list
+ */
+
+$("#wantedList").on("click", ".list-group-item", function(){
+	// get data from list element tags
+	var listedBook = this;
+	var book_id = listedBook.id;
+	var book_name = listedBook.dataset.bookName;  
+	var class_name = listedBook.dataset.className;
+
+	console.log(listedBook);
+
+	$.post("/api/wish_list/remove",
+		{ user_id: "user", book_id: book_id },
+		function(data){
+			if(data.status === 0){
+				listedBook.remove();
+			}
+			else if(data.status === 1)
+				console.log('db connection error');
+			else if(data.status === 2)
+				console.log('db query error');
+			else if(data.status === 4){
+				console.log('book does not exist');
 			}
 		},
 		"json"

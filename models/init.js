@@ -27,6 +27,9 @@ exports.create_tables = function(){
                 if (err) {
                     return console.error('error happened during query', err)
                 }
+                else {
+                  console.log("SUCCESS " + i);
+                }
             });
         }
     });

@@ -101,6 +101,7 @@ const ownedBooksTest = require('./tests/models/owned_books').test();
 const possibleTradesTest = require('./tests/models/possible_trades').test();
 const usersTest = require('./tests/models/users').test();
 const bookToClassTest = require('./tests/models/book_to_class').test();
+const bookInfoTest = require('./tests/models/book_info').test();
 /*
  * Authentication routes.
  */

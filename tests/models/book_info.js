@@ -3,7 +3,6 @@ const initModel = require('../../models/init');
 const bookInfo = require('../../models/book_info');
 
 exports.test = function(){
-
   /*
    * Test usage of the interface
    * also shows how to use next callback

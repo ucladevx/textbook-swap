@@ -3,8 +3,6 @@ const initModel = require('../../models/init');
 const bookToClass = require('../../models/book_to_class');
 
 exports.test = function(){
-
-
   /*
    * Test usage of the interface
    * also shows how to use next callback

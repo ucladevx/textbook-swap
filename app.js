@@ -100,7 +100,7 @@ app.get('/api/possible_trades/get_book_wants', possibleTradesController.get_book
 const ownedBooksTest = require('./tests/models/owned_books').test();
 const possibleTradesTest = require('./tests/models/possible_trades').test();
 const usersTest = require('./tests/models/users').test();
-
+const bookToClassTest = require('./tests/models/book_to_class').test();
 /*
  * Authentication routes.
  */

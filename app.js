@@ -95,9 +95,13 @@ app.post('/api/possible_trades/remove', possibleTradesController.remove_relation
 app.get('/api/possible_trades/get_book_wants', possibleTradesController.get_book_wants);
 
 /*
- * Tests
+ * Database initialization and testing
  */
-const test = require('./tests/test_all').test();
+const init = require('./models/init').create_tables(function(){
+    const tradeIDInit = require('./models/found_trades_id').insert_id(0, function(){
+        const test = require('./tests/test_all').test();
+    });
+});
 
 /*
  * Authentication routes.

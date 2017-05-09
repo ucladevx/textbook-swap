@@ -5,10 +5,10 @@ const ge = require('./graph_edges');
 
 var edges = {}; // adjacency list of all nodes
 var matched = {}; // already matched nodes
+var tradeID = 0; // current trade ID
 
 exports.run_algorithm = function(){
-    load_data(function(data){
-        edges = data;
+    load_data(function(){
         for(var i = 2; i <= 4; i++){
             var keys = Object.keys(edges);
             for(var j = 0; j < keys.length; j++){
@@ -69,8 +69,8 @@ function process(visited){
 
 
 /*
- * Loads data from the database, and stores it as adjacency lists in an object (map).
- * @param next: callback to run the algorithm with the data
+ * Loads data from the database, and stores it as adjacency lists in an object (map). Also will load the current trade ID.
+ * @param next: callback to run the algorithm with the data and trade ID.
  */
 function load_data(next){
     ge.get_graph(function(status, rows){

@@ -4,6 +4,7 @@
 const ge = require('./graph_edges');
 
 var edges = {}; // adjacency list of all nodes
+var matched = {}; // already matched nodes
 
 exports.run_algorithm = function(){
     load_data(function(data){
@@ -26,10 +27,12 @@ exports.run_algorithm = function(){
  * @param visited: an array containing the already visited nodes
  */
 function dfs(curr, maxDepth, visited){
+    if(matched[curr])
+        return false;
+
     var found = false;
     if(visited.length == maxDepth){
         if(visited[0].toString() == curr.toString()){
-            console.log(curr, maxDepth, visited);
             process(visited);
             return true;
         }
@@ -58,7 +61,10 @@ function dfs(curr, maxDepth, visited){
  * Process the found loop
  */
 function process(visited){
-    // console.log(visited);
+    console.log(visited);
+    for(var i = 0; i < visited.length; i++)
+        matched[visited[i]] = 1;
+
 }
 
 

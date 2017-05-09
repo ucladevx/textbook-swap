@@ -2,8 +2,8 @@
  * Routes for Facebook Authentication
  */
  
-const initModel = require('../models/init');
-const users = require('../models/users');
+const initModel = require('../../models/init');
+const users = require('../../models/users');
 
 // output user profile info to console and redirect user to profile page
 exports.loginReturn = function (req, res) {

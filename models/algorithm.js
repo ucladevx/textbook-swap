@@ -69,8 +69,8 @@ function process(visited){
 
 
 /*
- * Loads data from the database, and stores it as adjacency lists in a map.
- * @return A map associating each user/book pair with a list of its neighbors.
+ * Loads data from the database, and stores it as adjacency lists in an object (map).
+ * @param next: callback to run the algorithm with the data
  */
 function load_data(next){
     ge.get_graph(function(status, rows){

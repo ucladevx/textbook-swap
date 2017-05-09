@@ -148,3 +148,41 @@ exports.test_get_id = function(){
         }
     }
 };
+
+exports.update_status_accepted_test = function(){
+    found_trades.update_status_accepted(1,'Adi', 2, 'Jay', 1,next);
+    function next(err, result){
+        if (err == ec.found_trades_id_errors.DB_SUCCESS){
+            console.log("TEST SUCCESS");
+        }
+        else {
+            console.log("TEST FAIL");
+        }
+    }
+};
+
+exports.update_status_rejected_test = function(){
+    found_trades.update_status_rejected(1,'Jay', 1, 'Adi', 2,next);
+    function next(err, result){
+        if (err == ec.found_trades_id_errors.DB_SUCCESS){
+            console.log("TEST SUCCESS");
+        }
+        else {
+            console.log("TEST FAIL");
+        }
+    }
+};
+
+exports.get_statuses_by_id_test = function() {
+    found_trades.get_statuses_by_id(1,next);
+    function next(err, result){
+        if (err == ec.found_trades_id_errors.DB_SUCCESS){
+            console.log("TEST SUCCESS: results below");
+            console.log(result);
+        }
+        else {
+            console.log("TEST FAIL");
+        }
+    }
+};
+

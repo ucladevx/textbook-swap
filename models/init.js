@@ -19,7 +19,7 @@ exports.create_tables = function(){
                        'CREATE TABLE IF NOT EXISTS graph_edges(user_id VARCHAR, book_have INTEGER, target_id VARCHAR, book_want INTEGER, PRIMARY KEY (user_id, book_have, target_id, book_want))',
                        'CREATE TABLE IF NOT EXISTS books(book_id INTEGER, book_name VARCHAR, class_name VARCHAR, PRIMARY KEY (book_id))',
                        'CREATE TABLE IF NOT EXISTS users(user_id VARCHAR, user_name VARCHAR, user_email VARCHAR, PRIMARY KEY (user_id))',
-                       'CREATE TABLE IF NOT EXISTS found_trades(trade_id INTEGER, user_id VARCHAR, book_have INTEGER, target_id VARCHAR, book_want INTEGER, PRIMARY KEY (trade_id, user_id, book_have, target_id, book_want))',
+                       'CREATE TABLE IF NOT EXISTS found_trades(trade_id INTEGER, user_id VARCHAR, book_have INTEGER, target_id VARCHAR, book_want INTEGER, status VARCHAR(1), PRIMARY KEY (trade_id, user_id, book_have, target_id, book_want))',
                        'CREATE TABLE IF NOT EXISTS found_trades_id(index INTEGER,trade_id INTEGER, PRIMARY KEY(index))'];
 
         for(var i = 0; i < queries.length; i++){

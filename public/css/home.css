@@ -9,7 +9,7 @@ body{
 	min-height: 40vh;
 }
 
-#first, #second {
+#first, #second{
 	height:100vh;
 	min-height:100vh;
     max-height:100vh;
@@ -17,9 +17,10 @@ body{
 }
 
 #second{
-	background: linear-gradient(to right, rgba(0,76,153,1),rgba(102,178,255,1));
+
 	max-height:100vh;
     padding-top: 10vh;
+
 }
 
 .btn {
@@ -66,7 +67,7 @@ body{
 }
 
 .about_column{
-	padding-right: 5vh;
+	padding-right: 1vh;
 	padding-top: 3vh;
 	color: #EEEEEE;
 	text-align: center;

@@ -1,7 +1,10 @@
 /*
  * Functions to run the loop-finding algorithms.
  */
+const ec = require('../error_codes');
 const ge = require('./graph_edges');
+const ft = require('./found_trades');
+const ftID = require('./found_trades_id');
 
 var edges = {}; // adjacency list of all nodes
 var matched = {}; // already matched nodes
@@ -17,6 +20,13 @@ exports.run_algorithm = function(){
                 var found = dfs(key, i, []);
             }
         }
+
+        ftID.update_id(tradeID, function(status){
+            if(status == ec.found_trades_id_errors.DB_SUCCESS)
+                console.log("Successfully updated trade ID to " + tradeID);
+            else
+                console.log("Failed to update trade ID.")
+        });
     });
 };
 
@@ -58,23 +68,43 @@ function dfs(curr, maxDepth, visited){
 }
 
 /*
- * Process the found loop
+ * Process the found loop. Will add all visited nodes to the matched object and add the trade to the found_trades table.
+ * @param visited: An array of the visited nodes in the loop.
  */
 function process(visited){
     console.log(visited);
-    for(var i = 0; i < visited.length; i++)
+    for(var i = 0; i < visited.length; i++){
         matched[visited[i]] = 1;
 
+        if(i == 0) {
+            var last = visited[visited.length - 1];
+            ft.add_loop_edge(tradeID, last[0], last[1], visited[0][0], visited[0][1], function(status){
+                if(status == ec.found_trades_errors.DB_SUCCESS)
+                    console.log("Successfully added edge to the found_trades table!");
+                else
+                    console.log("Error adding edge to the found_trades table: " + status);
+            });
+        }
+        else {
+            ft.add_loop_edge(tradeID, visited[i - 1][0], visited[i - 1][1], visited[i][0], visited[i][1], function(status){
+                if(status == ec.found_trades_errors.DB_SUCCESS)
+                    console.log("Successfully added edge to the found_trades table!");
+                else
+                    console.log("Error adding edge to the found_trades table: " + status);
+            });
+        }
+    }
+
+    tradeID++;
 }
 
 
 /*
- * Loads data from the database, and stores it as adjacency lists in an object (map). Also will load the current trade ID.
- * @param next: callback to run the algorithm with the data and trade ID.
+ * Loads data from the database, and stores it as an adjacency list in the global object edges. Also will load the current trade ID.
+ * @param next: callback to run the algorithm
  */
 function load_data(next){
     ge.get_graph(function(status, rows){
-        var edges = {};
         for(var i = 0; i < rows.length; i++){
             var from = [rows[i]['user_id'], rows[i]['book_have']];
             var to = [rows[i]['target_id'], rows[i]['book_want']];
@@ -84,6 +114,9 @@ function load_data(next){
                 edges[from] = [to];
         }
 
-        next(edges);
+        ftID.get_id(function(status, rows){
+            tradeID = rows[0].trade_id;
+            next();
+        });
     });
 }

@@ -28,7 +28,7 @@ exports.add_relation = function(user_id, book_have_id, book_want_id, next){
 
           //if relationship doesn't exist, it inserts it, if it does, it returns and error
           if(result.rows[0].count == 0){
-              client.query("INSERT INTO possible_trades (user_id, book_have, book_want) VALUES ($1::VARCHAR, $2::INTEGER, $3::INTEGER)", [user_id, book_have_id, book_want_id], function(err, result){
+              client.query("INSERT INTO possible_trades (user_id, book_have, book_want, status) VALUES ($1::VARCHAR, $2::INTEGER, $3::INTEGER, $4::VARCHAR)", [user_id, book_have_id, book_want_id, 'V'], function(err, result){
                   if (err){
                       console.error("Error inserting into possible_trades table", err);
                       return next(error_codes(error_codes.possible_trades_errors.DB_QUERY_ERROR));
@@ -135,4 +135,51 @@ exports.get_book_wants = function(user_id, book_have_id, next) {
         return next(error_codes.possible_trades_errors.DB_SUCCESS, result.rows);
     });
   });
+};
+
+
+/*
+ * updates status of possible trade {status_id:string length 1, user_id:string , book_have_id:int, book_want_id:int }
+ * Replies with either an error_code
+ */
+exports.update_status = function(status_id, user_id, owned_book, book_want, next) {
+    pg.connect(process.env.DATABASE_URL, function(err, client, done){
+        done();
+        if (err){
+            console.error("Error connection to client while querying possible_trades table: ", err);
+            return next(error_codes.possible_trades_errors.DB_CONNECTION_ERROR);
+        }
+
+        client.query("UPDATE possible_trades SET status=$1::VARCHAR WHERE user_id=$2::VARCHAR AND book_have=$3::INTEGER AND book_want=$4::INTEGER", [status_id, user_id, owned_book, book_want], function(err, result){
+            if(err){
+                console.error("Error querying database", err);
+                return next(error_codes.possible_trades_errors.DB_QUERY_ERROR);
+            }
+            return next(error_codes.possible_trades_errors.DB_SUCCESS);
+        });
+    });
+};
+
+
+/*
+ * gets status of possible trade { user_id:string , book_have_id:int, book_want_id:int }
+ * Replies with either an error_code or the status of the possible_trade (valid, invalid, etc.)
+ */
+
+exports.get_status = function(user_id, owned_book, book_want, next){
+    pg.connect(process.env.DATABASE_URL, function(err, client, done){
+        done();
+        if (err){
+            console.error("Error connection to client while querying possible_trades table: ", err);
+            return next(error_codes.possible_trades_errors.DB_CONNECTION_ERROR);
+        }
+
+        client.query("SELECT status FROM possible_trades WHERE user_id=$1::VARCHAR AND book_have=$2::INTEGER AND book_want=$3::INTEGER", [ user_id, owned_book, book_want], function(err, result){
+            if(err){
+                console.error("Error querying database", err);
+                return next(error_codes.possible_trades_errors.DB_QUERY_ERROR);
+            }
+            return next(error_codes.possible_trades_errors.DB_SUCCESS, result.rows);
+        });
+    });
 };

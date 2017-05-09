@@ -30,8 +30,8 @@ exports.add_loop_edge = function(loop_id, user_id, owned_book, target_user, want
 
                 //if relationship doesn't exist, it inserts it, if it does, it returns and error
                 if(result.rows[0].count == 0){
-                    client.query("INSERT INTO found_trades (trade_id, user_id, book_have, target_id, book_want) VALUES ($5::INTEGER, $1::VARCHAR, $2::INTEGER, $3::VARCHAR, $4::INTEGER)",
-                        [user_id, owned_book, target_user, wanted_book, loop_id], function(err, result){
+                    client.query("INSERT INTO found_trades (trade_id, user_id, book_have, target_id, book_want, status) VALUES ($5::INTEGER, $1::VARCHAR, $2::INTEGER, $3::VARCHAR, $4::INTEGER, $6::VARCHAR)",
+                        [user_id, owned_book, target_user, wanted_book, loop_id, 'P'], function(err, result){
                             if (err){
                                 console.error("Error inserting into found_trades table", err);
                                 return next(error_codes.found_trades_errors.DB_QUERY_ERROR);
@@ -217,3 +217,78 @@ exports.get_number_of_loops = function(next){
     });
 };
 
+
+
+/*
+ * Purpose: Update the status of a found trade to accepted
+ * Inputs: next:trade_id and its corresponding graph edge
+ * Output: Returns the callback function that has an error code (or success) passed back as a parameter
+*/
+exports.update_status_accepted = function(trade_id, user_id, owned_book, target_user, wanted_book, next){
+    pg.connect(process.env.DATABASE_URL, function(err, client, done){
+        done();
+
+        if (err){
+            console.error("Error connection to client while querying found_trades table: ", err);
+            return next(error_codes.found_trades_errors.DB_CONNECTION_ERROR, []);
+        }
+        client.query("UPDATE found_trades SET status=$1::VARCHAR WHERE trade_id=$2::INTEGER AND user_id=$3::VARCHAR AND book_have=$4::INTEGER AND target_id=$5::VARCHAR AND book_want=$6::INTEGER",
+            ['A', trade_id, user_id, owned_book, target_user, wanted_book], function(err, result){
+            if(err){
+                console.error("Error querying database", err);
+                return next(error_codes.found_trades_errors.DB_QUERY_ERROR, []);
+            }
+            return next(error_codes.found_trades_errors.DB_SUCCESS);
+        });
+    });
+};
+
+/*
+ * Purpose: Update the status of a found trade to rejected
+ * Inputs: trade_id and a graph edge
+ * Output: Returns the callback function that has an error code (or success) passed back as a parameter
+ */
+exports.update_status_rejected = function(trade_id, user_id, owned_book, target_user, wanted_book, next){
+    pg.connect(process.env.DATABASE_URL, function(err, client, done){
+        done();
+
+        if (err){
+            console.error("Error connection to client while querying found_trades table: ", err);
+            return next(error_codes.found_trades_errors.DB_CONNECTION_ERROR, []);
+        }
+        client.query("UPDATE found_trades SET status=$1::VARCHAR WHERE trade_id=$2::INTEGER AND user_id=$3::VARCHAR AND book_have=$4::INTEGER AND target_id=$5::VARCHAR AND book_want=$6::INTEGER",
+            ['R', trade_id, user_id, owned_book, target_user, wanted_book], function(err, result){
+            if(err){
+                console.error("Error querying database", err);
+                return next(error_codes.found_trades_errors.DB_QUERY_ERROR, []);
+            }
+            return next(error_codes.found_trades_errors.DB_SUCCESS);
+        });
+    });
+};
+
+
+/*
+    Purpose: Get the statuses of a found trade by id
+    Input: trade_id: id of a trade, next: a callback function
+    Output: the result code and the statuses of the edges in the found trade
+ */
+
+exports.get_statuses_by_id = function (trade_id, next){
+    pg.connect(process.env.DATABASE_URL, function(err, client, done){
+        done();
+
+        if (err){
+            console.error("Error connection to client while querying found_trades table: ", err);
+            return next(error_codes.found_trades_errors.DB_CONNECTION_ERROR, []);
+        }
+        client.query("SELECT status FROM found_trades WHERE trade_id=$1::INTEGER",
+            [trade_id], function(err, result){
+                if(err){
+                    console.error("Error querying database", err);
+                    return next(error_codes.found_trades_errors.DB_QUERY_ERROR, []);
+                }
+                return next(error_codes.found_trades_errors.DB_SUCCESS, result.rows);
+            });
+    });
+};

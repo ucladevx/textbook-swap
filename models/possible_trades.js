@@ -137,6 +137,28 @@ exports.get_book_wants = function(user_id, book_have_id, next) {
   });
 };
 
+/*
+ * Get the list of all rows associated with the relation {book_want:book_want_id}
+ * Replies with either an error_code or an Object of Javascript Objects (essentially an array)
+ */
+exports.get_rows_by_want = function(book_want_id, next) {
+    pg.connect(process.env.DATABASE_URL, function(err, client, done){
+        done();
+        if (err){
+            console.error("Error connection to client while querying possible_trades table: ", err);
+            return next(error_codes.possible_trades_errors.DB_CONNECTION_ERROR);
+        }
+
+        client.query("SELECT * FROM possible_trades WHERE book_want=$1::INTEGER", [book_want_id], function(err, result){
+            if(err){
+                console.error("Error querying database", err);
+                return next(error_codes.possible_trades_errors.DB_QUERY_ERROR);
+            }
+            return next(error_codes.possible_trades_errors.DB_SUCCESS, result.rows);
+        });
+    });
+};
+
 
 /*
  * updates status of possible trade {status_id:string length 1, user_id:string , book_have_id:int, book_want_id:int }

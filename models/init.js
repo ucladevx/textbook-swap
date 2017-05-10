@@ -15,17 +15,17 @@ exports.create_tables = function(next){
         }
         const book_to_class_data = "'" + __dirname + "/book_to_class.csv'";
         const book_to_class_query = 
-          'CREATE TEMP TABLE tmp_table AS SELECT * FROM book_to_class WITH NO DATA; COPY tmp_table FROM ' + book_to_class_data + ' DELIMITER \',\' CSV; INSERT INTO book_to_class SELECT DISTINCT ON (book_id, professor_name, class_name) * FROM tmp_table ON CONFLICT DO NOTHING; DROP TABLE tmp_table;';
+          'CREATE TEMP TABLE tmp_table AS SELECT * FROM book_to_class WITH NO DATA; COPY tmp_table FROM ' + book_to_class_data + ' DELIMITER \',\' CSV; INSERT INTO book_to_class SELECT DISTINCT ON (book_id, professor_name, class_name) * FROM tmp_table ON CONFLICT DO NOTHING; DROP TABLE tmp_table; UPDATE book_to_class SET tsv = to_tsvector(\'english\', professor_name) || to_tsvector(\'english\', class_name);';
         const book_info_data = "'" + __dirname + "/book_info.csv'";
         const book_info_query = 
-          'CREATE TEMP TABLE tmp_table AS SELECT * FROM book_info WITH NO DATA; COPY tmp_table FROM ' + book_info_data + ' DELIMITER \',\' CSV; INSERT INTO book_info SELECT DISTINCT ON (book_id) * FROM tmp_table ON CONFLICT DO NOTHING; DROP TABLE tmp_table; UPDATE book_info SET tsv = to_tsvector(\'english\', title) || to_tsvector(\'english\', author) WHERE tsv IS NULL;';
+          'CREATE TEMP TABLE tmp_table_two AS SELECT * FROM book_info WITH NO DATA; COPY tmp_table_two FROM ' + book_info_data + ' DELIMITER \',\' CSV; INSERT INTO book_info SELECT DISTINCT ON (book_id) * FROM tmp_table_two ON CONFLICT DO NOTHING; DROP TABLE tmp_table_two; UPDATE book_info SET tsv = to_tsvector(\'english\', title) || to_tsvector(\'english\', author) || to_tsvector(\'english\', isbn);';
         
         var queries = ['CREATE TABLE IF NOT EXISTS owned_books(user_id VARCHAR, book_id INTEGER, PRIMARY KEY (user_id, book_id))',
                        'CREATE TABLE IF NOT EXISTS wish_list(user_id VARCHAR, book_id INTEGER, PRIMARY KEY (user_id, book_id))',
                        'CREATE TABLE IF NOT EXISTS possible_trades(user_id VARCHAR, book_have INTEGER, book_want INTEGER, PRIMARY KEY (user_id, book_have, book_want))',
                        'CREATE TABLE IF NOT EXISTS graph_edges(user_id VARCHAR, book_have INTEGER, target_id VARCHAR, book_want INTEGER, PRIMARY KEY (user_id, book_have, target_id, book_want))',
                        'CREATE TABLE IF NOT EXISTS book_to_class(book_id INTEGER, professor_name VARCHAR, class_name VARCHAR, tsv TSVECTOR, PRIMARY KEY(book_id, professor_name, class_name))',
-                       'CREATE INDEX IF NOT EXISTS tsv_idx ON book_info USING gin(tsv)',
+                       'CREATE INDEX IF NOT EXISTS tsv_idx ON book_to_class USING gin(tsv)',
                        book_to_class_query,
                        'CREATE TABLE IF NOT EXISTS book_info(book_id INTEGER, title VARCHAR, author VARCHAR, isbn VARCHAR, img_url VARCHAR, tsv TSVECTOR, PRIMARY KEY(book_id))',
                        'CREATE INDEX IF NOT EXISTS tsv_idx ON book_info USING gin(tsv)',

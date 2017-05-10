@@ -81,7 +81,7 @@ exports.get_wanted_books = function(user, next){
             return next(error_codes.wish_list_errors.DB_CONNECTION_ERROR, []);
         }
 
-        client.query("SELECT book_id, book_name, class_name FROM books WHERE book_id IN (SELECT book_id FROM wish_list WHERE user_id=$1::VARCHAR)", [user], function(err, result){
+        client.query("SELECT book_id FROM wish_list WHERE user_id=$1::VARCHAR", [user], function(err, result){
             if(err){
                 console.error("Error querying database", err);
                 return next(error_codes.wish_list_errors.DB_QUERY_ERROR, []);

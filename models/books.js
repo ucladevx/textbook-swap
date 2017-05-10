@@ -6,6 +6,29 @@
 const pg = require('pg');
 const error_codes = require('../error_codes');
 
+var searchAndReplace = function(results, book_num, ranking){
+    for (var k = 0; k < results.length; k++) {
+        if (results[k].book_id === book_num) {
+            results[k].rank = ranking;
+            return;
+        }
+    }
+
+};
+
+var add_books_results = function(database_rows, results, keys_visited){
+    for (var i = 0; i < database_rows.length; i++){
+        if(!keys_visited.has(database_rows[i].book_id)){
+            results.push({book_id: database_rows[i].book_id, rank: database_rows[i].rank});
+            keys_visited.add(database_rows[i].book_id);
+        }
+        else {
+            searchAndReplace(results, database_rows[i].book_id, database_rows[i].rank);
+        }
+    }
+};
+
+
 /*
     Purpose: Query the database and return top 10 relevant results based on search box input
     Inputs: Search box input typed by user
@@ -26,9 +49,23 @@ exports.get_search_results = function(search_input, next){
             }
 
             client.query("SELECT book_id, title, author, isbn, ts_rank_cd(tsv, query, 1) AS rank FROM book_info, plainto_tsquery($1::VARCHAR) query WHERE tsv @@ query ORDER BY rank DESC LIMIT 10", [search_input], function(err, books_info_result){
-                console.log(books_result.rows);
-                console.log(books_info_result.rows);
-                return next(error_codes.books_errors.DB_SUCCESS, books_result);
+                var books_result_rows = books_result.rows;
+                var books_info_rows = books_info_result.rows;
+
+                var results = new Array();
+                var keys_visited = new Set();
+
+                //logic to merge the results and the higher rank of duplicates
+                add_books_results(books_result_rows, results, keys_visited);
+                add_books_results(books_info_rows, results, keys_visited);
+
+
+                results.sort(function(a,b) {
+                    return b.rank - a.rank;
+                });
+
+                // returns a array of javascript objects EX. [{book_id: 1231, rank: 0.071}, ...]
+                return next(error_codes.books_errors.DB_SUCCESS, results);
             });
         });
     });

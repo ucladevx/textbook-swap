@@ -13,10 +13,10 @@ exports.create_tables = function(next){
         if (err) {
             return console.error('error fetching client from pool', err)
         }
-        const book_to_class_data = "'" + __dirname + "/book_to_class_clean.csv'";
+        const book_to_class_data = "'" + __dirname + "/data/book_to_class_clean.csv'";
         const book_to_class_query = 
           'CREATE TEMP TABLE tmp_table AS SELECT * FROM book_to_class WITH NO DATA; COPY tmp_table FROM ' + book_to_class_data + ' DELIMITER \',\' CSV; INSERT INTO book_to_class SELECT DISTINCT ON (book_id, professor_name, class_name) * FROM tmp_table ON CONFLICT DO NOTHING; DROP TABLE tmp_table;';
-        const book_info_data = "'" + __dirname + "/book_info_clean.csv'";
+        const book_info_data = "'" + __dirname + "/data/book_info_clean.csv'";
         const book_info_query = 
           'CREATE TEMP TABLE tmp_table AS SELECT * FROM book_info WITH NO DATA; COPY tmp_table FROM ' + book_info_data + ' DELIMITER \',\' CSV; INSERT INTO book_info SELECT DISTINCT ON (book_id) * FROM tmp_table ON CONFLICT DO NOTHING; DROP TABLE tmp_table; UPDATE book_info SET tsv = to_tsvector(title);';
         

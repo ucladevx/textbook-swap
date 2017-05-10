@@ -182,6 +182,53 @@ exports.update_status = function(status_id, user_id, owned_book, book_want, next
     });
 };
 
+/*
+ * updates status of all possible trades where a user owns
+ * a specific book {status_id:string length 1, user_id:string , book_have_id:int }
+ * Replies with either an error_code
+ */
+exports.update_status_by_owned_book = function(status_id, user_id, owned_book, next) {
+    pg.connect(process.env.DATABASE_URL, function(err, client, done){
+        done();
+        if (err){
+            console.error("Error connection to client while querying possible_trades table: ", err);
+            return next(error_codes.possible_trades_errors.DB_CONNECTION_ERROR);
+        }
+
+        client.query("UPDATE possible_trades SET status=$1::VARCHAR WHERE user_id=$2::VARCHAR AND book_have=$3::INTEGER", [status_id, user_id, owned_book], function(err, result){
+            if(err){
+                console.error("Error querying database", err);
+                return next(error_codes.possible_trades_errors.DB_QUERY_ERROR);
+            }
+            return next(error_codes.possible_trades_errors.DB_SUCCESS);
+        });
+    });
+};
+
+
+/*
+ * updates status of all possible trades where a user wants
+ * a specific book {status_id:string length 1, user_id:string , book_want_id:int }
+ * Replies with either an error_code
+ */
+exports.update_status_by_wanted_book = function(status_id, user_id, book_want_id, next) {
+    pg.connect(process.env.DATABASE_URL, function(err, client, done){
+        done();
+        if (err){
+            console.error("Error connection to client while querying possible_trades table: ", err);
+            return next(error_codes.possible_trades_errors.DB_CONNECTION_ERROR);
+        }
+
+        client.query("UPDATE possible_trades SET status=$1::VARCHAR WHERE user_id=$2::VARCHAR AND book_want=$3::INTEGER", [status_id, user_id, book_want_id], function(err, result){
+            if(err){
+                console.error("Error querying database", err);
+                return next(error_codes.possible_trades_errors.DB_QUERY_ERROR);
+            }
+            return next(error_codes.possible_trades_errors.DB_SUCCESS);
+        });
+    });
+};
+
 
 /*
  * gets status of possible trade { user_id:string , book_have_id:int, book_want_id:int }

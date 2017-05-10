@@ -19,7 +19,7 @@ exports.search_textbooks = function(req, res) {
     bt.get_search_results(search_input, function(status, data) {
     	if (status == ec.books_errors.DB_SUCCESS) {
             console.log("Successfully found textbook search results in the database!");
-            console.log(data);
+            //console.log(data);
     	}
         else if (status == ec.books_errors.DB_QUERY_ERROR)
         	console.log("Error querying database for textbook search results!");

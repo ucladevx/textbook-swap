@@ -26,8 +26,8 @@ exports.get_search_results = function(search_input, next){
             }
 
             client.query("SELECT book_id, title, author, isbn, ts_rank_cd(tsv, query, 1) AS rank FROM book_info, plainto_tsquery($1::VARCHAR) query WHERE tsv @@ query ORDER BY rank DESC LIMIT 10", [search_input], function(err, books_info_result){
-                console.log(books_result);
-                console.log(book_info_result);
+                console.log(books_result.rows);
+                console.log(books_info_result.rows);
                 return next(error_codes.books_errors.DB_SUCCESS, books_result);
             });
         });

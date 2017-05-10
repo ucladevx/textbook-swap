@@ -31,7 +31,7 @@ exports.add_relation = function(user_id, book_have_id, book_want_id, next){
               client.query("INSERT INTO possible_trades (user_id, book_have, book_want) VALUES ($1::VARCHAR, $2::INTEGER, $3::INTEGER)", [user_id, book_have_id, book_want_id], function(err, result){
                   if (err){
                       console.error("Error inserting into possible_trades table", err);
-                      return next(error_codes(error_codes.possible_trades_errors.DB_QUERY_ERROR));
+                      return next(error_codes.possible_trades_errors.DB_QUERY_ERROR);
                   }
 
                   return next(error_codes.possible_trades_errors.DB_SUCCESS);

@@ -25,6 +25,7 @@ exports.create_tables = function(next){
                        'CREATE TABLE IF NOT EXISTS possible_trades(user_id VARCHAR, book_have INTEGER, book_want INTEGER, PRIMARY KEY (user_id, book_have, book_want))',
                        'CREATE TABLE IF NOT EXISTS graph_edges(user_id VARCHAR, book_have INTEGER, target_id VARCHAR, book_want INTEGER, PRIMARY KEY (user_id, book_have, target_id, book_want))',
                        'CREATE TABLE IF NOT EXISTS book_to_class(book_id INTEGER, professor_name VARCHAR, class_name VARCHAR, PRIMARY KEY(book_id, professor_name, class_name))',
+                       'CREATE INDEX IF NOT EXISTS tsv_idx ON book_info USING gin(tsv)',
                        book_to_class_query,
                        'CREATE TABLE IF NOT EXISTS book_info(book_id INTEGER, title VARCHAR, author VARCHAR, isbn VARCHAR, img_url VARCHAR, tsv TSVECTOR, PRIMARY KEY(book_id))',
                        'CREATE INDEX IF NOT EXISTS tsv_idx ON book_info USING gin(tsv)',

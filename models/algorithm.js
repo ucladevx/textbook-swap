@@ -3,6 +3,9 @@
  */
 const ec = require('../error_codes');
 const ge = require('./graph_edges');
+const ob = require('./owned_books');
+const wl = require('./wish_list');
+const pt = require('./possible_trades');
 const ft = require('./found_trades');
 const ftID = require('./found_trades_id');
 
@@ -93,6 +96,38 @@ function process(visited){
                     console.log("Error adding edge to the found_trades table: " + status);
             });
         }
+
+        ob.remove_book(visited[i][0], visited[i][1], function(status){
+            if(status == ec.owned_books_errors.DB_SUCCESS)
+                console.log("Successfully removed book from owned_books table!");
+            else
+                console.log("Error removing book from the owned_books table: " + status);
+        });
+
+        wl.remove_book(visited[i][0], visited[i][3], function(status){
+            if(status == ec.wish_list_errors.DB_SUCCESS)
+                console.log("Successfully removed book from wish_list table!");
+            else
+                console.log("Error removing book from the wish_list table: " + status);
+        });
+
+        ge.remove_owned_book(visited[i][0], visited[i][1], function(status){
+            if(status == ec.graph_edges_errors.DB_SUCCESS)
+                console.log("Successfully removed edges!");
+            else
+                console.log("Error removing edges from the graph_edges table: " + status);
+        });
+
+        ge.remove_wanted_book(visited[i][0], visited[i][3], function(status){
+            if(status == ec.graph_edges_errors.DB_SUCCESS)
+                console.log("Successfully removed edges!");
+            else
+                console.log("Error removing edges from the graph_edges table: " + status);
+        });
+
+        // update possible trades status
+
+
     }
 
     tradeID++;

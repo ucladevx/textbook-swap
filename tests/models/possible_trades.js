@@ -4,11 +4,6 @@ const possibleTrades = require('../../models/possible_trades');
 
 exports.test = function(){
     /*
-     * Database initialization
-     */
-    initModel.create_tables();
-
-    /*
      * Test usage of the interface
      * also shows how to use next callback
      */

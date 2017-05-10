@@ -19,12 +19,17 @@ exports.get_search_results = function(search_input, next){
             return next(error_codes.books_errors.DB_CONNECTION_ERROR);
         }
 
-        client.query("SELECT book_id, book_name, class_name, ts_rank_cd(tsv, query, 1) AS rank FROM books, plainto_tsquery($1::VARCHAR) query WHERE tsv @@ query ORDER BY rank DESC LIMIT 10", [search_input], function(err, result){
+        client.query("SELECT book_id, professor_name, class_name, ts_rank_cd(tsv, query, 1) AS rank FROM book_to_class, plainto_tsquery($1::VARCHAR) query WHERE tsv @@ query ORDER BY rank DESC LIMIT 10", [search_input], function(err, books_result){
             if(err){
                 console.error("Error querying database", err);
                 return next(error_codes.books_errors.DB_QUERY_ERROR);
             }
-            return next(error_codes.books_errors.DB_SUCCESS, result.rows);
+
+            client.query("SELECT book_id, title, author, isbn, ts_rank_cd(tsv, query, 1) AS rank FROM book_info, plainto_tsquery($1::VARCHAR) query WHERE tsv @@ query ORDER BY rank DESC LIMIT 10", [search_input], function(err, books_info_result){
+                console.log(books_result);
+                console.log(book_info_result);
+                return next(error_codes.books_errors.DB_SUCCESS, books_result);
+            });
         });
     });
 };

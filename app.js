@@ -76,6 +76,8 @@ app.get('/search', require_login.ensureLoggedIn(), searchController.index);
 
 /*
  * API routes.
+ *
+ *
  */
 
 // Owned books
@@ -103,7 +105,9 @@ app.get('/api/search/search_textbooks', textbookSearchController.search_textbook
 /*
  * Tests
  */
-const test = require('./tests/test_all').test();
+const initDB = require('./models/init');
+initDB.create_tables(function(){});
+//const test = require('./tests/test_all').test();
 
 /*
  * Authentication routes.

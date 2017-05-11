@@ -41,32 +41,15 @@ exports.get_books_info = function(book_ids, next) {
             return next(error_codes.book_info_errors.DB_CONNECTION_ERROR);
         }
 
-        // get the info from book_info table for each book_id
-        var books_info = new Array();
+        // get the book info for all books
+        client.query("SELECT book_id, title, author, isbn FROM book_info WHERE book_id = any ($1)", [book_ids], function(err, books_info_result) {
+            if (err) {
+                console.error("Error querying database", err);
+                return next(error_codes.book_info_errors.DB_QUERY_ERROR);
+            }
 
-        for (var i = 0; i < book_ids.length; i++) {
-            var curr_book_id = book_ids[i];
-            client.query("SELECT book_id, title, author, isbn FROM book_info WHERE book_id = ($1::INTEGER)", [curr_book_id], function(err, books_info_result) {
-                if (err) {
-                    console.error("Error querying database", err);
-                    return next(error_codes.book_info_errors.DB_QUERY_ERROR);
-                }
-
-                console.log("books_info_result");
-                console.log(books_info_result.rows);
-
-                books_info.push(books_info_result.rows);
-                // console.log("get_books_info()");
-                // console.log(books_info);
-
-            });
-        }
-
-        console.log("get_books_info()");
-        console.log(books_info);
-
-        // returns an array of javascript objects EX. [{[book_id, title, author, isbn]}, ...]
-        return next(error_codes.book_info_errors.DB_SUCCESS, books_info);
+            return next(error_codes.book_info_errors.DB_SUCCESS, books_info_result.rows);
+        });
     });
 };
 

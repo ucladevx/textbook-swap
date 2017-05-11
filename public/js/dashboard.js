@@ -56,6 +56,9 @@ $("#ownedInput").keyup(function() {
 			// get the search results
 			var searchResults = object.data;
 
+			console.log("searchResults:");
+			console.log(searchResults);
+
 			// successful query
 			if (object.status == 0) {
 				// new search results found, so display them

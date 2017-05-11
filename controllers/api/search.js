@@ -21,14 +21,12 @@ exports.search_textbooks = function(req, res) {
             console.log("Successfully found textbook search results in the database!");
             // print out data, which is an array of Javascript objects of the form (book_id, rank)
             console.log(data);
+
+            // convert from array of Javascript objects to just array of book_ids
             var book_ids = new Array();
-            // convert from array of Javascript objects to just book_ids
             for (var i = 0; i < data.length; i++) {
             	book_ids.push(data[i]["book_id"]);
             }
-
-            console.log("book ids:");
-            console.log(book_ids);
 
             // get the book info corresponding to each book_id 
             bt.get_books_info(book_ids, function(error_status, books_data) {
@@ -46,7 +44,5 @@ exports.search_textbooks = function(req, res) {
     	}
         else if (status == ec.books_errors.DB_QUERY_ERROR)
         	console.log("Error querying database for textbook search results!");
-
-    	// res.json({status: status, data: data});
     });
 };

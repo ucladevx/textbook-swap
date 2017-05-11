@@ -19,11 +19,34 @@ exports.search_textbooks = function(req, res) {
     bt.get_search_results(search_input, function(status, data) {
     	if (status == ec.books_errors.DB_SUCCESS) {
             console.log("Successfully found textbook search results in the database!");
-            //console.log(data);
+            // print out data, which is an array of Javascript objects of the form (book_id, rank)
+            console.log(data);
+            var book_ids = new Array();
+            // convert from array of Javascript objects to just book_ids
+            for (var i = 0; i < data.length; i++) {
+            	book_ids.push(data[i]["book_id"]);
+            }
+
+            console.log("book ids:");
+            console.log(book_ids);
+
+            // get the book info corresponding to each book_id 
+            bt.get_books_info(book_ids, function(error_status, books_data) {
+            	if (error_status) {
+	                console.error("Error querying database", error_status);
+	            }
+
+	            console.log("books data:");
+	            console.log(books_data);
+
+	            // return the info for all the books
+	            res.json({status: error_status, data: books_data});
+            });
+
     	}
         else if (status == ec.books_errors.DB_QUERY_ERROR)
         	console.log("Error querying database for textbook search results!");
 
-    	res.json({status: status, data: data});
+    	// res.json({status: status, data: data});
     });
 };

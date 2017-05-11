@@ -28,6 +28,48 @@ var add_books_results = function(database_rows, results, keys_visited){
     }
 };
 
+/*
+    Purpose: Query the database for all the book_info associated with a given book_id
+    Inputs: Array of book_id's
+    Output: Returns a callback function that has an success or error code passed as a parameter and the resulting list of [book_id, title, author, isbn] as another parameter
+ */
+exports.get_books_info = function(book_ids, next) {
+    pg.connect(process.env.DATABASE_URL, function(err, client, done){
+        done();
+        if (err) {
+            console.error("Error connection to client while querying books table: ", err);
+            return next(error_codes.book_info_errors.DB_CONNECTION_ERROR);
+        }
+
+        // get the info from book_info table for each book_id
+        var books_info = new Array();
+
+        for (var i = 0; i < book_ids.length; i++) {
+            var curr_book_id = book_ids[i];
+            client.query("SELECT book_id, title, author, isbn FROM book_info WHERE book_id = ($1::INTEGER)", [curr_book_id], function(err, books_info_result) {
+                if (err) {
+                    console.error("Error querying database", err);
+                    return next(error_codes.book_info_errors.DB_QUERY_ERROR);
+                }
+
+                console.log("books_info_result");
+                console.log(books_info_result.rows);
+
+                books_info.push(books_info_result.rows);
+                // console.log("get_books_info()");
+                // console.log(books_info);
+
+            });
+        }
+
+        console.log("get_books_info()");
+        console.log(books_info);
+
+        // returns an array of javascript objects EX. [{[book_id, title, author, isbn]}, ...]
+        return next(error_codes.book_info_errors.DB_SUCCESS, books_info);
+    });
+};
+
 
 /*
     Purpose: Query the database and return top 10 relevant results based on search box input
@@ -39,13 +81,13 @@ exports.get_search_results = function(search_input, next){
         done();
         if (err){
             console.error("Error connection to client while querying books table: ", err);
-            return next(error_codes.books_errors.DB_CONNECTION_ERROR);
+            return next(error_codes.book_info_errors.DB_CONNECTION_ERROR);
         }
 
         client.query("SELECT book_id, professor_name, class_name, ts_rank_cd(tsv, query, 1) AS rank FROM book_to_class, plainto_tsquery($1::VARCHAR) query WHERE tsv @@ query ORDER BY rank DESC LIMIT 10", [search_input], function(err, books_result){
             if(err){
                 console.error("Error querying database", err);
-                return next(error_codes.books_errors.DB_QUERY_ERROR);
+                return next(error_codes.book_to_class_errors.DB_QUERY_ERROR);
             }
 
             client.query("SELECT book_id, title, author, isbn, ts_rank_cd(tsv, query, 1) AS rank FROM book_info, plainto_tsquery($1::VARCHAR) query WHERE tsv @@ query ORDER BY rank DESC LIMIT 10", [search_input], function(err, books_info_result){
@@ -65,7 +107,7 @@ exports.get_search_results = function(search_input, next){
                 });
 
                 // returns a array of javascript objects EX. [{book_id: 1231, rank: 0.071}, ...]
-                return next(error_codes.books_errors.DB_SUCCESS, results);
+                return next(error_codes.book_info_errors.DB_SUCCESS, results);
             });
         });
     });

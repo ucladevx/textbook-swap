@@ -22,14 +22,14 @@ exports.create_tables = function(next){
         
         var queries = ['CREATE TABLE IF NOT EXISTS owned_books(user_id VARCHAR, book_id INTEGER, PRIMARY KEY (user_id, book_id))',
                        'CREATE TABLE IF NOT EXISTS wish_list(user_id VARCHAR, book_id INTEGER, PRIMARY KEY (user_id, book_id))',
-                       'CREATE TABLE IF NOT EXISTS possible_trades(user_id VARCHAR, book_have INTEGER, book_want INTEGER, PRIMARY KEY (user_id, book_have, book_want))',
+                       'CREATE TABLE IF NOT EXISTS possible_trades(user_id VARCHAR, book_have INTEGER, book_want INTEGER, status VARCHAR(1), PRIMARY KEY (user_id, book_have, book_want))',
                        'CREATE TABLE IF NOT EXISTS graph_edges(user_id VARCHAR, book_have INTEGER, target_id VARCHAR, book_want INTEGER, PRIMARY KEY (user_id, book_have, target_id, book_want))',
                        'CREATE TABLE IF NOT EXISTS book_to_class(book_id INTEGER, professor_name VARCHAR, class_name VARCHAR, PRIMARY KEY(book_id, professor_name, class_name))',
                        book_to_class_query,
                        'CREATE TABLE IF NOT EXISTS book_info(book_id INTEGER, title VARCHAR, author VARCHAR, isbn VARCHAR, img_url VARCHAR, tsv TSVECTOR, PRIMARY KEY(book_id))',
                        book_info_query,
                        'CREATE TABLE IF NOT EXISTS users(user_id VARCHAR, user_name VARCHAR, user_email VARCHAR, PRIMARY KEY (user_id))',
-                       'CREATE TABLE IF NOT EXISTS found_trades(trade_id INTEGER, user_id VARCHAR, book_have INTEGER, target_id VARCHAR, book_want INTEGER, PRIMARY KEY (trade_id, user_id, book_have, target_id, book_want))',
+                       'CREATE TABLE IF NOT EXISTS found_trades(trade_id INTEGER, user_id VARCHAR, book_have INTEGER, target_id VARCHAR, book_want INTEGER, status VARCHAR(1), PRIMARY KEY (trade_id, user_id, book_have, target_id, book_want))',
                        'CREATE TABLE IF NOT EXISTS found_trades_id(index INTEGER,trade_id INTEGER, PRIMARY KEY(index))'];
 
         for(var i = 0; i < queries.length; i++){

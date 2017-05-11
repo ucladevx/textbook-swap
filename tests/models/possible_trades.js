@@ -17,7 +17,7 @@ exports.test = function(){
     */
     possibleTrades.add_relation('Jay', 1, 10, test_n_have);
     possibleTrades.add_relation('Jay', 1, 11, test_n_have);
-    possibleTrades.add_relation('Jay', 1, 12, test_n_have); 
+    possibleTrades.add_relation('Jay', 1, 12, test_n_have);
 
     /*
         after this sixth add relation runs, there should be no relations
@@ -52,6 +52,9 @@ exports.test = function(){
         console log should have printed
         [ { book_want: 8 }, { book_want: 9 }, { book_want: 10 } ]
     */
+
+    possibleTrades.update_status('I', 'Jay', 7, 8, test_n);
+    possibleTrades.get_status('Jay', 7, 8, test_next);
   
     function test_n(errorcode){
         if (errorcode == ec.possible_trades_errors.POSSIBLE_TRADE_ALREADY_EXISTS){

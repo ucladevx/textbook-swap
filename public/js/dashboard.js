@@ -60,9 +60,6 @@ $("#ownedInput").keyup(function() {
 			// get the search results
 			var searchResults = object.data;
 
-			console.log("searchResults:");
-			console.log(searchResults);
-
 			// successful query
 			if (object.status == 0) {
 				// new search results found, so display them
@@ -99,8 +96,6 @@ $("#ownedSearchResultsList").on("click", ".list-group-item", function(){
 	var author = searchResult.dataset.author;
 	var isbn = searchResult.dataset.isbn;
 
-	console.log(searchResult);
-
 	$.post("/api/owned_books/add",
 		{ user_id: "user", book_id: book_id },
 		function(data){
@@ -131,9 +126,6 @@ $("#wantedInput").keyup(function() {
 		$.get("/api/search/search_textbooks", { search_input: wantedInput }, function(object) {
 			// get the search results
 			var searchResults = object.data;
-
-			console.log("searchResults:");
-			console.log(searchResults);
 
 			// successful query
 			if (object.status == 0) {
@@ -171,8 +163,6 @@ $("#wantedSearchResultsList").on("click", ".list-group-item", function(){
 	var author = searchResult.dataset.author;
 	var isbn = searchResult.dataset.isbn;
 
-	console.log(searchResult);
-
 	$.post("/api/wish_list/add",
 		{ user_id: "user", book_id: book_id },
 		function(data){
@@ -200,8 +190,6 @@ $("#ownedList").on("click", ".list-group-item", function(){
 	var listedBook = this;
 	var book_id = listedBook.id;
 
-	console.log(listedBook);
-
 	$.post("/api/owned_books/remove",
 		{ user_id: "user", book_id: book_id },
 		function(data){
@@ -228,8 +216,6 @@ $("#wantedList").on("click", ".list-group-item", function(){
 	// get data from list element tags
 	var listedBook = this;
 	var book_id = listedBook.id;
-
-	console.log(listedBook);
 
 	$.post("/api/wish_list/remove",
 		{ user_id: "user", book_id: book_id },

@@ -19,8 +19,6 @@ exports.search_textbooks = function(req, res) {
     bt.get_search_results(search_input, function(status, data) {
     	if (status == ec.books_errors.DB_SUCCESS) {
             console.log("Successfully found textbook search results in the database!");
-            // print out data, which is an array of Javascript objects of the form (book_id, rank)
-            console.log(data);
 
             // convert from array of Javascript objects to just array of book_ids
             var book_ids = new Array();
@@ -33,9 +31,6 @@ exports.search_textbooks = function(req, res) {
             	if (error_status) {
 	                console.error("Error querying database", error_status);
 	            }
-
-	            console.log("books data:");
-	            console.log(books_data);
 
 	            // return the info for all the books
 	            res.json({status: error_status, data: books_data});

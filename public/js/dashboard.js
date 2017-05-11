@@ -12,13 +12,13 @@ $(document).ready(function(){
 					var book_name = booklist[i]["book_name"];
 					var class_name = booklist[i]["class_name"];
 					var book_id = booklist[i]["book_id"];
-					$("#ownedList").append('<li class="list-group-item" id="' + book_id + '" data-book-name="' + book_name + '" data-class-name="' + class_name +'">' + book_name + ', ' + class_name +'</li>')
+					$("#ownedList").append('<li class="list-group-item" id="' + book_id + '" data-book-name="' + book_name + '" data-class-name="' + class_name +'">' + book_name + ', ' + class_name +'</li>');
 				}
 			}
 			else if(response.status === 1)
-				console.log('db connection error')
+				console.log('db connection error');
 			else if(response.status === 2)
-				console.log('db query error')
+				console.log('db query error');
 		}
 	});
 
@@ -31,13 +31,13 @@ $(document).ready(function(){
 					var book_name = booklist[i]["book_name"];
 					var class_name = booklist[i]["class_name"];
 					var book_id = booklist[i]["book_id"];
-					$("#wantedList").append('<li class="list-group-item" id="' + book_id + '" data-book-name="' + book_name + '" data-class-name="' + class_name +'">' + book_name + ', ' + class_name +'</li>')
+					$("#wantedList").append('<li class="list-group-item" id="' + book_id + '" data-book-name="' + book_name + '" data-class-name="' + class_name +'">' + book_name + ', ' + class_name +'</li>');
 				}
 			}
 			else if(response.status === 1)
-				console.log('db connection error')
+				console.log('db connection error');
 			else if(response.status === 2)
-				console.log('db query error')
+				console.log('db query error');
 		}
 	});
 
@@ -66,17 +66,18 @@ $("#ownedInput").keyup(function() {
 					$("#ownedSearchResultsList").empty();
 					// display all of the search results on the screen
 					for (var i = 0; i < searchResults.length; i++) {
-						var book_name = searchResults[i]["book_name"];
-						var class_name = searchResults[i]["class_name"];
+						var title = searchResults[i]["title"];
+						var author = searchResults[i]["author"];
+						var isbn = searchResults[i]["isbn"];
 						var book_id = searchResults[i]["book_id"];
 						// display each line of the search result
-						$("#ownedSearchResultsList").append('<li class="list-group-item" id="' + book_id + '" data-book-name="' + book_name + '" data-class-name="' + class_name +'">' + book_name + ', ' + class_name +'</li>')
+						$("#ownedSearchResultsList").append('<li class="list-group-item" id="' + book_id + '" data-title="' + title + '" data-author="' + author + '" data-isbn="' + isbn +'">' + title + ', ' + author +'</li>');
 					}
 				}
 			}
 			// error when querying
 			else if (object.status === 2)
-				console.log('db query error')
+				console.log('db query error');
 		});
 	}
 	else {
@@ -99,14 +100,14 @@ $("#ownedSearchResultsList").on("click", ".list-group-item", function(){
 		{ user_id: "user", book_id: book_id },
 		function(data){
 			if(data.status === 0){
-				$("#ownedList").append('<li class="list-group-item" id="' + book_id + '" data-book-name="' + book_name + '" data-class-name="' + class_name +'">' + book_name + ', ' + class_name +'</li>')
+				$("#ownedList").append('<li class="list-group-item" id="' + book_id + '" data-book-name="' + book_name + '" data-class-name="' + class_name +'">' + book_name + ', ' + class_name +'</li>');
 			}
 			else if(data.status === 1)
-				console.log('db connection error')
+				console.log('db connection error');
 			else if(data.status === 2)
-				console.log('db query error')
+				console.log('db query error');
 			else if(data.status === 3){
-				console.log('book already exists')
+				console.log('book already exists');
 			}
 		},
 		"json"
@@ -126,6 +127,9 @@ $("#wantedInput").keyup(function() {
 			// get the search results
 			var searchResults = object.data;
 
+			console.log("searchResults:");
+			console.log(searchResults);
+
 			// successful query
 			if (object.status == 0) {
 				// new search results found, so display them
@@ -133,17 +137,18 @@ $("#wantedInput").keyup(function() {
 					$("#wantedSearchResultsList").empty();
 					// display all of the search results on the screen
 					for (var i = 0; i < searchResults.length; i++) {
-						var book_name = searchResults[i]["book_name"];
-						var class_name = searchResults[i]["class_name"];
+						var title = searchResults[i]["title"];
+						var author = searchResults[i]["author"];
+						var isbn = searchResults[i]["isbn"];
 						var book_id = searchResults[i]["book_id"];
 						// display each line of the search result
-						$("#wantedSearchResultsList").append('<li class="list-group-item" id="' + book_id + '" data-book-name="' + book_name + '" data-class-name="' + class_name +'">' + book_name + ', ' + class_name +'</li>')
+						$("#wantedSearchResultsList").append('<li class="list-group-item" id="' + book_id + '" data-title="' + title + '" data-author="' + author + '" data-isbn="' + isbn +'">' + title + ', ' + author +'</li>');
 					}
 				}
 			}
 			// error when querying
 			else if (object.status === 2)
-				console.log('db query error')
+				console.log('db query error');
 		});
 	}
 	else {
@@ -166,14 +171,14 @@ $("#wantedSearchResultsList").on("click", ".list-group-item", function(){
 		{ user_id: "user", book_id: book_id },
 		function(data){
 			if(data.status === 0){
-				$("#wantedList").append('<li class="list-group-item" id="' + book_id + '" data-book-name="' + book_name + '" data-class-name="' + class_name +'">' + book_name + ', ' + class_name +'</li>')
+				$("#wantedList").append('<li class="list-group-item" id="' + book_id + '" data-book-name="' + book_name + '" data-class-name="' + class_name +'">' + book_name + ', ' + class_name +'</li>');
 			}
 			else if(data.status === 1)
-				console.log('db connection error')
+				console.log('db connection error');
 			else if(data.status === 2)
-				console.log('db query error')
+				console.log('db query error');
 			else if(data.status === 3){
-				console.log('book already exists')
+				console.log('book already exists');
 			}
 		},
 		"json"

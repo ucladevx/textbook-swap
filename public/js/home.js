@@ -27,22 +27,36 @@ $("#navbar_logo").click(function(){
 $(document).ready(function(){
 
     var index = 0;
-    var images=[];
 
+    var imgPreloader = $("<div>").appendTo(".about_graphic");
     for(var i = 1; i <= 143; i+=1){
-        var string = "/images/loop_animation/loopgraphic_00" + ("000"+i).slice(-3) + ".png";
-        images[i-1] = new Image();
-        images[i-1].src = string;
+        var string = "/images/loops_animation/loopgraphic_00" + ("000"+i).slice(-3) + ".png";
+        $("<img>").attr({"src": string, "id": "image" + i, "display": "none"}).appendTo(imgPreloader);
+        var target = "#image" + i;
+        $(target).css({"z-index": i, "position":"absolute", "top":"50px", "left":"50px"});
     }
 
     function loop_animate(){
-        $("#second").css('background-image', images[index]);
-        index += 1;
+        var targetindex = index%143 + 1;
+
+        var target = "#image" + targetindex;
+        $(target).css("opacity", 1.0);
+        $(target).attr("display", "block");
+
+        for(var i = 1; i <= 143; i+=1){
+            if(i != targetindex) {
+                var remaining = "#image" + i;
+                $(remaining).css("opacity", 0.0);
+                $(remaining).attr("display", "none");
+            }
+        }
+
+        index+=1;
     }
 
     loop_animate();
 
-    window.setInterval(loop_animate, 100);
+    window.setInterval(loop_animate, 20);
 
 
 });

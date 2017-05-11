@@ -17,10 +17,9 @@ body{
 }
 
 #second{
-
+	background: linear-gradient(to right, rgba(0,76,153,1),rgba(102,178,255,1));
 	max-height:100vh;
     padding-top: 10vh;
-
 }
 
 .btn {
@@ -74,13 +73,15 @@ body{
 	transform:scale(1.5,1); /* W3C */
 	font-size: 250%;
 	color: #DDDDDD;
+	z-index: 300;
 }
 
 .about_column{
-	padding-right: 1vh;
+	padding-right: 2vh;
 	padding-top: 3vh;
 	color: #EEEEEE;
 	text-align: center;
+	z-index: 300;
 }
 
 .about_column p{
@@ -88,7 +89,13 @@ body{
 }
 
 .about_graphic{
-	text-align: center;
-	padding-top: 12vh;
+	position: relative;
+}
+
+.about_graphic img {
+	transition: all ease-out;
+	height: 90vh;
+	margin-top: -10vh;
+	margin-left: -27vh;
 }
 

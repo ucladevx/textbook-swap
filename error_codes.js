@@ -39,6 +39,20 @@ exports.graph_edges_errors = Object.freeze({
     GRAPH_EDGE_ALREADY_EXISTS : 3
 });
 
+exports.book_to_class_errors = Object.freeze({
+    DB_SUCCESS : 0,
+    DB_CONNECTION_ERROR : 1,
+    DB_QUERY_ERROR : 2,
+    BOOK_TO_CLASS_RELATION_EXISTS : 3
+});
+
+exports.book_info_errors = Object.freeze({
+    DB_SUCCESS : 0,
+    DB_CONNECTION_ERROR : 1,
+    DB_QUERY_ERROR : 2,
+    BOOK_INFO_RELATION_EXISTS : 3
+});
+
 exports.found_trades_errors = Object.freeze({
     DB_SUCCESS : 0,
     DB_CONNECTION_ERROR : 1,

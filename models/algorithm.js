@@ -76,26 +76,17 @@ function dfs(curr, maxDepth, visited){
  */
 function process(visited){
     console.log(visited);
-    for(var i = 0; i < visited.length; i++){
+    visited.push(visited[0]);
+
+    for(var i = 0; i < visited.length - 1; i++){
         matched[visited[i]] = 1;
 
-        if(i == 0) {
-            var last = visited[visited.length - 1];
-            ft.add_loop_edge(tradeID, last[0], last[1], visited[0][0], visited[0][1], function(status){
-                if(status == ec.found_trades_errors.DB_SUCCESS)
-                    console.log("Successfully added edge to the found_trades table!");
-                else
-                    console.log("Error adding edge to the found_trades table: " + status);
-            });
-        }
-        else {
-            ft.add_loop_edge(tradeID, visited[i - 1][0], visited[i - 1][1], visited[i][0], visited[i][1], function(status){
-                if(status == ec.found_trades_errors.DB_SUCCESS)
-                    console.log("Successfully added edge to the found_trades table!");
-                else
-                    console.log("Error adding edge to the found_trades table: " + status);
-            });
-        }
+        ft.add_loop_edge(tradeID, visited[i][0], visited[i][1], visited[i + 1][0], visited[i + 1][1], function(status){
+            if(status == ec.found_trades_errors.DB_SUCCESS)
+                console.log("Successfully added edge to the found_trades table!");
+            else
+                console.log("Error adding edge to the found_trades table: " + status);
+        });
 
         ob.remove_book(visited[i][0], visited[i][1], function(status){
             if(status == ec.owned_books_errors.DB_SUCCESS)
@@ -104,7 +95,7 @@ function process(visited){
                 console.log("Error removing book from the owned_books table: " + status);
         });
 
-        wl.remove_book(visited[i][0], visited[i][3], function(status){
+        wl.remove_book(visited[i][0], visited[i + 1][1], function(status){
             if(status == ec.wish_list_errors.DB_SUCCESS)
                 console.log("Successfully removed book from wish_list table!");
             else
@@ -118,16 +109,26 @@ function process(visited){
                 console.log("Error removing edges from the graph_edges table: " + status);
         });
 
-        ge.remove_wanted_book(visited[i][0], visited[i][3], function(status){
+        ge.remove_wanted_book(visited[i][0], visited[i + 1][1], function(status){
             if(status == ec.graph_edges_errors.DB_SUCCESS)
                 console.log("Successfully removed edges!");
             else
                 console.log("Error removing edges from the graph_edges table: " + status);
         });
 
-        // update possible trades status
+        pt.update_status_by_owned_book('I', visited[i][0], visited[i][1], function(status){
+            if(status == ec.possible_trades_errors.DB_SUCCESS)
+                console.log("Successfully updated statuses!");
+            else
+                console.log("Error updating statuses: " + status);
+        });
 
-
+        pt.update_status_by_wanted_book('I', visited[i][0], visited[i + 1][1], function(status){
+            if(status == ec.possible_trades_errors.DB_SUCCESS)
+                console.log("Successfully updated statuses!");
+            else
+                console.log("Error updating statuses: " + status);
+        });
     }
 
     tradeID++;

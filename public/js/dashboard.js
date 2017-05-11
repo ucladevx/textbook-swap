@@ -9,10 +9,12 @@ $(document).ready(function(){
 	 		if(response.status === 0){
 				var booklist = response.data;
 				for (i=0; i<booklist.length; i++){
-					var book_name = booklist[i]["book_name"];
-					var class_name = booklist[i]["class_name"];
+					var title = booklist[i]["title"];
+					var author = booklist[i]["author"];
+					var isbn = booklist[i]["isbn"];
 					var book_id = booklist[i]["book_id"];
-					$("#ownedList").append('<li class="list-group-item" id="' + book_id + '" data-book-name="' + book_name + '" data-class-name="' + class_name +'">' + book_name + ', ' + class_name +'</li>');
+					// display each line of the search result
+					$("#ownedList").append('<li class="list-group-item" id="' + book_id + '" data-title="' + title + '" data-author="' + author + '" data-isbn="' + isbn +'">' + title + ', ' + author +'</li>');
 				}
 			}
 			else if(response.status === 1)
@@ -28,10 +30,12 @@ $(document).ready(function(){
 	 		if(response.status === 0){
 				var booklist = response.data;
 				for (i=0; i<booklist.length; i++){
-					var book_name = booklist[i]["book_name"];
-					var class_name = booklist[i]["class_name"];
+					var title = booklist[i]["title"];
+					var author = booklist[i]["author"];
+					var isbn = booklist[i]["isbn"];
 					var book_id = booklist[i]["book_id"];
-					$("#wantedList").append('<li class="list-group-item" id="' + book_id + '" data-book-name="' + book_name + '" data-class-name="' + class_name +'">' + book_name + ', ' + class_name +'</li>');
+					// display each line of the search result
+					$("#wantedList").append('<li class="list-group-item" id="' + book_id + '" data-title="' + title + '" data-author="' + author + '" data-isbn="' + isbn +'">' + title + ', ' + author +'</li>');
 				}
 			}
 			else if(response.status === 1)
@@ -91,8 +95,9 @@ $("#ownedSearchResultsList").on("click", ".list-group-item", function(){
 	// get data from list element tags
 	var searchResult = this;
 	var book_id = searchResult.id;
-	var book_name = searchResult.dataset.bookName;  
-	var class_name = searchResult.dataset.className;
+	var title = searchResult.dataset.title;  
+	var author = searchResult.dataset.author;
+	var isbn = searchResult.dataset.isbn;
 
 	console.log(searchResult);
 
@@ -100,7 +105,7 @@ $("#ownedSearchResultsList").on("click", ".list-group-item", function(){
 		{ user_id: "user", book_id: book_id },
 		function(data){
 			if(data.status === 0){
-				$("#ownedList").append('<li class="list-group-item" id="' + book_id + '" data-book-name="' + book_name + '" data-class-name="' + class_name +'">' + book_name + ', ' + class_name +'</li>');
+				$("#ownedList").append('<li class="list-group-item" id="' + book_id + '" data-title="' + title + '" data-author="' + author + '" data-isbn="' + isbn +'">' + title + ', ' + author +'</li>');
 			}
 			else if(data.status === 1)
 				console.log('db connection error');
@@ -162,8 +167,9 @@ $("#wantedSearchResultsList").on("click", ".list-group-item", function(){
 	// get data from list element tags
 	var searchResult = this;
 	var book_id = searchResult.id;
-	var book_name = searchResult.dataset.bookName;  
-	var class_name = searchResult.dataset.className;
+	var title = searchResult.dataset.title;  
+	var author = searchResult.dataset.author;
+	var isbn = searchResult.dataset.isbn;
 
 	console.log(searchResult);
 
@@ -171,7 +177,7 @@ $("#wantedSearchResultsList").on("click", ".list-group-item", function(){
 		{ user_id: "user", book_id: book_id },
 		function(data){
 			if(data.status === 0){
-				$("#wantedList").append('<li class="list-group-item" id="' + book_id + '" data-book-name="' + book_name + '" data-class-name="' + class_name +'">' + book_name + ', ' + class_name +'</li>');
+				$("#wantedList").append('<li class="list-group-item" id="' + book_id + '" data-title="' + title + '" data-author="' + author + '" data-isbn="' + isbn +'">' + title + ', ' + author +'</li>');
 			}
 			else if(data.status === 1)
 				console.log('db connection error');
@@ -182,7 +188,7 @@ $("#wantedSearchResultsList").on("click", ".list-group-item", function(){
 			}
 		},
 		"json"
-	);
+	)
 })
 
 /*
@@ -193,8 +199,6 @@ $("#ownedList").on("click", ".list-group-item", function(){
 	// get data from list element tags
 	var listedBook = this;
 	var book_id = listedBook.id;
-	var book_name = listedBook.dataset.bookName;  
-	var class_name = listedBook.dataset.className;
 
 	console.log(listedBook);
 
@@ -224,8 +228,6 @@ $("#wantedList").on("click", ".list-group-item", function(){
 	// get data from list element tags
 	var listedBook = this;
 	var book_id = listedBook.id;
-	var book_name = listedBook.dataset.bookName;  
-	var class_name = listedBook.dataset.className;
 
 	console.log(listedBook);
 

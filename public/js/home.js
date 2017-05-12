@@ -39,18 +39,16 @@ $(document).ready(function(){
     function loop_animate(){
         var targetindex = index%143 + 1;
 
-        var target = "#image" + targetindex;
-        $(target).css("opacity", 1.0);
-        $(target).attr("display", "block");
+
 
         for(var i = 1; i <= 143; i+=1){
-            if(i != targetindex) {
                 var remaining = "#image" + i;
                 $(remaining).css("opacity", 0.0);
                 $(remaining).attr("display", "none");
-            }
         }
-
+        var target = "#image" + targetindex;
+        $(target).css("opacity", 1.0);
+        $(target).attr("display", "block");
         index+=1;
     }
 

@@ -9,16 +9,16 @@ body{
 	min-height: 40vh;
 }
 
+#first{
+	margin-bottom: 35vh;
+}
+
 #first, #second{
-	height:100vh;
-	min-height:100vh;
-    max-height:100vh;
     padding-bottom: 0vh;
 }
 
 #second{
 	background: linear-gradient(to right, rgba(0,76,153,1),rgba(102,178,255,1));
-	max-height:100vh;
     padding-top: 10vh;
 }
 

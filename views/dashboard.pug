@@ -9,6 +9,20 @@ html
         script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous")
     body
         h1 Search for Textbooks
+        link(rel='stylesheet' type="text/css" href="css/navbar.css")
+        nav.navbar.navbar-default.navbar-fixed-top.navbar-default
+            .container-fluid
+                .navbar-header
+                    a.navbar-brand(href='#')
+                        img(alt='LOOP', src="/assets/logo_navbar.svg", id="navbar_logo")
+                ul.nav.navbar-nav.navbar-right
+                    li
+                        a(href='#') Help
+                    li
+                        a(href='#', id="nav_about") Settings
+                    li
+                        a(href="/logout/facebook") Logout
+
         div(class="row" id="forms")
             div(class="col-lg-6" id="ownedForm")
                 div(class="input-group")
@@ -33,3 +47,4 @@ html
             div(class="col-lg-6" id="wantedBox")
                 ul.list-group(id="wantedList")
         script(src="/js/dashboard.js")
+        script(src="/js/navbar.js")

@@ -20,6 +20,7 @@ body{
 #second{
 	background: linear-gradient(to right, rgba(0,76,153,1),rgba(102,178,255,1));
     padding-top: 10vh;
+	height: 100vh;
 }
 
 .btn {

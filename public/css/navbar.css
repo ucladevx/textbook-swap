@@ -1,0 +1,28 @@
+/* navbar */
+nav {
+    box-shadow: 0px 1px 8px #555;
+}
+
+.navbar-fixed-top {
+    opacity: 0.6;
+    transition: all ease-out;
+    background: linear-gradient(to right, rgba(0,76,153,1),rgba(102,178,255,1));
+    border: 0;
+}
+
+.nav.navbar-nav.navbar-right li a{
+    color: white;
+    font-size:120%;
+}
+
+.nav.navbar-nav.navbar-right{
+    padding-right: 2vh;
+}
+
+#navbar_logo{
+    height: 38px;
+}
+
+.navbar-brand{
+    padding-top: 1vh;
+}

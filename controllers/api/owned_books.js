@@ -5,6 +5,7 @@
 const request = require('request');
 const ec = require('../../error_codes');
 const db = require('../../models/owned_books');
+const bt = require('../../models/books');
 const pt = require('../../models/possible_trades');
 const ge = require('../../models/graph_edges');
 
@@ -85,7 +86,7 @@ exports.remove_book = function(req, res) {
 
 /*
  * GET http://localhost:3000/api/owned_books/get_books
- * Gets a list of owned books of an user from the database.
+ * Gets a list of owned books of an user from the database, where each entry has [book_id, title, author, isbn]
  * Replies with a json object containing the status of the database operation and the list of books.
  */
 exports.get_books = function(req, res) {
@@ -95,7 +96,20 @@ exports.get_books = function(req, res) {
         if (status == ec.owned_books_errors.DB_SUCCESS)
             console.log("Successfully found books from the database!");
 
-        res.json({status: status, data: data});
+        // convert from array of Javascript objects to just array of book_ids
+        var book_ids = new Array();
+        for (var i = 0; i < data.length; i++) {
+            book_ids.push(data[i]["book_id"]);
+        }
+
+        // get the book info corresponding to each book_id 
+        bt.get_books_info(book_ids, function(error_status, books_data) {
+            if (error_status) {
+                console.error("Error querying database", error_status);
+            }
+            // return the info for all the books
+            res.json({status: error_status, data: books_data});
+        });
     });
 };
 

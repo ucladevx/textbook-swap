@@ -5,20 +5,40 @@ html
         title Loops - Dashboard
         link(rel='stylesheet' type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous")
         link(rel='stylesheet' type="text/css" href="css/dashboard.css")
+        link(rel='stylesheet' type="text/css" href="css/navbar.css")
         script(src=src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js")
         script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous")
     body
+        h1 Search for Textbooks
+        nav.navbar.navbar-default.navbar-fixed-top.navbar-default
+            .container-fluid
+                .navbar-header
+                    a.navbar-brand(href='#')
+                        img(alt='LOOP', src="/assets/logo_navbar.svg", id="navbar_logo")
+                ul.nav.navbar-nav.navbar-right
+                    li
+                        a(href='#') Help
+                    li
+                        a(href='#', id="nav_about") Settings
+                    li
+                        a(href="/logout/facebook") Logout
         div(class="row" id="forms")
             div(class="col-lg-6" id="ownedForm")
                 div(class="input-group")
-                    input(class="form-control", type='text', id="ownedID", placeholder='Book ID of owned book...')
+                    input(class="form-control", type='text', id="ownedInput", placeholder='Search for owned book...')
                     span(class="input-group-btn")
                         button(class="btn btn-default" type="button" id="addOwned") Add
             div(class="col-lg-6" id="wantedForm")
                 div(class="input-group")
-                    input(class="form-control", type='text', id="wantedID", placeholder='Book ID of wanted book...')
+                    input(class="form-control", type='text', id="wantedInput", placeholder='Search for wanted book...')
                     span(class="input-group-btn")
                         button(class="btn btn-default" type="button" id="addWanted") Request
+
+        div(class="row" id="searchResults")
+            div(class="col-lg-6" id="ownedSearchResultsBox")
+                ul(id = "ownedSearchResultsList").list-group
+            div(class="col-lg-6" id="wantedSearchResultsBox")
+                ul(id = "wantedSearchResultsList").list-group
 
         div(class="row" id="bookLists")
             div(class="col-lg-6" id="ownedBox")
@@ -26,3 +46,4 @@ html
             div(class="col-lg-6" id="wantedBox")
                 ul.list-group(id="wantedList")
         script(src="/js/dashboard.js")
+        script(src="/js/navbar.js")

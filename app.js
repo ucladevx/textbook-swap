@@ -24,6 +24,7 @@ dotenv.config();
 const homeController = require('./controllers/routes/home');
 const passportController = require('./controllers/routes/passport');
 const dashboardController = require('./controllers/routes/dashboard');
+const searchController = require('./controllers/routes/search');
 
 /*
  * Controllers (API)
@@ -31,6 +32,7 @@ const dashboardController = require('./controllers/routes/dashboard');
 const ownedBooksController = require('./controllers/api/owned_books');
 const wishListController = require('./controllers/api/wish_list');
 const possibleTradesController = require('./controllers/api/possible_trades');
+const textbookSearchController = require('./controllers/api/search');
 
 /*
  * API keys and Passport configuration.
@@ -70,6 +72,7 @@ app.use(passport.session());
  */
 app.get('/', homeController.index);
 app.get('/dashboard', require_login.ensureLoggedIn(), dashboardController.index);
+app.get('/search', require_login.ensureLoggedIn(), searchController.index);
 
 /*
  * API routes.
@@ -94,8 +97,11 @@ app.post('/api/possible_trades/remove', possibleTradesController.remove_relation
 // app.post('/api/possible_trades/remove_want', possibleTradesController.remove_relation_want);
 app.get('/api/possible_trades/get_book_wants', possibleTradesController.get_book_wants);
 
+// Textbook search
+app.get('/api/search/search_textbooks', textbookSearchController.search_textbooks);
+
 /*
- * Database initialization and testing
+ * Tests
  */
 const init = require('./models/init').create_tables(function(){
     const tradeIDInit = require('./models/found_trades_id').insert_id(0, function(){

@@ -22,6 +22,8 @@ html
                         a(href='#', id="nav_about") Settings
                     li
                         a(href="/logout/facebook") Logout
+        a.btn(data-popup-open='popup-1', href='#') Open Popup #1
+        include newtradeform.pug
         div(class="row" id="forms")
             div(class="col-lg-6" id="ownedForm")
                 div(class="input-group")
@@ -45,5 +47,7 @@ html
                 ul.list-group(id="ownedList")
             div(class="col-lg-6" id="wantedBox")
                 ul.list-group(id="wantedList")
+
         script(src="/js/dashboard.js")
         script(src="/js/navbar.js")
+

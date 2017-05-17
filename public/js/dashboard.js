@@ -22,6 +22,15 @@ $(document).ready(function(){
         });
     });
 
+
+
+    $(".popup:not(.popup-inner)").click(function(e){
+        console.log($(this).attr('class'))
+		var targeted_popup_class = jQuery(this).attr('data-popup');
+		$('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
+	});
+
+
 	$.ajax({url: "/api/owned_books/get_books",
 		data: { user_id: "user" },
 		success: function(response){

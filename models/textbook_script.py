@@ -6,8 +6,12 @@ myfile = open("classes.csv", 'wb')
 wr = csv.writer(myfile, quoting=csv.QUOTE_ALL)
 
 final = set()
-for i in range(141535, 141545):
+for i in range(141530, 141545):
 	print i
+	# edge case that breaks the algorithm
+	if i == 160671:
+		continue
+	
 	url = "http://ucla.verbacompare.com/comparison?id=" + str(i)
 	r  = requests.get(url)
 	data = r.text
@@ -42,11 +46,13 @@ for i in range(141535, 141545):
 					elements['title' + index] = elements['title' + index].encode('ascii', 'ignore').decode('ascii')
 				elif 'author' == word.split(":")[0].strip('"'):
 					elements['author' + index] = word.split(":")[1].strip('"').decode("unicode-escape")
-					#once the author field is hit, we've gotten all the data we need for this book
+				elif 'edition' == word.split(":")[0].strip('"'):
+					elements['edition' + index] = word.split(":")[1].strip('"').decode("unicode-escape")
+					#once the edition field is hit, we've gotten all the data we need for this book
 					index = str(int(index) + 1)
 
 	if 'instructor' in elements and 'title1' in elements: 
 		for j in range(1, int(index)):
-			temp = [elements['instructor'], elements['class'],  elements['title' + str(j)], elements['author' + str(j)], elements['image' + str(j)], elements['isbn' + str(j)], str(i)]
+			temp = [elements['instructor'], elements['class'],  elements['title' + str(j)], elements['edition' + str(j)], elements['author' + str(j)], elements['image' + str(j)], elements['isbn' + str(j)], str(i)]
 			wr.writerow(temp)
 			final.add(str(elements))

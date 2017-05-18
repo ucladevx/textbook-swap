@@ -28,3 +28,28 @@ exports.get_book_info = function(book_id, next){
         });
     });
 };
+
+/*
+ Purpose: Query the database for all the book_info associated with a given book_id
+ Inputs: Array of book_id's
+ Output: Returns a callback function that has an success or error code passed as a parameter and the resulting list of [book_id, title, author, isbn] as another parameter
+ */
+exports.get_books_info = function(book_ids, next) {
+    pg.connect(process.env.DATABASE_URL, function(err, client, done){
+        done();
+        if (err) {
+            console.error("Error connection to client while querying books table: ", err);
+            return next(error_codes.book_info_errors.DB_CONNECTION_ERROR);
+        }
+
+        // get the book info for all books
+        client.query("SELECT book_id, title, author, isbn, img_url FROM book_info WHERE book_id = any ($1)", [book_ids], function(err, books_info_result) {
+            if (err) {
+                console.error("Error querying database", err);
+                return next(error_codes.book_info_errors.DB_QUERY_ERROR);
+            }
+
+            return next(error_codes.book_info_errors.DB_SUCCESS, books_info_result.rows);
+        });
+    });
+};

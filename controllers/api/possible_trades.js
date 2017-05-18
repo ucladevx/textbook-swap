@@ -85,8 +85,8 @@ exports.remove_relation = function(req, res) {
 //     var user_id = req.user.id;
 //     var owned_book_id = req.body.owned_book_id;
 //
-//     db.remove_relation_have(user_id, owned_book_id, function(status){
-//         if (status == ec.possible_trades_errors.DB_SUCCESS)
+//     owned_books.remove_relation_have(user_id, owned_book_id, function(status){
+//         if (status == error_codes.possible_trades_errors.DB_SUCCESS)
 //             console.log("Successfully removed relation-have from the database!");
 //
 //         res.json({status: status});
@@ -102,8 +102,8 @@ exports.remove_relation = function(req, res) {
 //     var user_id = req.user.id;
 //     var wanted_book_id = req.body.wanted_book_id;
 //
-//     db.remove_relation_want(user_id, wanted_book_id, function(status){
-//         if (status == ec.possible_trades_errors.DB_SUCCESS)
+//     owned_books.remove_relation_want(user_id, wanted_book_id, function(status){
+//         if (status == error_codes.possible_trades_errors.DB_SUCCESS)
 //             console.log("Successfully removed relation-want from the database!");
 //
 //         res.json({status: status});

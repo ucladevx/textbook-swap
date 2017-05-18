@@ -18,9 +18,9 @@ $(document).ready(function(){
 				}
 			}
 			else if(response.status === 1)
-				console.log('db connection error');
+				console.log('owned_books connection error');
 			else if(response.status === 2)
-				console.log('db query error');
+				console.log('owned_books query error');
 		}
 	});
 
@@ -39,9 +39,9 @@ $(document).ready(function(){
 				}
 			}
 			else if(response.status === 1)
-				console.log('db connection error');
+				console.log('owned_books connection error');
 			else if(response.status === 2)
-				console.log('db query error');
+				console.log('owned_books query error');
 		}
 	});
 
@@ -78,7 +78,7 @@ $("#ownedInput").keyup(function() {
 			}
 			// error when querying
 			else if (object.status === 2)
-				console.log('db query error');
+				console.log('owned_books query error');
 		});
 	}
 	else {
@@ -103,9 +103,9 @@ $("#ownedSearchResultsList").on("click", ".list-group-item", function(){
 				$("#ownedList").append('<li class="list-group-item" id="' + book_id + '" data-title="' + title + '" data-author="' + author + '" data-isbn="' + isbn +'">' + title + ', ' + author +'</li>');
 			}
 			else if(data.status === 1)
-				console.log('db connection error');
+				console.log('owned_books connection error');
 			else if(data.status === 2)
-				console.log('db query error');
+				console.log('owned_books query error');
 			else if(data.status === 3){
 				console.log('book already exists');
 			}
@@ -145,7 +145,7 @@ $("#wantedInput").keyup(function() {
 			}
 			// error when querying
 			else if (object.status === 2)
-				console.log('db query error');
+				console.log('owned_books query error');
 		});
 	}
 	else {
@@ -170,9 +170,9 @@ $("#wantedSearchResultsList").on("click", ".list-group-item", function(){
 				$("#wantedList").append('<li class="list-group-item" id="' + book_id + '" data-title="' + title + '" data-author="' + author + '" data-isbn="' + isbn +'">' + title + ', ' + author +'</li>');
 			}
 			else if(data.status === 1)
-				console.log('db connection error');
+				console.log('owned_books connection error');
 			else if(data.status === 2)
-				console.log('db query error');
+				console.log('owned_books query error');
 			else if(data.status === 3){
 				console.log('book already exists');
 			}
@@ -197,9 +197,9 @@ $("#ownedList").on("click", ".list-group-item", function(){
 				listedBook.remove();
 			}
 			else if(data.status === 1)
-				console.log('db connection error');
+				console.log('owned_books connection error');
 			else if(data.status === 2)
-				console.log('db query error');
+				console.log('owned_books query error');
 			else if(data.status === 4){
 				console.log('book does not exist');
 			}
@@ -224,9 +224,9 @@ $("#wantedList").on("click", ".list-group-item", function(){
 				listedBook.remove();
 			}
 			else if(data.status === 1)
-				console.log('db connection error');
+				console.log('owned_books connection error');
 			else if(data.status === 2)
-				console.log('db query error');
+				console.log('owned_books query error');
 			else if(data.status === 4){
 				console.log('book does not exist');
 			}

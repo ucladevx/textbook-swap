@@ -24,7 +24,7 @@ dotenv.config();
 const homeController = require('./controllers/routes/home');
 const passportController = require('./controllers/routes/passport');
 const dashboardController = require('./controllers/routes/dashboard');
-const searchController = require('./controllers/routes/search');
+const bookShelfController = require('./controllers/routes/bookshelf');
 
 /*
  * Controllers (API)
@@ -72,7 +72,7 @@ app.use(passport.session());
  */
 app.get('/', homeController.index);
 app.get('/dashboard', require_login.ensureLoggedIn(), dashboardController.index);
-app.get('/search', require_login.ensureLoggedIn(), searchController.index);
+app.get('/bookshelf', require_login.ensureLoggedIn(), bookShelfController.index);
 
 /*
  * API routes.
@@ -83,7 +83,7 @@ app.get('/search', require_login.ensureLoggedIn(), searchController.index);
 // Owned books
 app.post('/api/owned_books/add', ownedBooksController.add_book);
 app.post('/api/owned_books/remove', ownedBooksController.remove_book);
-app.get('/api/owned_books/get_books', ownedBooksController.get_books);
+app.get('/api/owned_books/get_owned_cards', ownedBooksController.get_owned_cards);
 app.get('/api/owned_books/get_users', ownedBooksController.get_users);
 
 // Wanted books

@@ -4,36 +4,18 @@ html
         meta(charset='utf-8')
         title Loops - Dashboard
         link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css', integrity='sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ', crossorigin='anonymous')
+        link(rel='stylesheet' type="text/css" href="css/bookshelf.css")
         script(src='https://code.jquery.com/jquery-3.1.1.slim.min.js', integrity='sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n', crossorigin='anonymous')
         script(src='https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js', integrity='sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb', crossorigin='anonymous')
         script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js', integrity='sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn', crossorigin='anonymous')
     body
         .card-deck
-            .card
-                img.card-img-top(src='...', alt='Card image cap')
-                .card-block
-                    h4.card-title Card title
-                    p.card-text
-                        | This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
-                    p.card-text
-                        small.text-muted Last updated 3 mins ago
-            .card
-                img.card-img-top(src='...', alt='Card image cap')
-                .card-block
-                    h4.card-title Card title
-                    p.card-text This card has supporting text below as a natural lead-in to additional content.
-                    p.card-text
-                        small.text-muted Last updated 3 mins ago
-            .card
-                img.card-img-top(src='...', alt='Card image cap')
-                .card-block
-                    h4.card-title Card title
-                    p.card-text
-                        | This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.
-                    p.card-text
-                        small.text-muted Last updated 3 mins ago
-
         each card in books
-            li= card.title
+             .card
+                img.card-img-top(src=card.img_url, alt='Card image cap')
+                .card-block
+                    h4.card-title #{card.title}
+                    h5.card-author #{card.author}
+        
         script(src="/js/bookshelf.js")
         script(src="/js/navbar.js")

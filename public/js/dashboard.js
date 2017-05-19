@@ -1,3 +1,7 @@
+/*
+ *  Helper functions
+ */
+
 /* Helper function to reset pop-up form input */
 var resetFormInput = function() {
 	document.getElementById("ownedInput").value = "";
@@ -5,45 +9,11 @@ var resetFormInput = function() {
 }
 
 /*
- * Functions needed for pop-up form input
+ * Initialization code that runs when DOM is ready
  */
 
 $(document).ready(function(){
-
-    $(function() {
-        //----- OPEN
-        $('[data-popup-open]').on('click', function(e)  {
-            var targeted_popup_class = jQuery(this).attr('data-popup-open');
-            $('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
-
-            e.preventDefault();
-        });
-
-        //----- CLOSE
-        $('[data-popup-close]').on('click', function(e)  {
-            var targeted_popup_class = jQuery(this).attr('data-popup-close');
-            $('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
-
-            e.preventDefault();
-            resetFormInput();
-        });
-    });
-
-    // close the popup if you are clicking outside of it
-    $(".popup").click(function(e){
-        console.log($(this).attr('class'))
-		var targeted_popup_class = jQuery(this).attr('data-popup');
-		$('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
-		// reset the form since user is closing the pop-up
-		resetFormInput();
-	});
-
-    // do not close the pop-up if you are clicking inside of it
-    $(".popup-inner").click(function(e){
-        console.log($(this).attr('class'))
-		e.stopPropagation();
-	});
-
+	// load books for the owned books list
 	$.ajax({url: "/api/owned_books/get_books",
 		data: { user_id: "user" },
 		success: function(response){
@@ -65,6 +35,7 @@ $(document).ready(function(){
 		}
 	});
 
+	// load books from the wanted books list
 	$.ajax({url: "/api/wish_list/get_books",
 		data: { user_id: "user" },
 		success: function(response){
@@ -85,8 +56,43 @@ $(document).ready(function(){
 				console.log('db query error');
 		}
 	});
-
 })
+
+/*
+ * Functions needed for pop-up form input
+ */
+
+// open the popup 
+$('[data-popup-open]').on('click', function(e)  {
+	// new pop-up, so reset form input from previous instance of the pop-up
+	resetFormInput();
+
+    var targeted_popup_class = jQuery(this).attr('data-popup-open');
+    $('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
+
+    e.preventDefault();
+});
+
+// close the pop-up using the button on the top right corner
+$('[data-popup-close]').on('click', function(e)  {
+    var targeted_popup_class = jQuery(this).attr('data-popup-close');
+    $('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
+
+    e.preventDefault();
+});
+
+// close the popup if you are clicking outside of it
+$(".popup").click(function(e){
+    console.log($(this).attr('class'))
+	var targeted_popup_class = jQuery(this).attr('data-popup');
+	$('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
+});
+
+// do not close the pop-up if you are clicking inside of it
+$(".popup-inner").click(function(e){
+    console.log($(this).attr('class'))
+	e.stopPropagation();
+});
 
 /* 
  * Searching and adding entries to the owned books list

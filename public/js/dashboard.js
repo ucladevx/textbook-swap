@@ -1,5 +1,11 @@
+/* Helper function to reset pop-up form input */
+var resetFormInput = function() {
+	document.getElementById("ownedInput").value = "";
+	$("#ownedSearchResultsList").empty();
+}
+
 /*
- * Initializing the owned books and wanted books lists
+ * Functions needed for pop-up form input
  */
 
 $(document).ready(function(){
@@ -19,6 +25,7 @@ $(document).ready(function(){
             $('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
 
             e.preventDefault();
+            resetFormInput();
         });
     });
 
@@ -27,6 +34,8 @@ $(document).ready(function(){
         console.log($(this).attr('class'))
 		var targeted_popup_class = jQuery(this).attr('data-popup');
 		$('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
+		// reset the form since user is closing the pop-up
+		resetFormInput();
 	});
 
     // do not close the pop-up if you are clicking inside of it

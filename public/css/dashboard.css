@@ -34,9 +34,9 @@ h3 {
 
 /* Inner */
 .popup-inner {
-    z-index: 200;
-    max-width:700px;
-    width:90%;
+    z-index: 200; 
+    height:60vh;
+    width:90vh;
     padding:40px;
     position:absolute;
     top:50%;

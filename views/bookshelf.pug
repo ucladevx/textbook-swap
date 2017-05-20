@@ -9,13 +9,43 @@ html
         script(src='https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js', integrity='sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb', crossorigin='anonymous')
         script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js', integrity='sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn', crossorigin='anonymous')
     body
-        .card-deck
-        each card in books
-             .card
-                img.card-img-top(src=card.img_url, alt='Card image cap')
+        .row
+            .card.col-md-4
+                img.card-img-top(src=books[0].img_url, alt='Card image cap')
                 .card-block
-                    h4.card-title #{card.title}
-                    h5.card-author #{card.author}
-        
+                    h4.card-title #{books[0].title}
+                    h5.card-author #{books[0].author}
+            .card.col-md-4
+                img.card-img-top(src=books[0].img_url, alt='Card image cap')
+                .card-block
+                    h4.card-title #{books[0].title}
+                    h5.card-author #{books[0].author}
+            .card.col-md-4
+                img.card-img-top(src=books[1].img_url, alt='Card image cap')
+                .card-block
+                    h4.card-title #{books[1].title}
+                    h5.card-author #{books[1].author}
+        - for(var i = 2; i < books.length; i += 3){
+            .row
+                .card.col-md-4
+                    img.card-img-top(src=books[i].img_url, alt='Card image cap')
+                    .card-block
+                        h4.card-title #{books[i].title}
+                        h5.card-author #{books[i].author}
+                .card.col-md-4
+                    img.card-img-top(src=books[i+1].img_url, alt='Card image cap')
+                    .card-block
+                        h4.card-title #{books[i+1].title}
+                        h5.card-author #{books[i+1].author}
+                .card.col-md-4
+                    img.card-img-top(src=books[i+2].img_url, alt='Card image cap')
+                    .card-block
+                        h4.card-title #{books[i+2].title}
+                        h5.card-author #{books[i+2].author}
+
+        - }
+
+
+
         script(src="/js/bookshelf.js")
         script(src="/js/navbar.js")

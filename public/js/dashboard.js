@@ -67,6 +67,8 @@ $('[data-popup-open]').on('click', function(e)  {
 	// new pop-up, so reset form input from previous instance of the pop-up
 	resetFormInput();
 
+	
+
     var targeted_popup_class = jQuery(this).attr('data-popup-open');
     $('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
 

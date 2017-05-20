@@ -11,6 +11,11 @@
     margin-right:5vh;
 }
 
+#ownedSearchResultsList {
+	height: 15vh;
+	overflow: scroll;
+}
+
 h1 {
     margin-top:10vh;
     margin-left:8vh;

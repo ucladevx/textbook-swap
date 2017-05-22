@@ -14,7 +14,7 @@
 #ownedSearchResultsList {
 	background-color: rgb(254, 254, 254);
 	height: 18vh;
-	overflow: scroll;
+	overflow-y: scroll;
 	margin-top: 0;
   	margin-bottom: 0;
 }
@@ -33,6 +33,17 @@
 	border-color: rgb(24, 166, 181);
 	border-radius: 0;
 	color: rgb(255, 255, 255);
+}
+
+/* display scroll bar by default */
+::-webkit-scrollbar {
+	width: 12px;  
+}
+
+::-webkit-scrollbar-thumb {
+	border-radius: 5px;
+	background-color: rgb(146, 214, 225);
+	-webkit-box-shadow: inset 0 0 8px rgba(0,0,0,.2);
 }
 
 /* hovering over search result item or after clicking it */

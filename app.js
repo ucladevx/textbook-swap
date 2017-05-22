@@ -102,7 +102,7 @@ app.get('/api/possible_trades/get_book_wants', possibleTradesController.get_book
 app.get('/api/search/search_textbooks', textbookSearchController.search_textbooks);
 
 // Book Info
-app.get('/api/book_info/get_book_info', bookInfoController.get_book_info)
+app.get('/api/book_info/get_book_info', bookInfoController.get_book_info);
 
 /*
  * Tests

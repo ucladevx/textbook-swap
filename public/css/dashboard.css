@@ -6,14 +6,19 @@
 }
 
 #bookLists, #searchResults {
-    margin-top:5vh;
     margin-left:5vh;
     margin-right:5vh;
 }
 
 #ownedSearchResultsList {
-	height: 15vh;
+	height: 18vh;
 	overflow: scroll;
+	margin-top: 0;
+  	margin-bottom: 0;
+}
+
+#nextButtonRow {
+	margin-top:3vh;
 }
 
 h1 {

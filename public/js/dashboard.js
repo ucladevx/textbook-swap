@@ -134,32 +134,39 @@ $("#ownedInput").keyup(function() {
 	}
 })
 
-// add search result to owned books list
+// after selecting item from the search results, keep it highlighted
 $("#ownedSearchResultsList").on("click", ".list-group-item", function(){
-	// get data from list element tags
-	var searchResult = this;
-	var book_id = searchResult.id;
-	var title = searchResult.dataset.title;  
-	var author = searchResult.dataset.author;
-	var isbn = searchResult.dataset.isbn;
+        $('.highlight').removeClass('highlight');
+        $(this).addClass('highlight');
+        console.log("selected element");
+});
 
-	$.post("/api/owned_books/add",
-		{ user_id: "user", book_id: book_id },
-		function(data){
-			if(data.status === 0){
-				$("#ownedList").append('<li class="list-group-item" id="' + book_id + '" data-title="' + title + '" data-author="' + author + '" data-isbn="' + isbn +'">' + title + ', ' + author +'</li>');
-			}
-			else if(data.status === 1)
-				console.log('db connection error');
-			else if(data.status === 2)
-				console.log('db query error');
-			else if(data.status === 3){
-				console.log('book already exists');
-			}
-		},
-		"json"
-	)
-})
+// // add search result to owned books list
+// $("#ownedSearchResultsList").on("click", ".list-group-item", function(){
+// 	// get data from list element tags
+// 	var searchResult = this;
+// 	var book_id = searchResult.id;
+// 	var title = searchResult.dataset.title;  
+// 	var author = searchResult.dataset.author;
+// 	var isbn = searchResult.dataset.isbn;
+
+// 	$.post("/api/owned_books/add",
+// 		{ user_id: "user", book_id: book_id },
+// 		function(data){
+// 			if(data.status === 0){
+// 				$("#ownedList").append('<li class="list-group-item" id="' + book_id + '" data-title="' + title + '" data-author="' + author + '" data-isbn="' + isbn +'">' + title + ', ' + author +'</li>');
+// 			}
+// 			else if(data.status === 1)
+// 				console.log('db connection error');
+// 			else if(data.status === 2)
+// 				console.log('db query error');
+// 			else if(data.status === 3){
+// 				console.log('book already exists');
+// 			}
+// 		},
+// 		"json"
+// 	)
+// })
 
 /* 
  * Searching and adding entries to the wanted books list

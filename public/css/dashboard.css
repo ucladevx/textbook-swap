@@ -1,3 +1,4 @@
+
 #forms {
     margin-top:5vh;
     margin-left:5vh;
@@ -5,11 +6,12 @@
     z-index: 0;
 }
 
-#bookLists, #searchResults {
+#searchResults {
     margin-left:5vh;
     margin-right:5vh;
 }
 
+/* list of entries from search query results */
 #ownedSearchResultsList {
 	height: 18vh;
 	overflow: scroll;
@@ -17,8 +19,35 @@
   	margin-bottom: 0;
 }
 
+/* search box for user input */
+#ownedInput, .form-control::-webkit-input-placeholder {
+	background-color: rgb(35, 188, 212);
+	border-color: rgb(35, 188, 212);
+	border-radius: 0;
+	color: rgb(255, 255, 255);
+}
+
+/* little magnifying glass icon beside search box */
+#ownedInputAddon {
+	background-color: rgb(24, 166, 181);
+	border-color: rgb(24, 166, 181);
+	border-radius: 0;
+	color: rgb(255, 255, 255);
+}
+
+/* hovering over search result item or after clicking it */
+.list-group-item:hover, .highlight {
+	background-color: rgb(242, 242, 242); /* or whatever color you'd like */
+}
+
 #nextButtonRow {
 	margin-top:3vh;
+}
+
+#nextButton {
+	background-color: rgb(253, 206, 48);
+	border-color: rgb(253, 206, 48);
+	border-radius:0;
 }
 
 h1 {
@@ -55,7 +84,7 @@ h3 {
     transform:translate(-50%, -50%);
     box-shadow:0px 2px 6px rgba(0,0,0,1);
     border-radius:3px;
-    background:#fff;
+    background: rgb(254, 254, 254);
 }
 
 /* Close Button */
@@ -84,4 +113,5 @@ h3 {
     transform:translate(50%, -50%) rotate(180deg);
     background:rgba(0,0,0,1);
     text-decoration:none;
+    color: rgb(216, 96, 69);  /* colour for "X" close button */
 }

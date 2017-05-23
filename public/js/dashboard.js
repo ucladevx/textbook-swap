@@ -67,10 +67,47 @@ $('[data-popup-open]').on('click', function(e)  {
 	// new pop-up, so reset form input from previous instance of the pop-up
 	resetFormInput();
 
-	
-
     var targeted_popup_class = jQuery(this).attr('data-popup-open');
-    $('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
+
+	// load book info
+	$.ajax({url: "/api/book_info/get_book_info",
+		data: { id: 1 },
+		success: function(response){
+	 		if(response.status === 0){
+				console.log(response);
+				$("body").append("<div class=\"popup\" data-popup=\"" 
+				+ targeted_popup_class
+				+ "\"><div class=\"popup-inner\">"
+				+ "<a class=\"popup-close\" data-popup-close=\"" + targeted_popup_class
+				+ "\" href=\"\">x</a>" 
+				+ "<h3>"
+				+ "Title: " + response.data[0].title + "<br>"
+				+ "Author: " + response.data[0].author + "<br>"
+				+ "ISBN: " + response.data[0].isbn + "<br>"
+				+ "<img src=\"" + response.data[0].img_url + "\">"
+				+ "</h3>"
+				+ "</div></div>");
+			    
+			    $('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
+
+			    // close the popup if you are clicking outside of it
+			    $(".popup").click(function(e){
+					var targeted_popup_class = jQuery(this).attr('data-popup');
+					$('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
+				});
+
+				// do not close the pop-up if you are clicking inside of it
+				$(".popup-inner").click(function(e){
+					e.stopPropagation();
+				});
+			}
+			else if(response.status === 1)
+				console.log('db connection error');
+			else if(response.status === 2)
+				console.log('db query error');
+		},
+		async: false
+	});
 
     e.preventDefault();
 });
@@ -81,19 +118,6 @@ $('[data-popup-close]').on('click', function(e)  {
     $('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
 
     e.preventDefault();
-});
-
-// close the popup if you are clicking outside of it
-$(".popup").click(function(e){
-    console.log($(this).attr('class'))
-	var targeted_popup_class = jQuery(this).attr('data-popup');
-	$('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
-});
-
-// do not close the pop-up if you are clicking inside of it
-$(".popup-inner").click(function(e){
-    console.log($(this).attr('class'))
-	e.stopPropagation();
 });
 
 /* 

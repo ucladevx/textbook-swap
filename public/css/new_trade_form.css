@@ -52,11 +52,11 @@
 	background-color: rgb(242, 242, 242); /* or whatever color you'd like */
 }
 
-#nextButtonRow {
+#transitionButtonRow {
 	margin-top:3vh;
 }
 
-#nextButton {
+#nextButton, #prevButton {
 	background-color: rgb(253, 206, 48);
 	border-color: rgb(253, 206, 48);
 	border-radius:0;
@@ -114,12 +114,12 @@ h3 {
 }
 
 /* needed to for multistep form */
-#msform fieldset {
+.page {
 	/*stacking fieldsets above each other*/
 	position: relative;
 }
 
 /*Hide all except first fieldset*/
-#msform fieldset:not(:first-of-type) {
+.page:not(:first-of-type) {
 	display: none;
 }

@@ -100,12 +100,18 @@ $("#ownedSearchResultsList").on("click", ".list-group-item", function(){
  */
 
 //jQuery time
-var current_fs, next_fs, previous_fs; //fieldsets
+var current_fs, next_fs, previous_fs; // fieldsets (.page in our newtradeform.pug)
 var left, opacity, scale; //fieldset properties which we will animate
 var animating; //flag to prevent quick multi-click glitches
 
-$("#nextButton").click(function(){
-	if(animating) return false;
+$(".nextButton").click(function(){
+
+	console.log("click next");
+
+	if(animating) {
+		console.log("return from click next");
+		return false;
+	}
 	animating = true;
 	
 	current_fs = $(this).parent().parent().parent();
@@ -142,12 +148,18 @@ $("#nextButton").click(function(){
 	});
 });
 
-$("#prevButton").click(function(){
+$(".prevButton").click(function(){
+
+	console.log("click previous");
+
 	if(animating) return false;
 	animating = true;
 	
 	current_fs = $(this).parent().parent().parent();
 	previous_fs = current_fs.prev();
+
+	// //de-activate current step on progressbar
+	// $("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
 	
 	//show the previous fieldset
 	previous_fs.show(); 

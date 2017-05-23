@@ -56,16 +56,12 @@
 	margin-top:3vh;
 }
 
-#nextButton, #prevButton {
+.nextButton, .prevButton, .btn:focus, .btn:focus:active {
 	background-color: rgb(253, 206, 48);
 	border-color: rgb(253, 206, 48);
 	border-radius:0;
-}
-
-/* remove shadow when clicking on button */
-.btn:focus, .btn:focus:active {
-  outline: none;
-  box-shadow:none
+	outline: none;
+  	box-shadow:none;
 }
 
 h1 {

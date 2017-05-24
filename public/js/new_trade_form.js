@@ -21,6 +21,10 @@ $('[data-popup-open]').on('click', function(e)  {
     $('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
 
     e.preventDefault();
+
+    // start carousel
+    $('.carousel').carousel()
+
 });
 
 // close the pop-up using the button on the top right corner

@@ -189,3 +189,7 @@ $(".prevButton").click(function(){
 		easing: 'easeInOutBack'
 	});
 });
+
+$('.right').click(function(){
+	$('.carousel').carousel('next');
+});

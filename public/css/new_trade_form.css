@@ -119,3 +119,11 @@ h3 {
 .page:not(:first-of-type) {
 	display: none;
 }
+
+.carousel-indicators li {
+    border-color: #979797;
+}
+
+.carousel-indicators .active {
+    background-color: #979797;
+}

@@ -115,3 +115,9 @@ $(".nextButton").click(function(){
 $(".prevButton").click(function(){
 	$('.carousel').carousel('prev');
 });
+
+$('.carousel-indicators li').click(function(){
+    var number = Number($(this).attr('data-slide-to'));
+    console.log(number);
+    $('.carousel').carousel(number);
+});

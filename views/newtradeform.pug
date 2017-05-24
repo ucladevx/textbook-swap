@@ -27,6 +27,14 @@
                     .item
                         a.popup-close(data-popup-close='popup-1', href='#') x
                         h3 NEW TRADE (confirm book)
+                        .row
+                            #ownedBookInfo.col-md-6
+                                h4 Confirm book!
+                                img(src="", alt='Card image cap', id="ownedBookImg")
+                            .col-md-6
+                                h4(id="ownedBookTitle")
+                                h4(id="ownedBookAuthor")
+                                h4(id="ownedBookIsbn")
                         div(class = "row" id="transitionButtonRow")
                             div(class = "col-sm-3 col-sm-offset-3 text-center")
                                 button(class="btn btn-primary prevButton" type="button") Previous

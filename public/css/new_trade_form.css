@@ -116,3 +116,9 @@ h3 {
 .carousel-indicators .active {
     background-color: #979797;
 }
+
+/* Image for owned book */
+#ownedBookImg {
+	height: 60%;
+	width: 44%;
+}

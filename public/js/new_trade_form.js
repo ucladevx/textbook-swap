@@ -163,20 +163,26 @@ $('.carousel-indicators li').click(function(){
     if (slideFrom == 0 && slideTo == 1) {
     	// get the book that the user previously selected
     	var selectedOwnedBook = $("li.highlight-owned.list-group-item");
-
+    	// get all info needed for the book
     	if (selectedOwnedBook.length) {
+    		// info from the tags
     		var book_id = selectedOwnedBook.attr("id");
 			var title = selectedOwnedBook.attr("data-title");  
 			var author = selectedOwnedBook.attr("data-author");
 			var isbn = selectedOwnedBook.attr("data-isbn");
 			var img_url = selectedOwnedBook.attr("data-img_url");
 
-			console.log(book_id);
-			console.log(title);
-			console.log(author);
-			console.log(isbn);
-			console.log(img_url);
+			// TODO: get the classes and professors associated with the book
+
+			// send the book info values to the front-end (html)
+
+			// TODO: figure out how to incorporate the img_url
+			document.getElementById("ownedBookImg").src = img_url;
+			document.getElementById("ownedBookTitle").innerHTML = "Title: " + title;
+			document.getElementById("ownedBookAuthor").innerHTML = "Author: " + author;
+			document.getElementById("ownedBookIsbn").innerHTML = "ISBN: " + isbn;
     	}
+
     }
 
 });

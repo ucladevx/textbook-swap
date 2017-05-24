@@ -71,7 +71,7 @@ $('[data-popup-open]').on('click', function(e)  {
 
 	// load book info
 	$.ajax({url: "/api/book_info/get_pair_book_info",
-		data: { id1: 1, id2: 4 },
+		data: { id1: 1, id2: 10 },
 		success: function(response){
 	 		if(response.status === 0){
 				$("body").append("<div class=\"popup\" data-popup=\"" 
@@ -90,7 +90,7 @@ $('[data-popup-open]').on('click', function(e)  {
 				+ "ISBN: " + response.book1[0].isbn + "<br>"
 				+ "<img src=\"" + response.book1[0].img_url + "\"> <br>" 
 				+ "</p>"
-				+ "</div>"
+				+ "</div>" //close col
 
 				+ "<div class=\"col-xs-6 text-center\">"
 				+ "<p>"
@@ -99,10 +99,21 @@ $('[data-popup-open]').on('click', function(e)  {
 				+ "ISBN: " + response.book2[0].isbn + "<br>"
 				+ "<img src=\"" + response.book2[0].img_url + "\"> <br>"
 				+ "</p>"
-				+ "</div>"
-				+ "</div>"
+				+ "</div>" //close col
+				+ "</div>" //close row
 
-				+ "</div></div>");
+				+ "<div class=\"row\">"
+				+ "<div class=\"col-xs-4\"></div>"
+				+ "<div class=\"col-xs-2 text-center\">"
+				+ "<a class=\"btn accept-trade\">Accept</a>"
+				+ "</div>" //close col
+				+ "<div class=\"col-xs-2 text-center\">"
+				+ "<a class=\"btn reject-trade\">Reject</a>"
+				+ "</div>" //close col
+				+ "<div class=\"col-xs-4\"></div>"
+				+ "</div>" //close row
+
+				+ "</div></div>"); //close popup-inner and popup
 			    
 			    $('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
 

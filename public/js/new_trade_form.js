@@ -193,3 +193,7 @@ $(".prevButton").click(function(){
 $('.right').click(function(){
 	$('.carousel').carousel('next');
 });
+
+$('.left').click(function(){
+    $('.carousel').carousel('prev');
+});

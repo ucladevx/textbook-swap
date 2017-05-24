@@ -1,6 +1,6 @@
 .popup(data-popup='popup-1')
     .popup-inner
-        #myCarousel.carousel.slide(data-ride='carousel')
+        #myCarousel.carousel.slide(data-ride='carousel' data-interval="false")
             // Indicators
             ol.carousel-indicators
                 li.active(data-target='#myCarousel', data-slide-to=0)
@@ -25,7 +25,7 @@
                         div(class = "col-lg-12 text-center")
                             button(class="btn btn-primary nextButton" type="button") Next
                 .item
-                    a.popup-close(data-popup-close='popup-2', href='#') x
+                    a.popup-close(data-popup-close='popup-1', href='#') x
                     h3 NEW TRADE (confirm book)
                     div(class = "row" id="transitionButtonRow")
                         div(class = "col-sm-3 col-sm-offset-3 text-center")
@@ -33,7 +33,7 @@
                         div(class = "col-sm-3 text-center")
                             button(class="btn btn-primary nextButton" type="button") Next
                 .item
-                    a.popup-close(data-popup-close='popup-3', href='#') x
+                    a.popup-close(data-popup-close='popup-1', href='#') x
                     h3 NEW TRADE (select wanted books)
                     div(class = "row" id="transitionButtonRow")
                         div(class = "col-sm-3 col-sm-offset-3 text-center")
@@ -41,7 +41,7 @@
                         div(class = "col-sm-3 text-center")
                             button(class="btn btn-primary nextButton" type="button") Next
                 .item
-                    a.popup-close(data-popup-close='popup-4', href='#') x
+                    a.popup-close(data-popup-close='popup-1', href='#') x
                     h3 NEW TRADE (confirm trade)
                     div(class = "row" id="transitionButtonRow")
                         div(class = "col-sm-3 col-sm-offset-3 text-center")

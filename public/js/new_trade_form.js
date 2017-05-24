@@ -22,8 +22,23 @@ $('[data-popup-open]').on('click', function(e)  {
 
     e.preventDefault();
 
+    // center the popup
+    var w = $(window).width();
+	var h = $(window).height();
+	var d = $('.popup-inner');
+	var divW = $(d).width();
+	var divH = $(d).height();
+
+	d.css({ 'position': "absolute",
+		'top': (h/2)-(divH/2)+"px",
+		'left': (w/2)-(divW/2)+"px"
+	});
+
     // start carousel
-    $('.carousel').carousel()
+    $('.carousel').carousel({
+    	pause: true,
+    	interval: false
+	});
 
 });
 
@@ -102,11 +117,6 @@ $("#ownedSearchResultsList").on("click", ".list-group-item", function(){
 /*
  * Multistep form with progress bar
  */
-
-//jQuery time
-var current_fs, next_fs, previous_fs; // fieldsets (.page in our newtradeform.pug)
-var left, opacity, scale; //fieldset properties which we will animate
-var animating; //flag to prevent quick multi-click glitches
 
 $(".nextButton").click(function(){
 	$('.carousel').carousel('next');

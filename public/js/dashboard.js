@@ -70,22 +70,38 @@ $('[data-popup-open]').on('click', function(e)  {
     var targeted_popup_class = jQuery(this).attr('data-popup-open');
 
 	// load book info
-	$.ajax({url: "/api/book_info/get_book_info",
-		data: { id: 1 },
+	$.ajax({url: "/api/book_info/get_pair_book_info",
+		data: { id1: 1, id2: 4 },
 		success: function(response){
 	 		if(response.status === 0){
-				console.log(response);
 				$("body").append("<div class=\"popup\" data-popup=\"" 
 				+ targeted_popup_class
 				+ "\"><div class=\"popup-inner\">"
 				+ "<a class=\"popup-close\" data-popup-close=\"" + targeted_popup_class
 				+ "\" href=\"\">x</a>" 
-				+ "<h3>"
-				+ "Title: " + response.data[0].title + "<br>"
-				+ "Author: " + response.data[0].author + "<br>"
-				+ "ISBN: " + response.data[0].isbn + "<br>"
-				+ "<img src=\"" + response.data[0].img_url + "\">"
-				+ "</h3>"
+				
+				+ "<div class=\"row text-center\"><h4>Matched Trade</h4></div>"
+
+				+ "<div class=\"row\">"
+				+ "<div class=\"col-xs-6 text-center\">"
+				+ "<p>"
+				+ "Title: " + response.book1[0].title + "<br>"
+				+ "Author: " + response.book1[0].author + "<br>"
+				+ "ISBN: " + response.book1[0].isbn + "<br>"
+				+ "<img src=\"" + response.book1[0].img_url + "\"> <br>" 
+				+ "</p>"
+				+ "</div>"
+
+				+ "<div class=\"col-xs-6 text-center\">"
+				+ "<p>"
+				+ "Title: " + response.book2[0].title + "<br>"
+				+ "Author: " + response.book2[0].author + "<br>"
+				+ "ISBN: " + response.book2[0].isbn + "<br>"
+				+ "<img src=\"" + response.book2[0].img_url + "\"> <br>"
+				+ "</p>"
+				+ "</div>"
+				+ "</div>"
+
 				+ "</div></div>");
 			    
 			    $('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
@@ -106,7 +122,6 @@ $('[data-popup-open]').on('click', function(e)  {
 			else if(response.status === 2)
 				console.log('db query error');
 		},
-		async: false
 	});
 
     e.preventDefault();

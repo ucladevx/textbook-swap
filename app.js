@@ -103,6 +103,7 @@ app.get('/api/search/search_textbooks', textbookSearchController.search_textbook
 
 // Book Info
 app.get('/api/book_info/get_book_info', bookInfoController.get_book_info);
+app.get('/api/book_info/get_pair_book_info', bookInfoController.get_pair_book_info);
 
 /*
  * Tests

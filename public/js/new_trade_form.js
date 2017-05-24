@@ -17,6 +17,9 @@ $('[data-popup-open]').on('click', function(e)  {
 	// new pop-up, so reset form input from previous instance of the pop-up
 	resetFormInput();
 
+	// start at the first popup screen
+	$('.carousel').carousel(0);
+
     var targeted_popup_class = jQuery(this).attr('data-popup-open');
     $('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
 
@@ -121,12 +124,13 @@ $("#ownedInput").keyup(function() {
 // after selecting item from the search results, keep it highlighted
 $("#ownedSearchResultsList").on("click", ".list-group-item", function(){
         // highlight the selected results list entry
-        $('.highlight').removeClass('highlight');
-        $(this).addClass('highlight');
+        $('.highlight-owned').removeClass('highlight-owned');
+        $(this).addClass('highlight-owned');
         console.log("selected element");
 
         // get the book_id from tags and corresponding info on the book
-
+		var listedBook = this;
+		var book_id = listedBook.id;
 });
 
 /*
@@ -145,4 +149,35 @@ $('.carousel-indicators li').click(function(){
     var number = Number($(this).attr('data-slide-to'));
     console.log(number);
     $('.carousel').carousel(number);
+});
+
+/*
+ * Code needed for carousel transitions
+ */
+
+ $("#myCarousel").on('slide.bs.carousel',function(e){
+ 	// figure out when slides we are transitioning between
+    var slideFrom = $(this).find('.active').index();
+    var slideTo = $(e.relatedTarget).index();
+    console.log(slideFrom+' => '+slideTo);
+
+    // distinguish what to do in each case
+    // user selected which book they want to offer
+    if (slideFrom == 0 && slideTo == 1) {
+    	// get the book that the user previously selected
+    	var selectedOwnedBook = $("li.highlight-owned.list-group-item");
+
+    	if (selectedOwnedBook.length) {
+    		var book_id = selectedOwnedBook.attr("id");
+			var title = selectedOwnedBook.attr("data-title");  
+			var author = selectedOwnedBook.attr("data-author");
+			var isbn = selectedOwnedBook.attr("data-isbn");
+
+			console.log(book_id);
+			console.log(title);
+			console.log(author);
+			console.log(isbn);
+    	}
+    }
+
 });

@@ -8,13 +8,12 @@
 #searchResults {
     margin-left:5vh;
     margin-right:5vh;
-
 }
 
 /* list of entries from search query results */
 #ownedSearchResultsList {
 	background-color: rgb(254, 254, 254);
-	height: 18vh;
+	height: 24vh;
 	overflow-y: scroll;
 	margin-top: 0;
   	margin-bottom: 0;
@@ -48,7 +47,7 @@
 }
 
 /* hovering over search result item or after clicking it */
-.list-group-item:hover, .highlight {
+.list-group-item:hover, .highlight-owned {
 	background-color: rgb(242, 242, 242); /* or whatever color you'd like */
 }
 

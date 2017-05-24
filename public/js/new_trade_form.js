@@ -63,6 +63,21 @@ $(".popup-inner").click(function(e){
 	e.stopPropagation();
 });
 
+// move the popup to the middle when resizing
+$(window).bind('resize', function() {
+	// center the popup
+    var w = $(window).width();
+	var h = $(window).height();
+	var d = $('.popup-inner');
+	var divW = $(d).width();
+	var divH = $(d).height();
+
+	d.css({ 'position': "absolute",
+		'top': (h/2)-(divH/2)+"px",
+		'left': (w/2)-(divW/2)+"px"
+	});
+});
+
 /* 
  * Searching and adding entries to the owned books list
  */ 

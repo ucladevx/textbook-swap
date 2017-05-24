@@ -105,6 +105,11 @@ h3 {
 	color: rgb(149, 149, 149);
 }
 
+/* Indicators (circles) on the bottom of pop up */
+.carousel-indicators {
+	text-align: center;
+}
+
 .carousel-indicators li {
     border-color: #979797;
 }

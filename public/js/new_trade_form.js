@@ -105,8 +105,10 @@ $("#ownedInput").keyup(function() {
 						var author = searchResults[i]["author"];
 						var isbn = searchResults[i]["isbn"];
 						var book_id = searchResults[i]["book_id"];
+						var img_url = searchResults[i]["img_url"];
+
 						// display each line of the search result
-						$("#ownedSearchResultsList").append('<li class="list-group-item" id="' + book_id + '" data-title="' + title + '" data-author="' + author + '" data-isbn="' + isbn +'">' + title + ', ' + author +'</li>');
+						$("#ownedSearchResultsList").append('<li class="list-group-item" id="' + book_id + '" data-title="' + title + '" data-author="' + author + '" data-isbn="' + isbn + '" data-img_url="' + img_url +'">' + title + ', ' + author + '</li>');
 					}
 				}
 			}
@@ -126,11 +128,6 @@ $("#ownedSearchResultsList").on("click", ".list-group-item", function(){
         // highlight the selected results list entry
         $('.highlight-owned').removeClass('highlight-owned');
         $(this).addClass('highlight-owned');
-        console.log("selected element");
-
-        // get the book_id from tags and corresponding info on the book
-		var listedBook = this;
-		var book_id = listedBook.id;
 });
 
 /*
@@ -172,11 +169,13 @@ $('.carousel-indicators li').click(function(){
 			var title = selectedOwnedBook.attr("data-title");  
 			var author = selectedOwnedBook.attr("data-author");
 			var isbn = selectedOwnedBook.attr("data-isbn");
+			var img_url = selectedOwnedBook.attr("data-img_url");
 
 			console.log(book_id);
 			console.log(title);
 			console.log(author);
 			console.log(isbn);
+			console.log(img_url);
     	}
     }
 

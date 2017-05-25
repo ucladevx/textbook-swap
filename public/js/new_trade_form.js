@@ -126,7 +126,7 @@ $("#ownedInput").keyup(function() {
 		// input too small to query so clear the search results list
 		$("#ownedSearchResultsList").empty();
 	}
-})
+});
 
 // after selecting item from the search results, keep it highlighted
 $("#ownedSearchResultsList, #wantedSearchResultsList").on("click", ".list-group-item", function(){
@@ -175,7 +175,7 @@ $("#wantedInput").keyup(function() {
 		// input too small to query so clear the search results list
 		$("#wantedSearchResultsList").empty();
 	}
-})
+});
 
 // add search result to wanted books list that use has selected
 $("#wantedSearchResultsList").on("click", ".list-group-item", function(){
@@ -188,15 +188,13 @@ $("#wantedSearchResultsList").on("click", ".list-group-item", function(){
 	var img_url = searchResult.dataset.img_url;
 
 	// add new selected item to wanted list
-	$("#wantedBooksList").append('<li class="list-group-item" id="' + book_id + '" data-title="' + title + '" data-author="' + author + '" data-isbn="' + isbn + '" data-img_url="' + img_url +'">' + "<a class=\"closeButton\" href=\"#\">x</a>" + "<img src=" + img_url + "> " + '</li>');
+	$("#wantedBooksList").append('<li class="list-group-item" id="' + book_id + '" data-title="' + title + '" data-author="' + author + '" data-isbn="' + isbn + '" data-img_url="' + img_url + '">' + "<a class=\"closeButton\" href=\"#\">x</a>" + "<img src=" + img_url + "> " + '</li>');
 
-})
+});
 
 // remove the book from the wanted list
-$("a.closeButton").click(function(){
-	console.log("click close");
-
-	var wantedBook = this.parent();
+$("#wantedBooksList").on("click", ".closeButton", function(){
+	var wantedBook = $(this).parent();
 	wantedBook.remove();
 });
 

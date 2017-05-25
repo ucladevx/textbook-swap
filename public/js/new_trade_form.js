@@ -188,9 +188,17 @@ $("#wantedSearchResultsList").on("click", ".list-group-item", function(){
 	var img_url = searchResult.dataset.img_url;
 
 	// add new selected item to wanted list
-	$("#wantedBooksList").append('<li class="list-group-item" id="' + book_id + '" data-title="' + title + '" data-author="' + author + '" data-isbn="' + isbn + '" data-img_url="' + img_url +'">' + "<img src=" + img_url + "> " + '</li>');
+	$("#wantedBooksList").append('<li class="list-group-item" id="' + book_id + '" data-title="' + title + '" data-author="' + author + '" data-isbn="' + isbn + '" data-img_url="' + img_url +'">' + "<a class=\"closeButton\" href=\"#\">x</a>" + "<img src=" + img_url + "> " + '</li>');
 
 })
+
+// remove the book from the wanted list
+$("a.closeButton").click(function(){
+	console.log("click close");
+
+	var wantedBook = this.parent();
+	wantedBook.remove();
+});
 
 /*
  * Multistep form with progress bar

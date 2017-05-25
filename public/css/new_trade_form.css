@@ -45,7 +45,7 @@
 	width: 12px;  
 }
 
-#ownedSearchResultsList::-webkit-scrollbar-thumb {
+#ownedSearchResultsList::-webkit-scrollbar-thumb, #wantedSearchResultsList::-webkit-scrollbar-thumb {
 	border-radius: 5px;
 	background-color: rgb(146, 214, 225);
 	-webkit-box-shadow: inset 0 0 8px rgba(0,0,0,.2);
@@ -154,7 +154,38 @@ h3 {
 	height: 30vh;
 }
 
+/* scale image for selected wanted books */
 #wantedBooksList.img {
 	height: 40%;
 	width: 40%;
 }
+
+/* close button */
+/*
+.closeButton {
+    width:10px;
+    height:10px;
+    padding-top:10px;
+    display:inline-block;
+    position:absolute;
+    top:0px;
+    right:0px;
+    transition:ease 0.25s all;
+    -webkit-transform:translate(50%, -50%);
+    transform:translate(50%, -50%);
+    border-radius:1000px;
+    background:rgb(24,166,181);
+    font-family:Arial, Sans-Serif;
+    font-size:10px;
+    text-align:center;
+    line-height:100%;
+    color:#fff;
+}
+ 
+.closeButton:hover {
+    -webkit-transform:translate(50%, -50%) rotate(180deg);
+    transform:translate(50%, -50%) rotate(180deg);
+    background:rgba(0,0,0,1);
+    text-decoration:none;
+}
+*/

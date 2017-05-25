@@ -10,6 +10,11 @@
     margin-right:5vh;
 }
 
+/* Message on the top of the slide */
+#slideMessage {
+	padding-left: 3vh;
+}
+
 /* list of entries from search query results */
 #ownedSearchResultsList {
 	background-color: rgb(254, 254, 254);
@@ -121,8 +126,8 @@ h3 {
 
 /* Image for owned book */
 #ownedBookImg {
-	height: 60%;
-	width: 44%;
+	height: 70%;
+	width: 70%;
 }
 
 .ownedBookText {

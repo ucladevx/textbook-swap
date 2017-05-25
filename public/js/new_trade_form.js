@@ -175,33 +175,30 @@ $('.carousel-indicators li').click(function(){
 			var profs = "";
 			var classes = "";
 
-			// TODO: get the classes and professors associated with the book
+			// get the classes and professors associated with the book
 			$.get("/api/book_to_class/get_prof_class_info", { book_id: book_id }, function(object) {
-			// get the search results
-			var profClassInfo = object.data;
+				// get professor and class info for the owned book
+				var profClassInfo = object.data;
+				// successful query
+				if (object.status == 0) {
+					// create strings of professors and classes 
+					for (var i = 0; i < profClassInfo.length; i++) {
+						profs = profs + profClassInfo[i]["professor_name"] + ", ";
+						classes = classes + profClassInfo[i]["class_name"] + ", ";
+					}
+					// get rid of extraneous ", " at the end
+					profs = profs.substring(0, profs.length - 2);
+					classes = classes.substring(0, classes.length - 2);
 
-			console.log(profClassInfo);
-
-			// successful query
-			if (object.status == 0) {
-				for (var i = 0; i < profClassInfo.length; i++) {
-					profs = profs + profClassInfo[i]["professor_name"] + ", ";
-					classes = classes + profClassInfo[i]["class_name"] + ", ";
+					// send profs and classes info to front-end
+					document.getElementById("ownedBookClasses").innerHTML = "Class: " + classes;
+					document.getElementById("ownedBookProfs").innerHTML = "Professor: " + profs;
 				}
-				// get of extraneous ", " at the end
-				profs = profs.substring(0, profs.length - 2);
-				classes = classes.substring(0, classes.length - 2);
-
-				// send profs and classes to front-end
-				document.getElementById("ownedBookClasses").innerHTML = "Class: " + classes;
-				document.getElementById("ownedBookProfs").innerHTML = "Professor: " + profs;
-			}
-			// error when querying
-			else if (object.status === 2)
-				console.log('db query error');
+				// error when querying
+				else if (object.status === 2)
+					console.log('db query error');
 			});
 			// send the book info values to the front-end (html)
-			// TODO: figure out how to incorporate the img_url
 			document.getElementById("ownedBookImg").src = img_url;
 			document.getElementById("ownedBookTitle").innerHTML = "Title: " + title;
 			document.getElementById("ownedBookAuthor").innerHTML = "Author: " + author;

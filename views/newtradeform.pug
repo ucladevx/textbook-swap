@@ -46,14 +46,14 @@
                         a.popup-close(data-popup-close='popup-1', href='#') x
                         h3 NEW TRADE (select wanted books)
                         div(class="row" id="forms")
-                            div(class="col-lg-8" id="wantedForm")
-                                label Select the books you want to add to your trades.
+                            h5#slideMessage Select the books you want to add to your trades.
+                            div(class="col-md-8" id="wantedForm")
                                 div(class="input-group")
                                     input(class="form-control", type='text', id="wantedInput", placeholder='Search by title, professor, or class' aria-describedby="wantedInputAddon")
                                     span(class="input-group-addon" id="wantedInputAddon") #[span(class="glyphicon glyphicon-search")]
-                        div(class="row" id="searchResults")
-                            div(class="col-lg-8" id="wantedSearchResultsBox")
                                 ul(id = "wantedSearchResultsList").list-group
+                            div(class="col-md-4" id="wantedBooksDisplay")
+                                ul(id = "wantedBooksList").list-group
                         div(class = "row" id="transitionButtonRow")
                             div(class = "col-sm-3 col-sm-offset-3 text-center")
                                 button(class="btn btn-primary prevButton" type="button") Previous

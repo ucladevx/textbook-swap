@@ -124,11 +124,66 @@ $("#ownedInput").keyup(function() {
 })
 
 // after selecting item from the search results, keep it highlighted
-$("#ownedSearchResultsList").on("click", ".list-group-item", function(){
+$("#ownedSearchResultsList, #wantedSearchResultsList").on("click", ".list-group-item", function(){
         // highlight the selected results list entry
         $('.highlight-owned').removeClass('highlight-owned');
         $(this).addClass('highlight-owned');
 });
+
+/* 
+ * Searching and adding entries to the wanted books list
+ */ 
+
+ // get input from search box as user types, character by character and query the database for textbooks
+$("#wantedInput").keyup(function() {
+	var wantedInput = $("#wantedInput").val();
+	// only query for results if the input is at least three characters long
+	if (wantedInput.length >= 3) {
+		$.get("/api/search/search_textbooks", { search_input: wantedInput }, function(object) {
+			// get the search results
+			var searchResults = object.data;
+
+			// successful query
+			if (object.status == 0) {
+				// new search results found, so display them
+				if (searchResults.length > 0) {
+					$("#wantedSearchResultsList").empty();
+					// display all of the search results on the screen
+					for (var i = 0; i < searchResults.length; i++) {
+						var title = searchResults[i]["title"];
+						var author = searchResults[i]["author"];
+						var isbn = searchResults[i]["isbn"];
+						var book_id = searchResults[i]["book_id"];
+						// display each line of the search result
+						$("#wantedSearchResultsList").append('<li class="list-group-item" id="' + book_id + '" data-title="' + title + '" data-author="' + author + '" data-isbn="' + isbn +'">' + title + ', ' + author +'</li>');
+					}
+				}
+			}
+			// error when querying
+			else if (object.status === 2)
+				console.log('db query error');
+		});
+	}
+	else {
+		// input too small to query so clear the search results list
+		$("#wantedSearchResultsList").empty();
+	}
+})
+
+// add search result to wanted books list that use has selected
+$("#wantedSearchResultsList").on("click", ".list-group-item", function(){
+	// get data from list element tags
+	var searchResult = this;
+	var book_id = searchResult.id;
+	var title = searchResult.dataset.title;  
+	var author = searchResult.dataset.author;
+	var isbn = searchResult.dataset.isbn;
+	var img_url = searchResult.dataset.img_url;
+
+	// add new selected item to wanted list
+	$("#wantedBooksList").append('<li class="list-group-item" id="' + book_id + '" data-title="' + title + '" data-author="' + author + '" data-isbn="' + isbn + '" data-img_url="' + img_url +'">' + title + ', ' + author + '</li>');
+
+})
 
 /*
  * Multistep form with progress bar

@@ -16,7 +16,7 @@
 }
 
 /* list of entries from search query results */
-#ownedSearchResultsList, #wantedSearchResultsList {
+#ownedSearchResultsList, #wantedSearchResultsList, #wantedBooksList {
 	background-color: rgb(254, 254, 254);
 	height: 24vh;
 	overflow-y: scroll;
@@ -45,9 +45,15 @@
 	width: 12px;  
 }
 
-::-webkit-scrollbar-thumb {
+#ownedSearchResultsList::-webkit-scrollbar-thumb {
 	border-radius: 5px;
 	background-color: rgb(146, 214, 225);
+	-webkit-box-shadow: inset 0 0 8px rgba(0,0,0,.2);
+}
+
+#wantedBooksList::-webkit-scrollbar-thumb {
+	border-radius: 5px;
+	background-color: rgb(242, 242, 242);
 	-webkit-box-shadow: inset 0 0 8px rgba(0,0,0,.2);
 }
 
@@ -140,4 +146,9 @@ h3 {
 	padding-bottom: 5vh;
 	margin-right: 5vh;
 	margin-left: 2vh;
+}
+
+/* Select wanted books slide */
+#wantedBooksList {
+	height: 30vh;
 }

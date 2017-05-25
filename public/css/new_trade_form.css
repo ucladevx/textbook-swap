@@ -117,8 +117,22 @@ h3 {
     background-color: #979797;
 }
 
+/* Owned book slide */ 
+
 /* Image for owned book */
 #ownedBookImg {
 	height: 60%;
 	width: 44%;
+}
+
+.ownedBookText {
+	padding-left:5vh;
+}
+
+.ownedBookWrapper {
+	background-color: rgb(236,236,236);
+	padding-top: 5vh;
+	padding-bottom: 5vh;
+	margin-right: 5vh;
+	margin-left: 2vh;
 }

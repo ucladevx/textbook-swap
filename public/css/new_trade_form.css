@@ -161,15 +161,24 @@ h3 {
 }
 
 /* close button */
-/*
-.closeButton {
+
+.closeButton{
+	width:20px;
+    height:20px;
+    float: right;
+    color: #fff;
+    border-radius:100%;
+    background: rgb(24,166,181);
+    font-size: 15px;
+    text-align:center; 
+}
+
+
+/*.closeButton {
     width:10px;
     height:10px;
-    padding-top:10px;
-    display:inline-block;
-    position:absolute;
-    top:0px;
-    right:0px;
+    margin-top:5px;
+    margin-right: 5px;
     transition:ease 0.25s all;
     -webkit-transform:translate(50%, -50%);
     transform:translate(50%, -50%);
@@ -180,12 +189,4 @@ h3 {
     text-align:center;
     line-height:100%;
     color:#fff;
-}
- 
-.closeButton:hover {
-    -webkit-transform:translate(50%, -50%) rotate(180deg);
-    transform:translate(50%, -50%) rotate(180deg);
-    background:rgba(0,0,0,1);
-    text-decoration:none;
-}
-*/
+}*/

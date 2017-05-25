@@ -4,8 +4,13 @@
 
 /* Helper function to reset pop-up form input */
 var resetFormInput = function() {
+	// clear input and search results for owned books (slide 1)
 	document.getElementById("ownedInput").value = "";
 	$("#ownedSearchResultsList").empty();
+	// clear input and search results for owned books (slide 3)
+	document.getElementById("wantedInput").value = "";
+	$("#wantedSearchResultsList").empty();
+	$("#wantedBooksList").empty();
 }
 
 /*
@@ -154,8 +159,10 @@ $("#wantedInput").keyup(function() {
 						var author = searchResults[i]["author"];
 						var isbn = searchResults[i]["isbn"];
 						var book_id = searchResults[i]["book_id"];
+						var img_url = searchResults[i]["img_url"];
+
 						// display each line of the search result
-						$("#wantedSearchResultsList").append('<li class="list-group-item" id="' + book_id + '" data-title="' + title + '" data-author="' + author + '" data-isbn="' + isbn +'">' + title + ', ' + author +'</li>');
+						$("#wantedSearchResultsList").append('<li class="list-group-item" id="' + book_id + '" data-title="' + title + '" data-author="' + author + '" data-isbn="' + isbn + '" data-img_url="' + img_url +'">' + title + ', ' + author + '</li>');
 					}
 				}
 			}
@@ -181,7 +188,7 @@ $("#wantedSearchResultsList").on("click", ".list-group-item", function(){
 	var img_url = searchResult.dataset.img_url;
 
 	// add new selected item to wanted list
-	$("#wantedBooksList").append('<li class="list-group-item" id="' + book_id + '" data-title="' + title + '" data-author="' + author + '" data-isbn="' + isbn + '" data-img_url="' + img_url +'">' + title + ', ' + author + '</li>');
+	$("#wantedBooksList").append('<li class="list-group-item" id="' + book_id + '" data-title="' + title + '" data-author="' + author + '" data-isbn="' + isbn + '" data-img_url="' + img_url +'">' + "<img src=" + img_url + "> " + '</li>');
 
 })
 

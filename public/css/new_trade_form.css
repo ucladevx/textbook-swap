@@ -106,6 +106,7 @@ h3 {
     box-shadow:0px 2px 6px rgba(0,0,0,1);
     border-radius:3px;
     background: rgb(254, 254, 254);
+    overflow:hidden;
 }
 
 /* Close Button */
@@ -151,4 +152,9 @@ h3 {
 /* Select wanted books slide */
 #wantedBooksList {
 	height: 30vh;
+}
+
+#wantedBooksList.img {
+	height: 40%;
+	width: 40%;
 }

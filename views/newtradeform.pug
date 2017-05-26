@@ -61,7 +61,22 @@
                                 button(class="btn btn-primary nextButton" type="button") Next
                     .item
                         a.popup-close(data-popup-close='popup-1', href='#') x
-                        h3 NEW TRADE (confirm trade)
+                        h3 NEW TRADE 
+                        h5#slideMessage Confirm trades!
+                        .row.confirmWrapper
+                            .col-md-6
+                                h5.confirmSubtitle OFFERING
+                                .col-md-6
+                                    img(src="", alt='Card image cap', id="confirmOwnedBookImg")
+                                .col-md-6.confirmOwnedBookText
+                                    h6(id="confirmOwnedBookTitle")
+                                    h6(id="confirmOwnedBookAuthor")
+                                    h6(id="confirmOwnedBookIsbn")
+                                    h6(id="confirmOwnedBookClasses")
+                                    h6(id="confirmOwnedBookProfs")
+                            .col-md-6.ownedBookText
+                                h5.confirmSubtitle TRADES
+                        div(class = "row" id="transitionButtonRow")
                         div(class = "row" id="transitionButtonRow")
                             div(class = "col-sm-3 col-sm-offset-3 text-center")
                                 button(class="btn btn-primary prevButton" type="button") Previous

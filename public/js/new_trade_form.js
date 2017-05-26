@@ -228,7 +228,7 @@ $('.carousel-indicators li').click(function(){
 
     // distinguish what to do in each case
     // user selected which book they want to offer
-    if (slideFrom == 0 && slideTo == 1) {
+    if ((slideFrom == 0 && slideTo == 1) || (slideFrom == 2 && slideTo == 3)) {
     	// get the book that the user previously selected
     	var selectedOwnedBook = $("li.highlight-owned.list-group-item");
     	// get all info needed for the book
@@ -260,7 +260,9 @@ $('.carousel-indicators li').click(function(){
 
 					// send profs and classes info to front-end
 					document.getElementById("ownedBookClasses").innerHTML = "Class: " + classes;
+					document.getElementById("confirmOwnedBookClasses").innerHTML = "Class: " + classes;
 					document.getElementById("ownedBookProfs").innerHTML = "Professor: " + profs;
+					document.getElementById("confirmOwnedBookProfs").innerHTML = "Professor: " + profs;
 				}
 				// error when querying
 				else if (object.status === 2)
@@ -268,10 +270,21 @@ $('.carousel-indicators li').click(function(){
 			});
 			// send the book info values to the front-end (html)
 			document.getElementById("ownedBookImg").src = img_url;
+			document.getElementById("confirmOwnedBookImg").src = img_url;
+
 			document.getElementById("ownedBookTitle").innerHTML = "Title: " + title;
+			document.getElementById("confirmOwnedBookTitle").innerHTML = "Title: " + title;
+
 			document.getElementById("ownedBookAuthor").innerHTML = "Author: " + author;
+			document.getElementById("confirmOwnedBookAuthor").innerHTML = "Author: " + author;
+
 			document.getElementById("ownedBookIsbn").innerHTML = "ISBN: " + isbn;
+			document.getElementById("confirmOwnedBookIsbn").innerHTML = "ISBN: " + isbn;
     	}
+
+    	// confirm the trade
+   		if (slideFrom == 2 && slideTo == 3) {
+   		}
 
     }
 

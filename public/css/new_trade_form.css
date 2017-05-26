@@ -122,11 +122,14 @@ h3 {
 }
 
 .carousel-indicators li {
-    border-color: #979797;
+    border-color: rgb(219, 219, 219);
+    background-color: rgb(219, 219, 219);
+    margin: 0px 2px;
 }
 
 .carousel-indicators .active {
-    background-color: #979797;
+    background-color: rgb(184, 184, 184);
+    margin: 0px 2px;
 }
 
 /* Owned book slide */ 
@@ -162,7 +165,7 @@ h3 {
 
 /* close button */
 
-.closeButton{
+.closeButton, .closeButton:hover {
 	width:20px;
     height:20px;
     float: right;
@@ -172,21 +175,3 @@ h3 {
     font-size: 15px;
     text-align:center; 
 }
-
-
-/*.closeButton {
-    width:10px;
-    height:10px;
-    margin-top:5px;
-    margin-right: 5px;
-    transition:ease 0.25s all;
-    -webkit-transform:translate(50%, -50%);
-    transform:translate(50%, -50%);
-    border-radius:1000px;
-    background:rgb(24,166,181);
-    font-family:Arial, Sans-Serif;
-    font-size:10px;
-    text-align:center;
-    line-height:100%;
-    color:#fff;
-}*/

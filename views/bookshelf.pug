@@ -3,49 +3,59 @@ html
     head
         meta(charset='utf-8')
         title Loops - Dashboard
+        script(src='https://code.jquery.com/jquery-3.2.1.min.js', crossorigin='anonymous')
         link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css', integrity='sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ', crossorigin='anonymous')
         link(rel='stylesheet' type="text/css" href="css/bookshelf.css")
-        script(src='https://code.jquery.com/jquery-3.1.1.slim.min.js', integrity='sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n', crossorigin='anonymous')
+        script(src="/assets/isotope.pkgd.min.js")
         script(src='https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js', integrity='sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb', crossorigin='anonymous')
-        script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js', integrity='sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn', crossorigin='anonymous')
-    body
-        .row
-            .card.col-md-4
-                img.card-img-top(src=books[0].img_url, alt='Card image cap')
-                .card-block
-                    h4.card-title #{books[0].title}
-                    h5.card-author #{books[0].author}
-            .card.col-md-4
-                img.card-img-top(src=books[0].img_url, alt='Card image cap')
-                .card-block
-                    h4.card-title #{books[0].title}
-                    h5.card-author #{books[0].author}
-            .card.col-md-4
-                img.card-img-top(src=books[1].img_url, alt='Card image cap')
-                .card-block
-                    h4.card-title #{books[1].title}
-                    h5.card-author #{books[1].author}
-        - for(var i = 2; i < books.length; i += 3){
-            .row
-                .card.col-md-4
-                    img.card-img-top(src=books[i].img_url, alt='Card image cap')
-                    .card-block
-                        h4.card-title #{books[i].title}
-                        h5.card-author #{books[i].author}
-                .card.col-md-4
-                    img.card-img-top(src=books[i+1].img_url, alt='Card image cap')
-                    .card-block
-                        h4.card-title #{books[i+1].title}
-                        h5.card-author #{books[i+1].author}
-                .card.col-md-4
-                    img.card-img-top(src=books[i+2].img_url, alt='Card image cap')
-                    .card-block
-                        h4.card-title #{books[i+2].title}
-                        h5.card-author #{books[i+2].author}
-
-        - }
-
-
-
+        script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js', integrity='sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn', crossorigin='anonymous') 
         script(src="/js/bookshelf.js")
+ 
+    body
+        h6 Hi Joe, welcome to Bookshelf
+        .filter-button-group.button-group(data-filter-group= "Status")
+            button.filter-button(data-filter='All') All
+            button.filter-button(data-filter='Requested') Requested
+            button.filter-button(data-filter='Matched') Matched
+            button.filter-button(data-filter='Rejected') Rejected
+         
+       
+        .grid
+            .row
+                .card.col-md-4.grid-item
+                    img.card-img-top(src='/images/green_plus.png', alt='Card image cap')
+                    .card-block
+                        h4.card-title Add book
+                .card.col-md-4.grid-item(data-filter='Requested')
+                    img.card-img-top(src=books[0].img_url, alt='Card image cap')
+                    .card-block
+                        h4.card-title #{books[0].title}
+                        h5.card-author #{books[0].author}
+                .card.col-md-4.grid-item(data-filter='Requested')
+                    img.card-img-top(src=books[1].img_url, alt='Card image cap')
+                    .card-block
+                        h4.card-title #{books[1].title}
+                        h5.card-author #{books[1].author}
+            - for(var i = 2; i < books.length; i += 3){
+                .row
+                    .card.col-md-4.grid-item(data-filter='Requested')
+                        img.card-img-top(src=books[i].img_url, alt='Card image cap')
+                        .card-block
+                            h4.card-title #{books[i].title}
+                            h5.card-author #{books[i].author}
+                    .card.col-md-4.grid-item(data-filter='Requested')
+                        img.card-img-top(src=books[i+1].img_url, alt='Card image cap')
+                        .card-block
+                            h4.card-title #{books[i+1].title}
+                            h5.card-author #{books[i+1].author}
+                    .card.col-md-4.grid-item(data-filter='Requested')
+                        img.card-img-top(src=books[i+2].img_url, alt='Card image cap')
+                        .card-block
+                            h4.card-title #{books[i+2].title}
+                            h5.card-author #{books[i+2].author}
+
+            - }
+
+
+
         script(src="/js/navbar.js")

@@ -9,15 +9,17 @@
 
 // });
 
-$(".body").click(function(e) {
-	console.log("grid click");
-});
+$(document).ready(function(){
+	$(".body").click(function(e) {
+		console.log("grid click");
+	});
 
-$(".filter-button").click(function () {
+	$(".filter-button").on('click', function () {
 		console.log("click recognized");
 		// var filterValue = button.getAttribute('data-filter');
 		// iso.arrange({ filter: filterValue });
 	});
+});
 
 // // filter items on button click
 // $('.filter-button-group').on( 'click', 'button', function() {

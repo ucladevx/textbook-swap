@@ -167,9 +167,8 @@ h3 {
 }
 
 /* scale image for selected wanted books */
-#wantedBooksList.img {
-	height: 40%;
-	width: 40%;
+#wantedBooksList img {
+	width: 20vh;
 }
 
 /* close/remove button for selected books */

@@ -3,6 +3,7 @@
  * Bookshelf.
  */
 
+const users = require('../../models/users');
 const owned_books = require('../../models/owned_books');
 const book_info = require('../../models/book_info');
 const error_codes = require('../../error_codes');
@@ -26,8 +27,13 @@ exports.index = function(req, res) {
                 console.error("Error querying database", error_status);
             }
             // return the info for all the books
-            console.log(books_data);
-            res.render('bookshelf', {status: error_status, books: books_data});
+            users.get_user_name(user_id, function(error_status, user_name) {
+                if (error_status) {
+                    console.error("Error querying database", error_status);
+                }
+                res.render('bookshelf', {status: error_status, books: books_data, username: user_name});
+            });
+            
         });
     });
 };

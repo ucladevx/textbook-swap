@@ -131,12 +131,20 @@ $("#ownedInput").keyup(function() {
 });
 
 // after selecting item from the search results, keep it highlighted
-$("#ownedSearchResultsList, #wantedSearchResultsList").on("click", ".list-group-item", function(){
+$("#ownedSearchResultsList").on("click", ".list-group-item", function(){
         // highlight the selected results list entry
         $('.highlight-owned').removeClass('highlight-owned');
         $(this).addClass('highlight-owned');
 
     	$('#pick_book_next').prop('disabled', false);
+});
+
+$("#wantedSearchResultsList").on("click", ".list-group-item", function(){
+    // highlight the selected results list entry
+    $('.highlight-owned').removeClass('highlight-wanted');
+    $(this).addClass('highlight-wanted');
+
+    $('#pick_book_next').prop('disabled', false);
 });
 
 /* 

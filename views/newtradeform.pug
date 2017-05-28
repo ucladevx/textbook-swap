@@ -52,8 +52,8 @@
                                     input(class="form-control", type='text', id="wantedInput", placeholder='Search by title, professor, or class' aria-describedby="wantedInputAddon")
                                     span(class="input-group-addon" id="wantedInputAddon") #[span(class="glyphicon glyphicon-search")]
                                 ul(id = "wantedSearchResultsList").list-group
-                            div(class="col-md-4" id="wantedBooksDisplay")
-                                ul(id = "wantedBooksList").list-group
+                            div(class="col-md-4, wantedBooksDisplay")
+                                ul(class = "wantedBooksList").list-group
                         div(class = "row" id="transitionButtonRow")
                             div(class = "col-sm-3 col-sm-offset-3 text-center")
                                 button(class="btn btn-primary prevButton" type="button") Previous
@@ -76,6 +76,8 @@
                                     h6(id="confirmOwnedBookProfs")
                             .col-md-6.ownedBookText
                                 h5.confirmSubtitle TRADES
+                                div(class="col-md-6, wantedBooksDisplay")
+                                    ul(class = "wantedBooksList").list-group
                         div(class = "row" id="transitionButtonRow")
                         div(class = "row" id="transitionButtonRow")
                             div(class = "col-sm-3 col-sm-offset-3 text-center")

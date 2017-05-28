@@ -10,7 +10,7 @@ var resetFormInput = function() {
 	// clear input and search results for owned books (slide 3)
 	document.getElementById("wantedInput").value = "";
 	$("#wantedSearchResultsList").empty();
-	$("#wantedBooksList").empty();
+	$(".wantedBooksList").empty();
 
     $('#pick_book_next').prop('disabled', true);
     $('#wanted_list_next').prop('disabled', true);
@@ -201,15 +201,15 @@ $("#wantedSearchResultsList").on("click", ".list-group-item", function(){
 	var img_url = searchResult.dataset.img_url;
 
 	// add new selected item to wanted list
-	$("#wantedBooksList").prepend('<li class="list-group-item" id="' + book_id + '" data-title="' + title + '" data-author="' + author + '" data-isbn="' + isbn + '" data-img_url="' + img_url + '">' + "<a class=\"closeButton\" href=\"#\">x</a>" + "<img src=" + img_url + "> " + '</li>');
+	$(".wantedBooksList").prepend('<li class="list-group-item" id="' + book_id + '" data-title="' + title + '" data-author="' + author + '" data-isbn="' + isbn + '" data-img_url="' + img_url + '">' + "<a class=\"closeButton\" href=\"#\">x</a>" + "<img src=" + img_url + "> " + '</li>');
 
 });
 
 // remove the book from the wanted list
-$("#wantedBooksList").on("click", ".closeButton", function(){
+$(".wantedBooksList").on("click", ".closeButton", function(){
 	var wantedBook = $(this).parent();
 	wantedBook.remove();
-    if ($('#wantedBooksList li').length == 0)
+    if ($('.wantedBooksList li').length == 0)
         $('#wanted_list_next').prop('disabled', true);
 });
 

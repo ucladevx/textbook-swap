@@ -13,6 +13,7 @@ var resetFormInput = function() {
 	$("#wantedBooksList").empty();
 
     $('#pick_book_next').prop('disabled', true);
+    $('#wanted_list_next').prop('disabled', true);
 }
 
 /*
@@ -144,7 +145,7 @@ $("#wantedSearchResultsList").on("click", ".list-group-item", function(){
     $('.highlight-owned').removeClass('highlight-wanted');
     $(this).addClass('highlight-wanted');
 
-    $('#pick_book_next').prop('disabled', false);
+    $('#wanted_list_next').prop('disabled', false);
 });
 
 /* 
@@ -200,7 +201,7 @@ $("#wantedSearchResultsList").on("click", ".list-group-item", function(){
 	var img_url = searchResult.dataset.img_url;
 
 	// add new selected item to wanted list
-	$("#wantedBooksList").append('<li class="list-group-item" id="' + book_id + '" data-title="' + title + '" data-author="' + author + '" data-isbn="' + isbn + '" data-img_url="' + img_url + '">' + "<a class=\"closeButton\" href=\"#\">x</a>" + "<img src=" + img_url + "> " + '</li>');
+	$("#wantedBooksList").prepend('<li class="list-group-item" id="' + book_id + '" data-title="' + title + '" data-author="' + author + '" data-isbn="' + isbn + '" data-img_url="' + img_url + '">' + "<a class=\"closeButton\" href=\"#\">x</a>" + "<img src=" + img_url + "> " + '</li>');
 
 });
 
@@ -208,6 +209,8 @@ $("#wantedSearchResultsList").on("click", ".list-group-item", function(){
 $("#wantedBooksList").on("click", ".closeButton", function(){
 	var wantedBook = $(this).parent();
 	wantedBook.remove();
+    if ($('#wantedBooksList li').length == 0)
+        $('#wanted_list_next').prop('disabled', true);
 });
 
 /*

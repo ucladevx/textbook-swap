@@ -11,6 +11,8 @@ var resetFormInput = function() {
 	document.getElementById("wantedInput").value = "";
 	$("#wantedSearchResultsList").empty();
 	$("#wantedBooksList").empty();
+
+    $('#pick_book_next').prop('disabled', true);
 }
 
 /*
@@ -133,6 +135,8 @@ $("#ownedSearchResultsList, #wantedSearchResultsList").on("click", ".list-group-
         // highlight the selected results list entry
         $('.highlight-owned').removeClass('highlight-owned');
         $(this).addClass('highlight-owned');
+
+    	$('#pick_book_next').prop('disabled', false);
 });
 
 /* 
@@ -210,11 +214,6 @@ $(".prevButton").click(function(){
 	$('.carousel').carousel('prev');
 });
 
-$('.carousel-indicators li').click(function(){
-    var number = Number($(this).attr('data-slide-to'));
-    console.log(number);
-    $('.carousel').carousel(number);
-});
 
 /*
  * Code needed for carousel transitions

@@ -168,7 +168,7 @@ h3 {
 
 /* scale image for selected wanted books */
 .wantedBooksList img {
-	width: 20vh;
+	width: 22vh;
 }
 
 /* close/remove button for selected books */
@@ -210,7 +210,7 @@ h3 {
 
 /* Text summary for owned book */
 .confirmOwnedBookText > h6 {
-	font-size: 11px;
+	font-size: 16px;
 }
 
 /*
@@ -218,7 +218,7 @@ h3 {
  */
 
  .confirmBooksList {
-	height: 30vh;
+	height: 28vh;
 }
 
 /* scale image for selected wanted books */

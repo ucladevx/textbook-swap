@@ -270,9 +270,7 @@ $(".prevButton").click(function(){
 
 					// send profs and classes info to front-end
 					document.getElementById("ownedBookClasses").innerHTML = "Class: " + classes;
-					document.getElementById("confirmOwnedBookClasses").innerHTML = "Class: " + classes;
 					document.getElementById("ownedBookProfs").innerHTML = "Professor: " + profs;
-					document.getElementById("confirmOwnedBookProfs").innerHTML = "Professor: " + profs;
 				}
 				// error when querying
 				else if (object.status === 2)

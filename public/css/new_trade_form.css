@@ -169,6 +169,7 @@ h3 {
 /* scale image for selected wanted books */
 .wantedBooksList img {
 	width: 22vh;
+	padding-top: 2vh;
 }
 
 /* close/remove button for selected books */
@@ -181,7 +182,11 @@ h3 {
     border-radius:100%;
     background: rgb(24,166,181);
     font-size: 15px;
-    text-align:center; 
+    text-align:center;
+
+	position: relative;
+	left: -1.5vh;
+	bottom: -1vh;
 }
 
 /*

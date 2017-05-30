@@ -202,7 +202,9 @@ $("#wantedSearchResultsList").on("click", ".list-group-item", function(){
 
 	// add new selected item to wanted list
 	$(".wantedBooksList").prepend('<li class="list-group-item" id="' + book_id + '" data-title="' + title + '" data-author="' + author + '" data-isbn="' + isbn + '" data-img_url="' + img_url + '">' + "<a class=\"closeButton\" href=\"#\">x</a>" + "<img src=" + img_url + "> " + '</li>');
-
+    $('.wantedBooksList').animate({
+        scrollTop: "0px"
+    }, 200);
 });
 
 // remove the book from the wanted list

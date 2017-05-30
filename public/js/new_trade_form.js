@@ -142,7 +142,7 @@ $("#ownedSearchResultsList").on("click", ".list-group-item", function(){
 
 $("#wantedSearchResultsList").on("click", ".list-group-item", function(){
     // highlight the selected results list entry
-    $('.highlight-owned').removeClass('highlight-wanted');
+    $('.highlight-wanted').removeClass('highlight-wanted');
     $(this).addClass('highlight-wanted');
 
     $('#wanted_list_next').prop('disabled', false);
@@ -294,6 +294,27 @@ $(".prevButton").click(function(){
 
     	// confirm the trade
    		if (slideFrom == 2 && slideTo == 3) {
+   			// display the wanted books list
+   // 			var listItems = $(".wantedBooksList li");
+
+   // 			console.log(listItems);
+
+			// listItems.each(function(idx, li) {
+			$('.wantedBooksList li').each(function() {
+			    // var wantedBook = $(li);
+			    var wantedBook = $(this);
+
+			    console.log(wantedBook);
+
+			    var book_id = wantedBook.attr("id");
+				var title = wantedBook.attr("data-title");  
+				var author = wantedBook.attr("data-author");
+				var isbn = wantedBook.attr("data-isbn");
+				var img_url = wantedBook.attr("data-img_url");
+
+			    // and the rest of your code
+			    $(".confirmBooksList").append('<li class="list-group-item" id="' + book_id + '" data-title="' + title + '" data-author="' + author + '" data-isbn="' + isbn + '" data-img_url="' + img_url + '">' + "<img src=" + img_url + "> " + '<p>' + title + '</p>' + '<p>' + author + '</p>' + '</li>');
+			});
    		}
 
     }

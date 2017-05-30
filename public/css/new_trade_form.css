@@ -217,11 +217,16 @@ h3 {
  * Confirm Trade Slide
  */
 
- .confirmBooksList {
+.confirmBooksList {
 	height: 28vh;
 }
 
 /* scale image for selected wanted books */
-.confirmBooksList img {
+.confirmBooksList li img {
 	width: 10vh;
+	float:left;
+}
+
+.confirmBooksList li p {
+	display:inline-block;
 }

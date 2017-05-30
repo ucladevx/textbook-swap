@@ -26,11 +26,13 @@ html
                     img.card-img-top(src='/images/green_plus.png', alt='Card image cap')
                     .card-block
                         h4.card-title New Trade
+            if books.length > 0
                 .card.col-md-4.grid-item.Requested.All
                     img.card-img-top(src=books[0].img_url, alt='Card image cap')
                     .card-block
                         h4.card-title #{books[0].title}
                         h5.card-author #{books[0].author}
+            if books.length > 1
                 .card.col-md-4.grid-item.Requested.All
                     img.card-img-top(src=books[1].img_url, alt='Card image cap')
                     .card-block

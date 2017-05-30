@@ -8,8 +8,8 @@ const books = require('../../models/book_info');
 
 /*
  * GET http://localhost:3000/api/book_info/get_book_info
- * Gets 
- * Replies with 
+ * Gets book info from database for a given book id
+ * Replies with a json object containing status and book title, author, isbn, etc.
  */
 exports.get_book_info = function(req, res) {
 	var book_id = req.query.id;
@@ -24,8 +24,8 @@ exports.get_book_info = function(req, res) {
 
 /*
  * GET http://localhost:3000/api/book_info/get_pair_book_info
- * Gets 
- * Replies with 
+ * Gets book info from database for a pair of book ids
+ * Replies with a json object containing status and book title, author, isbn, etc. for both books.
  */
 exports.get_pair_book_info = function(req, res) {
 	var book_id1 = req.query.id1;

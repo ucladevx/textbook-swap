@@ -7,6 +7,7 @@ const users = require('../../models/users');
 const owned_books = require('../../models/owned_books');
 const book_info = require('../../models/book_info');
 const error_codes = require('../../error_codes');
+const found_trades = require('../../models/found_trades');
 
 exports.index = function(req, res) {
     var user_id = req.user.id;
@@ -31,7 +32,32 @@ exports.index = function(req, res) {
                 if (error_status) {
                     console.error("Error querying database", error_status);
                 }
-                res.render('bookshelf', {status: error_status, books: books_data, username: user_name});
+
+                found_trades.get_matched_trades(user_id, function(error_status, matched_books_data){
+                    if(error_status){
+                        console.error("Error querying database", error_status);
+                    }
+
+                    var matched_books_info = [];
+                    console.log(matched_books_data);
+                    for(var i = 0; i < matched_books_data.length; i++){
+                        var curr = i;
+                        book_info.get_book_info(matched_books_data[curr]['book_have'], function(error_status, book_have_data){
+                            book_info.get_book_info(matched_books_data[curr]['book_want'], function(error_status, book_want_data){
+                                matched_books_info.push([book_have_data[0], book_want_data[0]]);
+
+                                if(matched_books_info.length == matched_books_data.length){
+                                    console.log(matched_books_info);
+                                    console.log(books_data);
+                                    res.render('bookshelf', {status: error_status, books: books_data, username: user_name, matched_books: matched_books_info});
+                                }
+                            });
+                        });
+                    }
+
+                    if(matched_books_data.length == 0)
+                        res.render('bookshelf', {status: error_status, books: books_data, username: user_name, matched_books: matched_books_info});
+                });
             });
             
         });

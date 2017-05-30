@@ -107,7 +107,7 @@ app.get('/api/search/search_textbooks', textbookSearchController.search_textbook
  */
 const initDB = require('./models/init');
 initDB.create_tables(function(){});
-//const test = require('./tests/test_all').test();
+const test = require('./tests/test_all').test();
 
 /*
  * Authentication routes.

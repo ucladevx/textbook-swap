@@ -16,7 +16,7 @@
 }
 
 /* list of entries from search query results */
-#ownedSearchResultsList, #wantedSearchResultsList, .wantedBooksList {
+#ownedSearchResultsList, #wantedSearchResultsList, .wantedBooksList, .confirmBooksList {
 	background-color: rgb(254, 254, 254);
 	height: 30vh;
 	overflow-y: scroll;
@@ -51,7 +51,7 @@
 	-webkit-box-shadow: inset 0 0 8px rgba(0,0,0,.2);
 }
 
-.wantedBooksList::-webkit-scrollbar-thumb {
+.wantedBooksList::-webkit-scrollbar-thumb, .confirmBooksList::-webkit-scrollbar-thumb {
 	border-radius: 5px;
 	background-color: rgb(242, 242, 242);
 	-webkit-box-shadow: inset 0 0 8px rgba(0,0,0,.2);
@@ -211,4 +211,17 @@ h3 {
 /* Text summary for owned book */
 .confirmOwnedBookText > h6 {
 	font-size: 11px;
+}
+
+/*
+ * Confirm Trade Slide
+ */
+
+ .confirmBooksList {
+	height: 30vh;
+}
+
+/* scale image for selected wanted books */
+.confirmBooksList img {
+	width: 10vh;
 }

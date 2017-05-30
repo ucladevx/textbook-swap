@@ -295,11 +295,8 @@ $(".prevButton").click(function(){
     	// confirm the trade
    		if (slideFrom == 2 && slideTo == 3) {
    			// display the wanted books list
-   // 			var listItems = $(".wantedBooksList li");
-
-   // 			console.log(listItems);
-
-			// listItems.each(function(idx, li) {
+   			// clear the list before adding entries (in case user modifies then comes back, don't want duplicates)
+			$(".confirmBooksList").empty();
 			$('.wantedBooksList li').each(function() {
 			    // var wantedBook = $(li);
 			    var wantedBook = $(this);

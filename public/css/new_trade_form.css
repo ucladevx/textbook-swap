@@ -223,10 +223,10 @@ h3 {
 
 /* scale image for selected wanted books */
 .confirmBooksList li img {
-	width: 10vh;
-	float:left;
+	width: 8vh;
+	margin-right:5px;
 }
 
 .confirmBooksList li p {
-	display:inline-block;
+	display: inline;
 }

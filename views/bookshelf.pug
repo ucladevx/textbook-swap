@@ -18,36 +18,12 @@ html
             button.filter-button(data-filter='.Requested') Requested
             button.filter-button(data-filter='.Matched') Matched
             button.filter-button(data-filter='.Rejected') Rejected
-         
-       
+
         .grid
-            //.row
-            //    .card.col-md-4.grid-item.All
-            //        img.card-img-top(src='/images/green_plus.png', alt='Card image cap')
-            //        .card-block
-            //            h4.card-title New Trade
-            //if books.length > 0 && books[0].title
-            //    .card.col-md-4.grid-item.Requested.All
-            //        img.card-img-top(src=books[0].img_url, alt='Card image cap')
-            //        .card-block
-            //            h4.card-title #{books[0].title}
-            //            h5.card-author #{books[0].author}
-            //else
-            //    .card.col-md-4.grid-item.Matched.All
-            //        img.card-img-top(src=books[0]['book_have'].img_url, alt='Card image cap')
-            //        .card-block
-            //            h4.card-title #{books[0].title}
-            //            h5.card-author #{books[0].author}
-            //if books.length > 1 && books[1].title
-            //    .card.col-md-4.grid-item.Requested.All
-            //        img.card-img-top(src=books[1].img_url, alt='Card image cap')
-            //        .card-block
-            //            h4.card-title #{books[1].title}
-            //            h5.card-author #{books[1].author}
             - for(var i = -1; i < books.length; i += 3){
-                .row
+                .row.shelf
                     if i == -1
-                        .card.col-md-4.grid-item.All.Requested.Matched.Rejected
+                        .card.col-md-4.grid-item.All
                             img.card-img-top(src='/images/green_plus.png', alt='Card image cap')
                             .card-block
                                 h4.card-title New Trade
@@ -60,10 +36,17 @@ html
                                     h5.card-author #{books[i].author}
                         else
                             .card.col-md-4.grid-item.Matched.All
-                                img.card-img-top(src=books[i]['book_have'].img_url, alt='Card image cap')
-                                .card-block
-                                    h4.card-title #{books[i]['book_have'].title}
-                                    h5.card-author #{books[i]['book_have'].author}
+                                .row
+                                    .col-md-5
+                                        .owned
+                                            img.book-img(src=books[i]['book_have'].img_url, alt='Card image cap')
+                                        p.title #{books[i]['book_have'].title}
+                                    .col-md-2
+                                        p.arrow.align-middle &harr;
+                                    .col-md-5
+                                        .wanted
+                                            img.book-img(src=books[i]['book_want'].img_url, alt='Card image cap')
+                                        p.title #{books[i]['book_want'].title}
                     if i + 1 < books.length
                         if books[i + 1].title
                             .card.col-md-4.grid-item.Requested.All
@@ -73,10 +56,17 @@ html
                                     h5.card-author #{books[i + 1].author}
                         else
                             .card.col-md-4.grid-item.Matched.All
-                                img.card-img-top(src=books[i + 1]['book_have'].img_url, alt='Card image cap')
-                                .card-block
-                                    h4.card-title #{books[i + 1]['book_have'].title}
-                                    h5.card-author #{books[i + 1]['book_have'].author}
+                                .row
+                                    .col-md-5
+                                        .owned
+                                            img.book-img(src=books[i + 1]['book_have'].img_url, alt='Card image cap')
+                                        p.title #{books[i + 1]['book_have'].title}
+                                    .col-md-2
+                                        p.arrow.align-middle &harr;
+                                    .col-md-5
+                                        .wanted
+                                            img.book-img(src=books[i + 1]['book_want'].img_url, alt='Card image cap')
+                                        p.title #{books[i + 1]['book_want'].title}
                     if i + 2 < books.length
                         if books[i + 2].title
                             .card.col-md-4.grid-item.Requested.All
@@ -86,10 +76,17 @@ html
                                     h5.card-author #{books[i + 2].author}
                         else
                             .card.col-md-4.grid-item.Matched.All
-                                img.card-img-top(src=books[i + 2]['book_have'].img_url, alt='Card image cap')
-                                .card-block
-                                    h4.card-title #{books[i + 2]['book_have'].title}
-                                    h5.card-author #{books[i + 2]['book_have'].author}
+                                .row
+                                    .col-md-5
+                                        .owned
+                                            img.book-img(src=books[i + 2]['book_have'].img_url, alt='Card image cap')
+                                        p.title #{books[i + 2]['book_have'].title}
+                                    .col-md-2
+                                        p.arrow.align-middle &harr;
+                                    .col-md-5
+                                        .wanted
+                                            img.book-img(src=books[i + 2]['book_want'].img_url, alt='Card image cap')
+                                        p.title #{books[i + 2]['book_want'].title}
             - }
 
 

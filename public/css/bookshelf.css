@@ -1,16 +1,50 @@
 .card {
 	width: 30vw;
-	height: 30vh;
+	height: 240px;
 	display: table-cell;
-	padding-top: 3%;
-	padding-bottom: 3%;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	text-align: center;
 }
+
+.Matched{
+	background-color: #52b9d1;
+}
+
 .card-img-top {
 	width: 30%;
 	/*margin-left: 50%;*/
 	float: right;
 }
-.row{
+
+.owned, .wanted {
+	text-align: center;
+	background-color: rgb(201, 232, 235);
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.book-img {
+	width: 60%;
+}
+
+.title{
+	margin-top: 5px;
+	font-size: 0.8em;
+	color: white;
+	text-transform: uppercase;
+	word-wrap: break-word;
+	overflow: hidden;
+	max-height: 2.8em; /* (Number of lines you want visible) * (line-height) */
+	line-height: 1.4em;
+}
+
+.arrow{
+	font-size: 2.5em;
+	margin-top: 100%;
+}
+
+.shelf{
 	display: table;
 	height:20%;
 	margin: 1%;

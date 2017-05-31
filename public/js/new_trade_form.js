@@ -238,7 +238,69 @@ $(".prevButton").click(function(){
 
 $("#confirmButton").click(function(){
 	console.log("confirm button click");
+	// add owned book
+	var selectedOwnedBook = $("li.highlight-owned.list-group-item");
+	var owned_book_id = selectedOwnedBook.attr("id");
+	$.post("/api/owned_books/add", { user_id: "user", book_id: owned_book_id },
+		function(data){
+			if(data.status === 0){
+				console.log('successfully added wanted book to wish list');
+			}
+			else if(data.status === 1)
+				console.log('db connection error');
+			else if(data.status === 2)
+				console.log('db query error');
+			else if(data.status === 3){
+				console.log('book already exists');
+			}
+		},
+		"json"
+	);
+
+
+	// add confirmed wanted books
+	$('.confirmBooksList li').each(function() {
+	    var confirmedBook = $(this);
+
+	    console.log(confirmedBook);
+
+	    var wanted_book_id = confirmedBook.attr("id");
+
+	    $.post("/api/wish_list/add", { user_id: "user", book_id: wanted_book_id },
+			function(data){
+				if(data.status === 0){
+					console.log('successfully added wanted book to wish list');
+				}
+				else if(data.status === 1)
+					console.log('db connection error');
+				else if(data.status === 2)
+					console.log('db query error');
+				else if(data.status === 3){
+					console.log('book already exists');
+				}
+			},
+			"json"
+		);
+
+		$.post("/api/possible_trades/add", { user_id: "user", owned_book_id: owned_book_id, wanted_book_id: wanted_book_id },
+			function(data){
+				if(data.status === 0){
+					console.log('successfully added wanted book to wish list');
+				}
+				else if(data.status === 1)
+					console.log('db connection error');
+				else if(data.status === 2)
+					console.log('db query error');
+				else if(data.status === 3){
+					console.log('book already exists');
+				}
+			},
+			"json"
+		);
+	});
 });
+
+
 
 
 /*

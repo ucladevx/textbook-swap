@@ -36,3 +36,37 @@ exports.update_status_accepted = function(req, res) {
         });
     });
 };
+
+/*
+ * POST http://localhost:3000/api/found_trades/update_status_rejected
+ * Update a trade to rejected & set all other rows with same trade_id to reject
+ * Replies with a json object containing the status of the database operation
+ */
+exports.update_status_rejected = function(req, res) {
+    var user_id = req.user.id;
+    var trade_id = req.body.trade_id;
+    var owned_book = req.body.owned_book;
+    var target_user = req.body.target_user;
+    var wanted_book = req.body.wanted_book;
+
+    found_trades.update_status_rejected(trade_id, user_id, owned_book, target_user, wanted_book, function(status){
+        if (status == error_codes.found_trades_errors.DB_SUCCESS)
+            console.log("Successfully updated trade status to rejected!");
+        else{
+            console.log("DB error")
+        }
+
+        found_trades.get_trade_by_id(trade_id, function(status, data){
+            for (var i = 0; i < data.length; i++) {
+                found_trades.update_status_rejected(data[i]["trade_id"], data[i]["user_id"], data[i]["book_have"], data[i]["target_id"], data[i]["book_want"], function(status){
+                    if (status == error_codes.found_trades_errors.DB_SUCCESS)
+                        console.log("Successfully updated trade status to rejected!");
+                    else{
+                        console.log("DB error")
+                    }
+                });
+            }
+            res.json({status: status});
+        });
+    });
+};

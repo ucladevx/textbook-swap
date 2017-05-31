@@ -108,6 +108,7 @@ app.get('/api/book_info/get_pair_book_info', bookInfoController.get_pair_book_in
 
 // Found trades
 app.post('/api/found_trades/update_status_accepted', foundTradesController.update_status_accepted);
+app.post('/api/found_trades/update_status_rejected', foundTradesController.update_status_rejected);
 
 /*
  * Tests

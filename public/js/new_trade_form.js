@@ -244,14 +244,14 @@ $("#confirmButton").click(function(){
 	$.post("/api/owned_books/add", { user_id: "user", book_id: owned_book_id },
 		function(data){
 			if(data.status === 0){
-				console.log('successfully added wanted book to wish list');
+				console.log('successfully added wanted book to owned_books');
 			}
 			else if(data.status === 1)
-				console.log('db connection error');
+				console.log('db connection error for owned_books');
 			else if(data.status === 2)
-				console.log('db query error');
+				console.log('db query error for owned_books');
 			else if(data.status === 3){
-				console.log('book already exists');
+				console.log('owned book already exists');
 			}
 		},
 		"json"
@@ -265,34 +265,37 @@ $("#confirmButton").click(function(){
 	    console.log(confirmedBook);
 
 	    var wanted_book_id = confirmedBook.attr("id");
+	    var relationStatus = 1;  // TODO: set correct status for relation
 
+	    // add wanted book to wish list
 	    $.post("/api/wish_list/add", { user_id: "user", book_id: wanted_book_id },
 			function(data){
 				if(data.status === 0){
-					console.log('successfully added wanted book to wish list');
+					console.log('successfully added wanted book to wish_list');
 				}
 				else if(data.status === 1)
-					console.log('db connection error');
+					console.log('db connection error for wish_list');
 				else if(data.status === 2)
-					console.log('db query error');
+					console.log('db query error for wish_list');
 				else if(data.status === 3){
-					console.log('book already exists');
+					console.log('wanted book already exists');
 				}
 			},
 			"json"
 		);
 
-		$.post("/api/possible_trades/add", { user_id: "user", owned_book_id: owned_book_id, wanted_book_id: wanted_book_id },
+	    // add trade relation between owned book and wanted book
+		$.post("/api/possible_trades/add", { user_id: "user", owned_book_id: owned_book_id, wanted_book_id: wanted_book_id, status: relationStatus },
 			function(data){
 				if(data.status === 0){
-					console.log('successfully added wanted book to wish list');
+					console.log('successfully added trade relation to possible_trades');
 				}
 				else if(data.status === 1)
-					console.log('db connection error');
+					console.log('db connection error for possible_trades');
 				else if(data.status === 2)
-					console.log('db query error');
+					console.log('db query error for possible_trades');
 				else if(data.status === 3){
-					console.log('book already exists');
+					console.log('trade relation already exists');
 				}
 			},
 			"json"

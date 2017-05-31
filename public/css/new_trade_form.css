@@ -5,6 +5,17 @@
     z-index: 0;
 }
 
+#top-right-bookshelf{
+	top: 0px;
+	right: 0px;
+	height:10%;
+	width:10%;
+}
+
+#top-right-bookshelf-container{
+	align: right;
+}
+
 #searchResults {
     margin-left:5vh;
     margin-right:5vh;

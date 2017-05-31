@@ -227,6 +227,10 @@ $(".prevButton").click(function(){
 	$('.carousel').carousel('prev');
 });
 
+$("#confirmButton").click(function(){
+	
+});
+
 
 /*
  * Code needed for carousel transitions

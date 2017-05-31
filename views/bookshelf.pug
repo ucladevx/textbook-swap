@@ -23,7 +23,7 @@ html
             - for(var i = -1; i < books.length; i += 3){
                 .row.shelf
                     if i == -1
-                        .card.col-md-4.grid-item.All
+                        .card.col-md-4.grid-item.All.Requested.Matched.Rejected
                             img.card-img-top(src='/images/green_plus.png', alt='Card image cap')
                             .card-block
                                 h4.card-title New Trade
@@ -38,13 +38,13 @@ html
                             .card.col-md-4.grid-item.Matched.All
                                 .row
                                     .col-md-5
-                                        .owned
+                                        .owned(data-title=books[i]['book_have'].title, data-author=books[i]['book_have'].author, data-id=books[i]['book_have'].book_id, data-isbn=books[i]['book_have'].isbn, data-img=books[i]['book_have'].img_url)
                                             img.book-img(src=books[i]['book_have'].img_url, alt='Card image cap')
                                         p.title #{books[i]['book_have'].title}
                                     .col-md-2
                                         p.arrow.align-middle &harr;
                                     .col-md-5
-                                        .wanted
+                                        .wanted(data-title=books[i]['book_want'].title, data-author=books[i]['book_want'].author, data-id=books[i]['book_want'].book_id, data-isbn=books[i]['book_want'].isbn, data-img=books[i]['book_want'].img_url)
                                             img.book-img(src=books[i]['book_want'].img_url, alt='Card image cap')
                                         p.title #{books[i]['book_want'].title}
                     if i + 1 < books.length
@@ -58,13 +58,13 @@ html
                             .card.col-md-4.grid-item.Matched.All
                                 .row
                                     .col-md-5
-                                        .owned
+                                        .owned(data-title=books[i + 1]['book_have'].title, data-author=books[i + 1]['book_have'].author, data-id=books[i + 1]['book_have'].book_id, data-isbn=books[i + 1]['book_have'].isbn, data-img=books[i + 1]['book_have'].img_url)
                                             img.book-img(src=books[i + 1]['book_have'].img_url, alt='Card image cap')
                                         p.title #{books[i + 1]['book_have'].title}
                                     .col-md-2
                                         p.arrow.align-middle &harr;
                                     .col-md-5
-                                        .wanted
+                                        .wanted(data-title=books[i + 1]['book_want'].title, data-author=books[i + 1]['book_want'].author, data-id=books[i + 1]['book_want'].book_id, data-isbn=books[i + 1]['book_want'].isbn, data-img=books[i + 1]['book_want'].img_url)
                                             img.book-img(src=books[i + 1]['book_want'].img_url, alt='Card image cap')
                                         p.title #{books[i + 1]['book_want'].title}
                     if i + 2 < books.length
@@ -78,13 +78,13 @@ html
                             .card.col-md-4.grid-item.Matched.All
                                 .row
                                     .col-md-5
-                                        .owned
+                                        .owned(data-title=books[i + 2]['book_have'].title, data-author=books[i + 2]['book_have'].author, data-id=books[i + 2]['book_have'].book_id, data-isbn=books[i + 2]['book_have'].isbn, data-img=books[i + 2]['book_have'].img_url)
                                             img.book-img(src=books[i + 2]['book_have'].img_url, alt='Card image cap')
                                         p.title #{books[i + 2]['book_have'].title}
                                     .col-md-2
                                         p.arrow.align-middle &harr;
                                     .col-md-5
-                                        .wanted
+                                        .wanted(data-title=books[i + 2]['book_want'].title, data-author=books[i + 2]['book_want'].author, data-id=books[i + 2]['book_want'].book_id, data-isbn=books[i + 2]['book_want'].isbn, data-img=books[i + 2]['book_want'].img_url)
                                             img.book-img(src=books[i + 2]['book_want'].img_url, alt='Card image cap')
                                         p.title #{books[i + 2]['book_want'].title}
             - }

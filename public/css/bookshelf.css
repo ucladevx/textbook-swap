@@ -7,7 +7,7 @@
 	text-align: center;
 }
 
-.Matched{
+.Matched:not(.Requested){
 	background-color: #52b9d1;
 }
 

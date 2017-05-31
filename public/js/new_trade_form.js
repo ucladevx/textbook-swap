@@ -237,7 +237,7 @@ $(".prevButton").click(function(){
 });
 
 $("#confirmButton").click(function(){
-	
+	console.log("confirm button click");
 });
 
 

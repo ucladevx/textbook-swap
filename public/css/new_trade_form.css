@@ -45,8 +45,14 @@
 	margin-right: 5vh;
 }
 
-#transitionButtonRow {
-	margin-top: 3vh;
+/* book-shelf image on top right corner */
+.bottom-left-bookshelf {
+	height: 15%;
+	margin-left: 3vh;
+	margin-top: -2vh;
+	float: left;
+	right: 0;
+	width: 15%;
 }
 
 .carousel-indicators .active {
@@ -73,7 +79,7 @@
 	float: right;
 	font-size: 15px;
 	height: 20px;
-	left: -1.5vh;
+	left: 0vh;
 	position: relative;
 	text-align: center;
 	width: 20px;
@@ -117,7 +123,7 @@
 	background-color: rgb(242, 242, 242);
 }
 
-.nextButton, .prevButton, .btn:focus, .btn:focus:active, .btn:hover {
+.nextButton, .prevButton, .btn:focus, .btn:focus:active, .btn:hover, #pick_book_next, #wanted_list_next {
 	background-color: rgb(253, 206, 48);
 	border-color: rgb(253, 206, 48);
 	border-radius: 0;
@@ -156,7 +162,7 @@
 	overflow: hidden;
 	padding-left: 15px;
 	padding-top: 10px;
-	position: absolute;
+	position: absolute;  /* TODO: used to be absolute */
 	width: 100vh;
 	z-index: 20;
 }
@@ -190,12 +196,21 @@
 	width: 25%;
 }
 
+/* transition buttons */
+.transitionButtonRow {
+	margin-top: 3vh;
+}
+
+.transitionButtonRow button {
+	float:bottom;
+	position:relative;
+}
+
 .wantedBooksList {
 	height: 32vh;
 }
 
 .wantedBooksList img {
-	padding-top: 2vh;
 	width: 22vh;
 }
 

@@ -14,16 +14,17 @@
                         .row.slideHeader
                             h3.slideTitle NEW TRADE
                             img.top-right-bookshelf(src="./images/Bookshelf_NewTrade1.svg")
-                        .searchForm
+                        .row.searchForm
                             h5.slideMessage Confirm book! Select the book you can offer.
                             .col-lg-12
                                 .input-group
                                     input.form-control#ownedInput(type='text', placeholder='Search by title, professor, or class' aria-describedby="ownedInputAddon")
                                     span.input-group-addon#ownedInputAddon #[span(class="glyphicon glyphicon-search")]
                                 ul#ownedSearchResultsList.list-group
-                        .row#transitionButtonRow
+                        .row.transitionButtonRow
                             .col-lg-12.text-center
                                 button.btn.btn-primary.nextButton#pick_book_next(type="button") Next
+                        img.bottom-left-bookshelf(src="./images/Bookshelf_NewTrade2.svg")
                     .item
                         a.popup-close(data-popup-close='popup-1', href='#') x
                         .row.slideHeader
@@ -39,17 +40,18 @@
                                 h4#ownedBookProfs
                             .col-md-4
                                 img#ownedBookImg(src="", alt='Card image cap')
-                        .row#transitionButtonRow
+                        .row.transitionButtonRow
                             .col-sm-3.col-sm-offset-3.text-center
                                 button.btn.btn-primary.prevButton(type="button") Previous
                             .col-sm-3.text-center
                                 button.btn.btn-primary.nextButton(type="button") Next
+                        img.bottom-left-bookshelf(src="./images/Bookshelf_NewTrade2.svg")
                     .item
                         a.popup-close(data-popup-close='popup-1', href='#') x
                         .row.slideHeader
                             h3.slideTitle NEW TRADE
                             img.top-right-bookshelf(src="./images/Bookshelf_NewTrade1.svg")
-                        .searchForm
+                        .row.searchForm
                             h5.slideMessage Select the books you want to add to your trades.
                             .col-md-8#wantedForm
                                 .input-group
@@ -58,11 +60,12 @@
                                 ul#wantedSearchResultsList.list-group
                             col-md-4.wantedBooksDisplay
                                 ul.wantedBooksList.list-group
-                        .row#transitionButtonRow
+                        .row.transitionButtonRow
                             .col-sm-3.col-sm-offset-3.text-center
                                 button.btn.btn-primary.prevButton(type="button") Previous
                             .col-sm-3.text-center
                                 button.btn.btn-primary.nextButton#wanted_list_next(type="button") Next
+                        img.bottom-left-bookshelf(src="./images/Bookshelf_NewTrade2.svg")
                     .item
                         a.popup-close(data-popup-close='popup-1', href='#') x
                         .row.slideHeader
@@ -80,11 +83,11 @@
                                     h6#confirmOwnedBookIsbn
                             .col-md-6.ownedBookText
                                 h5.confirmSubtitle TRADES
-                                .col-md-6.wantedBooksDisplay
+                                .col-md-12.wantedBooksDisplay
                                     ul.confirmBooksList.list-group
-                        .row#transitionButtonRow
+                        .row.transitionButtonRow
                             .col-sm-3.col-sm-offset-3.text-center
                                 button.btn.btn-primary.prevButton(type="button") Previous
                             .col-sm-3.text-center
                                 button.btn.btn-primary.nextButton#confirmButton(type="button") Confirm
-
+                        img.bottom-left-bookshelf(src="./images/Bookshelf_NewTrade2.svg")

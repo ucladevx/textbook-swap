@@ -390,7 +390,7 @@ $("#confirmButton").click(function(){
 				var img_url = wantedBook.attr("data-img_url");
 
 			    // and the rest of your code
-			    $(".confirmBooksList").append('<li class="list-group-item" id="' + book_id + '" data-title="' + title + '" data-author="' + author + '" data-isbn="' + isbn + '" data-img_url="' + img_url + '">' + "<img src=" + img_url + "> " + '<p>' + title + '<br>' + author + '</p>' + '</li>');
+			    $(".confirmBooksList").append('<li class="list-group-item" id="' + book_id + '" data-title="' + title + '" data-author="' + author + '" data-isbn="' + isbn + '" data-img_url="' + img_url + '">' + '<div class="row"> <div class="col-md-3">' + '<img src="' + img_url + '"> ' + '</div>' + '<div class="col-md-9">' + '<p>' + title + '</p> <p>' + author + '</p>' + '</div> </div>' + '</li>');
 			});
    		}
 

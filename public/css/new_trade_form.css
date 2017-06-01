@@ -94,6 +94,12 @@
 	height: 28vh;
 }
 
+/* add spacing between list elements */
+.confirmBooksList li, .confirmBooksList li:hover {
+	margin: 0 0 6px 0;
+	background-color: rgb(136, 216, 229);
+}
+
 /* scale image for selected wanted books */
 .confirmBooksList li img {
 	margin-right: 5px;
@@ -101,7 +107,7 @@
 }
 
 .confirmBooksList li p {
-	display: inline;
+	color: #ffffff;
 }
 
 /* Text summary for owned book */
@@ -111,6 +117,16 @@
 
 .confirmSubtitle {
 	text-align: center;
+	font-weight: bold;
+	font-size: 16px;
+}
+
+/* Box enclosing wanted books list to confirm */
+.confirmWantedBooksBox {
+	background-color: rgb(254, 254, 254);
+	/*margin-left: 0vh;*/
+	padding: 0.5vh 1vh 1vh 1vh;
+	/*margin-bottom: 0.5vh;*/
 }
 
 .confirmWrapper {

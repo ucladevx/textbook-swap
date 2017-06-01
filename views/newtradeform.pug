@@ -37,14 +37,15 @@ link(href = 'https://fonts.googleapis.com/css?family=Lato:400,700' rel='styleshe
                         .slideContent
                             h5.slideMessage Confirm book!
                             .row.confirmWrapper
-                                .col-md-8.ownedBookText
-                                    h4#ownedBookTitle
-                                    h4#ownedBookAuthor
-                                    h4#ownedBookIsbn
-                                    h4#ownedBookClasses
-                                    h4#ownedBookProfs
-                                .col-md-4
-                                    img#ownedBookImg(src="", alt='Card image cap')
+                                .ownedBookInfoBox
+                                    .col-md-8.ownedBookText
+                                        h4#ownedBookTitle
+                                        h4#ownedBookAuthor
+                                        h4#ownedBookIsbn
+                                        h4#ownedBookClasses
+                                        h4#ownedBookProfs
+                                    .col-md-4
+                                        img#ownedBookImg(src="", alt='Card image cap')
                         .row.transitionButtonRow
                             .col-sm-3.col-sm-offset-3.text-center
                                 button.btn.btn-primary.prevButton(type="button") Previous

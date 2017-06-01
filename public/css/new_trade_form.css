@@ -33,7 +33,7 @@
 /* list of entries from search query results */
 #ownedSearchResultsList, #wantedSearchResultsList, .wantedBooksList, .confirmBooksList {
 	background-color: rgb(254, 254, 254);
-	height: 30vh;
+	height: 32vh;
 	margin-bottom: 0;
 	margin-top: 0;
 	overflow-y: scroll;
@@ -85,7 +85,7 @@
 	width: 20px;
 }
 
-/* align confirm owned book info */
+/* align confirm owned book info for confirm trade slide (4th)*/
 .confirmBookInfoBox {
 	padding: 2vh 0vh 2vh 2vh;
 }
@@ -150,8 +150,18 @@
 	outline: none;
 }
 
+/* align owned book info for confirm book slide (2nd)*/
+.ownedBookInfoBox {
+	padding: 3vh 0vh 3vh 2vh;
+}
+
 .ownedBookText {
 	padding-left: 5vh;
+}
+
+/* line spacing for owned book slide */
+.ownedBookText h4 {
+	margin-top: 10px;
 }
 
 .popup {
@@ -237,7 +247,7 @@
 }
 
 .wantedBooksList {
-	height: 32vh;
+	height: 36vh;
 }
 
 .wantedBooksList img {

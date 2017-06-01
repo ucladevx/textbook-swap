@@ -1,19 +1,23 @@
-#forms {
-    margin-top:5vh;
-    margin-left:5vh;
-    margin-right:5vh;
+.searchForm {
+    margin-top:3vh;
+    margin-left:8vh;
+    margin-right:10vh;
     z-index: 0;
 }
 
+/* book-shelf image on top right corner */
 #top-right-bookshelf{
 	top: 0px;
 	right: 0px;
-	height:10%;
-	width:10%;
+	height:25%;
+	width:25%;
+	float:right;
+	margin-top: -4vh;
+	margin-right: 5vh;
 }
 
 #top-right-bookshelf-container{
-	align: right;
+	/*align: right;*/
 }
 
 #searchResults {
@@ -21,8 +25,14 @@
     margin-right:5vh;
 }
 
+/* Header (title and image) for slide */
+.slideHeader {
+	text-align: center;
+	margin-top: -3vh;
+}
+
 /* Message on the top of the slide */
-#slideMessage {
+.slideMessage {
 	padding-left: 3vh;
 }
 
@@ -91,10 +101,6 @@ h1 {
     margin-right:5vh;
 }
 
-h3 {
-	text-align: center;
-}
-
 /*
  * Pop up 
  */
@@ -108,6 +114,7 @@ h3 {
     top:0px;
     left:0px;
     background:rgba(0,0,0,0.75);
+    color: rgb(114, 114, 114);
 }
 
 /* Inner */
@@ -161,20 +168,12 @@ h3 {
 	padding-left:5vh;
 }
 
-.ownedBookWrapper {
-	background-color: rgb(236,236,236);
-	padding-top: 5vh;
-	padding-bottom: 5vh;
-	margin-right: 5vh;
-	margin-left: 2vh;
-}
-
 /* 
  * Select wanted books slide 
  */
 
 .wantedBooksList {
-	height: 35vh;
+	height: 32vh;
 }
 
 /* scale image for selected wanted books */
@@ -210,6 +209,7 @@ h3 {
 	padding-bottom: 0.5vh;
 	margin-right: 5vh;
 	margin-left: 2vh;
+	margin-top: 3vh;
 	height: 40vh;
 }
 

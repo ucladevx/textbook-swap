@@ -1,4 +1,9 @@
- /* Image for owned book */
+/* Apply to all elements */
+* {
+	font-family: 'Lato', sans-serif;
+}
+
+/* Image for owned book */
 #confirmOwnedBookImg {
 	height: 100%;
 	width: 100%;

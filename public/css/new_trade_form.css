@@ -71,11 +71,6 @@
 	margin: 0 2px;
 }
 
-/* Indicators (circles) on the bottom of pop up */
-.carousel-indicators {
-	text-align: center;
-}
-
 .closeButton, .closeButton:hover {
 	background: rgb(24, 166, 181);
 	border-radius: 100%;
@@ -88,6 +83,11 @@
 	position: relative;
 	text-align: center;
 	width: 20px;
+}
+
+/* align confirm owned book info */
+.confirmBookInfoBox {
+	padding: 2vh 0vh 2vh 2vh;
 }
 
 .confirmBooksList {

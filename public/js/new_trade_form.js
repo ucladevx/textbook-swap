@@ -351,8 +351,8 @@ $("#confirmButton").click(function(){
 					classes = classes.substring(0, classes.length - 2);
 
 					// send profs and classes info to front-end
-					document.getElementById("ownedBookClasses").innerHTML = "Class: " + classes;
-					document.getElementById("ownedBookProfs").innerHTML = "Professor: " + profs;
+					document.getElementById("ownedBookClasses").innerHTML = "Class: " + "<span style='color: #3AC1D7'>" + classes + "</span>";
+					document.getElementById("ownedBookProfs").innerHTML = "Professor: " + "<span style='color: #3AC1D7'>" + profs + "</span>";
 				}
 				// error when querying
 				else if (object.status === 2)

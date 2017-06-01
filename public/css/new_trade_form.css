@@ -194,6 +194,11 @@
 	font-size: 16px;
 }
 
+/* Title on top of slide (New Trade) */
+.slideTitle {
+	font-weight: bold;
+}
+
 /* book-shelf image on top right corner */
 .top-right-bookshelf {
 	float: right;

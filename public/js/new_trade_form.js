@@ -257,7 +257,6 @@ $("#confirmButton").click(function(){
 		"json"
 	);
 
-
 	// add confirmed wanted books
 	$('.confirmBooksList li').each(function() {
 	    var confirmedBook = $(this);
@@ -265,7 +264,7 @@ $("#confirmButton").click(function(){
 	    console.log(confirmedBook);
 
 	    var wanted_book_id = confirmedBook.attr("id");
-	    var relationStatus = 1;  // TODO: set correct status for relation
+	    var relationStatus = 'V';  // V = verified
 
 	    // add wanted book to wish list
 	    $.post("/api/wish_list/add", { user_id: "user", book_id: wanted_book_id },
@@ -301,10 +300,13 @@ $("#confirmButton").click(function(){
 			"json"
 		);
 	});
+
+	// close the popup
+	$('[data-popup="popup-1"]').fadeOut(350);
+
+	// refresh the window (display newly added book trade)
+	location.reload();
 });
-
-
-
 
 /*
  * Code needed for carousel transitions

@@ -1,48 +1,12 @@
-.searchForm {
-    margin-top:3vh;
-    margin-left:8vh;
-    margin-right:10vh;
-    z-index: 0;
+ /* Image for owned book */
+#confirmOwnedBookImg {
+	height: 100%;
+	width: 100%;
 }
 
-/* book-shelf image on top right corner */
-#top-right-bookshelf{
-	top: 0px;
-	right: 0px;
-	height:25%;
-	width:25%;
-	float:right;
-	margin-top: -4vh;
-	margin-right: 5vh;
-}
-
-#top-right-bookshelf-container{
-	/*align: right;*/
-}
-
-#searchResults {
-    margin-left:5vh;
-    margin-right:5vh;
-}
-
-/* Header (title and image) for slide */
-.slideHeader {
-	text-align: center;
-	margin-top: -3vh;
-}
-
-/* Message on the top of the slide */
-.slideMessage {
-	padding-left: 3vh;
-}
-
-/* list of entries from search query results */
-#ownedSearchResultsList, #wantedSearchResultsList, .wantedBooksList, .confirmBooksList {
-	background-color: rgb(254, 254, 254);
-	height: 30vh;
-	overflow-y: scroll;
-	margin-top: 0;
-  	margin-bottom: 0;
+#ownedBookImg {
+	height: 70%;
+	width: 70%;
 }
 
 /* search box for user input */
@@ -61,81 +25,39 @@
 	color: rgb(255, 255, 255);
 }
 
-/* display scroll bar by default */
-::-webkit-scrollbar {
-	width: 12px;  
+/* list of entries from search query results */
+#ownedSearchResultsList, #wantedSearchResultsList, .wantedBooksList, .confirmBooksList {
+	background-color: rgb(254, 254, 254);
+	height: 30vh;
+	margin-bottom: 0;
+	margin-top: 0;
+	overflow-y: scroll;
 }
 
 #ownedSearchResultsList::-webkit-scrollbar-thumb, #wantedSearchResultsList::-webkit-scrollbar-thumb {
-	border-radius: 5px;
+	-webkit-box-shadow: inset 0 0 8px rgba(0, 0, 0, .2);
 	background-color: rgb(146, 214, 225);
-	-webkit-box-shadow: inset 0 0 8px rgba(0,0,0,.2);
-}
-
-.wantedBooksList::-webkit-scrollbar-thumb, .confirmBooksList::-webkit-scrollbar-thumb {
 	border-radius: 5px;
-	background-color: rgb(242, 242, 242);
-	-webkit-box-shadow: inset 0 0 8px rgba(0,0,0,.2);
 }
 
-/* hovering over search result item or after clicking it */
-.list-group-item:hover, .highlight-owned {
-	background-color: rgb(242, 242, 242); /* or whatever color you'd like */
+#searchResults {
+	margin-left: 5vh;
+	margin-right: 5vh;
 }
 
 #transitionButtonRow {
-	margin-top:3vh;
+	margin-top: 3vh;
 }
 
-.nextButton, .prevButton, .btn:focus, .btn:focus:active, .btn:hover {
-	background-color: rgb(253, 206, 48);
-	border-color: rgb(253, 206, 48);
-	border-radius:0;
-	outline: none;
-  	box-shadow:none;
+.carousel-indicators .active {
+	background-color: rgb(184, 184, 184);
+	margin: 0 2px;
 }
 
-h1 {
-    margin-top:10vh;
-    margin-left:8vh;
-    margin-right:5vh;
-}
-
-/*
- * Pop up 
- */
-
-.popup {
-    z-index: 10;
-    width:100%;
-    height:100%;
-    display:none;
-    position:fixed;
-    top:0px;
-    left:0px;
-    background:rgba(0,0,0,0.75);
-    color: rgb(114, 114, 114);
-}
-
-/* Inner */
-.popup-inner {
-    z-index: 20; 
-    height:70vh;
-    width:100vh;
-    padding-top: 10px;
-    padding-left: 15px;
-    position:absolute;
-    box-shadow:0px 2px 6px rgba(0,0,0,1);
-    border-radius:3px;
-    background: rgb(254, 254, 254);
-    overflow:hidden;
-}
-
-/* Close button for pop up*/
-.popup-close, .popup-close:hover {
-	font-size:20px;
-	text-decoration:none;
-	color: rgb(149, 149, 149);
+.carousel-indicators li {
+	background-color: rgb(219, 219, 219);
+	border-color: rgb(219, 219, 219);
+	margin: 0 2px;
 }
 
 /* Indicators (circles) on the bottom of pop up */
@@ -143,95 +65,19 @@ h1 {
 	text-align: center;
 }
 
-.carousel-indicators li {
-    border-color: rgb(219, 219, 219);
-    background-color: rgb(219, 219, 219);
-    margin: 0px 2px;
-}
-
-.carousel-indicators .active {
-    background-color: rgb(184, 184, 184);
-    margin: 0px 2px;
-}
-
-/* 
- * Owned book slide 
- */ 
-
-/* Image for owned book */
-#ownedBookImg {
-	height: 70%;
-	width: 70%;
-}
-
-.ownedBookText {
-	padding-left:5vh;
-}
-
-/* 
- * Select wanted books slide 
- */
-
-.wantedBooksList {
-	height: 32vh;
-}
-
-/* scale image for selected wanted books */
-.wantedBooksList img {
-	width: 22vh;
-	padding-top: 2vh;
-}
-
-/* close/remove button for selected books */
-
 .closeButton, .closeButton:hover {
-	width:20px;
-    height:20px;
-    float: right;
-    color: #fff;
-    border-radius:100%;
-    background: rgb(24,166,181);
-    font-size: 15px;
-    text-align:center;
-
-	position: relative;
-	left: -1.5vh;
+	background: rgb(24, 166, 181);
+	border-radius: 100%;
 	bottom: -1vh;
-}
-
-/*
- * Confirm trade slide
- */
-
-.confirmWrapper {
-	background-color: rgb(236,236,236);
-	padding-top: 1vh;
-	padding-bottom: 0.5vh;
-	margin-right: 5vh;
-	margin-left: 2vh;
-	margin-top: 3vh;
-	height: 40vh;
-}
-
-.confirmSubtitle {
+	color: #fff;
+	float: right;
+	font-size: 15px;
+	height: 20px;
+	left: -1.5vh;
+	position: relative;
 	text-align: center;
+	width: 20px;
 }
-
-
- /* Image for owned book */
-#confirmOwnedBookImg {
-	height: 100%;
-	width: 100%;
-}
-
-/* Text summary for owned book */
-.confirmOwnedBookText > h6 {
-	font-size: 16px;
-}
-
-/*
- * Confirm Trade Slide
- */
 
 .confirmBooksList {
 	height: 28vh;
@@ -239,10 +85,133 @@ h1 {
 
 /* scale image for selected wanted books */
 .confirmBooksList li img {
+	margin-right: 5px;
 	width: 8vh;
-	margin-right:5px;
 }
 
 .confirmBooksList li p {
 	display: inline;
+}
+
+/* Text summary for owned book */
+.confirmOwnedBookText>h6 {
+	font-size: 16px;
+}
+
+.confirmSubtitle {
+	text-align: center;
+}
+
+.confirmWrapper {
+	background-color: rgb(236, 236, 236);
+	height: 36vh;
+	margin-left: 2vh;
+	margin-right: 5vh;
+	margin-top: 3vh;
+	padding-bottom: .5vh;
+	padding-top: 1vh;
+}
+
+/* hovering over search result item or after clicking it */
+.list-group-item:hover, .highlight-owned {
+	background-color: rgb(242, 242, 242);
+}
+
+.nextButton, .prevButton, .btn:focus, .btn:focus:active, .btn:hover {
+	background-color: rgb(253, 206, 48);
+	border-color: rgb(253, 206, 48);
+	border-radius: 0;
+	box-shadow: none;
+	outline: none;
+}
+
+.ownedBookText {
+	padding-left: 5vh;
+}
+
+.popup {
+	background: rgba(0, 0, 0, 0.75);
+	color: rgb(114, 114, 114);
+	display: none;
+	height: 100%;
+	left: 0;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 10;
+}
+
+/* Close button for pop up*/
+.popup-close, .popup-close:hover {
+	color: rgb(149, 149, 149);
+	font-size: 20px;
+	text-decoration: none;
+}
+
+.popup-inner {
+	background: rgb(254, 254, 254);
+	border-radius: 3px;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 1);
+	height: 70vh;
+	overflow: hidden;
+	padding-left: 15px;
+	padding-top: 10px;
+	position: absolute;
+	width: 100vh;
+	z-index: 20;
+}
+
+.searchForm {
+	margin-left: 8vh;
+	margin-right: 10vh;
+	margin-top: 3vh;
+	z-index: 0;
+}
+
+/* Header (title and image) for slide */
+.slideHeader {
+	margin-top: -3vh;
+	text-align: center;
+}
+
+/* Message on the top of the slide */
+.slideMessage {
+	padding-left: 3vh;
+}
+
+/* book-shelf image on top right corner */
+.top-right-bookshelf {
+	float: right;
+	height: 25%;
+	margin-right: 5vh;
+	margin-top: -4vh;
+	right: 0;
+	top: 0;
+	width: 25%;
+}
+
+.wantedBooksList {
+	height: 32vh;
+}
+
+.wantedBooksList img {
+	padding-top: 2vh;
+	width: 22vh;
+}
+
+.wantedBooksList::-webkit-scrollbar-thumb, .confirmBooksList::-webkit-scrollbar-thumb {
+	-webkit-box-shadow: inset 0 0 8px rgba(0, 0, 0, .2);
+	background-color: rgb(242, 242, 242);
+	border-radius: 5px;
+}
+
+/* display scroll bar by default */
+::-webkit-scrollbar {
+	width: 12px;
+}
+
+h1 {
+	margin-left: 8vh;
+	margin-right: 5vh;
+	margin-top: 10vh;
 }

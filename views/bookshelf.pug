@@ -12,16 +12,26 @@ html
         script(src="/js/bookshelf.js")
 
     body
-        h6 Hi #{username[0].user_name}, welcome to your Bookshelf
-        .filter-button-group.button-group(data-filter-group= "Status")
-            button.filter-button(data-filter='.All') All
-            button.filter-button(data-filter='.Requested') Requested
-            button.filter-button(data-filter='.Matched') Matched
-            button.filter-button(data-filter='.Rejected') Rejected
+        .bookshelf_navbar_container
+            .row.bookshelf_navbar
+                .col-md-3.welcome_dialog_container
+                    h6.welcome-dialog
+                        | Hi 
+                        span.username #{username[0].user_name}
+                        |  welcome to your 
+                        span.bookshelf_name Bookshelf
+                .col-md-6.filter_button_container
+                    .filter-button-group.button-group(data-filter-group= "Status")
+                        button.filter-button(data-filter='.All') All
+                        button.Requested_but.filter-button(data-filter='.Requested') Requested
+                        button.Matched_but.filter-button(data-filter='.Matched') Matched
+                        button.Rejected_but.filter-button(data-filter='.Rejected') Rejected
+                .col-md-3.bookshelf_image_container
+                    img(src='images/Bookshelf_Dashboard.svg')
          
        
         .grid
-            .row
+            .row.grid_row
                 .card.col-md-4.grid-item.All
                     img.card-img-top(src='/images/green_plus.png', alt='Card image cap')
                     .card-block
@@ -39,7 +49,7 @@ html
                         h4.card-title #{books[1].title}
                         h5.card-author #{books[1].author}
             - for(var i = 2; i < books.length; i += 3){
-                .row
+                .row.grid_row
                     .card.col-md-4.grid-item.Requested.All
                         img.card-img-top(src=books[i].img_url, alt='Card image cap')
                         .card-block

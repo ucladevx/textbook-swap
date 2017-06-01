@@ -17,13 +17,14 @@ link(href = 'https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type
                         .row.slideHeader
                             h3.slideTitle NEW TRADE
                             img.top-right-bookshelf(src="./images/Bookshelf_NewTrade1.svg")
-                        .row.searchForm
-                            h5.slideMessage Confirm book! Select the book you can offer.
-                            .col-lg-12
-                                .input-group
-                                    input.form-control#ownedInput(type='text', placeholder='Search by title, professor, or class' aria-describedby="ownedInputAddon")
-                                    span.input-group-addon#ownedInputAddon #[span(class="glyphicon glyphicon-search")]
-                                ul#ownedSearchResultsList.list-group
+                        .slideContent
+                            h5.slideMessage Select the book you can offer.
+                            .row.searchForm
+                                .col-lg-12
+                                    .input-group
+                                        input.form-control#ownedInput(type='text', placeholder='Search by title, professor, or class' aria-describedby="ownedInputAddon")
+                                        span.input-group-addon#ownedInputAddon #[span(class="glyphicon glyphicon-search")]
+                                    ul#ownedSearchResultsList.list-group
                         .row.transitionButtonRow
                             .col-lg-12.text-center
                                 button.btn.btn-primary.nextButton#pick_book_next(type="button") Next
@@ -33,16 +34,17 @@ link(href = 'https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type
                         .row.slideHeader
                             h3.slideTitle NEW TRADE
                             img.top-right-bookshelf(src="./images/Bookshelf_NewTrade1.svg")
-                        h5.slideMessage Confirm book!
-                        .row.confirmWrapper
-                            .col-md-8.ownedBookText
-                                h4#ownedBookTitle
-                                h4#ownedBookAuthor
-                                h4#ownedBookIsbn
-                                h4#ownedBookClasses
-                                h4#ownedBookProfs
-                            .col-md-4
-                                img#ownedBookImg(src="", alt='Card image cap')
+                        .slideContent
+                            h5.slideMessage Confirm book!
+                            .row.confirmWrapper
+                                .col-md-8.ownedBookText
+                                    h4#ownedBookTitle
+                                    h4#ownedBookAuthor
+                                    h4#ownedBookIsbn
+                                    h4#ownedBookClasses
+                                    h4#ownedBookProfs
+                                .col-md-4
+                                    img#ownedBookImg(src="", alt='Card image cap')
                         .row.transitionButtonRow
                             .col-sm-3.col-sm-offset-3.text-center
                                 button.btn.btn-primary.prevButton(type="button") Previous
@@ -54,15 +56,16 @@ link(href = 'https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type
                         .row.slideHeader
                             h3.slideTitle NEW TRADE
                             img.top-right-bookshelf(src="./images/Bookshelf_NewTrade1.svg")
-                        .row.searchForm
+                        .slideContent
                             h5.slideMessage Select the books you want to add to your trades.
-                            .col-md-8#wantedForm
-                                .input-group
-                                    input.form-control#wantedInput(type='text', placeholder='Search by title, professor, or class' aria-describedby="wantedInputAddon")
-                                    .input-group-addon#wantedInputAddon #[span(class="glyphicon glyphicon-search")]
-                                ul#wantedSearchResultsList.list-group
-                            col-md-4.wantedBooksDisplay
-                                ul.wantedBooksList.list-group
+                            .row.searchForm
+                                .col-md-8#wantedForm
+                                    .input-group
+                                        input.form-control#wantedInput(type='text', placeholder='Search by title, professor, or class' aria-describedby="wantedInputAddon")
+                                        .input-group-addon#wantedInputAddon #[span(class="glyphicon glyphicon-search")]
+                                    ul#wantedSearchResultsList.list-group
+                                col-md-4.wantedBooksDisplay
+                                    ul.wantedBooksList.list-group
                         .row.transitionButtonRow
                             .col-sm-3.col-sm-offset-3.text-center
                                 button.btn.btn-primary.prevButton(type="button") Previous
@@ -74,20 +77,21 @@ link(href = 'https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type
                         .row.slideHeader
                             h3.slideTitle NEW TRADE
                             img.top-right-bookshelf(src="./images/Bookshelf_NewTrade1.svg")
-                        h5.slideMessage Confirm trades!
-                        .row.confirmWrapper
-                            .col-md-6
-                                h5.confirmSubtitle OFFERING
+                        .slideContent
+                            h5.slideMessage Confirm trades!
+                            .row.confirmWrapper
                                 .col-md-6
-                                    img#confirmOwnedBookImg(src="", alt='Card image cap')
-                                .col-md-6.confirmOwnedBookText
-                                    h6#confirmOwnedBookTitle
-                                    h6#confirmOwnedBookAuthor
-                                    h6#confirmOwnedBookIsbn
-                            .col-md-6.ownedBookText
-                                h5.confirmSubtitle TRADES
-                                .col-md-12.wantedBooksDisplay
-                                    ul.confirmBooksList.list-group
+                                    h5.confirmSubtitle OFFERING
+                                    .col-md-6
+                                        img#confirmOwnedBookImg(src="", alt='Card image cap')
+                                    .col-md-6.confirmOwnedBookText
+                                        h6#confirmOwnedBookTitle
+                                        h6#confirmOwnedBookAuthor
+                                        h6#confirmOwnedBookIsbn
+                                .col-md-6.ownedBookText
+                                    h5.confirmSubtitle TRADES
+                                    .col-md-12.wantedBooksDisplay
+                                        ul.confirmBooksList.list-group
                         .row.transitionButtonRow
                             .col-sm-3.col-sm-offset-3.text-center
                                 button.btn.btn-primary.prevButton(type="button") Previous

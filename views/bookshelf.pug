@@ -37,9 +37,14 @@ html
                 .row.shelf
                     if i == -1
                         .card.col-md-4.grid-item.All.Requested.Matched.Rejected
-                            img.card-img-top(src='/images/green_plus.png', alt='Card image cap')
-                            .card-block
-                                h4.card-title New Trade
+                            .row.card_row
+                                .col-md-4
+                                .col-md-4
+                                    img.card-img-top(src='/images/grey_plus.png', alt='Card image cap')
+                                .col-md-4
+                            .row
+                                .card-block
+                                    h4.card-title New Trade
                     else
                         if books[i].title
                             .card.col-md-4.grid-item.Requested.All

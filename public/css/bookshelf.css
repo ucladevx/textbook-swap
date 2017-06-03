@@ -12,9 +12,15 @@
 }
 
 .card-img-top {
-	width: 30%;
+	height: 100%;
 	/*margin-left: 50%;*/
-	float: right;
+	text-align: center;
+}
+
+.card_row {
+	text-align: middle;
+	margin-top: 5vh;
+	height: 15vh;
 }
 
 .grid{

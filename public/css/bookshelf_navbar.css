@@ -13,6 +13,7 @@ nav {
     background: linear-gradient(to right, rgba(0,76,153,1),rgba(102,178,255,1));
     border: 0;
     padding-top: 5vh;
+    padding-bottom: 0vh;
 }
 
 li a{
@@ -47,7 +48,9 @@ li a{
 }
 .navbar-header {
     padding-left: 6vw;
+    margin-top: 1vh;
 }
 .col-md-4 ul {
     /*padding-top: 1vh;*/
+    padding-top: 3vh;
 }

@@ -394,7 +394,7 @@ $("#confirmButton").click(function(){
 
 			    console.log(wantedBook);
 
-			    var book_id = wantedBook.attr("id");
+			    var book_id = wantedBook.attr("id").substr(4);
 				var title = wantedBook.attr("data-title");  
 				var author = wantedBook.attr("data-author");
 				var isbn = wantedBook.attr("data-isbn");

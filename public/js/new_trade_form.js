@@ -164,9 +164,6 @@ $("#wantedInput").keyup(function() {
 			var selectedOwnedBook = $("li.highlight-owned.list-group-item");
 			var owned_book_title = selectedOwnedBook.attr("data-title");
 
-			// TESTING
-			console.log(owned_book_title);
-
 			// successful query
 			if (object.status == 0) {
 				// new search results found, so display them

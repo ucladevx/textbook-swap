@@ -101,23 +101,40 @@ $("#ownedInput").keyup(function() {
 		$.get("/api/search/search_textbooks", { search_input: ownedInput }, function(object) {
 			// get the search results
 			var searchResults = object.data;
+			// set of book id's for books that user owns
+			var ownedBooksSet = new Set();
 
 			// successful query
 			if (object.status == 0) {
 				// new search results found, so display them
 				if (searchResults.length > 0) {
 					$("#ownedSearchResultsList").empty();
-					// display all of the search results on the screen
-					for (var i = 0; i < searchResults.length; i++) {
-						var title = searchResults[i]["title"];
-						var author = searchResults[i]["author"];
-						var isbn = searchResults[i]["isbn"];
-						var book_id = searchResults[i]["book_id"];
-						var img_url = searchResults[i]["img_url"];
 
-						// display each line of the search result
-						$("#ownedSearchResultsList").append('<li class="list-group-item" id="' + book_id + '" data-title="' + title + '" data-author="' + author + '" data-isbn="' + isbn + '" data-img_url="' + img_url +'">' + title + ', ' + author + '</li>');
-					}
+					// don't display books inside user's owned books list
+					$.get("/api/owned_books/get_books", { user_id: "user" }, function(userData) {
+						var userBooksInfo = userData.data;
+						for (var j = 0; j < userBooksInfo.length; j++) {
+							ownedBooksSet.add(userBooksInfo[j]["book_id"]);
+
+							console.log(userBooksInfo[j]["book_id"]);
+						}
+
+						// display all of the search results on the screen
+						for (var i = 0; i < searchResults.length; i++) {
+							var title = searchResults[i]["title"];
+							var author = searchResults[i]["author"];
+							var isbn = searchResults[i]["isbn"];
+							var book_id = searchResults[i]["book_id"];
+							var img_url = searchResults[i]["img_url"];
+
+							// console.log(book_id);
+
+							if (!ownedBooksSet.has(book_id)) {
+								// display each line of the search result
+								$("#ownedSearchResultsList").append('<li class="list-group-item" id="' + book_id + '" data-title="' + title + '" data-author="' + author + '" data-isbn="' + isbn + '" data-img_url="' + img_url +'">' + title + ', ' + author + '</li>');
+							}
+						}
+					});
 				}
 			}
 			// error when querying
@@ -162,7 +179,7 @@ $("#wantedInput").keyup(function() {
 			var searchResults = object.data;
 			// get the title of the book (use as unique key)
 			var selectedOwnedBook = $("li.highlight-owned.list-group-item");
-			var owned_book_title = selectedOwnedBook.attr("data-title");
+			var owned_book_id = selectedOwnedBook.attr("id");
 
 			// successful query
 			if (object.status == 0) {
@@ -179,7 +196,7 @@ $("#wantedInput").keyup(function() {
 
 						// console.log(title);
 
-						if (owned_book_title != title) {
+						if (owned_book_id != book_id) {
 							// display each line of the search result
 							$("#wantedSearchResultsList").append('<li class="list-group-item" id="' + book_id + '" data-title="' + title + '" data-author="' + author + '" data-isbn="' + isbn + '" data-img_url="' + img_url +'">' + title + ', ' + author + '</li>');
 						}
@@ -213,7 +230,7 @@ $("#wantedSearchResultsList").on("click", ".list-group-item", function(){
 
     if($(".wantedBooksList").find(selector).length) {
         document.getElementById(selectorID).scrollIntoView({behavior: 'smooth'});
-    }else {
+    } else {
         $(".wantedBooksList").prepend('<li class="list-group-item" id="item' + book_id + '" data-title="' + title + '" data-author="' + author + '" data-isbn="' + isbn + '" data-img_url="' + img_url + '">' + "<a class=\"closeButton\" href=\"#\">x</a>" + "<img src=" + img_url + "> " + '</li>');
         $('.wantedBooksList').animate({
             scrollTop: "0px"

@@ -60,6 +60,11 @@
 	width: 15%;
 }
 
+.carousel-indicators {
+	margin-bottom: -3vh;
+	padding-left: 1.2vw;
+}
+
 .carousel-indicators .active {
 	background-color: rgb(184, 184, 184);
 	margin: 0 2px;

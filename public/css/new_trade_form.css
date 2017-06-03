@@ -164,6 +164,7 @@ h3 {
 
 .wantedBooksList {
 	height: 35vh;
+	scroll-behavior: smooth;
 }
 
 /* scale image for selected wanted books */

@@ -201,15 +201,13 @@ $("#wantedSearchResultsList").on("click", ".list-group-item", function(){
 	var img_url = searchResult.dataset.img_url;
 
 	// add new selected item to wanted list
-    var selector = "#" + book_id
+    var selector = "#item" + book_id
+	var selectorID = "item" + book_id
 
     if($(".wantedBooksList").find(selector).length) {
-        console.log('exists!');
-        $('.wantedBooksList').animate({
-            scrollTop: $(".wantedBooksList").find(selector).offset().top
-        }, 350);
+        document.getElementById(selectorID).scrollIntoView({behavior: 'smooth'});
     }else {
-        $(".wantedBooksList").prepend('<li class="list-group-item" id="' + book_id + '" data-title="' + title + '" data-author="' + author + '" data-isbn="' + isbn + '" data-img_url="' + img_url + '">' + "<a class=\"closeButton\" href=\"#\">x</a>" + "<img src=" + img_url + "> " + '</li>');
+        $(".wantedBooksList").prepend('<li class="list-group-item" id="item' + book_id + '" data-title="' + title + '" data-author="' + author + '" data-isbn="' + isbn + '" data-img_url="' + img_url + '">' + "<a class=\"closeButton\" href=\"#\">x</a>" + "<img src=" + img_url + "> " + '</li>');
         $('.wantedBooksList').animate({
             scrollTop: "0px"
         }, 350);

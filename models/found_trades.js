@@ -292,3 +292,23 @@ exports.get_statuses_by_id = function (trade_id, next){
             });
     });
 };
+
+exports.get_matched_trades = function (user_id, next){
+    pg.connect(process.env.DATABASE_URL, function(err, client, done){
+        done();
+
+        if (err){
+            console.error("Error connection to client while querying found_trades table: ", err);
+            return next(error_codes.found_trades_errors.DB_CONNECTION_ERROR, []);
+        }
+        client.query("SELECT book_have, book_want FROM found_trades WHERE user_id=$1::VARCHAR",
+            [user_id], function(err, result){
+                if(err){
+                    console.error("Error querying database", err);
+                    return next(error_codes.found_trades_errors.DB_QUERY_ERROR, []);
+                }
+
+                return next(error_codes.found_trades_errors.DB_SUCCESS, result.rows);
+            });
+    });
+};

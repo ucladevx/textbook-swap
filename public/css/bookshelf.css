@@ -1,0 +1,115 @@
+.card {
+	width: 30vw;
+	height: 240px;
+	display: table-cell;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	text-align: center;
+}
+
+.Matched:not(.Requested){
+	background-color: #52b9d1;
+}
+
+.card-img-top {
+	width: 30%;
+	/*margin-left: 50%;*/
+	float: right;
+}
+
+.grid{
+	margin-top: -20vh;
+}
+
+.owned, .wanted {
+	text-align: center;
+	background-color: rgb(201, 232, 235);
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.book-img {
+	width: 60%;
+}
+
+.title{
+	margin-top: 5px;
+	font-size: 0.8em;
+	color: white;
+	text-transform: uppercase;
+	word-wrap: break-word;
+	overflow: hidden;
+	max-height: 2.8em; /* (Number of lines you want visible) * (line-height) */
+	line-height: 1.4em;
+}
+
+.arrow{
+	font-size: 2.5em;
+	margin-top: 100%;
+}
+
+.shelf{
+	display: table;
+	height:20%;
+	margin: 1%;
+}
+.button-group{
+	text-align: center;
+	padding-bottom: 2%;
+}
+.filter-button-group{
+	margin-top: 3vh;
+}
+.filter-button {
+	background-color: #353535;
+	color: white;
+	border: 0;
+	margin: 1vw;
+	font-size: 120%;
+}
+body {
+	/*margin: 1%;*/
+	background-color: #ececec;
+	overflow-x: hidden;
+}
+.grid-item{
+	margin: 1%;
+}
+.username {
+	/*size: 150%;*/
+	font-weight: normal;
+}
+h6 {
+	font-weight: lighter;
+	color: white;
+	/*size: 75%;*/
+}
+.bookshelf_name {
+	font-weight: normal;
+	color: #52b9d1;
+}
+
+.bookshelf_navbar_container {
+	background-color: #353535;
+	width: 110vw;
+	margin-left: -1vw;
+	margin-top: -5vh;
+	padding-top: 3vh;
+	padding-right: 3vw;
+	/*margin-right: -3vw;*/
+}
+.bookshelf_navbar {
+	padding: 3vw;
+}
+.welcome-dialog {
+	font-size: 85%;
+}
+.Requested_but {
+	color: #f8cc45;
+}
+.Matched_but {
+	color: #52b9d1;
+}
+.Rejected_but {
+	color: #e88154;
+}

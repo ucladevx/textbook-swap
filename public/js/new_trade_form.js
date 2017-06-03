@@ -339,12 +339,25 @@ $("#confirmButton").click(function(){
 			$.get("/api/book_to_class/get_prof_class_info", { book_id: book_id }, function(object) {
 				// get professor and class info for the owned book
 				var profClassInfo = object.data;
+				// set of professors
+				var profSet = new Set();
+				// set of classes
+				var classSet = new Set();
 				// successful query
 				if (object.status == 0) {
 					// create strings of professors and classes 
 					for (var i = 0; i < profClassInfo.length; i++) {
-						profs = profs + profClassInfo[i]["professor_name"] + ", ";
-						classes = classes + profClassInfo[i]["class_name"] + ", ";
+						// professor name already seen
+						if (!profSet.has(profClassInfo[i]["professor_name"])) {
+							profs = profs + profClassInfo[i]["professor_name"] + ", ";;
+							profSet.add(profClassInfo[i]["professor_name"]);
+						}
+
+						// professor name already seen
+						if (!classSet.has(profClassInfo[i]["class_name"])) {
+							classes = classes + profClassInfo[i]["class_name"] + ", ";;
+							classSet.add(profClassInfo[i]["class_name"]);
+						}
 					}
 					// get rid of extraneous ", " at the end
 					profs = profs.substring(0, profs.length - 2);

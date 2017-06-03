@@ -54,14 +54,14 @@
 .bottom-left-bookshelf {
 	height: 15%;
 	margin-left: 3vw;
-	margin-top: -2vw;
+	margin-top: -2vh;
 	float: left;
 	right: 0;
 	width: 15%;
 }
 
 .carousel-indicators {
-	margin-bottom: -3vh;
+	margin-bottom: 0vh;
 	padding-left: 1.2vw;
 }
 

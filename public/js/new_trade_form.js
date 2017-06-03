@@ -234,6 +234,77 @@ $(".prevButton").click(function(){
 	$('.carousel').carousel('prev');
 });
 
+$("#confirmButton").click(function(){
+	console.log("confirm button click");
+	// add owned book
+	var selectedOwnedBook = $("li.highlight-owned.list-group-item");
+	var owned_book_id = selectedOwnedBook.attr("id");
+	$.post("/api/owned_books/add", { user_id: "user", book_id: owned_book_id },
+		function(data){
+			if(data.status === 0){
+				console.log('successfully added wanted book to owned_books');
+			}
+			else if(data.status === 1)
+				console.log('db connection error for owned_books');
+			else if(data.status === 2)
+				console.log('db query error for owned_books');
+			else if(data.status === 3){
+				console.log('owned book already exists');
+			}
+		},
+		"json"
+	);
+
+	// add confirmed wanted books
+	$('.confirmBooksList li').each(function() {
+	    var confirmedBook = $(this);
+
+	    console.log(confirmedBook);
+
+	    var wanted_book_id = confirmedBook.attr("id");
+	    var relationStatus = 'V';  // V = verified
+
+	    // add wanted book to wish list
+	    $.post("/api/wish_list/add", { user_id: "user", book_id: wanted_book_id },
+			function(data){
+				if(data.status === 0){
+					console.log('successfully added wanted book to wish_list');
+				}
+				else if(data.status === 1)
+					console.log('db connection error for wish_list');
+				else if(data.status === 2)
+					console.log('db query error for wish_list');
+				else if(data.status === 3){
+					console.log('wanted book already exists');
+				}
+			},
+			"json"
+		);
+
+	    // add trade relation between owned book and wanted book
+		$.post("/api/possible_trades/add", { user_id: "user", owned_book_id: owned_book_id, wanted_book_id: wanted_book_id, status: relationStatus },
+			function(data){
+				if(data.status === 0){
+					console.log('successfully added trade relation to possible_trades');
+				}
+				else if(data.status === 1)
+					console.log('db connection error for possible_trades');
+				else if(data.status === 2)
+					console.log('db query error for possible_trades');
+				else if(data.status === 3){
+					console.log('trade relation already exists');
+				}
+			},
+			"json"
+		);
+	});
+
+	// close the popup
+	$('[data-popup="popup-1"]').fadeOut(350);
+
+	// refresh the window (display newly added book trade)
+	location.reload();
+});
 
 /*
  * Code needed for carousel transitions
@@ -266,20 +337,33 @@ $(".prevButton").click(function(){
 			$.get("/api/book_to_class/get_prof_class_info", { book_id: book_id }, function(object) {
 				// get professor and class info for the owned book
 				var profClassInfo = object.data;
+				// set of professors
+				var profSet = new Set();
+				// set of classes
+				var classSet = new Set();
 				// successful query
 				if (object.status == 0) {
 					// create strings of professors and classes 
 					for (var i = 0; i < profClassInfo.length; i++) {
-						profs = profs + profClassInfo[i]["professor_name"] + ", ";
-						classes = classes + profClassInfo[i]["class_name"] + ", ";
+						// professor name already seen
+						if (!profSet.has(profClassInfo[i]["professor_name"])) {
+							profs = profs + profClassInfo[i]["professor_name"] + ", ";;
+							profSet.add(profClassInfo[i]["professor_name"]);
+						}
+
+						// professor name already seen
+						if (!classSet.has(profClassInfo[i]["class_name"])) {
+							classes = classes + profClassInfo[i]["class_name"] + ", ";;
+							classSet.add(profClassInfo[i]["class_name"]);
+						}
 					}
 					// get rid of extraneous ", " at the end
 					profs = profs.substring(0, profs.length - 2);
 					classes = classes.substring(0, classes.length - 2);
 
 					// send profs and classes info to front-end
-					document.getElementById("ownedBookClasses").innerHTML = "Class: " + classes;
-					document.getElementById("ownedBookProfs").innerHTML = "Professor: " + profs;
+					document.getElementById("ownedBookClasses").innerHTML = "Class: " + "<span style='color: #3AC1D7'>" + classes + "</span>";
+					document.getElementById("ownedBookProfs").innerHTML = "Professor: " + "<span style='color: #3AC1D7'>" + profs + "</span>";
 				}
 				// error when querying
 				else if (object.status === 2)
@@ -317,7 +401,7 @@ $(".prevButton").click(function(){
 				var img_url = wantedBook.attr("data-img_url");
 
 			    // and the rest of your code
-			    $(".confirmBooksList").append('<li class="list-group-item" id="' + book_id + '" data-title="' + title + '" data-author="' + author + '" data-isbn="' + isbn + '" data-img_url="' + img_url + '">' + "<img src=" + img_url + "> " + '<p>' + title + '<br>' + author + '</p>' + '</li>');
+			    $(".confirmBooksList").append('<li class="list-group-item" id="' + book_id + '" data-title="' + title + '" data-author="' + author + '" data-isbn="' + isbn + '" data-img_url="' + img_url + '">' + '<div class="row"> <div class="col-md-3">' + '<img src="' + img_url + '"> ' + '</div>' + '<div class="col-md-9">' + '<p>' + title + '</p> <p>' + author + '</p>' + '</div> </div>' + '</li>');
 			});
    		}
 

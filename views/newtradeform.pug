@@ -1,3 +1,6 @@
+// Lato font
+link(href = 'https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css')
+
 .popup(data-popup='popup-1')
     #myCarousel.carousel.slide(data-ride='carousel' data-interval="false" data-wrap="false")
         .popup-inner
@@ -11,74 +14,89 @@
                 .carousel-inner
                     .item.active
                         a.popup-close(data-popup-close='popup-1', href='#') x
-                        h3 NEW TRADE
-                        div(class="row" id="forms")
-                            div(class="col-lg-12" id="ownedForm")
-                                label Select the book you can offer.
-                                div(class="input-group")
-                                    input(class="form-control", type='text', id="ownedInput", placeholder='Search by title, professor, or class' aria-describedby="ownedInputAddon")
-                                    span(class="input-group-addon" id="ownedInputAddon") #[span(class="glyphicon glyphicon-search")]
-                        div(class="row" id="searchResults")
-                            div(class="col-lg-12" id="ownedSearchResultsBox")
-                                ul(id = "ownedSearchResultsList").list-group
-                        div(class = "row" id="transitionButtonRow")
-                            div(class = "col-lg-12 text-center")
-                                button(class="btn btn-primary nextButton" type="button" id="pick_book_next") Next
+                        .row.slideHeader
+                            h3.slideTitle NEW TRADE
+                            img.top-right-bookshelf(src="./images/Bookshelf_NewTrade1.svg")
+                        .slideContent
+                            h5.slideMessage Select the book you can offer.
+                            .row.searchForm
+                                .col-lg-12
+                                    .input-group
+                                        input.form-control#ownedInput(type='text', placeholder='Search by title, professor, or class' aria-describedby="ownedInputAddon")
+                                        span.input-group-addon#ownedInputAddon #[span(class="glyphicon glyphicon-search")]
+                                    ul#ownedSearchResultsList.list-group
+                        .row.transitionButtonRow
+                            .col-lg-12.text-center
+                                button.btn.btn-primary.nextButton#pick_book_next(type="button") Next
+                        img.bottom-left-bookshelf(src="./images/Bookshelf_NewTrade2.svg")
                     .item
                         a.popup-close(data-popup-close='popup-1', href='#') x
-                        h3 NEW TRADE 
-                        h5#slideMessage Confirm book!
-                        .row.ownedBookWrapper
-                            .col-md-8.ownedBookText
-                                h4(id="ownedBookTitle")
-                                h4(id="ownedBookAuthor")
-                                h4(id="ownedBookIsbn")
-                                h4(id="ownedBookClasses")
-                                h4(id="ownedBookProfs")
-                            .col-md-4
-                                img(src="", alt='Card image cap', id="ownedBookImg")
-                        div(class = "row" id="transitionButtonRow")
-                            div(class = "col-sm-3 col-sm-offset-3 text-center")
-                                button(class="btn btn-primary prevButton" type="button") Previous
-                            div(class = "col-sm-3 text-center")
-                                button(class="btn btn-primary nextButton" type="button") Next
+                        .row.slideHeader
+                            h3.slideTitle NEW TRADE
+                            img.top-right-bookshelf(src="./images/Bookshelf_NewTrade1.svg")
+                        .slideContent
+                            h5.slideMessage Confirm book!
+                            .row.confirmWrapper
+                                .row.ownedBookInfoBox
+                                    .col-md-8.ownedBookText
+                                        h4#ownedBookTitle
+                                        h4#ownedBookAuthor
+                                        h4#ownedBookIsbn
+                                        h4#ownedBookClasses
+                                        h4#ownedBookProfs
+                                    .col-md-4
+                                        img#ownedBookImg(src="", alt='Card image cap')
+                        .row.transitionButtonRow
+                            .col-sm-3.col-sm-offset-3.text-center
+                                button.btn.btn-primary.prevButton(type="button") Previous
+                            .col-sm-3.text-center
+                                button.btn.btn-primary.nextButton(type="button") Next
+                        img.bottom-left-bookshelf(src="./images/Bookshelf_NewTrade2.svg")
                     .item
                         a.popup-close(data-popup-close='popup-1', href='#') x
-                        h3 NEW TRADE (select wanted books)
-                        div(class="row" id="forms")
-                            h5#slideMessage Select the books you want to add to your trades.
-                            div(class="col-md-8" id="wantedForm")
-                                div(class="input-group")
-                                    input(class="form-control", type='text', id="wantedInput", placeholder='Search by title, professor, or class' aria-describedby="wantedInputAddon")
-                                    span(class="input-group-addon" id="wantedInputAddon") #[span(class="glyphicon glyphicon-search")]
-                                ul(id = "wantedSearchResultsList").list-group
-                            div(class="col-md-4, wantedBooksDisplay")
-                                ul(class = "wantedBooksList").list-group
-                        div(class = "row" id="transitionButtonRow")
-                            div(class = "col-sm-3 col-sm-offset-3 text-center")
-                                button(class="btn btn-primary prevButton" type="button") Previous
-                            div(class = "col-sm-3 text-center")
-                                button(class="btn btn-primary nextButton" type="button" id="wanted_list_next") Next
+                        .row.slideHeader
+                            h3.slideTitle NEW TRADE
+                            img.top-right-bookshelf(src="./images/Bookshelf_NewTrade1.svg")
+                        .slideContent
+                            h5.slideMessage Select the books you want to add to your trades.
+                            .row.searchForm
+                                .col-md-8#wantedForm
+                                    .input-group
+                                        input.form-control#wantedInput(type='text', placeholder='Search by title, professor, or class' aria-describedby="wantedInputAddon")
+                                        .input-group-addon#wantedInputAddon #[span(class="glyphicon glyphicon-search")]
+                                    ul#wantedSearchResultsList.list-group
+                                col-md-4.wantedBooksDisplay
+                                    ul.wantedBooksList.list-group
+                        .row.transitionButtonRow
+                            .col-sm-3.col-sm-offset-3.text-center
+                                button.btn.btn-primary.prevButton(type="button") Previous
+                            .col-sm-3.text-center
+                                button.btn.btn-primary.nextButton#wanted_list_next(type="button") Next
+                        img.bottom-left-bookshelf(src="./images/Bookshelf_NewTrade2.svg")
                     .item
                         a.popup-close(data-popup-close='popup-1', href='#') x
-                        h3 NEW TRADE 
-                        h5#slideMessage Confirm trades!
-                        .row.confirmWrapper
-                            .col-md-6
-                                h5.confirmSubtitle OFFERING
+                        .row.slideHeader
+                            h3.slideTitle NEW TRADE
+                            img.top-right-bookshelf(src="./images/Bookshelf_NewTrade1.svg")
+                        .slideContent
+                            h5.slideMessage Confirm trades!
+                            .row.confirmWrapper
                                 .col-md-6
-                                    img(src="", alt='Card image cap', id="confirmOwnedBookImg")
-                                .col-md-6.confirmOwnedBookText
-                                    h6(id="confirmOwnedBookTitle")
-                                    h6(id="confirmOwnedBookAuthor")
-                                    h6(id="confirmOwnedBookIsbn")
-                            .col-md-6.ownedBookText
-                                h5.confirmSubtitle TRADES
-                                div(class="col-md-6, wantedBooksDisplay")
-                                    ul(class = "confirmBooksList").list-group
-                        div(class = "row" id="transitionButtonRow")
-                        div(class = "row" id="transitionButtonRow")
-                            div(class = "col-sm-3 col-sm-offset-3 text-center")
-                                button(class="btn btn-primary prevButton" type="button") Previous
-                            div(class = "col-sm-3 text-center")
-                                button(class="btn btn-primary nextButton" type="button") Confirm
+                                    h5.confirmSubtitle OFFERING
+                                    .row.confirmBookInfoBox
+                                        .col-md-6
+                                            img#confirmOwnedBookImg(src="", alt='Card image cap')
+                                        .col-md-6.confirmOwnedBookText
+                                            h6#confirmOwnedBookTitle
+                                            h6#confirmOwnedBookAuthor
+                                            h6#confirmOwnedBookIsbn
+                                .col-md-6
+                                    .confirmWantedBooksBox
+                                        h5.confirmSubtitle TRADES
+                                        ul.confirmBooksList.list-group
+                        .row.transitionButtonRow
+                            .col-sm-3.col-sm-offset-3.text-center
+                                button.btn.btn-primary.prevButton(type="button") Previous
+                            .col-sm-3.text-center
+                                button.btn.btn-primary.nextButton#confirmButton(type="button") Confirm
+                        img.bottom-left-bookshelf(src="./images/Bookshelf_NewTrade2.svg")

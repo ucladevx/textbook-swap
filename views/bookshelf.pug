@@ -4,15 +4,17 @@ html
         meta(charset='utf-8')
         title Loops - Dashboard
         script(src='https://code.jquery.com/jquery-3.2.1.min.js', crossorigin='anonymous')
-        link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css', integrity='sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ', crossorigin='anonymous')
+
+        link(rel='stylesheet' type="text/css" href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css', integrity='sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ', crossorigin='anonymous')
         link(rel='stylesheet' type="text/css" href="css/bookshelf.css")
+        //- link(rel='stylesheet' type="text/css" href="css/bookshelf_navbar.css")
         script(src="/assets/isotope.pkgd.min.js")
         script(src='https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js', integrity='sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb', crossorigin='anonymous')
         script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js', integrity='sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn', crossorigin='anonymous') 
         script(src="/js/bookshelf.js")
 
+    include bookshelf_navbar.pug
     body
-<<<<<<< HEAD
         .bookshelf_navbar_container
             .row.bookshelf_navbar
                 .col-md-3.welcome_dialog_container
@@ -30,7 +32,7 @@ html
                 .col-md-3.bookshelf_image_container
                     img(src='images/Bookshelf_Dashboard.svg')
 
-        .grid
+        .grid.carousel-inner
             - for(var i = -1; i < books.length; i += 3){
                 .row.shelf
                     if i == -1

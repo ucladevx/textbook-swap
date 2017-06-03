@@ -160,6 +160,12 @@ $("#wantedInput").keyup(function() {
 		$.get("/api/search/search_textbooks", { search_input: wantedInput }, function(object) {
 			// get the search results
 			var searchResults = object.data;
+			// get the title of the book (use as unique key)
+			var selectedOwnedBook = $("li.highlight-owned.list-group-item");
+			var owned_book_title = selectedOwnedBook.attr("data-title");
+
+			// TESTING
+			console.log(owned_book_title);
 
 			// successful query
 			if (object.status == 0) {
@@ -174,8 +180,12 @@ $("#wantedInput").keyup(function() {
 						var book_id = searchResults[i]["book_id"];
 						var img_url = searchResults[i]["img_url"];
 
-						// display each line of the search result
-						$("#wantedSearchResultsList").append('<li class="list-group-item" id="' + book_id + '" data-title="' + title + '" data-author="' + author + '" data-isbn="' + isbn + '" data-img_url="' + img_url +'">' + title + ', ' + author + '</li>');
+						// console.log(title);
+
+						if (owned_book_title != title) {
+							// display each line of the search result
+							$("#wantedSearchResultsList").append('<li class="list-group-item" id="' + book_id + '" data-title="' + title + '" data-author="' + author + '" data-isbn="' + isbn + '" data-img_url="' + img_url +'">' + title + ', ' + author + '</li>');
+						}
 					}
 				}
 			}

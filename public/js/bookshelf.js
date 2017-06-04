@@ -10,9 +10,9 @@ $(document).ready(function(){
 	});
 
 	$(".Matched").on('click', function(e){
-		console.log($(this).find(".owned")[0].attributes[1].nodeValue);
 		var ownedCard = $(this).find(".owned")[0].attributes;
 		var wantedCard = $(this).find(".wanted")[0].attributes;
+		console.log(wantedCard);
 
 		$("body").append("<div class=\"popup\" data-popup=\"" 
 				+ "popup-matched-trade"
@@ -66,6 +66,23 @@ $(document).ready(function(){
 				// do not close the pop-up if you are clicking inside of it
 				$(".popup-inner").click(function(e){
 					e.stopPropagation();
+				});
+
+				$.ajax({url: "/api/found_trades/get_trade_by_wanted_book",
+					data: { wanted_book: wantedCard[3].nodeValue },
+					success: function(response){
+				 		
+
+						$(".accept-trade").click(function(e){
+							$.post("/api/found_trades/update_status_accepted",
+								{ trade_id:  },
+								function(data){
+
+								},
+								"json"
+							)
+						});
+					}
 				});
 		e.preventDefault();
 	});

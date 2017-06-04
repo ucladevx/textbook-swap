@@ -12,7 +12,6 @@ $(document).ready(function(){
 	$(".Matched").on('click', function(e){
 		var ownedCard = $(this).find(".owned")[0].attributes;
 		var wantedCard = $(this).find(".wanted")[0].attributes;
-		console.log(wantedCard);
 
 		$("body").append("<div class=\"popup\" data-popup=\"" 
 				+ "popup-matched-trade"
@@ -71,17 +70,28 @@ $(document).ready(function(){
 				$.ajax({url: "/api/found_trades/get_trade_by_wanted_book",
 					data: { wanted_book: wantedCard[3].nodeValue },
 					success: function(response){
-				 		
+						if(response.status === 0){
+							var trade = response.data[0];
+							$(".accept-trade").click(function(e){
+								$.post("/api/found_trades/update_status_accepted",
+									{ trade_id: trade.trade_id, owned_book: trade.book_have, target_user: trade.target_id, wanted_book: trade.book_want },
+									function(data){
+										console.log(data);
+									},
+									"json"
+								)
+							});
 
-						$(".accept-trade").click(function(e){
-							$.post("/api/found_trades/update_status_accepted",
-								{ trade_id:  },
-								function(data){
-
-								},
-								"json"
-							)
-						});
+							$(".reject-trade").click(function(e){
+								$.post("/api/found_trades/update_status_rejected",
+									{ trade_id: trade.trade_id, owned_book: trade.book_have, target_user: trade.target_id, wanted_book: trade.book_want },
+									function(data){
+										console.log(data);
+									},
+									"json"
+								)
+							});
+						}
 					}
 				});
 		e.preventDefault();

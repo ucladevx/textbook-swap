@@ -14,7 +14,7 @@ $(document).ready(function(){
 		$(".wantedBooksList").empty();
 
 		$('#wanted_list_next').prop('disabled', true);
-	}
+	};
 
 	/*
 	 * Functions needed for pop-up form input

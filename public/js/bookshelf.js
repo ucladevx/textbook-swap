@@ -22,17 +22,17 @@ $(document).ready(function(){
 			+ "\" href=\"\">x</a>" 
 			
 			+ "<div class=\"row\" id=\"top-row\">"
-			+ "<div class=\"col-3\"></div>"
-			+ "<div class=\"col-6 text-center\">"
+			+ "<div class=\"col-xs-3\"></div>"
+			+ "<div class=\"col-xs-6 text-center\">"
 			+ "<h4>Matched Trade</h4>"
             + "</div>"
-            + "<div class=\"col-3\">"
+            + "<div class=\"col-xs-3\">"
             + "<img src=\"./images/book4.svg\" id=\"book-corner\">"
 			+ "</div>"
 			+ "</div>"
 
 			+ "<div class=\"row\" id=\"book-info\">"
-			+ "<div class=\"col-6 text-center\">"
+			+ "<div class=\"col-xs-6 text-center\">"
 			+ "<p>"
 			+ "Title: " + ownedCard[1].nodeValue + "<br>"
 			+ "Author: " + ownedCard[2].nodeValue + "<br>"
@@ -41,7 +41,7 @@ $(document).ready(function(){
 			+ "</p>"
 			+ "</div>" //close col
 
-			+ "<div class=\"col-6 text-center\">"
+			+ "<div class=\"col-xs-6 text-center\">"
 			+ "<p>"
 			+ "Title: " + wantedCard[1].nodeValue + "<br>"
 			+ "Author: " + wantedCard[2].nodeValue + "<br>"
@@ -52,14 +52,14 @@ $(document).ready(function(){
 			+ "</div>" //close row
 
 			+ "<div class=\"row\">"
-			+ "<div class=\"col-4\"></div>"
-			+ "<div class=\"col-2 text-center\">"
+			+ "<div class=\"col-xs-4\"></div>"
+			+ "<div class=\"col-xs-2 text-center\">"
 			+ "<a class=\"btn btn-primary accept-trade\" role=\"button\" href=\"#\">Accept</a>"
 			+ "</div>" //close col
-			+ "<div class=\"col-2 text-center\">"
+			+ "<div class=\"col-xs-2 text-center\">"
 			+ "<a class=\"btn btn-danger reject-trade\" role=\"button\" href=\"#\">Reject</a>"
 			+ "</div>" //close col
-			+ "<div class=\"col-4\"></div>"
+			+ "<div class=\"col-xs-4\"></div>"
 			+ "</div>" //close row
 
 			+ "</div>" //close first-page

@@ -170,6 +170,8 @@ h6 {
 #matched {
 	background-color: #52b9d1;
 	color: white;
+	height: 70vh;
+	width: 90vw;
 }
 
 .accept-trade, .confirm {
@@ -195,11 +197,15 @@ h6 {
 #book-info {
 	background-color: #ececec;
 	color: #353535;
+	margin-top: 3vh;
+	margin-bottom: 3vh;
+	padding-top: 2vh;
+	padding-bottom: 2vh;
 }
 
 #book-corner {
 	height: 8vh;
-	width: 18vw;
+	width: 25vw;
 	margin-right: -3vw;
 	margin-top: 0vh;
 	-moz-transform: scaleX(-1);

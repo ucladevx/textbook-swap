@@ -40,7 +40,8 @@ exports.test = function(){
     */
     possibleTrades.add_relation('Jay', 20, 21, test_n);
     possibleTrades.add_relation('Jay', 25, 30, test_n);
-
+    possibleTrades.add_relation('1743176729031533', 25, 30, test_n);
+     possibleTrades.add_relation('1743176729031533', 20, 31, test_n);
     /*
         At the conclusion of this, the DB should contain
         'Jay', 7, 8
@@ -53,9 +54,12 @@ exports.test = function(){
         [ { book_want: 8 }, { book_want: 9 }, { book_want: 10 } ]
     */
 
-    possibleTrades.update_status('I', 'Jay', 7, 8, test_n);
-    possibleTrades.get_status('Jay', 7, 8, test_next);
+    // possibleTrades.update_status('I', 'Jay', 7, 8, test_n);
+    // possibleTrades.get_status('Jay', 7, 8, test_next);
   
+
+   
+
     function test_n(errorcode){
         if (errorcode == ec.possible_trades_errors.POSSIBLE_TRADE_ALREADY_EXISTS){
             console.log("relation is in the database");
@@ -89,6 +93,7 @@ exports.test = function(){
         relation_get_relations++;
         if(relation_get_relations == 3) {
             possibleTrades.get_book_wants('Jay', 7, test_next);
+             possibleTrades.get_num_trades('Jay', test_n);
         }
     }
 

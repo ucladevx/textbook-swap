@@ -138,6 +138,44 @@ exports.get_book_wants = function(user_id, book_have_id, next) {
 };
 
 /*
+ * 
+ *
+ */
+exports.get_num_trades = function(user_id, next) {
+  pg.connect(process.env.DATABASE_URL, function(err, client, done){
+    done();
+    if (err){
+      console.error("Error connection to client while querying possible_trades table: ", err);
+      return next(error_codes.possible_trades_errors.DB_CONNECTION_ERROR);
+    }
+    client.query("SELECT DISTINCT book_have FROM possible_trades WHERE user_id=$1::VARCHAR", [user_id], function(err, result) {
+      if(err){
+          console.error("Error querying database", err);
+          return next(error_codes.possible_trades_errors.DB_QUERY_ERROR);
+      }
+      // key: book_have id
+      // value: count of book_wants associated with each book_have 
+      var book_to_count = {};
+      var num_books = result.rows.length;
+      if(num_books == 0) return next(error_codes.possible_trades_errors.DB_SUCCESS, null);
+      (result.rows).forEach(function(row, i_index) {
+        var book_have_id = result.rows[i_index].book_have;
+        client.query("SELECT COUNT(book_want) FROM possible_trades WHERE user_id=$1::VARCHAR AND book_have=$2::INTEGER", [user_id, book_have_id], function(err, result){
+          if(err){
+              console.error("Error querying database", err);
+              return next(error_codes.possible_trades_errors.DB_QUERY_ERROR);
+          }
+          book_to_count[book_have_id] = result.rows[0].count;
+          if(Object.keys(book_to_count).length == num_books) {
+            return next(error_codes.possible_trades_errors.DB_SUCCESS, book_to_count);
+          }
+        });
+      });     
+    });   
+  });
+};
+
+/*
  * Get the list of all rows associated with the relation {book_want:book_want_id}
  * Replies with either an error_code or an Object of Javascript Objects (essentially an array)
  */

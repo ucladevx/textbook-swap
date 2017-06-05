@@ -6,15 +6,18 @@ html
         script(src='https://code.jquery.com/jquery-3.2.1.min.js', crossorigin='anonymous')
         link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', integrity='sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u', crossorigin='anonymous')
         link(rel='stylesheet' type="text/css" href="css/bookshelf.css")
+        link(rel='stylesheet' type="text/css" href="css/new_trade_form.css")
         link(href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet")
         //- link(rel='stylesheet' type="text/css" href="css/bookshelf_navbar.css")
         script(src="/assets/isotope.pkgd.min.js")
         script(src='https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js', integrity='sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb', crossorigin='anonymous')
         script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js', integrity='sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa', crossorigin='anonymous')
         script(src="/js/bookshelf.js")
+        script(src="/js/new_trade_form.js")
 
     body
         include bookshelf_navbar.pug
+        include newtradeform.pug
         .bookshelf_navbar_container
             .row.bookshelf_navbar
                 .col-md-3.welcome_dialog_container
@@ -36,7 +39,7 @@ html
             - for(var i = -1; i < books.length; i += 3){
                 .row.shelf
                     if i == -1
-                        .card.col-md-4.grid-item.All.Requested.Matched.Rejected
+                        .card.col-md-4.grid-item.All.Requested.Matched.Rejected.new-trade-card(data-popup-open='popup-1', href='#')
                             .row.card_row
                                 .col-md-4
                                 .col-md-4

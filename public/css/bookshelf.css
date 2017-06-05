@@ -2,6 +2,10 @@ body{
 	font-family: 'Lato', sans-serif;
 }
 
+.new-trade-card {
+	cursor: pointer;
+}
+
 .card {
 	position: relative;
 	width: 30vw;
@@ -511,3 +515,4 @@ h6 {
 		border-radius: 0;
 	}
 }
+

@@ -155,8 +155,6 @@ h6 {
     transform:translate(50%, -50%);
     border-radius:1000px;
     background:rgba(0,0,0,0.8);
-    font-family:Arial, Sans-Serif;
-    font-size:20px;
     text-align:center;
     line-height:100%;
     color:#fff;
@@ -167,4 +165,29 @@ h6 {
     transform:translate(50%, -50%) rotate(180deg);
     background:rgba(0,0,0,1);
     text-decoration:none;
+}
+
+#matched {
+	background-color: #52b9d1;
+	color: white;
+}
+
+.accept-trade, .confirm {
+	background-color: #f8cc45;
+	border-color: #f8cc45;
+}
+
+.accept-trade:hover, .confirm:hover {
+	background-color: #efb745;
+	border-color: #efb745;
+}
+
+.reject-trade, .back {
+	background-color: #e88154;
+	border-color: #e88154;
+}
+
+.reject-trade:hover, .back:hover {
+	background-color: #cc6b4e;
+	border-color: #cc6b4e;
 }

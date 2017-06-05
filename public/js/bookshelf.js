@@ -15,7 +15,7 @@ $(document).ready(function(){
 
 		$("body").append("<div class=\"popup\" data-popup=\"" 
 			+ "popup-matched-trade"
-			+ "\"><div class=\"popup-inner\">"
+			+ "\"><div class=\"popup-inner\" id=\"matched\">"
 			+ "<div class=\"first-page\">"
 
 			+ "<a class=\"popup-close\" data-popup-close=\"" + "popup-matched-trade"
@@ -83,7 +83,7 @@ $(document).ready(function(){
 			+ "<h3>Congratulations! You've accepted the trade.</h3>"
 			+ "<a class=\"popup-close\" data-popup-close=\"" + "popup-matched-trade"
 			+ "\" href=\"\">x</a>" 
-			+ "<a class=\"btn btn-warning close\" role=\"button\" href=\"#\">Close</a>"
+			+ "<a class=\"btn btn-warning closebtn\" role=\"button\" href=\"\">Close</a>"
 			+ "</div>"
 		);
 
@@ -94,8 +94,8 @@ $(document).ready(function(){
 			+ "<a class=\"popup-close\" data-popup-close=\"" + "popup-matched-trade"
 			+ "\" href=\"\">x</a>" 
 
-			+ "<a class=\"btn btn-danger confirm\" role=\"button\" href=\"#\">Yes</a>"
 			+ "<a class=\"btn btn-warning back\" role=\"button\" href=\"#\">No, take me back!</a>"
+			+ "<a class=\"btn btn-danger confirm\" role=\"button\" href=\"\">Yes</a>"
 			+ "</div>"
 		);
 
@@ -106,21 +106,23 @@ $(document).ready(function(){
 			+ "<a class=\"popup-close\" data-popup-close=\"" + "popup-matched-trade"
 			+ "\" href=\"\">x</a>" 
 
-			+ "<a class=\"btn btn-warning close\" role=\"button\" href=\"#\">Close</a>"
+			+ "<a class=\"btn btn-warning closebtn\" role=\"button\" href=\"\">Close</a>"
 			+ "</div>"
 		);
 
 		//close button on accept confirmation page
-		$(".close").click(function(e){
+		$(".closebtn").click(function(e){
 			var targeted_popup_class = "popup-matched-trade";
 			$('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
 			$('[data-popup="' + targeted_popup_class + '"]').remove();
+			e.preventDefault();
 		});
 
 		//go back button on reject page
 		$(".back").click(function(e){
 			$(".reject-page").hide();
 			$(".first-page").show();
+			e.preventDefault();
 		});
 
 		//get trade for reject/accept buttons
@@ -137,6 +139,7 @@ $(document).ready(function(){
 						);
 						$(".reject-page").hide();
 						$(".rejected-page").show();
+						e.preventDefault();
 					});
 
 					//accept button
@@ -147,6 +150,7 @@ $(document).ready(function(){
 
 						$(".first-page").hide();
 						$(".accept-page").show();
+						e.preventDefault();
 
 					});
 
@@ -154,6 +158,7 @@ $(document).ready(function(){
 					$(".reject-trade").click(function(e){
 						$(".first-page").hide();
 						$(".reject-page").show();
+						e.preventDefault();
 					});
 				}
 			}

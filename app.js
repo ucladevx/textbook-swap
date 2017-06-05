@@ -24,6 +24,7 @@ dotenv.config();
 const homeController = require('./controllers/routes/home');
 const passportController = require('./controllers/routes/passport');
 const dashboardController = require('./controllers/routes/dashboard');
+const searchController = require('./controllers/routes/search');
 const bookShelfController = require('./controllers/routes/bookshelf');
 
 /*
@@ -33,6 +34,7 @@ const ownedBooksController = require('./controllers/api/owned_books');
 const wishListController = require('./controllers/api/wish_list');
 const possibleTradesController = require('./controllers/api/possible_trades');
 const textbookSearchController = require('./controllers/api/search');
+const bookToClassController = require('./controllers/api/book_to_class');
 
 /*
  * API keys and Passport configuration.
@@ -72,6 +74,7 @@ app.use(passport.session());
  */
 app.get('/', homeController.index);
 app.get('/dashboard', require_login.ensureLoggedIn(), dashboardController.index);
+app.get('/search', require_login.ensureLoggedIn(), searchController.index);
 app.get('/bookshelf', require_login.ensureLoggedIn(), bookShelfController.index);
 
 /*
@@ -101,6 +104,9 @@ app.get('/api/possible_trades/get_book_wants', possibleTradesController.get_book
 
 // Textbook search
 app.get('/api/search/search_textbooks', textbookSearchController.search_textbooks);
+
+// Book to class
+app.get('/api/book_to_class/get_prof_class_info', bookToClassController.get_prof_class_info);
 
 /*
  * Tests

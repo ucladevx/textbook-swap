@@ -28,7 +28,7 @@ exports.add_relation = function(req, res) {
         res.json({status: status});
     });
 
-    //find all (A,B) in the owned_book table where B=wanted_book_id and insert (user_id, owned_book_id, A, wanted_book_id) into the graph_
+    //find all (A,B) in the owned_book table where B=wanted_book_id and insert (user_id, owned_book_id, A, wanted_book_id) into the graph
     ob.get_users(wanted_book_id, function(status, rows){
         if (status == ec.possible_trades_errors.DB_SUCCESS)
             console.log("Successfully found possible trades by wanted book in the database!");

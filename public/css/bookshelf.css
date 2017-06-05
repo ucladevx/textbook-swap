@@ -160,6 +160,119 @@ body {
 	color: #e88154;
 }
 
+.matched-popup {
+    z-index: 100;
+    width:100%;
+    height:100%;
+    display:none;
+    position:fixed;
+    top:0px;
+    left:0px;
+    background:rgba(0,0,0,0.75);
+}
+
+/* Inner */
+.matched-popup-inner {
+    z-index: 200;
+    height:60vh;
+    width:90vh;
+    padding:40px;
+    position:absolute;
+    top:50%;
+    left:50%;
+    -webkit-transform:translate(-50%, -50%);
+    transform:translate(-50%, -50%);
+    box-shadow:0px 2px 6px rgba(0,0,0,1);
+    border-radius:3px;
+    background:#fff;
+}
+
+/* Close Button */
+.matched-popup-close {
+    width:30px;
+    height:30px;
+    padding-top:4px;
+    display:inline-block;
+    position:absolute;
+    top:0px;
+    right:0px;
+    transition:ease 0.25s all;
+    -webkit-transform:translate(50%, -50%);
+    transform:translate(50%, -50%);
+    border-radius:1000px;
+    background:rgba(0,0,0,0.8);
+    text-align:center;
+    line-height:100%;
+    color:#fff;
+}
+
+.matched-popup-close:hover {
+    -webkit-transform:translate(50%, -50%) rotate(180deg);
+    transform:translate(50%, -50%) rotate(180deg);
+    background:rgba(0,0,0,1);
+    text-decoration:none;
+}
+
+#matched {
+    background-color: #52b9d1;
+    color: white;
+    height: 70vh;
+    width: 80vw;
+}
+
+.accept-trade, .confirm {
+    background-color: #f8cc45;
+    border-color: #f8cc45;
+}
+
+.accept-trade:hover, .confirm:hover {
+    background-color: #efb745;
+    border-color: #efb745;
+}
+
+.reject-trade, .back {
+    background-color: #e88154;
+    border-color: #e88154;
+}
+
+.reject-trade:hover, .back:hover {
+    background-color: #cc6b4e;
+    border-color: #cc6b4e;
+}
+
+#book-info {
+    background-color: #ececec;
+    color: #353535;
+    margin-top: 3vh;
+    margin-bottom: 3vh;
+    margin-left: 5vw;
+    margin-right: 5vw;
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+}
+
+#book-corner {
+    height: 8vh;
+    width: 25vw;
+    margin-right: -3vw;
+    margin-top: 0vh;
+    -moz-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    filter: FlipH;
+    -ms-filter: "FlipH";
+}
+
+#top-row {
+    margin-top: -4vh;
+}
+
+#matched-divider {
+    margin-top: 15vh;
+    font-size: 300%;
+}
+
 .Matched .info{
 	background-color: #47a3b2;
 }

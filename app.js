@@ -34,6 +34,8 @@ const wishListController = require('./controllers/api/wish_list');
 const possibleTradesController = require('./controllers/api/possible_trades');
 const textbookSearchController = require('./controllers/api/search');
 const bookToClassController = require('./controllers/api/book_to_class');
+const bookInfoController = require('./controllers/api/book_info');
+const foundTradesController = require('./controllers/api/found_trades');
 
 /*
  * API keys and Passport configuration.
@@ -105,6 +107,15 @@ app.get('/api/search/search_textbooks', textbookSearchController.search_textbook
 
 // Book to class
 app.get('/api/book_to_class/get_prof_class_info', bookToClassController.get_prof_class_info);
+
+// Book info
+app.get('/api/book_info/get_book_info', bookInfoController.get_book_info);
+app.get('/api/book_info/get_pair_book_info', bookInfoController.get_pair_book_info);
+
+// Found trades
+app.post('/api/found_trades/update_status_accepted', foundTradesController.update_status_accepted);
+app.post('/api/found_trades/update_status_rejected', foundTradesController.update_status_rejected);
+app.get('/api/found_trades/get_trade_by_wanted_book', foundTradesController.get_trade_by_wanted_book);
 
 /*
  * Tests

@@ -1,5 +1,15 @@
 /*
- * Initializing the owned books and wanted books lists
+ *  Helper functions
+ */
+
+/* Helper function to reset pop-up form input */
+var resetFormInput = function() {
+	document.getElementById("ownedInput").value = "";
+	$("#ownedSearchResultsList").empty();
+}
+
+/*
+ * Initialization code that runs when DOM is ready
  */
 
 $(document).ready(function(){
@@ -19,12 +29,13 @@ $(document).ready(function(){
 				}
 			}
 			else if(response.status === 1)
-				console.log('db connection error');
+				console.log('owned_books connection error');
 			else if(response.status === 2)
-				console.log('db query error');
+				console.log('owned_books query error');
 		}
 	});
 
+	// load books from the wanted books list
 	$.ajax({url: "/api/wish_list/get_books",
 		data: { user_id: "user" },
 		success: function(response){
@@ -40,13 +51,100 @@ $(document).ready(function(){
 				}
 			}
 			else if(response.status === 1)
+				console.log('owned_books connection error');
+			else if(response.status === 2)
+				console.log('owned_books query error');
+		}
+	});
+})
+
+/*
+ * Functions needed for pop-up form input
+ */
+
+// open the popup 
+$('[data-popup-open]').on('click', function(e)  {
+	// new pop-up, so reset form input from previous instance of the pop-up
+	resetFormInput();
+
+    var targeted_popup_class = jQuery(this).attr('data-popup-open');
+
+	// load book info
+	$.ajax({url: "/api/book_info/get_pair_book_info",
+		data: { id1: 1, id2: 10 },
+		success: function(response){
+	 		if(response.status === 0){
+				$("body").append("<div class=\"popup\" data-popup=\"" 
+				+ targeted_popup_class
+				+ "\"><div class=\"popup-inner\">"
+				+ "<a class=\"popup-close\" data-popup-close=\"" + targeted_popup_class
+				+ "\" href=\"\">x</a>" 
+				
+				+ "<div class=\"row text-center\"><h4>Matched Trade</h4></div>"
+
+				+ "<div class=\"row\">"
+				+ "<div class=\"col-xs-6 text-center\">"
+				+ "<p>"
+				+ "Title: " + response.book1[0].title + "<br>"
+				+ "Author: " + response.book1[0].author + "<br>"
+				+ "ISBN: " + response.book1[0].isbn + "<br>"
+				+ "<img src=\"" + response.book1[0].img_url + "\"> <br>" 
+				+ "</p>"
+				+ "</div>" //close col
+
+				+ "<div class=\"col-xs-6 text-center\">"
+				+ "<p>"
+				+ "Title: " + response.book2[0].title + "<br>"
+				+ "Author: " + response.book2[0].author + "<br>"
+				+ "ISBN: " + response.book2[0].isbn + "<br>"
+				+ "<img src=\"" + response.book2[0].img_url + "\"> <br>"
+				+ "</p>"
+				+ "</div>" //close col
+				+ "</div>" //close row
+
+				+ "<div class=\"row\">"
+				+ "<div class=\"col-xs-4\"></div>"
+				+ "<div class=\"col-xs-2 text-center\">"
+				+ "<a class=\"btn accept-trade\">Accept</a>"
+				+ "</div>" //close col
+				+ "<div class=\"col-xs-2 text-center\">"
+				+ "<a class=\"btn reject-trade\">Reject</a>"
+				+ "</div>" //close col
+				+ "<div class=\"col-xs-4\"></div>"
+				+ "</div>" //close row
+
+				+ "</div></div>"); //close popup-inner and popup
+			    
+			    $('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
+
+			    // close the popup if you are clicking outside of it
+			    $(".popup").click(function(e){
+					var targeted_popup_class = jQuery(this).attr('data-popup');
+					$('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
+				});
+
+				// do not close the pop-up if you are clicking inside of it
+				$(".popup-inner").click(function(e){
+					e.stopPropagation();
+				});
+			}
+			else if(response.status === 1)
 				console.log('db connection error');
 			else if(response.status === 2)
 				console.log('db query error');
-		}
+		},
 	});
 
-})
+    e.preventDefault();
+});
+
+// close the pop-up using the button on the top right corner
+$('[data-popup-close]').on('click', function(e)  {
+    var targeted_popup_class = jQuery(this).attr('data-popup-close');
+    $('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
+
+    e.preventDefault();
+});
 
 /* 
  * Searching and adding entries to the owned books list
@@ -79,7 +177,7 @@ $("#ownedInput").keyup(function() {
 			}
 			// error when querying
 			else if (object.status === 2)
-				console.log('db query error');
+				console.log('owned_books query error');
 		});
 	}
 	else {
@@ -104,9 +202,9 @@ $("#ownedSearchResultsList").on("click", ".list-group-item", function(){
 				$("#ownedList").append('<li class="list-group-item" id="' + book_id + '" data-title="' + title + '" data-author="' + author + '" data-isbn="' + isbn +'">' + title + ', ' + author +'</li>');
 			}
 			else if(data.status === 1)
-				console.log('db connection error');
+				console.log('owned_books connection error');
 			else if(data.status === 2)
-				console.log('db query error');
+				console.log('owned_books query error');
 			else if(data.status === 3){
 				console.log('book already exists');
 			}
@@ -146,7 +244,7 @@ $("#wantedInput").keyup(function() {
 			}
 			// error when querying
 			else if (object.status === 2)
-				console.log('db query error');
+				console.log('owned_books query error');
 		});
 	}
 	else {
@@ -171,9 +269,9 @@ $("#wantedSearchResultsList").on("click", ".list-group-item", function(){
 				$("#wantedList").append('<li class="list-group-item" id="' + book_id + '" data-title="' + title + '" data-author="' + author + '" data-isbn="' + isbn +'">' + title + ', ' + author +'</li>');
 			}
 			else if(data.status === 1)
-				console.log('db connection error');
+				console.log('owned_books connection error');
 			else if(data.status === 2)
-				console.log('db query error');
+				console.log('owned_books query error');
 			else if(data.status === 3){
 				console.log('book already exists');
 			}
@@ -198,9 +296,9 @@ $("#ownedList").on("click", ".list-group-item", function(){
 				listedBook.remove();
 			}
 			else if(data.status === 1)
-				console.log('db connection error');
+				console.log('owned_books connection error');
 			else if(data.status === 2)
-				console.log('db query error');
+				console.log('owned_books query error');
 			else if(data.status === 4){
 				console.log('book does not exist');
 			}
@@ -225,9 +323,9 @@ $("#wantedList").on("click", ".list-group-item", function(){
 				listedBook.remove();
 			}
 			else if(data.status === 1)
-				console.log('db connection error');
+				console.log('owned_books connection error');
 			else if(data.status === 2)
-				console.log('db query error');
+				console.log('owned_books query error');
 			else if(data.status === 4){
 				console.log('book does not exist');
 			}

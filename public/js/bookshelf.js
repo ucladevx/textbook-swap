@@ -21,10 +21,13 @@ $(document).ready(function(){
 			+ "<a class=\"popup-close\" data-popup-close=\"" + "popup-matched-trade"
 			+ "\" href=\"\">x</a>" 
 			
-			+ "<div class=\"row\">"
-			+ "<div class=\"col-2\"></div>"
-			+ "<div class=\"col-8 text-center\">"
+			+ "<div class=\"row\" id=\"top-row\">"
+			+ "<div class=\"col-3\"></div>"
+			+ "<div class=\"col-6 text-center\">"
 			+ "<h4>Matched Trade</h4>"
+            + "</div>"
+            + "<div class=\"col-3\">"
+            + "<img src=\"./images/book4.svg\" id=\"book-corner\">"
 			+ "</div>"
 			+ "</div>"
 

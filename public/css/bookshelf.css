@@ -196,3 +196,20 @@ h6 {
 	background-color: #ececec;
 	color: #353535;
 }
+
+#book-corner {
+	height: 8vh;
+	width: 18vw;
+	margin-right: -3vw;
+	margin-top: 0vh;
+	-moz-transform: scaleX(-1);
+	-o-transform: scaleX(-1);
+	-webkit-transform: scaleX(-1);
+	transform: scaleX(-1);
+	filter: FlipH;
+	-ms-filter: "FlipH";
+}
+
+#top-row {
+	margin-top: -4vh;
+}

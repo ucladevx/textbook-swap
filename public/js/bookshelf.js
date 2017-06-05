@@ -11,7 +11,7 @@ $(document).ready(function(){
         $(this).addClass('active');
 	});
 
-	$(".Matched").on('click', function(e){
+	$(".Matched:not(.Requested)").on('click', function(e){
 		var ownedCard = $(this).find(".owned")[0].attributes;
 		var wantedCard = $(this).find(".wanted")[0].attributes;
 
@@ -74,9 +74,9 @@ $(document).ready(function(){
 
 		// close the matched-popup if you are clicking outside of it
 		$(".matched-popup").click(function(e){
-			var targeted_matched-popup_class = "matched-popup-matched-trade";
-			$('[data-matched-popup="' + targeted_matched-popup_class + '"]').fadeOut(350);
-			$('[data-matched-popup="' + targeted_matched-popup_class + '"]').remove();
+			var targeted_matched_popup_class = "matched-popup-matched-trade";
+			$('[data-matched-popup="' + targeted_matched_popup_class + '"]').fadeOut(350);
+			$('[data-matched-popup="' + targeted_matched_popup_class + '"]').remove();
 		});
 
 		// do not close the pop-up if you are clicking inside of it
@@ -119,9 +119,9 @@ $(document).ready(function(){
 
 		//close button on accept confirmation page
 		$(".closebtn").click(function(e){
-			var targeted_matched-popup_class = "matched-popup-matched-trade";
-			$('[data-matched-popup="' + targeted_matched-popup_class + '"]').fadeOut(350);
-			$('[data-matched-popup="' + targeted_matched-popup_class + '"]').remove();
+			var targeted_matched_popup_class = "matched-popup-matched-trade";
+			$('[data-matched-popup="' + targeted_matched_popup_class + '"]').fadeOut(350);
+			$('[data-matched-popup="' + targeted_matched_popup_class + '"]').remove();
 			e.preventDefault();
 		});
 

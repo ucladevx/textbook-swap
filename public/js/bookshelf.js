@@ -28,7 +28,7 @@ $(document).ready(function(){
 			+ "</div>"
 			+ "</div>"
 
-			+ "<div class=\"row\">"
+			+ "<div class=\"row\" id=\"book-info\">"
 			+ "<div class=\"col-6 text-center\">"
 			+ "<p>"
 			+ "Title: " + ownedCard[1].nodeValue + "<br>"

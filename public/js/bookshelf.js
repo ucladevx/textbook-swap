@@ -24,7 +24,7 @@ $(document).ready(function(){
 			+ "<div class=\"row\" id=\"top-row\">"
 			+ "<div class=\"col-xs-3\"></div>"
 			+ "<div class=\"col-xs-6 text-center\">"
-			+ "<h4>Matched Trade</h4>"
+			+ "<h4>MATCHED TRADE</h4>"
             + "</div>"
             + "<div class=\"col-xs-3\">"
             + "<img src=\"./images/book4.svg\" id=\"book-corner\">"
@@ -32,20 +32,22 @@ $(document).ready(function(){
 			+ "</div>"
 
 			+ "<div class=\"row\" id=\"book-info\">"
-			+ "<div class=\"col-xs-6 text-center\">"
+			+ "<div class=\"col-xs-5 text-center\">"
 			+ "<p>"
-			+ "Title: " + ownedCard[1].nodeValue + "<br>"
-			+ "Author: " + ownedCard[2].nodeValue + "<br>"
-			+ "ISBN: " + ownedCard[4].nodeValue + "<br>"
+			+ "Title: " + ownedCard[1].nodeValue.toUpperCase() + "<br>"
+			+ "Author: " + ownedCard[2].nodeValue.toUpperCase() + "<br>"
+			+ "ISBN: " + ownedCard[4].nodeValue.toUpperCase() + "<br>"
 			+ "<img src=\"" + ownedCard[5].nodeValue + "\"> <br>" 
 			+ "</p>"
 			+ "</div>" //close col
 
-			+ "<div class=\"col-xs-6 text-center\">"
+			+ "<div class=\"col-xs-2 text-center\" id=\"matched-divider\">↔</div>"
+
+			+ "<div class=\"col-xs-5 text-center\">"
 			+ "<p>"
-			+ "Title: " + wantedCard[1].nodeValue + "<br>"
-			+ "Author: " + wantedCard[2].nodeValue + "<br>"
-			+ "ISBN: " + wantedCard[4].nodeValue + "<br>"
+			+ "Title: " + wantedCard[1].nodeValue.toUpperCase() + "<br>"
+			+ "Author: " + wantedCard[2].nodeValue.toUpperCase() + "<br>"
+			+ "ISBN: " + wantedCard[4].nodeValue.toUpperCase() + "<br>"
 			+ "<img src=\"" + wantedCard[5].nodeValue + "\"> <br>"
 			+ "</p>"
 			+ "</div>" //close col
@@ -54,10 +56,10 @@ $(document).ready(function(){
 			+ "<div class=\"row\">"
 			+ "<div class=\"col-xs-4\"></div>"
 			+ "<div class=\"col-xs-2 text-center\">"
-			+ "<a class=\"btn btn-primary accept-trade\" role=\"button\" href=\"#\">Accept</a>"
+			+ "<a class=\"btn btn-primary accept-trade\" role=\"button\" href=\"#\">ACCEPT</a>"
 			+ "</div>" //close col
 			+ "<div class=\"col-xs-2 text-center\">"
-			+ "<a class=\"btn btn-danger reject-trade\" role=\"button\" href=\"#\">Reject</a>"
+			+ "<a class=\"btn btn-danger reject-trade\" role=\"button\" href=\"#\">REJECT</a>"
 			+ "</div>" //close col
 			+ "<div class=\"col-xs-4\"></div>"
 			+ "</div>" //close row
@@ -97,8 +99,8 @@ $(document).ready(function(){
 			+ "<a class=\"popup-close\" data-popup-close=\"" + "popup-matched-trade"
 			+ "\" href=\"\">x</a>" 
 
-			+ "<a class=\"btn btn-warning back\" role=\"button\" href=\"#\">No, take me back!</a>"
-			+ "<a class=\"btn btn-danger confirm\" role=\"button\" href=\"\">Yes</a>"
+			+ "<a class=\"btn btn-warning back\" role=\"button\" href=\"#\">NO, take me back!</a>"
+			+ "<a class=\"btn btn-danger confirm\" role=\"button\" href=\"\">YES</a>"
 			+ "</div>"
 		);
 
@@ -138,7 +140,10 @@ $(document).ready(function(){
 					//confirm reject trade button
 					$(".confirm").click(function(e){
 						$.post("/api/found_trades/update_status_rejected",
-							{ trade_id: trade.trade_id, owned_book: trade.book_have, target_user: trade.target_id, wanted_book: trade.book_want }
+							{ trade_id: trade.trade_id, owned_book: trade.book_have, target_user: trade.target_id, wanted_book: trade.book_want },
+							function(response){
+
+							}
 						);
 						$(".reject-page").hide();
 						$(".rejected-page").show();
@@ -148,7 +153,10 @@ $(document).ready(function(){
 					//accept button
 					$(".accept-trade").click(function(e){
 						$.post("/api/found_trades/update_status_accepted",
-							{ trade_id: trade.trade_id, owned_book: trade.book_have, target_user: trade.target_id, wanted_book: trade.book_want }
+							{ trade_id: trade.trade_id, owned_book: trade.book_have, target_user: trade.target_id, wanted_book: trade.book_want },
+							function(response){
+
+							}
 						);
 
 						$(".first-page").hide();

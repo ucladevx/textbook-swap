@@ -13,12 +13,12 @@ $(document).ready(function(){
 		var ownedCard = $(this).find(".owned")[0].attributes;
 		var wantedCard = $(this).find(".wanted")[0].attributes;
 
-		$("body").append("<div class=\"popup\" data-popup=\"" 
-			+ "popup-matched-trade"
-			+ "\"><div class=\"popup-inner\" id=\"matched\">"
+		$("body").append("<div class=\"matched-popup\" data-matched-popup=\"" 
+			+ "matched-popup-matched-trade"
+			+ "\"><div class=\"matched-popup-inner\" id=\"matched\">"
 			+ "<div class=\"first-page\">"
 
-			+ "<a class=\"popup-close\" data-popup-close=\"" + "popup-matched-trade"
+			+ "<a class=\"matched-popup-close\" data-matched-popup-close=\"" + "matched-popup-matched-trade"
 			+ "\" href=\"\">x</a>" 
 			
 			+ "<div class=\"row\" id=\"top-row\">"
@@ -65,38 +65,38 @@ $(document).ready(function(){
 			+ "</div>" //close row
 
 			+ "</div>" //close first-page
-			+ "</div></div>" //close popup-inner and popup
+			+ "</div></div>" //close matched-popup-inner and matched-popup
 		);
 		
-		$('[data-popup="' + "popup-matched-trade" + '"]').fadeIn(350);
+		$('[data-matched-popup="' + "matched-popup-matched-trade" + '"]').fadeIn(350);
 
-		// close the popup if you are clicking outside of it
-		$(".popup").click(function(e){
-			var targeted_popup_class = "popup-matched-trade";
-			$('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
-			$('[data-popup="' + targeted_popup_class + '"]').remove();
+		// close the matched-popup if you are clicking outside of it
+		$(".matched-popup").click(function(e){
+			var targeted_matched-popup_class = "matched-popup-matched-trade";
+			$('[data-matched-popup="' + targeted_matched-popup_class + '"]').fadeOut(350);
+			$('[data-matched-popup="' + targeted_matched-popup_class + '"]').remove();
 		});
 
 		// do not close the pop-up if you are clicking inside of it
-		$(".popup-inner").click(function(e){
+		$(".matched-popup-inner").click(function(e){
 			e.stopPropagation();
 		});
 
 		//accept confirmation page
-		$(".popup-inner").append(
+		$(".matched-popup-inner").append(
 			"<div class=\"accept-page\" style=\"display:none\">"
 			+ "<h3>Congratulations! You've accepted the trade.</h3>"
-			+ "<a class=\"popup-close\" data-popup-close=\"" + "popup-matched-trade"
+			+ "<a class=\"matched-popup-close\" data-matched-popup-close=\"" + "matched-popup-matched-trade"
 			+ "\" href=\"\">x</a>" 
 			+ "<a class=\"btn btn-warning closebtn\" role=\"button\" href=\"\">Close</a>"
 			+ "</div>"
 		);
 
 		//reject confirmation page
-		$(".popup-inner").append(
+		$(".matched-popup-inner").append(
 			"<div class=\"reject-page\"  style=\"display:none\">"
 			+ "<h3>Are you sure you want to reject the trade?</h3>"
-			+ "<a class=\"popup-close\" data-popup-close=\"" + "popup-matched-trade"
+			+ "<a class=\"matched-popup-close\" data-matched-popup-close=\"" + "matched-popup-matched-trade"
 			+ "\" href=\"\">x</a>" 
 
 			+ "<a class=\"btn btn-warning back\" role=\"button\" href=\"#\">NO, take me back!</a>"
@@ -105,10 +105,10 @@ $(document).ready(function(){
 		);
 
 		//rejected page
-		$(".popup-inner").append(
+		$(".matched-popup-inner").append(
 			"<div class=\"rejected-page\"  style=\"display:none\">"
 			+ "<h3>You've rejected the trade.</h3>"
-			+ "<a class=\"popup-close\" data-popup-close=\"" + "popup-matched-trade"
+			+ "<a class=\"matched-popup-close\" data-matched-popup-close=\"" + "matched-popup-matched-trade"
 			+ "\" href=\"\">x</a>" 
 
 			+ "<a class=\"btn btn-warning closebtn\" role=\"button\" href=\"\">Close</a>"
@@ -117,9 +117,9 @@ $(document).ready(function(){
 
 		//close button on accept confirmation page
 		$(".closebtn").click(function(e){
-			var targeted_popup_class = "popup-matched-trade";
-			$('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
-			$('[data-popup="' + targeted_popup_class + '"]').remove();
+			var targeted_matched-popup_class = "matched-popup-matched-trade";
+			$('[data-matched-popup="' + targeted_matched-popup_class + '"]').fadeOut(350);
+			$('[data-matched-popup="' + targeted_matched-popup_class + '"]').remove();
 			e.preventDefault();
 		});
 

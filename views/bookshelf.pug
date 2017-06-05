@@ -21,10 +21,10 @@ html
         .bookshelf_navbar_container
             .row.bookshelf_navbar
                 .col-md-3.welcome_dialog_container
-                    h6.welcome-dialog
-                        | Hi
+                    h4.welcome-dialog
+                        | Hi&nbsp;
                         span.username #{username[0].user_name},
-                        |  welcome to your
+                        |  welcome to your&nbsp;
                         span.bookshelf_name Bookshelf!
                 .col-md-6.filter_button_container
                     .filter-button-group.button-group(data-filter-group= "Status")
@@ -140,7 +140,5 @@ html
 
 
             - }
-
-
 
         script(src="/js/navbar.js")

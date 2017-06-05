@@ -16,7 +16,7 @@ exports.logout = function (req, res) {
     req.session.destroy(function (err) {res.clearCookie('connect.sid', {path: '/'});
         req.logOut();
         res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
-        res.redirect('/home'); // redirect after we destroy session and log out
+        res.redirect('/'); // redirect after we destroy session and log out
     });
 };
 

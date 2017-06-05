@@ -9,10 +9,10 @@ const owned_books = require('../../models/owned_books');
 const book_info = require('../../models/book_info');
 const error_codes = require('../../error_codes');
 const found_trades = require('../../models/found_trades');
+const possible_trades = require('../../models/possible_trades');
 
 exports.index = function(req, res) {
     var user_id = req.user.id;
-
     async.parallel({
         owned_books_info: function(callback){
             owned_books.get_owned_books(user_id, function(status, owned_books_data){
@@ -21,7 +21,6 @@ exports.index = function(req, res) {
                 for (var i = 0; i < owned_books_data.length; i++) {
                     book_ids.push(owned_books_data[i]["book_id"]);
                 }
-
                 book_info.get_books_info(book_ids, function(error_status, owned_books_info) {
                     if (error_status) {
                         console.error("Error querying database", error_status);
@@ -29,6 +28,14 @@ exports.index = function(req, res) {
 
                     callback(null, owned_books_info);
                 });
+            });
+        },
+        possible_trades_info: function(callback){
+            possible_trades.get_num_trades(user_id, function(error_status, num_books) {
+                if (error_status) {
+                    console.error("Error querying database", error_status);
+                }
+                callback(null, num_books);
             });
         },
         user_name: function(callback){
@@ -71,7 +78,8 @@ exports.index = function(req, res) {
         res.render('bookshelf', {
             status: err,
             books: [].concat(results['matched_trades_info'], results['owned_books_info']),
-            username: results['user_name']
+            username: results['user_name'],
+            book_nums: results['possible_trades_info']
         });
     });
 };

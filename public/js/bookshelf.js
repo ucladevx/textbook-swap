@@ -51,10 +51,10 @@ $(document).ready(function(){
 			+ "<div class=\"row\">"
 			+ "<div class=\"col-4\"></div>"
 			+ "<div class=\"col-2 text-center\">"
-			+ "<a class=\"btn accept-trade\">Accept</a>"
+			+ "<a class=\"btn btn-primary accept-trade\" role=\"button\" href=\"#\">Accept</a>"
 			+ "</div>" //close col
 			+ "<div class=\"col-2 text-center\">"
-			+ "<a class=\"btn reject-trade\">Reject</a>"
+			+ "<a class=\"btn btn-danger reject-trade\" role=\"button\" href=\"#\">Reject</a>"
 			+ "</div>" //close col
 			+ "<div class=\"col-4\"></div>"
 			+ "</div>" //close row
@@ -83,7 +83,7 @@ $(document).ready(function(){
 			+ "<h3>Congratulations! You've accepted the trade.</h3>"
 			+ "<a class=\"popup-close\" data-popup-close=\"" + "popup-matched-trade"
 			+ "\" href=\"\">x</a>" 
-			+ "<a class=\"btn close\">Close</a>"
+			+ "<a class=\"btn btn-warning close\" role=\"button\" href=\"#\">Close</a>"
 			+ "</div>"
 		);
 
@@ -94,8 +94,8 @@ $(document).ready(function(){
 			+ "<a class=\"popup-close\" data-popup-close=\"" + "popup-matched-trade"
 			+ "\" href=\"\">x</a>" 
 
-			+ "<a class=\"btn confirm\">Yes</a>"
-			+ "<a class=\"btn back\">No, take me back!</a>"
+			+ "<a class=\"btn btn-danger confirm\" role=\"button\" href=\"#\">Yes</a>"
+			+ "<a class=\"btn btn-warning back\" role=\"button\" href=\"#\">No, take me back!</a>"
 			+ "</div>"
 		);
 
@@ -106,7 +106,7 @@ $(document).ready(function(){
 			+ "<a class=\"popup-close\" data-popup-close=\"" + "popup-matched-trade"
 			+ "\" href=\"\">x</a>" 
 
-			+ "<a class=\"btn close\">Close</a>"
+			+ "<a class=\"btn btn-warning close\" role=\"button\" href=\"#\">Close</a>"
 			+ "</div>"
 		);
 

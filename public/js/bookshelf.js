@@ -1,11 +1,13 @@
 $(document).ready(function(){
 	var $grid = $('.grid').isotope({
-   itemSelector: '.grid-item',
+        itemSelector: '.grid-item',
 	});
 
 	// filter items on button click
 	$('.filter-button-group').on( 'click', 'button', function() {
-	  var filterValue = $(this).attr('data-filter');
-	  $grid.isotope({ filter: filterValue });
+	    var filterValue = $(this).attr('data-filter');
+	    $grid.isotope({ filter: filterValue });
+	    $('.active').removeClass('active');
+        $(this).addClass('active');
 	});
 });

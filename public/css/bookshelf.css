@@ -1,14 +1,33 @@
+body{
+	font-family: 'Lato', sans-serif;
+}
+
 .card {
+	position: relative;
 	width: 30vw;
-	height: 240px;
+	height: 250px;
 	display: table-cell;
 	padding-top: 10px;
-	padding-bottom: 10px;
+	padding-bottom: 0;
 	text-align: center;
+	overflow-y: hidden;
+	box-shadow: -5px 5px 20px -5px rgba(0,0,0,0.5);
+}
+
+#new-trade-title{
+	color: grey;
+}
+
+.Requested .info{
+	text-align: right;
 }
 
 .Matched:not(.Requested){
 	background-color: #52b9d1;
+}
+
+.Requested:not(.Matched){
+	background-color: #f8cc45;
 }
 
 .card-img-top {
@@ -18,16 +37,32 @@
 }
 
 .card_row {
-	text-align: middle;
+	text-align: center;
 	margin-top: 5vh;
 	height: 15vh;
+}
+
+.card-title, .card-author{
+	color: white;
 }
 
 .grid{
 	margin-top: -20vh;
 }
 
-.owned, .wanted {
+.book-info{
+	margin-top: 40px;
+	font-size: 20px;
+}
+
+.Requested .owned {
+	text-align: center;
+	background-color: rgb(255, 248, 211);
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.Matched .owned, .wanted {
 	text-align: center;
 	background-color: rgb(201, 232, 235);
 	padding-top: 10px;
@@ -71,7 +106,8 @@
 	color: white;
 	border: 0;
 	margin: 1vw;
-	font-size: 120%;
+	font-size: 100%;
+	cursor: pointer;
 }
 body {
 	/*margin: 1%;*/
@@ -110,6 +146,7 @@ h6 {
 .welcome-dialog {
 	font-size: 85%;
 }
+
 .Requested_but {
 	color: #f8cc45;
 }
@@ -118,4 +155,53 @@ h6 {
 }
 .Rejected_but {
 	color: #e88154;
+}
+
+.Matched .info{
+	background-color: #47a3b2;
+}
+
+.info-row{
+	width: 100%;
+	position: absolute;
+	bottom: 0;
+	left: 15px;
+}
+
+.Requested .info{
+	background-color: #efb745;
+}
+
+.info{
+	color: white;
+	height: 30px;
+}
+
+.info p{
+	line-height: 30px;
+	font-size: 12px;
+}
+
+.arrow{
+	color: grey;
+}
+
+.All_but.active{
+	border-bottom: 1px solid white;
+}
+
+.Requested_but.active{
+	border-bottom: 1px solid #f8cc45;
+}
+
+.Matched_but.active{
+	border-bottom: 1px solid #52b9d1;
+}
+
+.Rejected_but.active{
+	border-bottom: 1px solid #e88154;
+}
+
+.filter-button-group button:focus{
+	outline: none;
 }

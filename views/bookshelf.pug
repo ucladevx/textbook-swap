@@ -7,6 +7,7 @@ html
 
         link(rel='stylesheet' type="text/css" href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css', integrity='sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ', crossorigin='anonymous')
         link(rel='stylesheet' type="text/css" href="css/bookshelf.css")
+        link(href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet")
         //- link(rel='stylesheet' type="text/css" href="css/bookshelf_navbar.css")
         script(src="/assets/isotope.pkgd.min.js")
         script(src='https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js', integrity='sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb', crossorigin='anonymous')
@@ -20,15 +21,15 @@ html
                 .col-md-3.welcome_dialog_container
                     h6.welcome-dialog
                         | Hi 
-                        span.username #{username[0].user_name}
+                        span.username #{username[0].user_name},
                         |  welcome to your 
-                        span.bookshelf_name Bookshelf
+                        span.bookshelf_name Bookshelf!
                 .col-md-6.filter_button_container
                     .filter-button-group.button-group(data-filter-group= "Status")
-                        button.filter-button(data-filter='.All') All
-                        button.Requested_but.filter-button(data-filter='.Requested') Requested
-                        button.Matched_but.filter-button(data-filter='.Matched') Matched
-                        button.Rejected_but.filter-button(data-filter='.Rejected') Rejected
+                        button.All_but.active.filter-button(data-filter='.All') ALL
+                        button.Requested_but.filter-button(data-filter='.Requested') REQUESTED
+                        button.Matched_but.filter-button(data-filter='.Matched') MATCHED
+                        button.Rejected_but.filter-button(data-filter='.Rejected') REJECTED
                 .col-md-3.bookshelf_image_container
                     img(src='images/Bookshelf_Dashboard.svg')
 
@@ -44,14 +45,20 @@ html
                                 .col-md-4
                             .row
                                 .card-block
-                                    h4.card-title New Trade
+                                    h5#new-trade-title NEW TRADE
                     else
                         if books[i].title
                             .card.col-md-4.grid-item.Requested.All
-                                img.card-img-top(src=books[i].img_url, alt='Card image cap')
-                                .card-block
-                                    h4.card-title #{books[i].title}
-                                    h5.card-author #{books[i].author}
+                                .row
+                                    .col-md-7.book-info
+                                        p.card-title #{books[i].title}
+                                        p.card-author #{books[i].author}
+                                    .col-md-5
+                                        .owned(data-title=books[i].title, data-author=books[i].author, data-id=books[i].book_id, data-isbn=books[i].isbn, data-img=books[i].img_url)
+                                            img.book-img(src=books[i].img_url, alt='Card image cap')
+                                .row.info-row
+                                    .col-md-12.info
+                                        p 16 books wanted in exchange
                         else
                             .card.col-md-4.grid-item.Matched.All
                                 .row
@@ -65,13 +72,23 @@ html
                                         .wanted(data-title=books[i]['book_want'].title, data-author=books[i]['book_want'].author, data-id=books[i]['book_want'].book_id, data-isbn=books[i]['book_want'].isbn, data-img=books[i]['book_want'].img_url)
                                             img.book-img(src=books[i]['book_want'].img_url, alt='Card image cap')
                                         p.title #{books[i]['book_want'].title}
+                                .row.info-row
+                                    .col-md-12.info
+                                        p NEW MATCH for #{books[i]['book_have'].title}
+
                     if i + 1 < books.length
                         if books[i + 1].title
                             .card.col-md-4.grid-item.Requested.All
-                                img.card-img-top(src=books[i + 1].img_url, alt='Card image cap')
-                                .card-block
-                                    h4.card-title #{books[i + 1].title}
-                                    h5.card-author #{books[i + 1].author}
+                                .row
+                                    .col-md-7.book-info
+                                        p.card-title #{books[i + 1].title}
+                                        p.card-author #{books[i + 1].author}
+                                    .col-md-5
+                                        .owned(data-title=books[i + 1].title, data-author=books[i + 1].author, data-id=books[i + 1].book_id, data-isbn=books[i + 1].isbn, data-img=books[i + 1].img_url)
+                                            img.book-img(src=books[i + 1].img_url, alt='Card image cap')
+                                .row.info-row
+                                    .col-md-12.info
+                                        p 16 books wanted in exchange
                         else
                             .card.col-md-4.grid-item.Matched.All
                                 .row
@@ -85,13 +102,23 @@ html
                                         .wanted(data-title=books[i + 1]['book_want'].title, data-author=books[i + 1]['book_want'].author, data-id=books[i + 1]['book_want'].book_id, data-isbn=books[i + 1]['book_want'].isbn, data-img=books[i + 1]['book_want'].img_url)
                                             img.book-img(src=books[i + 1]['book_want'].img_url, alt='Card image cap')
                                         p.title #{books[i + 1]['book_want'].title}
+                                .row.info-row
+                                    .col-md-12.info
+                                        p NEW MATCH for #{books[i + 1]['book_have'].title}
+
                     if i + 2 < books.length
                         if books[i + 2].title
                             .card.col-md-4.grid-item.Requested.All
-                                img.card-img-top(src=books[i + 2].img_url, alt='Card image cap')
-                                .card-block
-                                    h4.card-title #{books[i + 2].title}
-                                    h5.card-author #{books[i + 2].author}
+                                .row
+                                    .col-md-7.book-info
+                                        p.card-title #{books[i + 2].title}
+                                        p.card-author #{books[i + 2].author}
+                                    .col-md-5
+                                        .owned(data-title=books[i + 2].title, data-author=books[i + 2].author, data-id=books[i + 2].book_id, data-isbn=books[i + 2].isbn, data-img=books[i + 2].img_url)
+                                            img.book-img(src=books[i + 2].img_url, alt='Card image cap')
+                                .row.info-row
+                                    .col-md-12.info
+                                        p 16 books wanted in exchange
                         else
                             .card.col-md-4.grid-item.Matched.All
                                 .row
@@ -105,6 +132,11 @@ html
                                         .wanted(data-title=books[i + 2]['book_want'].title, data-author=books[i + 2]['book_want'].author, data-id=books[i + 2]['book_want'].book_id, data-isbn=books[i + 2]['book_want'].isbn, data-img=books[i + 2]['book_want'].img_url)
                                             img.book-img(src=books[i + 2]['book_want'].img_url, alt='Card image cap')
                                         p.title #{books[i + 2]['book_want'].title}
+                                .row.info-row
+                                    .col-md-12.info
+                                        p NEW MATCH for #{books[i + 2]['book_have'].title}
+
+
             - }
 
 

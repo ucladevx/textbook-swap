@@ -19,10 +19,15 @@ $(document).ready(function(){
 				+ "<a class=\"popup-close\" data-popup-close=\"" + "popup-matched-trade"
 				+ "\" href=\"\">x</a>" 
 				
-				+ "<div class=\"row text-center\"><h4>Matched Trade</h4></div>"
+				+ "<div class=\"row\">"
+				+ "<div class=\"col-2\"></div>"
+				+ "<div class=\"col-8 text-center\">"
+				+ "<h4>Matched Trade</h4>"
+				+ "</div>"
+				+ "</div>"
 
 				+ "<div class=\"row\">"
-				+ "<div class=\"col-xs-6 text-center\">"
+				+ "<div class=\"col-6 text-center\">"
 				+ "<p>"
 				+ "Title: " + ownedCard[1].nodeValue + "<br>"
 				+ "Author: " + ownedCard[2].nodeValue + "<br>"
@@ -31,7 +36,7 @@ $(document).ready(function(){
 				+ "</p>"
 				+ "</div>" //close col
 
-				+ "<div class=\"col-xs-6 text-center\">"
+				+ "<div class=\"col-6 text-center\">"
 				+ "<p>"
 				+ "Title: " + wantedCard[1].nodeValue + "<br>"
 				+ "Author: " + wantedCard[2].nodeValue + "<br>"
@@ -42,14 +47,14 @@ $(document).ready(function(){
 				+ "</div>" //close row
 
 				+ "<div class=\"row\">"
-				+ "<div class=\"col-xs-4\"></div>"
-				+ "<div class=\"col-xs-2 text-center\">"
+				+ "<div class=\"col-4\"></div>"
+				+ "<div class=\"col-2 text-center\">"
 				+ "<a class=\"btn accept-trade\">Accept</a>"
 				+ "</div>" //close col
-				+ "<div class=\"col-xs-2 text-center\">"
+				+ "<div class=\"col-2 text-center\">"
 				+ "<a class=\"btn reject-trade\">Reject</a>"
 				+ "</div>" //close col
-				+ "<div class=\"col-xs-4\"></div>"
+				+ "<div class=\"col-4\"></div>"
 				+ "</div>" //close row
 
 				+ "</div></div>"); //close popup-inner and popup

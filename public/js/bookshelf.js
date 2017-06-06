@@ -39,7 +39,7 @@ $(document).ready(function(){
 			+ "Title: " + ownedCard[1].nodeValue.toUpperCase() + "<br>"
 			+ "Author: " + ownedCard[2].nodeValue.toUpperCase() + "<br>"
 			+ "ISBN: " + ownedCard[4].nodeValue.toUpperCase() + "<br>"
-			+ "<img src=\"" + ownedCard[5].nodeValue + "\"> <br>" 
+			+ "<img class=\"matchbook\"src=\"" + ownedCard[5].nodeValue + "\"> <br>" 
 			+ "</p>"
 			+ "</div>" //close col
 
@@ -50,7 +50,7 @@ $(document).ready(function(){
 			+ "Title: " + wantedCard[1].nodeValue.toUpperCase() + "<br>"
 			+ "Author: " + wantedCard[2].nodeValue.toUpperCase() + "<br>"
 			+ "ISBN: " + wantedCard[4].nodeValue.toUpperCase() + "<br>"
-			+ "<img src=\"" + wantedCard[5].nodeValue + "\"> <br>"
+			+ "<img class=\"matchbook\" src=\"" + wantedCard[5].nodeValue + "\"> <br>"
 			+ "</p>"
 			+ "</div>" //close col
 			+ "</div>" //close row

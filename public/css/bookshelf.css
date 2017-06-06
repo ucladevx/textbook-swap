@@ -629,3 +629,6 @@ body {
 	}
 }
 
+.matchbook{
+	max-height: 200px;
+}

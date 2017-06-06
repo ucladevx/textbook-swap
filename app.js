@@ -33,6 +33,7 @@ const ownedBooksController = require('./controllers/api/owned_books');
 const wishListController = require('./controllers/api/wish_list');
 const possibleTradesController = require('./controllers/api/possible_trades');
 const textbookSearchController = require('./controllers/api/search');
+const bookToClassController = require('./controllers/api/book_to_class');
 const bookInfoController = require('./controllers/api/book_info');
 const foundTradesController = require('./controllers/api/found_trades');
 
@@ -40,6 +41,14 @@ const foundTradesController = require('./controllers/api/found_trades');
  * API keys and Passport configuration.
  */
 const passportConfig = require('./config/passport')(passport, FacebookStrategy);
+
+/*
+ * Database Initialization
+ */
+const initDB = require('./models/init');
+initDB.create_tables(function(){
+    console.log("created tables!");
+});
 
 /*
  * Create Express server.
@@ -73,7 +82,6 @@ app.use(passport.session());
  * Primary app routes.
  */
 app.get('/', homeController.index);
-app.get('/dashboard', require_login.ensureLoggedIn(), dashboardController.index);
 app.get('/bookshelf', require_login.ensureLoggedIn(), bookShelfController.index);
 
 /*
@@ -104,6 +112,9 @@ app.get('/api/possible_trades/get_book_wants', possibleTradesController.get_book
 // Textbook search
 app.get('/api/search/search_textbooks', textbookSearchController.search_textbooks);
 
+// Book to class
+app.get('/api/book_to_class/get_prof_class_info', bookToClassController.get_prof_class_info);
+
 // Book info
 app.get('/api/book_info/get_book_info', bookInfoController.get_book_info);
 app.get('/api/book_info/get_pair_book_info', bookInfoController.get_pair_book_info);
@@ -116,9 +127,7 @@ app.get('/api/found_trades/get_trade_by_wanted_book', foundTradesController.get_
 /*
  * Tests
  */
-const initDB = require('./models/init');
-initDB.create_tables(function(){});
-//const test = require('./tests/test_all').test();
+// const test = require('./tests/test_all').test();
 
 /*
  * Authentication routes.

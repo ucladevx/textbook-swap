@@ -1,53 +1,26 @@
 /* navbar */
-nav {
-    margin-top: -5vh;
-    margin-left: -5vw;
-    padding-left: 5vw;
-    width: 110vw;
-   
-}
 
 .navbar-fixed-top {
- 
     transition: all ease-out;
-    background: linear-gradient(to right, rgba(0,76,153,1),rgba(102,178,255,1));
+    background: linear-gradient(to right, #52b9d1,rgba(102,178,255,1));
     border: 0;
-    padding-top: 5vh;
+    margin-right: -1vw;
+    margin-bottom: 10px;
 }
 
-li a{
+.nav.navbar-nav.navbar-right li a{
     color: white;
     font-size:120%;
-    margin-right: 3vw;
-    padding-top: 5vh;
 }
 
 .nav.navbar-nav.navbar-right{
     padding-right: 2vh;
-    float: right;
 }
 
 #navbar_logo{
-    height: 38px;
+    height: 30px;
 }
 
 .navbar-brand{
-    padding-top: 1vh;
-}
-.container-fluid {
-    display: inline-block;
-}
- .col-md-4 li {
-    display: inline;
-    padding-top: 4vh;
-    padding-right: 3vw;
-    font-weight: bold;
-    color: white;
-
-}
-.navbar-header {
-    padding-left: 6vw;
-}
-.col-md-4 ul {
-    /*padding-top: 1vh;*/
+    padding-top: 10px;
 }

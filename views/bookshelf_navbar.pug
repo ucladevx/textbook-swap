@@ -1,15 +1,11 @@
 link(rel='stylesheet' type="text/css" href="css/bookshelf_navbar.css")
 nav.navbar.navbar-default.navbar-fixed-top
-    .row.align-middle
-        .col-md-8  
-            .navbar-header
-                a.navbar-brand(href='#')
-                    img(alt='LOOP', src="img/logo_navbar.svg", id="navbar_logo")
-        .col-md-4.align-middle
-            ul.align-middle
-                li
-                    a(href='#', id="nav_about") Notification
-                li
-                    a(href='/login/facebook') Logout
-
-
+    .container-fluid
+        .navbar-header
+            a.navbar-brand(href='#')
+                img(alt='LOOP', src="img/logo_navbar.svg", id="navbar_logo")
+        ul.nav.navbar-nav.navbar-right
+            li
+                a(href='#') Notifications
+            li
+                a(href='/logout/facebook') Logout

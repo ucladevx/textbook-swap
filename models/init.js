@@ -4,6 +4,7 @@
 
 'use strict';
 const pg = require('pg');
+const async = require('async');
 
 /*
  * Initializes the database by creating all the tables if they do not already exist.
@@ -34,15 +35,17 @@ exports.create_tables = function(next){
                        'CREATE TABLE IF NOT EXISTS found_trades(trade_id INTEGER, user_id VARCHAR, book_have INTEGER, target_id VARCHAR, book_want INTEGER, status VARCHAR(1), PRIMARY KEY (trade_id, user_id, book_have, target_id, book_want))',
                        'CREATE TABLE IF NOT EXISTS found_trades_id(index INTEGER,trade_id INTEGER, PRIMARY KEY(index))'];
 
-        for(var i = 0; i < queries.length; i++){
-            client.query(queries[i], function (err, result) {
+        async.map(queries, function(item, callback){
+            client.query(item, function (err, result) {
                 if (err) {
                     console.error('error happened during query', err);
-                    return next();
+                    return callback(err, result);
                 }
+                callback(err, result);
             });
-        }
-        done();
-        return next();
+        }, function(err, results){
+            done();
+            return next();
+        });
     });
 };

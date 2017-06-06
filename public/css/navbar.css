@@ -3,7 +3,7 @@
 .navbar-fixed-top {
     opacity: 0.6;
     transition: all ease-out;
-    background: linear-gradient(to right, rgba(0,76,153,1),rgba(102,178,255,1));
+    background: linear-gradient(to right, #52b9d1,rgba(102,178,255,1));
     border: 0;
 }
 

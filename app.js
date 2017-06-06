@@ -43,6 +43,14 @@ const foundTradesController = require('./controllers/api/found_trades');
 const passportConfig = require('./config/passport')(passport, FacebookStrategy);
 
 /*
+ * Database Initialization
+ */
+const initDB = require('./models/init');
+initDB.create_tables(function(){
+    console.log("created tables!");
+});
+
+/*
  * Create Express server.
  */
 const app = express();
@@ -74,7 +82,6 @@ app.use(passport.session());
  * Primary app routes.
  */
 app.get('/', homeController.index);
-app.get('/dashboard', require_login.ensureLoggedIn(), dashboardController.index);
 app.get('/bookshelf', require_login.ensureLoggedIn(), bookShelfController.index);
 
 /*
@@ -120,9 +127,7 @@ app.get('/api/found_trades/get_trade_by_wanted_book', foundTradesController.get_
 /*
  * Tests
  */
-const initDB = require('./models/init');
-initDB.create_tables(function(){});
-const test = require('./tests/test_all').test();
+// const test = require('./tests/test_all').test();
 
 /*
  * Authentication routes.

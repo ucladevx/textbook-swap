@@ -240,7 +240,7 @@ body {
     border-color: #cc6b4e;
 }
 
-#book-info {
+.matched-inner {
     background-color: #ececec;
     color: #353535;
     margin-top: 3vh;

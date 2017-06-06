@@ -118,7 +118,7 @@ $(document).ready(function(){
 		);
 
 		//close button on accept confirmation page
-		$(".closebtn").click(function(e){
+		$(".closebtn, .matched-popup-close").click(function(e){
 			var targeted_matched_popup_class = "matched-popup-matched-trade";
 			$('[data-matched-popup="' + targeted_matched_popup_class + '"]').fadeOut(350);
 			$('[data-matched-popup="' + targeted_matched_popup_class + '"]').remove();

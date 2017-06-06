@@ -147,7 +147,7 @@
 	background-color: rgb(242, 242, 242);
 }
 
-.nextButton, .prevButton, .btn:focus, .btn:focus:active, .btn:hover, #pick_book_next, #wanted_list_next {
+.popup .nextButton, .popup .prevButton, .popup .btn:focus, .popup .btn:focus:active, .popup .btn:hover, .popup #pick_book_next, .popup #wanted_list_next {
 	background-color: rgb(253, 206, 48);
 	border-color: rgb(253, 206, 48);
 	border-radius: 0;

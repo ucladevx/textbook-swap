@@ -63,14 +63,14 @@ $(document).ready(function(){
 
 // close the popup if you are clicking outside of it
 	$(".popup").click(function(e){
-		console.log($(this).attr('class'))
+		console.log($(this).attr('class'));
 		var targeted_popup_class = jQuery(this).attr('data-popup');
 		$('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
 	});
 
 // do not close the pop-up if you are clicking inside of it
 	$(".popup-inner").click(function(e){
-		console.log($(this).attr('class'))
+		console.log($(this).attr('class'));
 		e.stopPropagation();
 	});
 

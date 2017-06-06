@@ -30,7 +30,6 @@ $(document).ready(function(){
 
 		var targeted_popup_class = jQuery(this).attr('data-popup-open');
 		$('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
-
 		e.preventDefault();
 
 		// center the popup

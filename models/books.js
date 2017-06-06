@@ -42,7 +42,7 @@ exports.get_books_info = function(book_ids, next) {
         }
 
         // get the book info for all books
-        client.query("SELECT book_id, title, author, isbn FROM book_info WHERE book_id = any ($1)", [book_ids], function(err, books_info_result) {
+        client.query("SELECT book_id, title, author, isbn, img_url FROM book_info WHERE book_id = any ($1)", [book_ids], function(err, books_info_result) {
             if (err) {
                 console.error("Error querying database", err);
                 return next(error_codes.book_info_errors.DB_QUERY_ERROR);

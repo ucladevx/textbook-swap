@@ -24,7 +24,7 @@ dotenv.config();
 const homeController = require('./controllers/routes/home');
 const passportController = require('./controllers/routes/passport');
 const dashboardController = require('./controllers/routes/dashboard');
-const searchController = require('./controllers/routes/search');
+const bookShelfController = require('./controllers/routes/bookshelf');
 
 /*
  * Controllers (API)
@@ -33,6 +33,9 @@ const ownedBooksController = require('./controllers/api/owned_books');
 const wishListController = require('./controllers/api/wish_list');
 const possibleTradesController = require('./controllers/api/possible_trades');
 const textbookSearchController = require('./controllers/api/search');
+const bookToClassController = require('./controllers/api/book_to_class');
+const bookInfoController = require('./controllers/api/book_info');
+const foundTradesController = require('./controllers/api/found_trades');
 
 /*
  * API keys and Passport configuration.
@@ -72,7 +75,7 @@ app.use(passport.session());
  */
 app.get('/', homeController.index);
 app.get('/dashboard', require_login.ensureLoggedIn(), dashboardController.index);
-app.get('/search', require_login.ensureLoggedIn(), searchController.index);
+app.get('/bookshelf', require_login.ensureLoggedIn(), bookShelfController.index);
 
 /*
  * API routes.
@@ -83,7 +86,7 @@ app.get('/search', require_login.ensureLoggedIn(), searchController.index);
 // Owned books
 app.post('/api/owned_books/add', ownedBooksController.add_book);
 app.post('/api/owned_books/remove', ownedBooksController.remove_book);
-app.get('/api/owned_books/get_books', ownedBooksController.get_books);
+app.get('/api/owned_books/get_owned_cards', ownedBooksController.get_owned_cards);
 app.get('/api/owned_books/get_users', ownedBooksController.get_users);
 
 // Wanted books
@@ -102,12 +105,24 @@ app.get('/api/possible_trades/get_book_wants', possibleTradesController.get_book
 // Textbook search
 app.get('/api/search/search_textbooks', textbookSearchController.search_textbooks);
 
+// Book to class
+app.get('/api/book_to_class/get_prof_class_info', bookToClassController.get_prof_class_info);
+
+// Book info
+app.get('/api/book_info/get_book_info', bookInfoController.get_book_info);
+app.get('/api/book_info/get_pair_book_info', bookInfoController.get_pair_book_info);
+
+// Found trades
+app.post('/api/found_trades/update_status_accepted', foundTradesController.update_status_accepted);
+app.post('/api/found_trades/update_status_rejected', foundTradesController.update_status_rejected);
+app.get('/api/found_trades/get_trade_by_wanted_book', foundTradesController.get_trade_by_wanted_book);
+
 /*
  * Tests
  */
 const initDB = require('./models/init');
 initDB.create_tables(function(){});
-//const test = require('./tests/test_all').test();
+const test = require('./tests/test_all').test();
 
 /*
  * Authentication routes.

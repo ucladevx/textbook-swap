@@ -13,22 +13,31 @@ body{
 	margin-bottom: 35vh;
 }
 
-#first, #second{
+#first, #second, #third{
     padding-bottom: 0vh;
 }
 
 #second{
-	background: linear-gradient(to right, rgba(0,76,153,1),rgba(102,178,255,1));
+	background-color: rgb(236, 236, 236);
     padding-top: 10vh;
 }
 
+#third {
+	background-color: #353535;
+}
+
 .btn {
+	background-color: rgb(253, 206, 48);
+	border-color: rgb(253, 206, 48);
+	border-radius: 0;
+	box-shadow: none;
+	outline: none;
 	min-width:22vh;
 	max-width:22vh;
-	background-color: #FECF67;
-	border:0px;
+	/*background-color: #FECF67;
+	border:0px;*/
 	color: white;
-	box-shadow: 5px 5px 10px #CCCCCC;
+	/*box-shadow: 5px 5px 10px #CCCCCC;*/
 	text-align: center;
 	line-height: 4vh;
 	margin-top: 3vh;
@@ -79,7 +88,7 @@ body{
 .about_column{
 	padding-right: 2vh;
 	padding-top: 3vh;
-	color: #EEEEEE;
+	color: #353535;;
 	text-align: center;
 	z-index: 300;
 }
@@ -99,3 +108,31 @@ body{
 	margin-left: -27vh;
 }
 
+#top-right-book {
+	margin-bottom: -20vh;
+	height: 30vh;
+}
+
+#bottom-left-book {
+	margin-left: -12vw;
+	margin-bottom: -10vh;
+	height: 50vh;
+}
+
+first-transition-book, second-transition-book{
+	position: relative;
+	overflow:visible;
+}
+
+#first-transition-book-img {
+	height: 60vh;
+}
+
+#about-title {
+	color: rgb(89, 185, 208);
+}
+
+#contact-title {
+	color: rgb(253, 206, 48);
+	text-align: center;
+}

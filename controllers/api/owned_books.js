@@ -3,11 +3,11 @@
  */
 
 const request = require('request');
-const ec = require('../../error_codes');
-const db = require('../../models/owned_books');
-const bt = require('../../models/books');
-const pt = require('../../models/possible_trades');
-const ge = require('../../models/graph_edges');
+const error_codes = require('../../error_codes');
+const owned_books = require('../../models/owned_books');
+const possible_trades = require('../../models/possible_trades');
+const graph_edges = require('../../models/graph_edges');
+const book_info = require('../../models/book_info');
 
 /*
  * POST http://localhost:3000/api/owned_books/add
@@ -19,26 +19,26 @@ exports.add_book = function(req, res) {
     var user_id = req.user.id;
     var book_id = req.body.book_id;
 
-    db.add_book(user_id, book_id, function(status){
-        if (status == ec.owned_books_errors.DB_SUCCESS)
+    owned_books.add_book(user_id, book_id, function(status){
+        if (status == error_codes.owned_books_errors.DB_SUCCESS)
             console.log("Successfully added book to the database!");
-        else if (status == ec.owned_books_errors.OWNED_BOOK_ALREADY_EXISTS)
+        else if (status == error_codes.owned_books_errors.OWNED_BOOK_ALREADY_EXISTS)
             console.log("Book is already in the database.");
 
         res.json({status: status});
     });
 
     // find all (A,B,C) in possible_trades where C=book_id and add (A,B,user_id,C) to the graph_edges table
-    pt.get_rows_by_want(book_id, function(status, rows) {
-        if (status == ec.possible_trades_errors.DB_SUCCESS)
+    possible_trades.get_rows_by_want(book_id, function(status, rows) {
+        if (status == error_codes.possible_trades_errors.DB_SUCCESS)
             console.log("Successfully found possible trades by wanted book in the database!");
 
         // go through each of the returned rows and add (A, B, user_id, C) to graph_edges 
         for (var i = 0; i < rows.length; i++) {
-            ge.add_edge(rows[i]["user_id"], rows[i]["book_have"], user_id, book_id, function(status) {
-                if (status == ec.graph_edges_errors.DB_SUCCESS)
+            graph_edges.add_edge(rows[i]["user_id"], rows[i]["book_have"], user_id, book_id, function(status) {
+                if (status == error_codes.graph_edges_errors.DB_SUCCESS)
                     console.log("Edge added successfully to the database!");
-                else if (status == ec.graph_edges_errors.GRAPH_EDGE_ALREADY_EXISTS)
+                else if (status == error_codes.graph_edges_errors.GRAPH_EDGE_ALREADY_EXISTS)
                     console.log("Edge already exists in the database!");
                 else
                     console.log("Error trying to add edge to database!");
@@ -58,26 +58,26 @@ exports.remove_book = function(req, res) {
     var user_id = req.user.id;
     var book_id = req.body.book_id;
 
-    db.remove_book(user_id, book_id, function(status){
-        if (status == ec.owned_books_errors.DB_SUCCESS)
+    owned_books.remove_book(user_id, book_id, function(status){
+        if (status == error_codes.owned_books_errors.DB_SUCCESS)
             console.log("Successfully removed book from the database!");
-        else if (status == ec.owned_books_errors.OWNED_BOOK_DOES_NOT_EXIST)
+        else if (status == error_codes.owned_books_errors.OWNED_BOOK_DOES_NOT_EXIST)
             console.log("Owned book cannot be removed since it is not in the database!");
 
         res.json({status: status});
     });
 
     // delete all (A,B,C) in possible_trades where A=user_id AND B=book_id
-    pt.remove_relation_have(user_id, book_id, function(status) {
-        if (status == ec.possible_trades_errors.DB_SUCCESS)
+    possible_trades.remove_relation_have(user_id, book_id, function(status) {
+        if (status == error_codes.possible_trades_errors.DB_SUCCESS)
             console.log("Successfully removed relation_have from the database!");
 
         // res.json({status: status});
     });
 
     // delete all (A,B,C,D) in graph_edges where (A=user_id AND B=book_id) OR (C=user_id AND D=book_id)
-    ge.remove_owned_book(user_id, book_id, function(status) {
-        if (status == ec.graph_edges_errors.DB_SUCCESS)
+    graph_edges.remove_owned_book(user_id, book_id, function(status) {
+        if (status == error_codes.graph_edges_errors.DB_SUCCESS)
             console.log("Successfully removed owned book for all graph edges from the database!");
 
         // res.json({status: status});
@@ -89,11 +89,11 @@ exports.remove_book = function(req, res) {
  * Gets a list of owned books of an user from the database, where each entry has [book_id, title, author, isbn]
  * Replies with a json object containing the status of the database operation and the list of books.
  */
-exports.get_books = function(req, res) {
+exports.get_owned_cards = function(req, res) {
     var user_id = req.user.id;
 
-    db.get_owned_books(user_id, function(status, data){
-        if (status == ec.owned_books_errors.DB_SUCCESS)
+    owned_books.get_owned_books(user_id, function(status, data){
+        if (status == error_codes.owned_books_errors.DB_SUCCESS)
             console.log("Successfully found books from the database!");
 
         // convert from array of Javascript objects to just array of book_ids
@@ -103,7 +103,7 @@ exports.get_books = function(req, res) {
         }
 
         // get the book info corresponding to each book_id 
-        bt.get_books_info(book_ids, function(error_status, books_data) {
+        book_info.get_books_info(book_ids, function(error_status, books_data) {
             if (error_status) {
                 console.error("Error querying database", error_status);
             }
@@ -121,8 +121,8 @@ exports.get_books = function(req, res) {
 exports.get_users = function(req, res) {
     var book_id = req.query.book_id;
 
-    db.get_users(book_id, function(status, data){
-        if (status == ec.owned_books_errors.DB_SUCCESS)
+    owned_books.get_users(book_id, function(status, data){
+        if (status == error_codes.owned_books_errors.DB_SUCCESS)
             console.log("Successfully found owners from the database!");
 
         res.json({status: status, data: data});

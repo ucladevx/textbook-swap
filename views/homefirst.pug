@@ -1,6 +1,10 @@
 div(id="first")
+    div(class="container")
+        div(class="col-md-4 col-md-offset-8")
+            img(src="img/book1.svg" id="top-right-book")
     div(class="container" id="logo")
         div(class="col-xs-3")
+            img(src="img/book2.svg" id="bottom-left-book")
         div(class="col-xs-6")
             include logo
         div(class="col-xs-3")
@@ -9,12 +13,6 @@ div(id="first")
                 a(class="btn btn-default" href="/login/facebook" role="button") sign up
         span(class="col-xs-6 text-left")
                 a(class="btn btn-default" href="/login/facebook" role="button") login
-    div(class="container")
-        span()
-            div(class="col-xs-4")
-            div(class="col-xs-4 text-center")
-                //<span class="glyphicon glyphicon-menu-down" id="about" aria-hidden="true"></span>
-            div(class="col-xs-4")
-    div(class="container")
-        div(class="col-xs-12")
-            img(src="assets/bookshelf.svg" id="bookshelf")
+    div(id="first-transition-book")
+        div(class="col-md-4 col-md-offset-8")
+            img(src="img/book3.svg" id="first-transition-book-img")

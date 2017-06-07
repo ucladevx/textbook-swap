@@ -16,7 +16,10 @@ $(document).ready(function(){
 		var ownedCard = $(this).find(".owned")[0].attributes;
 		var wantedCard = $(this).find(".wanted")[0].attributes;
 		var header = "<div class=\"row\" id=\"top-row\">"
-			+ "<div class=\"col-xs-3\"></div>"
+			+ "<div class=\"col-xs-3 text-left\">"
+			+ "<a class=\"matched-popup-close\" data-matched-popup-close=\"" + "matched-popup-matched-trade"
+			+ "\" href=\"\">x</a>" 
+			+ "</div>"
 			+ "<div class=\"col-xs-6 text-center\">"
 			+ "<h4>MATCHED TRADE</h4>"
             + "</div>"
@@ -29,9 +32,6 @@ $(document).ready(function(){
 			+ "matched-popup-matched-trade"
 			+ "\"><div class=\"matched-popup-inner\" id=\"matched\">"
 			+ "<div class=\"first-page\">"
-
-			+ "<a class=\"matched-popup-close\" data-matched-popup-close=\"" + "matched-popup-matched-trade"
-			+ "\" href=\"\">x</a>" 
 			
 			+ header
 
@@ -60,7 +60,7 @@ $(document).ready(function(){
 			+ "<div class=\"row\">"
 			+ "<div class=\"col-xs-4\"></div>"
 			+ "<div class=\"col-xs-2 text-center\">"
-			+ "<a class=\"btn btn-primary accept-trade\" role=\"button\" href=\"#\">ACCEPT</a>"
+			+ "<a class=\"btn btn-warning accept-trade\" role=\"button\" href=\"#\">ACCEPT</a>"
 			+ "</div>" //close col
 			+ "<div class=\"col-xs-2 text-center\">"
 			+ "<a class=\"btn btn-danger reject-trade\" role=\"button\" href=\"#\">REJECT</a>"
@@ -94,8 +94,6 @@ $(document).ready(function(){
 			+ "<h4>Congratulations! You've accepted the trade.</h4>"
 			+ "</div>"
 
-			+ "<a class=\"matched-popup-close\" data-matched-popup-close=\"" + "matched-popup-matched-trade"
-			+ "\" href=\"\">x</a>" 
 			+ "<div class=\"row text-center\">"
 			+ "<a class=\"btn btn-warning closebtn\" role=\"button\" href=\"\">Close</a>"
 			+ "</div></div>"
@@ -109,17 +107,13 @@ $(document).ready(function(){
 			+ "<h4>Are you sure you want to reject the trade?</h4>"
 			+ "</div>"
 
-			+ "<a class=\"matched-popup-close\" data-matched-popup-close=\"" + "matched-popup-matched-trade"
-			+ "\" href=\"\">x</a>"
-
-
 			+ "<div class=\"row\">"
 			+ "<div class=\"col-xs-4\"></div>"
 			+ "<div class=\"col-xs-2 text-center\">"
-			+ "<a class=\"btn btn-warning back\" role=\"button\" href=\"#\">NO, take me back!</a>"
+			+ "<a class=\"btn btn-danger back\" role=\"button\" href=\"#\">NO, take me back!</a>"
 			+ "</div>" //close col
 			+ "<div class=\"col-xs-2 text-center\">"
-			+ "<a class=\"btn btn-danger confirm\" role=\"button\" href=\"\">YES</a>"
+			+ "<a class=\"btn btn-warning confirm\" role=\"button\" href=\"\">YES</a>"
 			+ "</div>" //close col
 			+ "<div class=\"col-xs-4\"></div>"
 			+ "</div>" //close row
@@ -133,9 +127,6 @@ $(document).ready(function(){
 			+ "<div class=\"row text-center matched-inner\">"
 			+ "<h4>You've rejected the trade.</h4>"
 			+ "</div>"
-
-			+ "<a class=\"matched-popup-close\" data-matched-popup-close=\"" + "matched-popup-matched-trade"
-			+ "\" href=\"\">x</a>" 
 
 			+ "<div class=\"row text-center\">"
 			+ "<a class=\"btn btn-warning closebtn\" role=\"button\" href=\"\">Close</a>"

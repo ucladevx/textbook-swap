@@ -618,3 +618,7 @@ body {
 .matchbook{
 	max-height: 200px;
 }
+
+.btn {
+	border-radius: 0;
+}

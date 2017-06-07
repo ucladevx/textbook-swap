@@ -86,8 +86,6 @@ app.get('/bookshelf', require_login.ensureLoggedIn(), bookShelfController.index)
 
 /*
  * API routes.
- *
- *
  */
 
 // Owned books
@@ -128,6 +126,11 @@ app.get('/api/found_trades/get_trade_by_wanted_book', foundTradesController.get_
  * Tests
  */
 // const test = require('./tests/test_all').test();
+const init = require('./models/init').create_tables(function(){
+    const tradeIDInit = require('./models/found_trades_id').insert_id(0, function(){
+        const test = require('./tests/test_all').test();
+    });
+});
 
 /*
  * Authentication routes.

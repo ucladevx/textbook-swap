@@ -36,11 +36,23 @@ const textbookSearchController = require('./controllers/api/search');
 const bookToClassController = require('./controllers/api/book_to_class');
 const bookInfoController = require('./controllers/api/book_info');
 const foundTradesController = require('./controllers/api/found_trades');
+const runAlgorithmController = require('./controllers/api/run_algorithm');
 
 /*
  * API keys and Passport configuration.
  */
 const passportConfig = require('./config/passport')(passport, FacebookStrategy);
+
+/*
+ * Database Initialization
+ */
+
+const initDB = require('./models/init');
+initDB.create_tables(function(){
+    const tradeIDInit = require('./models/found_trades_id').insert_id(0, function(){
+        console.log("initialized");
+    });
+});
 
 /*
  * Create Express server.
@@ -74,13 +86,10 @@ app.use(passport.session());
  * Primary app routes.
  */
 app.get('/', homeController.index);
-app.get('/dashboard', require_login.ensureLoggedIn(), dashboardController.index);
 app.get('/bookshelf', require_login.ensureLoggedIn(), bookShelfController.index);
 
 /*
  * API routes.
- *
- *
  */
 
 // Owned books
@@ -117,12 +126,13 @@ app.post('/api/found_trades/update_status_accepted', foundTradesController.updat
 app.post('/api/found_trades/update_status_rejected', foundTradesController.update_status_rejected);
 app.get('/api/found_trades/get_trade_by_wanted_book', foundTradesController.get_trade_by_wanted_book);
 
+// Algorithm (FOR DEVELOPMENT ONLY)
+app.get('/api/algorithm/run', runAlgorithmController.run_algorithm);
+
 /*
  * Tests
  */
-const initDB = require('./models/init');
-initDB.create_tables(function(){});
-const test = require('./tests/test_all').test();
+// const test = require('./tests/test_all').test();
 
 /*
  * Authentication routes.

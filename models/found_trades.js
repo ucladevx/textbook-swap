@@ -1,4 +1,4 @@
-/*
+ /*
  * Interface to query and modify the table found_trades.
  */
 
@@ -301,7 +301,7 @@ exports.get_matched_trades = function (user_id, next){
             console.error("Error connection to client while querying found_trades table: ", err);
             return next(error_codes.found_trades_errors.DB_CONNECTION_ERROR, []);
         }
-        client.query("SELECT book_have, book_want FROM found_trades WHERE user_id=$1::VARCHAR",
+        client.query("SELECT trade_id, book_have, book_want FROM found_trades WHERE user_id=$1::VARCHAR",
             [user_id], function(err, result){
                 if(err){
                     console.error("Error querying database", err);
@@ -310,5 +310,43 @@ exports.get_matched_trades = function (user_id, next){
 
                 return next(error_codes.found_trades_errors.DB_SUCCESS, result.rows);
             });
+    });
+};
+
+exports.get_trades_status = function (trade_id, next) {
+    pg.connect(process.env.DATABASE_URL, function(err, client, done){
+        done();
+
+        if (err){
+            console.error("Error connection to client while querying found_trades table: ", err);
+            return next(error_codes.found_trades_errors.DB_CONNECTION_ERROR, []);
+        }
+        var rejected = false;
+        var accepted = true;
+        var result;
+        get_statuses_by_id(trade_id, function(error_code, statuses) {
+            (statuses).forEach(function(row, i_index) {
+               console.log(row);
+               switch(row) {
+                case 'A':
+                    break;
+                case 'P':
+                    accepted = false;
+                    break;
+                case 'R':
+                    rejected = true;
+                    accepted = false;
+                    break;
+                default:
+                    break;
+               }
+               if(i_index == statuses.length - 1) {
+                    if(rejected) result = 'R';
+                    else if(accepted) result = 'A';
+                    else result = 'P';
+                    return next(error_codes.found_trades_errors.DB_SUCCESS, result);
+               }
+            });
+        });
     });
 };

@@ -337,10 +337,10 @@ $(document).ready(function(){
 		});
 
 		// close the popup
-		$('[data-popup="popup-1"]').fadeOut(350);
-
-		// refresh the window (display newly added book trade)
-		location.reload();
+		$('[data-popup="popup-1"]').fadeOut(350, function(){
+				// refresh the window (display newly added book trade)
+				location.reload();
+		});
 	});
 
 	/*

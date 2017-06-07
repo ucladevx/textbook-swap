@@ -14,16 +14,7 @@ $(document).ready(function(){
 	$(".Matched:not(.Requested)").on('click', function(e){
 		var ownedCard = $(this).find(".owned")[0].attributes;
 		var wantedCard = $(this).find(".wanted")[0].attributes;
-
-		$("body").append("<div class=\"matched-popup\" data-matched-popup=\"" 
-			+ "matched-popup-matched-trade"
-			+ "\"><div class=\"matched-popup-inner\" id=\"matched\">"
-			+ "<div class=\"first-page\">"
-
-			+ "<a class=\"matched-popup-close\" data-matched-popup-close=\"" + "matched-popup-matched-trade"
-			+ "\" href=\"\">x</a>" 
-			
-			+ "<div class=\"row\" id=\"top-row\">"
+		var header = "<div class=\"row\" id=\"top-row\">"
 			+ "<div class=\"col-xs-3\"></div>"
 			+ "<div class=\"col-xs-6 text-center\">"
 			+ "<h4>MATCHED TRADE</h4>"
@@ -33,13 +24,23 @@ $(document).ready(function(){
 			+ "</div>"
 			+ "</div>"
 
-			+ "<div class=\"row\" id=\"book-info\">"
+		$("body").append("<div class=\"matched-popup\" data-matched-popup=\"" 
+			+ "matched-popup-matched-trade"
+			+ "\"><div class=\"matched-popup-inner\" id=\"matched\">"
+			+ "<div class=\"first-page\">"
+
+			+ "<a class=\"matched-popup-close\" data-matched-popup-close=\"" + "matched-popup-matched-trade"
+			+ "\" href=\"\">x</a>" 
+			
+			+ header
+
+			+ "<div class=\"row matched-inner\">"
 			+ "<div class=\"col-xs-5 text-center\">"
 			+ "<p>"
 			+ "Title: " + ownedCard[1].nodeValue.toUpperCase() + "<br>"
 			+ "Author: " + ownedCard[2].nodeValue.toUpperCase() + "<br>"
 			+ "ISBN: " + ownedCard[4].nodeValue.toUpperCase() + "<br>"
-			+ "<img src=\"" + ownedCard[5].nodeValue + "\"> <br>" 
+			+ "<img class=\"matchbook\"src=\"" + ownedCard[5].nodeValue + "\"> <br>" 
 			+ "</p>"
 			+ "</div>" //close col
 
@@ -50,7 +51,7 @@ $(document).ready(function(){
 			+ "Title: " + wantedCard[1].nodeValue.toUpperCase() + "<br>"
 			+ "Author: " + wantedCard[2].nodeValue.toUpperCase() + "<br>"
 			+ "ISBN: " + wantedCard[4].nodeValue.toUpperCase() + "<br>"
-			+ "<img src=\"" + wantedCard[5].nodeValue + "\"> <br>"
+			+ "<img class=\"matchbook\" src=\"" + wantedCard[5].nodeValue + "\"> <br>"
 			+ "</p>"
 			+ "</div>" //close col
 			+ "</div>" //close row
@@ -87,34 +88,57 @@ $(document).ready(function(){
 		//accept confirmation page
 		$(".matched-popup-inner").append(
 			"<div class=\"accept-page\" style=\"display:none\">"
-			+ "<h3>Congratulations! You've accepted the trade.</h3>"
+			+ header
+			+ "<div class=\"row text-center matched-inner\">"
+			+ "<h4>Congratulations! You've accepted the trade.</h4>"
+			+ "</div>"
+
 			+ "<a class=\"matched-popup-close\" data-matched-popup-close=\"" + "matched-popup-matched-trade"
 			+ "\" href=\"\">x</a>" 
+			+ "<div class=\"row text-center\">"
 			+ "<a class=\"btn btn-warning closebtn\" role=\"button\" href=\"\">Close</a>"
-			+ "</div>"
+			+ "</div></div>"
 		);
 
 		//reject confirmation page
 		$(".matched-popup-inner").append(
 			"<div class=\"reject-page\"  style=\"display:none\">"
-			+ "<h3>Are you sure you want to reject the trade?</h3>"
-			+ "<a class=\"matched-popup-close\" data-matched-popup-close=\"" + "matched-popup-matched-trade"
-			+ "\" href=\"\">x</a>" 
+			+ header
+			+ "<div class=\"row text-center matched-inner\">"
+			+ "<h4>Are you sure you want to reject the trade?</h4>"
+			+ "</div>"
 
+			+ "<a class=\"matched-popup-close\" data-matched-popup-close=\"" + "matched-popup-matched-trade"
+			+ "\" href=\"\">x</a>"
+
+
+			+ "<div class=\"row\">"
+			+ "<div class=\"col-xs-4\"></div>"
+			+ "<div class=\"col-xs-2 text-center\">"
 			+ "<a class=\"btn btn-warning back\" role=\"button\" href=\"#\">NO, take me back!</a>"
+			+ "</div>" //close col
+			+ "<div class=\"col-xs-2 text-center\">"
 			+ "<a class=\"btn btn-danger confirm\" role=\"button\" href=\"\">YES</a>"
+			+ "</div>" //close col
+			+ "<div class=\"col-xs-4\"></div>"
+			+ "</div>" //close row
 			+ "</div>"
 		);
 
 		//rejected page
 		$(".matched-popup-inner").append(
 			"<div class=\"rejected-page\"  style=\"display:none\">"
-			+ "<h3>You've rejected the trade.</h3>"
+			+ header
+			+ "<div class=\"row text-center matched-inner\">"
+			+ "<h4>You've rejected the trade.</h4>"
+			+ "</div>"
+
 			+ "<a class=\"matched-popup-close\" data-matched-popup-close=\"" + "matched-popup-matched-trade"
 			+ "\" href=\"\">x</a>" 
 
+			+ "<div class=\"row text-center\">"
 			+ "<a class=\"btn btn-warning closebtn\" role=\"button\" href=\"\">Close</a>"
-			+ "</div>"
+			+ "</div></div>"
 		);
 
 		//close button on accept confirmation page

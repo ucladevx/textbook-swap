@@ -7,8 +7,9 @@ const users = require('../../models/users');
 
 // output user profile info to console and redirect user to profile page
 exports.loginReturn = function (req, res) {
-    users.add_new_user(req.user.id, req.user.displayName, req.user.emails[0].value, function(){});
-    res.redirect('/bookshelf');
+    users.add_new_user(req.user.id, req.user.displayName, req.user.emails[0].value, function(){
+        res.redirect('/bookshelf');
+    });
 };
 
 // logout user and redirect user to home page

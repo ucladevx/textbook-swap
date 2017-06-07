@@ -9,6 +9,7 @@ $(document).ready(function(){
 	    $grid.isotope({ filter: filterValue });
 	    $('.active').removeClass('active');
         $(this).addClass('active');
+        $(".carousel-inner #first-popup").addClass('active');
 	});
 
 	$(".Matched:not(.Requested)").on('click', function(e){

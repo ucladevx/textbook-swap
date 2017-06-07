@@ -1,5 +1,7 @@
 body{
 	font-family: 'Lato', sans-serif !important;
+	max-width: 100%;
+    overflow-x: hidden;
 }
 
 #logo {
@@ -122,9 +124,14 @@ body{
 	height: 50vh;
 }
 
-first-transition-book, second-transition-book, third-transition-laptop {
+first-transition-book, second-transition-book {
 	position: relative;
 	overflow: visible;
+}
+
+third-transition-laptop {
+	position: relative;
+	overflow: hidden;
 }
 
 #first-transition-book-img {

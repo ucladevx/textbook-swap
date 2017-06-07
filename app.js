@@ -36,6 +36,7 @@ const textbookSearchController = require('./controllers/api/search');
 const bookToClassController = require('./controllers/api/book_to_class');
 const bookInfoController = require('./controllers/api/book_info');
 const foundTradesController = require('./controllers/api/found_trades');
+const runAlgorithmController = require('./controllers/api/run_algorithm');
 
 /*
  * API keys and Passport configuration.
@@ -45,9 +46,12 @@ const passportConfig = require('./config/passport')(passport, FacebookStrategy);
 /*
  * Database Initialization
  */
+
 const initDB = require('./models/init');
 initDB.create_tables(function(){
-    console.log("created tables!");
+    const tradeIDInit = require('./models/found_trades_id').insert_id(0, function(){
+        console.log("initialized");
+    });
 });
 
 /*
@@ -86,8 +90,6 @@ app.get('/bookshelf', require_login.ensureLoggedIn(), bookShelfController.index)
 
 /*
  * API routes.
- *
- *
  */
 
 // Owned books
@@ -123,6 +125,9 @@ app.get('/api/book_info/get_pair_book_info', bookInfoController.get_pair_book_in
 app.post('/api/found_trades/update_status_accepted', foundTradesController.update_status_accepted);
 app.post('/api/found_trades/update_status_rejected', foundTradesController.update_status_rejected);
 app.get('/api/found_trades/get_trade_by_wanted_book', foundTradesController.get_trade_by_wanted_book);
+
+// Algorithm (FOR DEVELOPMENT ONLY)
+app.get('/api/algorithm/run', runAlgorithmController.run_algorithm);
 
 /*
  * Tests

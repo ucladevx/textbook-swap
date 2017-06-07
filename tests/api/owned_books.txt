@@ -1,6 +1,6 @@
 //TODO: These won't work anymore. Change to different tests.
 
 curl -H "Content-Type: application/json" -X POST -d '{"user_id":"jerrylinew","book_id":123432}' http://localhost:3000/api/owned_books/add
-curl -H "Content-Type: application/json" -X POST -d '{"user_id":"jerrylinew","book_id":123432}' http://localhost:3000/api/owned_books/remove
+curl -H "Content-Type: application/json" -X POST -d '{"book_id":123432}' http://localhost:3000/api/owned_books/remove
 curl -H "Accept: application/json" -H "Content-Type: application/json" -X GET http://localhost:3000/api/owned_books/get_books?user_id=jerrylinew
 curl -H "Accept: application/json" -H "Content-Type: application/json" -X GET http://localhost:3000/api/owned_books/get_users?book_id=2

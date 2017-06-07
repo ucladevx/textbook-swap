@@ -109,12 +109,20 @@ $(document).ready(function(){
 			+ "</div>"
 
 			+ "<a class=\"matched-popup-close\" data-matched-popup-close=\"" + "matched-popup-matched-trade"
-			+ "\" href=\"\">x</a>" 
+			+ "\" href=\"\">x</a>"
 
-			+ "<div class=\"row text-center\">"
+
+			+ "<div class=\"row\">"
+			+ "<div class=\"col-xs-4\"></div>"
+			+ "<div class=\"col-xs-2 text-center\">"
 			+ "<a class=\"btn btn-warning back\" role=\"button\" href=\"#\">NO, take me back!</a>"
+			+ "</div>" //close col
+			+ "<div class=\"col-xs-2 text-center\">"
 			+ "<a class=\"btn btn-danger confirm\" role=\"button\" href=\"\">YES</a>"
-			+ "</div></div>"
+			+ "</div>" //close col
+			+ "<div class=\"col-xs-4\"></div>"
+			+ "</div>" //close row
+			+ "</div>"
 		);
 
 		//rejected page

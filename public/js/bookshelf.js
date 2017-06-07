@@ -59,7 +59,7 @@ $(document).ready(function(){
 			+ "<div class=\"row\">"
 			+ "<div class=\"col-xs-4\"></div>"
 			+ "<div class=\"col-xs-2 text-center\">"
-			+ "<a class=\"btn btn-primary accept-trade\" role=\"button\" href=\"#\">ACCEPT</a>"
+			+ "<a class=\"btn btn-warning accept-trade\" role=\"button\" href=\"#\">ACCEPT</a>"
 			+ "</div>" //close col
 			+ "<div class=\"col-xs-2 text-center\">"
 			+ "<a class=\"btn btn-danger reject-trade\" role=\"button\" href=\"#\">REJECT</a>"
@@ -115,10 +115,10 @@ $(document).ready(function(){
 			+ "<div class=\"row\">"
 			+ "<div class=\"col-xs-4\"></div>"
 			+ "<div class=\"col-xs-2 text-center\">"
-			+ "<a class=\"btn btn-warning back\" role=\"button\" href=\"#\">NO, take me back!</a>"
+			+ "<a class=\"btn btn-danger back\" role=\"button\" href=\"#\">NO, take me back!</a>"
 			+ "</div>" //close col
 			+ "<div class=\"col-xs-2 text-center\">"
-			+ "<a class=\"btn btn-danger confirm\" role=\"button\" href=\"\">YES</a>"
+			+ "<a class=\"btn btn-warning confirm\" role=\"button\" href=\"\">YES</a>"
 			+ "</div>" //close col
 			+ "<div class=\"col-xs-4\"></div>"
 			+ "</div>" //close row

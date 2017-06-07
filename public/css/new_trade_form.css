@@ -147,12 +147,18 @@
 	background-color: rgb(242, 242, 242);
 }
 
-.popup .nextButton, .popup .prevButton, .popup .btn:focus, .popup .btn:focus:active, .popup .btn:hover, .popup #pick_book_next, .popup #wanted_list_next {
+.popup .nextButton, .popup .prevButton, .popup .btn:focus, .popup .btn:active, .popup .btn:hover, .popup #pick_book_next, .popup #wanted_list_next {
 	background-color: rgb(253, 206, 48);
 	border-color: rgb(253, 206, 48);
 	border-radius: 0;
 	box-shadow: none;
 	outline: none;
+}
+
+.popup .btn:active:focus {
+	background-color: #efb745;
+	border-color: #efb745;
+	color: #ffffff;
 }
 
 /* align owned book info for confirm book slide (2nd)*/

@@ -257,6 +257,8 @@ $(document).ready(function(){
 		wantedBook.remove();
 		if ($('.wantedBooksList li').length == 0)
 			$('#wanted_list_next').prop('disabled', true);
+		// don't scroll user to top
+		return false;
 	});
 
 	/*

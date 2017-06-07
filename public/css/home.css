@@ -30,7 +30,7 @@ body{
 	background-color: #353535;
 }
 
-.btn, .btn:focus:active, .btn:hover {
+.btn, .btn:focus, .btn:active, .btn:hover {
 	background-color: rgb(253, 206, 48);
 	border-color: rgb(253, 206, 48);
 	border-radius: 0;
@@ -46,6 +46,12 @@ body{
 	line-height: 4vh;
 	margin-top: 3vh;
 	font-size:125%;
+}
+
+.btn:active:focus {
+	background-color: #efb745;
+	border-color: #efb745;
+	color: #ffffff;
 }
 
 #bookshelf {

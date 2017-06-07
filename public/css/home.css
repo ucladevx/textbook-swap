@@ -102,15 +102,14 @@ body{
 	font-size: 125%;
 }
 
-.about_graphic{
+.about_animation{
 	position: relative;
 }
 
-.about_graphic img {
+.about_animation img {
 	transition: all ease-out;
-	width: 75vw;
-	margin-top: -10vh;
-	margin-left: -10vw;
+	width: 30vw;
+	padding-top: 8vh;
 }
 
 #top-right-book {

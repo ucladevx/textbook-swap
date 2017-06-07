@@ -13,7 +13,9 @@ html
         #second
             .container
                 .row
-                    .col-md-6.about_graphic
+                    //.col-md-6.about_graphic
+                    .col-md-6.about_animation
+                        img(src="img/loop-animation.gif" id="loop-animation-gif")
                     .col-md-3.about_column
                         h2#about-title What is Loop?
                         br
@@ -63,8 +65,7 @@ html
 
                 .container
                     span()
-                        .col-md-4
-                        .col-md-4.text-center
+                        .col-md-4.col-md-offset-4.text-center
                             span(class="glyphicon glyphicon-menu-up" id="backtotop" aria-hidden="true")
 
         script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js")

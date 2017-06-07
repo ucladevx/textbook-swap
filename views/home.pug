@@ -10,17 +10,14 @@ html
     body
         include navbar.pug
         include homefirst.pug
-        div(id="second")
+        #second
             .container
                 .row
                     .col-md-6.about_graphic
-                        //div(id="second-transition-book")
-                            //div(class="col-md-8")
-                            //img(src="img/book4.svg" id="second-transition-book-img")
                     .col-md-3.about_column
                         h2#about-title What is Loop?
                         br
-                        p Loop is an innovative way to trade, buy, and sell.
+                        p Loop is an innovative way to trade, buy, and sell textbooks.
                         br
                         p Users pick what textbooks they want and what they're willing to trade for them (or prices to buy/sell at), and our algorithm will do the rest. 
                         br 
@@ -28,25 +25,47 @@ html
                         br
                         p People who get matched up with a sale or trade can then meet up in person to complete the exchange.
                     .col-md-3.about_column
+                        .col-md-12#first-transition-book
+                            img(src="img/book3.svg" id="first-transition-book-img")
                         p Lorem ipsum dolor sit amet, consectetur adipiscing elit. In consectetur erat eros, a suscipit lorem dignissim ut.
                         br
-                        p Suspendisse bibendum turpis arcu, vitae accumsan lectus vulputate sollicitudin. Phasellus feugiat mattis mauris at viverra. In eget justo eu nulla ullamcorper rutrum sed eu felis.
+                        p Suspendisse bibendum turpis arcu, vitae accumsan lectus vulputate sollicitudin. 
                         br
-                        p Cras ut porttitor enim. Nulla varius tincidunt mi, at imperdiet odio vulputate ut. Nullam a felis ante. Integer metus augue, maximus accumsan nisl eu, rutrum sodales ante. Proin eget ex eu felis congue vehicula et nec risus. Sed in varius orci. Aenean tristique ligula id erat egestas tincidunt.
-
-        div(id="third")
+                        p Cras ut porttitor enim. Nulla varius tincidunt mi, at imperdiet odio vulputate ut. Nullam a felis ante. Integer metus augue, maximus accumsan nisl eu, rutrum sodales ante.
+        #third
             .container
                 .row   
-                    .col-md-12.contact
+                    .col-md-3#second-transition-book
+                        img(src="img/book4.svg" id="second-transition-book-img")
+                    .col-md-6.contact
                         h2#contact-title Contact Us
-                       
+                        form.form-horizontal#contact-form
+                            .form-group
+                                label.col-md-3.control-label(for="inputName") Name
+                                .col-md-9
+                                    input.form-control(type="text" class="form-control" id="inputName" placeholder="")
+                            .form-group
+                                label.col-md-3.control-label(for="inputEmail") Email
+                                .col-md-9
+                                    input.form-control(type="email" class="form-control" id="inputEmail" placeholder="")
+                            .form-group
+                                label.col-md-3.control-label(for="inputSubject") Subject
+                                .col-md-9
+                                    input.form-control(type="text" class="form-control" id="inputSubject" placeholder="")
+                            .form-group
+                                label.col-md-3.control-label(for="inputMessage") Message
+                                .col-md-9
+                                    textarea.form-control(rows="8" class="form-control" id="inputMessage" placeholder="")
+                        .text-center
+                            a(class="btn btn-default" href="#" role="button") SEND
+                    .col-md-3#third-transition-laptop
+                        img(src="img/laptop.svg" id="third-transition-laptop-img")
 
-                div(class="container")
+                .container
                     span()
-                        div(class="col-sm-4")
-                        div(class="col-sm-4 text-center")
-                            <span class="glyphicon glyphicon-menu-up" id="backtotop" aria-hidden="true"></span>
-                        div(class="col-sm-4")
+                        .col-md-4
+                        .col-md-4.text-center
+                            span(class="glyphicon glyphicon-menu-up" id="backtotop" aria-hidden="true")
 
         script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js")
         script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous")

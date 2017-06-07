@@ -64,7 +64,8 @@ html
                                         - var num_books = book_nums[book_id] ? book_nums[book_id] : 0;
                                         p #{num_books} books wanted in exchange
                         else
-                            .card.col-md-4.grid-item.Matched.All
+                            - var class_name = books[i]["status"] == "A" ? "Accepted" : books["status"] == "R" ? "Rejected" : "Matched";
+                            .card.col-md-4.grid-item.All.Matched
                                 .row
                                     .col-md-5
                                         .owned(data-title=books[i]['book_have'].title, data-author=books[i]['book_have'].author, data-id=books[i]['book_have'].book_id, data-isbn=books[i]['book_have'].isbn, data-img=books[i]['book_have'].img_url)
@@ -96,7 +97,8 @@ html
                                         - var num_books = book_nums[book_id] ? book_nums[book_id] : 0;
                                         p #{num_books} books wanted in exchange
                         else
-                            .card.col-md-4.grid-item.Matched.All
+                            - var class_name = books[i + 1]["status"] == "A" ? "Accepted" : books["status"] == "R" ? "Rejected" : "Matched";
+                            .card.col-md-4.grid-item.All.Matched
                                 .row
                                     .col-md-5
                                         .owned(data-title=books[i + 1]['book_have'].title, data-author=books[i + 1]['book_have'].author, data-id=books[i + 1]['book_have'].book_id, data-isbn=books[i + 1]['book_have'].isbn, data-img=books[i + 1]['book_have'].img_url)
@@ -128,7 +130,8 @@ html
                                         - var num_books = book_nums[book_id] ? book_nums[book_id] : 0;
                                         p #{num_books} books wanted in exchange
                         else
-                            .card.col-md-4.grid-item.Matched.All
+                            - var class_name = books[i + 2]["status"] == "A" ? "Accepted" : books["status"] == "R" ? "Rejected" : "Matched";
+                            .card.col-md-4.grid-item.All.Matched
                                 .row
                                     .col-md-5
                                         .owned(data-title=books[i + 2]['book_have'].title, data-author=books[i + 2]['book_have'].author, data-id=books[i + 2]['book_have'].book_id, data-isbn=books[i + 2]['book_have'].isbn, data-img=books[i + 2]['book_have'].img_url)
@@ -143,6 +146,4 @@ html
                                 .row.info-row
                                     .col-md-12.info
                                         p NEW MATCH for #{books[i + 2]['book_have'].title}
-
-
             - }

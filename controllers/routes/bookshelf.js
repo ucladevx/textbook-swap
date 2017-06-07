@@ -64,6 +64,11 @@ exports.index = function(req, res) {
                             book_info.get_book_info(item["book_want"], function(error, book_want_info){
                                 cb(null, book_want_info[0]);
                             });
+                        },
+                        status: function(cb){
+                            found_trades.get_trades_status(item["trade_id"], function(error, trades_status){
+                                cb(null, trades_status);
+                            });
                         }
                     }, function(err, matched_trade){
                         map_callback(null, matched_trade)
@@ -74,7 +79,7 @@ exports.index = function(req, res) {
             });
         }
     }, function(err, results){
-        console.log(results['possible_trades_info']);
+        console.log(results['matched_trades_info']);
         res.render('bookshelf', {
             status: err,
             books: [].concat(results['matched_trades_info'], results['owned_books_info']),

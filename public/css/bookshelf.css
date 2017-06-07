@@ -35,6 +35,10 @@ body{
 	background-color: #f8cc45;
 }
 
+.Accepted:not(.Matched){
+	background-color: green;
+}
+
 .card-img-top {
 	height: 100px;
 	/*margin-left: 50%;*/

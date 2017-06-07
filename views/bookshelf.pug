@@ -60,7 +60,9 @@ html
                                             img.book-img(src=books[i].img_url, alt='Card image cap')
                                 .row.info-row
                                     .col-md-12.info
-                                        p 16 books wanted in exchange
+                                        - var book_id = books[i].book_id.toString();
+                                        - var num_books = book_nums[book_id] ? book_nums[book_id] : 0;
+                                        p #{num_books} books wanted in exchange
                         else
                             .card.col-md-4.grid-item.Matched.All
                                 .row
@@ -90,7 +92,9 @@ html
                                             img.book-img(src=books[i + 1].img_url, alt='Card image cap')
                                 .row.info-row
                                     .col-md-12.info
-                                        p 16 books wanted in exchange
+                                        - var book_id = books[i+1].book_id.toString();
+                                        - var num_books = book_nums[book_id] ? book_nums[book_id] : 0;
+                                        p #{num_books} books wanted in exchange
                         else
                             .card.col-md-4.grid-item.Matched.All
                                 .row
@@ -120,7 +124,9 @@ html
                                             img.book-img(src=books[i + 2].img_url, alt='Card image cap')
                                 .row.info-row
                                     .col-md-12.info
-                                        p 16 books wanted in exchange
+                                        - var book_id = books[i+2].book_id.toString();
+                                        - var num_books = book_nums[book_id] ? book_nums[book_id] : 0;
+                                        p #{num_books} books wanted in exchange
                         else
                             .card.col-md-4.grid-item.Matched.All
                                 .row

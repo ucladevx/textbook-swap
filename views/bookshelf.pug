@@ -79,6 +79,10 @@ html
                                         p.title #{books[i]['book_want'].title}
                                 .row.info-row
                                     .col-md-12.info
+                                        if class_name == "Matched"
+                                            p NEW MATCH for #{books[i]['book_have'].title}
+                                        else if class_name == "Accepted"
+                                            p NEW ACCEPTED TRADE for #{books[i]['book_have'].title}
                                         p NEW MATCH for #{books[i]['book_have'].title}
                         else
                             .card.col-md-4.grid-item.All.Rejected
@@ -128,6 +132,10 @@ html
                                         p.title #{books[i + 1]['book_want'].title}
                                 .row.info-row
                                     .col-md-12.info
+                                        if class_name == "Matched"
+                                            p NEW MATCH for #{books[i + 1]['book_have'].title}
+                                        else if class_name == "Accepted"
+                                            p NEW ACCEPTED TRADE for #{books[i + 1]['book_have'].title}
                                         p NEW MATCH for #{books[i + 1]['book_have'].title}
                         else
                             .card.col-md-4.grid-item.All.Rejected
@@ -177,6 +185,10 @@ html
                                         p.title #{books[i + 2]['book_want'].title}
                                 .row.info-row
                                     .col-md-12.info
+                                        if class_name == "Matched"
+                                            p NEW MATCH for #{books[i + 2]['book_have'].title}
+                                        else if class_name == "Accepted"
+                                            p NEW ACCEPTED TRADE for #{books[i + 2]['book_have'].title}
                                         p NEW MATCH for #{books[i + 2]['book_have'].title}
                         else
                             - var class_name = books[i + 2]["status"] == "A" ? "Accepted" : books["status"] == "R" ? "Rejected" : "Matched";

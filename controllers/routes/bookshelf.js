@@ -79,7 +79,7 @@ exports.index = function(req, res) {
             });
         }
     }, function(err, results){
-        console.log(results['matched_trades_info']);
+        console.log(results['owned_books_info']);
         res.render('bookshelf', {
             status: err,
             books: [].concat(results['matched_trades_info'], results['owned_books_info']),

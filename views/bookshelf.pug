@@ -63,9 +63,25 @@ html
                                         - var book_id = books[i].book_id.toString();
                                         - var num_books = book_nums[book_id] ? book_nums[book_id] : 0;
                                         p #{num_books} books wanted in exchange
-                        else
+                        else if books[i]["status"] == "A"
                             - var class_name = books[i]["status"] == "A" ? "Accepted" : books["status"] == "R" ? "Rejected" : "Matched";
                             .card.col-md-4.grid-item.All.Matched
+                                .row
+                                    .col-md-5
+                                        .owned(data-title=books[i]['book_have'].title, data-author=books[i]['book_have'].author, data-id=books[i]['book_have'].book_id, data-isbn=books[i]['book_have'].isbn, data-img=books[i]['book_have'].img_url)
+                                            img.book-img(src=books[i]['book_have'].img_url, alt='Card image cap')
+                                        p.title #{books[i]['book_have'].title}
+                                    .col-md-2
+                                        p.arrow.align-middle &harr;
+                                    .col-md-5
+                                        .wanted(data-title=books[i]['book_want'].title, data-author=books[i]['book_want'].author, data-id=books[i]['book_want'].book_id, data-isbn=books[i]['book_want'].isbn, data-img=books[i]['book_want'].img_url)
+                                            img.book-img(src=books[i]['book_want'].img_url, alt='Card image cap')
+                                        p.title #{books[i]['book_want'].title}
+                                .row.info-row
+                                    .col-md-12.info
+                                        p NEW MATCH for #{books[i]['book_have'].title}
+                        else
+                            .card.col-md-4.grid-item.All.Rejected
                                 .row
                                     .col-md-5
                                         .owned(data-title=books[i]['book_have'].title, data-author=books[i]['book_have'].author, data-id=books[i]['book_have'].book_id, data-isbn=books[i]['book_have'].isbn, data-img=books[i]['book_have'].img_url)
@@ -96,9 +112,25 @@ html
                                         - var book_id = books[i+1].book_id.toString();
                                         - var num_books = book_nums[book_id] ? book_nums[book_id] : 0;
                                         p #{num_books} books wanted in exchange
-                        else
+                        else if books[i + 1]["status"] == "A"
                             - var class_name = books[i + 1]["status"] == "A" ? "Accepted" : books["status"] == "R" ? "Rejected" : "Matched";
                             .card.col-md-4.grid-item.All.Matched
+                                .row
+                                    .col-md-5
+                                        .owned(data-title=books[i + 1]['book_have'].title, data-author=books[i + 1]['book_have'].author, data-id=books[i + 1]['book_have'].book_id, data-isbn=books[i + 1]['book_have'].isbn, data-img=books[i + 1]['book_have'].img_url)
+                                            img.book-img(src=books[i + 1]['book_have'].img_url, alt='Card image cap')
+                                        p.title #{books[i + 1]['book_have'].title}
+                                    .col-md-2
+                                        p.arrow.align-middle &harr;
+                                    .col-md-5
+                                        .wanted(data-title=books[i + 1]['book_want'].title, data-author=books[i + 1]['book_want'].author, data-id=books[i + 1]['book_want'].book_id, data-isbn=books[i + 1]['book_want'].isbn, data-img=books[i + 1]['book_want'].img_url)
+                                            img.book-img(src=books[i + 1]['book_want'].img_url, alt='Card image cap')
+                                        p.title #{books[i + 1]['book_want'].title}
+                                .row.info-row
+                                    .col-md-12.info
+                                        p NEW MATCH for #{books[i + 1]['book_have'].title}
+                        else
+                            .card.col-md-4.grid-item.All.Rejected
                                 .row
                                     .col-md-5
                                         .owned(data-title=books[i + 1]['book_have'].title, data-author=books[i + 1]['book_have'].author, data-id=books[i + 1]['book_have'].book_id, data-isbn=books[i + 1]['book_have'].isbn, data-img=books[i + 1]['book_have'].img_url)
@@ -129,9 +161,26 @@ html
                                         - var book_id = books[i+2].book_id.toString();
                                         - var num_books = book_nums[book_id] ? book_nums[book_id] : 0;
                                         p #{num_books} books wanted in exchange
-                        else
+                        else if books[i + 2]["status"] == "A"
                             - var class_name = books[i + 2]["status"] == "A" ? "Accepted" : books["status"] == "R" ? "Rejected" : "Matched";
                             .card.col-md-4.grid-item.All.Matched
+                                .row
+                                    .col-md-5
+                                        .owned(data-title=books[i + 2]['book_have'].title, data-author=books[i + 2]['book_have'].author, data-id=books[i + 2]['book_have'].book_id, data-isbn=books[i + 2]['book_have'].isbn, data-img=books[i + 2]['book_have'].img_url)
+                                            img.book-img(src=books[i + 2]['book_have'].img_url, alt='Card image cap')
+                                        p.title #{books[i + 2]['book_have'].title}
+                                    .col-md-2
+                                        p.arrow.align-middle &harr;
+                                    .col-md-5
+                                        .wanted(data-title=books[i + 2]['book_want'].title, data-author=books[i + 2]['book_want'].author, data-id=books[i + 2]['book_want'].book_id, data-isbn=books[i + 2]['book_want'].isbn, data-img=books[i + 2]['book_want'].img_url)
+                                            img.book-img(src=books[i + 2]['book_want'].img_url, alt='Card image cap')
+                                        p.title #{books[i + 2]['book_want'].title}
+                                .row.info-row
+                                    .col-md-12.info
+                                        p NEW MATCH for #{books[i + 2]['book_have'].title}
+                        else
+                            - var class_name = books[i + 2]["status"] == "A" ? "Accepted" : books["status"] == "R" ? "Rejected" : "Matched";
+                            .card.col-md-4.grid-item.All.Rejected
                                 .row
                                     .col-md-5
                                         .owned(data-title=books[i + 2]['book_have'].title, data-author=books[i + 2]['book_have'].author, data-id=books[i + 2]['book_have'].book_id, data-isbn=books[i + 2]['book_have'].isbn, data-img=books[i + 2]['book_have'].img_url)

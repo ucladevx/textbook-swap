@@ -21,12 +21,28 @@ exports.index = function(req, res) {
                 for (var i = 0; i < owned_books_data.length; i++) {
                     book_ids.push(owned_books_data[i]["book_id"]);
                 }
+
                 book_info.get_books_info(book_ids, function(error_status, owned_books_info) {
                     if (error_status) {
                         console.error("Error querying database", error_status);
                     }
 
-                    callback(null, owned_books_info);
+                    async.map(owned_books_info, function(item, map_callback){
+                        possible_trades.get_book_wants(user_id, item['book_id'], function(pt_status, pt_ids){
+                            var book_want_ids = [];
+                            for (var j = 0; j < pt_ids.length; j++) {
+                                book_want_ids.push(pt_ids[j]["book_want"]);
+                            }
+                            book_info.get_books_info(book_want_ids, function(book_want_error, book_want_info) {
+                               map_callback(null, book_want_info);
+                            });
+                        });
+                    }, function(err, results){
+                        for (var k = 0; k < results.length; k++) {
+                            owned_books_info[k]['wanted_books_info'] = results[k];
+                        }
+                        callback(null, owned_books_info);
+                    });
                 });
             });
         },

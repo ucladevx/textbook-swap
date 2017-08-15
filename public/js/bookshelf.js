@@ -195,4 +195,47 @@ $(document).ready(function(){
 
 		e.preventDefault();
 	});
+
+	$(".Requested:not(.Matched)").on('click', function(e){
+		console.log("requested book");
+
+		// var header = "<div class=\"row\" id=\"top-row\">"
+		// 	+ "<div class=\"col-xs-3 text-left\">"
+		// 	+ "<a class=\"requested-popup-close\" data-requested-popup-close=\"" + "requested-popup-requested-trade"
+		// 	+ "\" href=\"\">x</a>" 
+		// 	+ "</div>"
+		// 	+ "<div class=\"col-xs-6 text-center\">"
+		// 	+ "<h4>EDIT TRADE</h4>"
+  //           + "</div>"
+  //           + "<div class=\"col-xs-3\">"
+  //           + "<img src=\"./images/book4.svg\" id=\"book-corner\">"
+		// 	+ "</div>"
+		// 	+ "</div>"
+
+		// $("body").append("<div class=\"requested-popup\" data-requested-popup=\"" 
+		// 	+ "requested-popup-requested-trade"
+		// 	+ "\"><div class=\"requested-popup-inner\" id=\"requested\">"
+		// 	+ "<div class=\"first-page\">"
+		// 	+ header
+		// 	+ "</div>"
+		// 	+ "</div>"
+		// 	+ "</div>"
+		// );
+
+		// $('[data-requested-popup="' + "requested-popup" + '"]').fadeIn(350);
+		$('[data-popup="' + "modify-trade" + '"]').fadeIn(350);
+		e.preventDefault();
+
+		// center the popup
+		var w = $(window).width();
+		var h = $(window).height();
+		var d = $('.modify-trade-popup-inner');
+		var divW = $(d).width();
+		var divH = $(d).height();
+
+		d.css({ 'position': "absolute",
+			'top': (h/2)-(divH/2)+"px",
+			'left': (w/2)-(divW/2)+"px"
+		});
+	});
 });

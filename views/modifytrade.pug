@@ -1,0 +1,23 @@
+.popup(data-popup='modify-trade')
+    .modify-trade-popup-inner
+        .item
+            a.popup-close(data-popup-close='modify-trade', href='#') x
+            .row.slideHeader
+                h3.slideTitle EDIT TRADE
+                img.top-right-bookshelf(src="./images/Bookshelf_NewTrade1.svg")
+            .slideContent
+                h5.slideMessage Select the books you want to add to your trades.
+                .row.searchForm
+                    .col-md-8#wantedForm
+                        .input-group
+                            input.form-control#wantedInput(type='text', placeholder='Search by title, professor, or class' aria-describedby="wantedInputAddon")
+                            .input-group-addon#wantedInputAddon #[span(class="glyphicon glyphicon-search")]
+                        ul#wantedSearchResultsList.list-group
+                    col-md-4.wantedBooksDisplay
+                        ul.wantedBooksList.list-group
+            .row.transitionButtonRow
+                .col-sm-3.col-sm-offset-3.text-center
+                    button.btn.btn-primary.prevButton(type="button") PREVIOUS
+                .col-sm-3.text-center
+                    button.btn.btn-primary.nextButton#wanted_list_next(type="button") NEXT
+            img.bottom-left-bookshelf(src="./images/Bookshelf_NewTrade2.svg")

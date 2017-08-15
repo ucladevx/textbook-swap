@@ -304,6 +304,39 @@ body {
 	border-bottom: 1px solid #e88154;
 }
 
+/* edit existing trade relation */
+.modify-trade-popup {
+	background: rgba(0, 0, 0, 0.75);
+	color: rgb(114, 114, 114);
+	display: none;
+	height: 100%;
+	left: 0;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 10;
+}
+
+/* Close button for pop up*/
+.modify-trade-popup-close, .modify-trade-popup-close:hover {
+	color: rgb(149, 149, 149);
+	font-size: 20px;
+	text-decoration: none;
+}
+
+.modify-trade-popup-inner {
+	background: rgb(254, 254, 254);
+	border-radius: 3px;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 1);
+	height: 70vh;
+	overflow: hidden;
+	padding-left: 15px;
+	padding-top: 10px;
+	position: absolute;  /* TODO: used to be absolute */
+	width: 65vw;
+	z-index: 20;
+}
+
 .filter-button-group button:focus{
 	outline: none;
 }

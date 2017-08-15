@@ -227,7 +227,7 @@ $(document).ready(function(){
 		}
 	});
 
-// add search result to wanted books list that use has selected
+	// add search result to wanted books list that user has selected
 	$("#wantedSearchResultsList").on("click", ".list-group-item", function(){
 		// get data from list element tags
 		var searchResult = this;

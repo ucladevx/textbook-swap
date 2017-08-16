@@ -20,7 +20,7 @@ $(document).ready(function(){
 	 * Functions needed for pop-up form input
 	 */
 
-// open the popup
+	// open the popup
 	$('.new-trade-card').on('click', function(e)  {
 		// new pop-up, so reset form input from previous instance of the pop-up
 		resetFormInput();

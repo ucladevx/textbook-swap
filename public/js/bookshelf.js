@@ -223,13 +223,17 @@ $(document).ready(function(){
 		// );
 
 		// $('[data-requested-popup="' + "requested-popup" + '"]').fadeIn(350);
+		
+		// start at the first popup screen
+		$('.carousel').carousel(0);
+
 		$('[data-popup="' + "modify-trade" + '"]').fadeIn(350);
 		e.preventDefault();
 
 		// center the popup
 		var w = $(window).width();
 		var h = $(window).height();
-		var d = $('.modify-trade-popup-inner');
+		var d = $('.popup-inner');
 		var divW = $(d).width();
 		var divH = $(d).height();
 
@@ -237,5 +241,26 @@ $(document).ready(function(){
 			'top': (h/2)-(divH/2)+"px",
 			'left': (w/2)-(divW/2)+"px"
 		});
+
+		// start carousel
+		$('.carousel').carousel({
+			pause: true,
+			interval: false
+		});
+
+		// TODO: how to get book info? for the currently selected book
+		var img_url = "";
+		var title = "";
+		var author = "";
+		var isbn = "";
+
+		// send owned book info values to the front-end (html)
+		document.getElementById("confirmTradeOwnedBookImg").src = img_url;
+
+		document.getElementById("confirmTradeOwnedBookTitle").innerHTML = "Title: " + title;
+
+		document.getElementById("confirmTradeOwnedBookAuthor").innerHTML = "Author: " + author;
+
+		document.getElementById("confirmTradeOwnedBookIsbn").innerHTML = "ISBN: " + isbn;
 	});
 });

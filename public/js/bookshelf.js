@@ -199,6 +199,8 @@ $(document).ready(function(){
 	$(".Requested:not(.Matched)").on('click', function(e){
 		console.log("requested book");
 
+		var ownedCard = $(this).find(".owned")[0].attributes;
+
 		// var header = "<div class=\"row\" id=\"top-row\">"
 		// 	+ "<div class=\"col-xs-3 text-left\">"
 		// 	+ "<a class=\"requested-popup-close\" data-requested-popup-close=\"" + "requested-popup-requested-trade"
@@ -249,10 +251,10 @@ $(document).ready(function(){
 		});
 
 		// TODO: how to get book info? for the currently selected book
-		var img_url = "";
-		var title = "";
-		var author = "";
-		var isbn = "";
+		var img_url = ownedCard[5].nodeValue;
+		var title = ownedCard[1].nodeValue.toUpperCase();
+		var author = ownedCard[2].nodeValue.toUpperCase();
+		var isbn = ownedCard[4].nodeValue.toUpperCase();
 
 		// send owned book info values to the front-end (html)
 		document.getElementById("confirmTradeOwnedBookImg").src = img_url;

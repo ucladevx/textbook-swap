@@ -655,3 +655,9 @@ body {
 .btn {
 	border-radius: 0;
 }
+
+/* Image for owned book */
+#confirmTradeOwnedBookImg {
+	height: 100%;
+	width: 100%;
+}

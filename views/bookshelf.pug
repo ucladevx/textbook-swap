@@ -9,6 +9,8 @@ html
         link(rel='stylesheet' type="text/css" href="css/new_trade_form.css")
         link(href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet")
         //- link(rel='stylesheet' type="text/css" href="css/bookshelf_navbar.css")
+        script(type='text/javascript').
+            var book_info = !{JSON.stringify(books)};
         script(src="/assets/isotope.pkgd.min.js")
         script(src='https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js', integrity='sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb', crossorigin='anonymous')
         script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js', integrity='sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa', crossorigin='anonymous')
@@ -57,7 +59,7 @@ html
                                         p.card-title #{books[i].title}
                                         p.card-author #{books[i].author}
                                     .col-md-5
-                                        .owned(data-title=books[i].title, data-author=books[i].author, data-id=books[i].book_id, data-isbn=books[i].isbn, data-img=books[i].img_url)
+                                        .owned(data-title=books[i].title, data-author=books[i].author, data-id=books[i].book_id, data-isbn=books[i].isbn, data-img=books[i].img_url, data-index=i)
                                             img.book-img(src=books[i].img_url, alt='Card image cap')
                                 .row.info-row
                                     .col-md-12.info
@@ -110,7 +112,7 @@ html
                                         p.card-title #{books[i + 1].title}
                                         p.card-author #{books[i + 1].author}
                                     .col-md-5
-                                        .owned(data-title=books[i + 1].title, data-author=books[i + 1].author, data-id=books[i + 1].book_id, data-isbn=books[i + 1].isbn, data-img=books[i + 1].img_url)
+                                        .owned(data-title=books[i + 1].title, data-author=books[i + 1].author, data-id=books[i + 1].book_id, data-isbn=books[i + 1].isbn, data-img=books[i + 1].img_url, data-index=i)
                                             img.book-img(src=books[i + 1].img_url, alt='Card image cap')
                                 .row.info-row
                                     .col-md-12.info
@@ -163,7 +165,7 @@ html
                                         p.card-title #{books[i + 2].title}
                                         p.card-author #{books[i + 2].author}
                                     .col-md-5
-                                        .owned(data-title=books[i + 2].title, data-author=books[i + 2].author, data-id=books[i + 2].book_id, data-isbn=books[i + 2].isbn, data-img=books[i + 2].img_url)
+                                        .owned(data-title=books[i + 2].title, data-author=books[i + 2].author, data-id=books[i + 2].book_id, data-isbn=books[i + 2].isbn, data-img=books[i + 2].img_url, data-index=i)
                                             img.book-img(src=books[i + 2].img_url, alt='Card image cap')
                                 .row.info-row
                                     .col-md-12.info

@@ -102,7 +102,7 @@ html
                                         p.title #{books[i]['book_want'].title}
                                 .row.info-row
                                     .col-md-12.info
-                                        p NEW MATCH for #{books[i]['book_have'].title}
+                                        p REJECTED trade for #{books[i]['book_have'].title}
 
                     if i + 1 < books.length
                         if books[i + 1].title
@@ -155,8 +155,7 @@ html
                                         p.title #{books[i + 1]['book_want'].title}
                                 .row.info-row
                                     .col-md-12.info
-                                        p NEW MATCH for #{books[i + 1]['book_have'].title}
-
+                                        p REJECTED trade for #{books[i + 1]['book_have'].title}
                     if i + 2 < books.length
                         if books[i + 2].title
                             .card.col-md-4.grid-item.Requested.All
@@ -209,5 +208,5 @@ html
                                         p.title #{books[i + 2]['book_want'].title}
                                 .row.info-row
                                     .col-md-12.info
-                                        p NEW MATCH for #{books[i + 2]['book_have'].title}
+                                        p REJECTED trade for #{books[i + 2]['book_have'].title}
             - }

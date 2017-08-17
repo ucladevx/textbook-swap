@@ -39,6 +39,10 @@ body{
 	background-color: green;
 }
 
+.Rejected:not(.Matched){
+	background-color: #e88154;
+}
+
 .card-img-top {
 	height: 100px;
 	/*margin-left: 50%;*/
@@ -72,11 +76,18 @@ body{
 	padding-bottom: 10px;
 }
 
-.Matched .owned, .wanted {
+.grid-item .owned, .grid-item .wanted {
 	text-align: center;
-	background-color: rgb(201, 232, 235);
 	padding-top: 10px;
 	padding-bottom: 10px;
+}
+
+.Matched .owned, .Matched .wanted {
+	background-color: rgb(201, 232, 235);
+}
+
+.Rejected .owned, .Rejected .wanted {
+	background-color: rgb(234, 170, 141);
 }
 
 .book-img {
@@ -259,10 +270,6 @@ body {
     font-size: 300%;
 }
 
-.Matched .info{
-	background-color: #47a3b2;
-}
-
 .info-row{
 	width: 100%;
 	position: absolute;
@@ -270,8 +277,16 @@ body {
 	left: 15px;
 }
 
+.Matched .info{
+	background-color: #47a3b2;
+}
+
 .Requested .info{
 	background-color: #efb745;
+}
+
+.Rejected .info{
+	background-color: #cc6b4e;
 }
 
 .info{

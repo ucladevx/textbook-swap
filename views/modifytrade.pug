@@ -1,10 +1,10 @@
 .popup(data-popup='modify-trade')
-    #myCarousel.carousel.slide(data-ride='carousel' data-interval="false" data-wrap="false")
+    #myEditTradeCarousel.carousel.slide(data-ride='carousel' data-interval="false" data-wrap="false")
         .popup-inner
             // Indicators
             ol.carousel-indicators
-                li.active(data-target='#myCarousel', data-slide-to=0)
-                li(data-target='#myCarousel', data-slide-to=1)
+                li.active(data-target='#myEditTradeCarousel', data-slide-to=0)
+                li(data-target='#myEditTradeCarousel', data-slide-to=1)
             // Wrapper for slides
             .carousel-inner
                 .item.active#first-popup
@@ -29,7 +29,7 @@
                                     ul.confirmBooksList.list-group
                     .row.transitionButtonRow
                         .col-sm-2.col-sm-offset-5.text-center
-                            button.btn.btn-primary.nextButton(type="button") EDIT
+                            button.btn.btn-primary.editButton(type="button") EDIT
                     img.bottom-left-bookshelf(src="./images/Bookshelf_NewTrade2.svg")
                 .item
                     a.popup-close(data-popup-close='popup-1', href='#') x
@@ -48,7 +48,7 @@
                                 ul.wantedBooksList.list-group
                     .row.transitionButtonRow
                         .col-sm-3.col-sm-offset-3.text-center
-                            button.btn.btn-primary.prevButton(type="button") UNDO
+                            button.btn.btn-primary.undoEditButton(type="button") UNDO
                         .col-sm-3.text-center
-                            button.btn.btn-primary.nextButton#confirmTradeChangesButton(type="button") SUBMIT
+                            button.btn.btn-primary.editButton#confirmTradeChangesButton(type="button") SUBMIT
                     img.bottom-left-bookshelf(src="./images/Bookshelf_NewTrade2.svg")

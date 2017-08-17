@@ -250,34 +250,92 @@ $(document).ready(function(){
 			interval: false
 		});
 
-		// TODO: how to get book info? for the currently selected book
+		// display info for the requested book
 		var img_url = ownedCard[5].nodeValue;
 		var title = ownedCard[1].nodeValue.toUpperCase();
 		var author = ownedCard[2].nodeValue.toUpperCase();
 		var isbn = ownedCard[4].nodeValue.toUpperCase();
+		var cardIndex = ownedCard[6].nodeValue.toUpperCase();
 
 		// send owned book info values to the front-end (html)
 		document.getElementById("confirmTradeOwnedBookImg").src = img_url;
-
 		document.getElementById("confirmTradeOwnedBookTitle").innerHTML = "Title: " + title;
-
 		document.getElementById("confirmTradeOwnedBookAuthor").innerHTML = "Author: " + author;
-
 		document.getElementById("confirmTradeOwnedBookIsbn").innerHTML = "ISBN: " + isbn;
 
-		// confirm button on edit trade confirmation page
-		$("#confirmTradeChangesButton").click(function(e){
-			// TODO: some funky back end stuff
-			// need to modify the wanted books in the backend for the requested
-			// need to change the trade relations/edges 
+		// display the wanted books list
+		// clear the list before adding entries (in case user modifies then comes back, don't want duplicates)
+		$(".confirmBooksList").empty();
+		// fetch and display info for all wanted
+		var wanted_books_info = book_info[cardIndex]["wanted_books_info"];
+		wanted_books_info.forEach(function(wanted_book) {
+			var book_id = wanted_book["book_id"];
+			var title = wanted_book["title"];
+			var author = wanted_book["author"];
+			var isbn = wanted_book["isbn"];
+			var img_url = wanted_book["img_url"];
 
-
-
-			// close the popup
-			$('[data-popup="modify-trade"]').fadeOut(350, function(){
-				// refresh the window (display newly added book trade)
-				location.reload();
-			});
+			// and the rest of your code
+			$(".confirmBooksList").append('<li class="list-group-item" id="' + book_id + '" data-title="' + title + '" data-author="' + author + '" data-isbn="' + isbn + '" data-img_url="' + img_url + '">' + '<div class="row"> <div class="col-md-3">' + '<img src="' + img_url + '"> ' + '</div>' + '<div class="col-md-9">' + '<p>' + title + '</p> <p>' + author + '</p>' + '</div> </div>' + '</li>');
 		});
 	});
+
+	/*
+	 * Code needed for carousel transitions
+	 */
+
+	$(".editButton").click(function(){
+		$('#myEditTradeCarousel').carousel('next');
+	})
+
+	$(".undoEditButton").click(function(){
+		$('#myEditTradeCarousel').carousel('prev');
+	});
+
+	// confirm button on edit trade confirmation page
+	$("#confirmTradeChangesButton").click(function(e){
+		// TODO: some funky back end stuff
+		// need to modify the wanted books in the backend for the requested
+		// need to change the trade relations/edges 
+
+		// close the popup
+		$('[data-popup="modify-trade"]').fadeOut(350, function(){
+			// refresh the window (display newly added book trade)
+			location.reload();
+		});
+	});
+
+	$("#myEditTradeCarousel").on('slide.bs.carousel',function(e){
+		// figure out when slides we are transitioning between
+		var slideFrom = $(this).find('.active').index();
+		var slideTo = $(e.relatedTarget).index();
+		console.log(slideFrom+' =>> '+slideTo);
+		// var ownedCard = $(this).find(".owned")[0].attributes;
+
+		// confirm the trade
+		if (slideFrom == 0 && slideTo == 1) {
+			// display the wanted books list
+			// clear the list before adding entries (in case user modifies then comes back, don't want duplicates)
+			$(".wantedBooksList").empty();
+
+			$.each($('.confirmBooksList'), function(index, wantedBook) {
+				var book_id = wantedBook["book_id"];
+				var title = wantedBook["title"];
+				var author = wantedBook["author"];
+				var isbn = wantedBook["isbn"];
+				var img_url = wantedBook["img_url"];
+
+				console.log(title);
+
+				// and the rest of your code
+				// TODO: figure out why not displaying
+
+				$(".wantedBooksList").prepend('<li class="list-group-item" id="item' + book_id + '" data-title="' + title + '" data-author="' + author + '" data-isbn="' + isbn + '" data-img_url="' + img_url + '">' + "<a class=\"closeButton\" href=\"#\">x</a>" + "<img src=" + img_url + "> " + '</li>');
+				$('.wantedBooksList').animate({
+					scrollTop: "0px"
+					}, 350);
+			});
+		}
+	});
+
 });

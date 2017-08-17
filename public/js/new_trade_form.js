@@ -251,7 +251,7 @@ $(document).ready(function(){
 		}
 	});
 
-// remove the book from the wanted list
+	// remove the book from the wanted list
 	$(".wantedBooksList").on("click", ".closeButton", function(){
 		var wantedBook = $(this).parent();
 		wantedBook.remove();
@@ -266,11 +266,11 @@ $(document).ready(function(){
 	 */
 
 	$(".nextButton").click(function(){
-		$('.carousel').carousel('next');
-	});
+		$('#myCarousel').carousel('next');
+	})
 
 	$(".prevButton").click(function(){
-		$('.carousel').carousel('prev');
+		$('#myCarousel').carousel('prev');
 	});
 
 	$("#confirmButton").click(function(){
@@ -428,7 +428,6 @@ $(document).ready(function(){
 				// clear the list before adding entries (in case user modifies then comes back, don't want duplicates)
 				$(".confirmBooksList").empty();
 				$('.wantedBooksList li').each(function() {
-					// var wantedBook = $(li);
 					var wantedBook = $(this);
 
 					console.log(wantedBook);

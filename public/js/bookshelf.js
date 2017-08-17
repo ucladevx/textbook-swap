@@ -264,5 +264,20 @@ $(document).ready(function(){
 		document.getElementById("confirmTradeOwnedBookAuthor").innerHTML = "Author: " + author;
 
 		document.getElementById("confirmTradeOwnedBookIsbn").innerHTML = "ISBN: " + isbn;
+
+		// confirm button on edit trade confirmation page
+		$("#confirmTradeChangesButton").click(function(e){
+			// TODO: some funky back end stuff
+			// need to modify the wanted books in the backend for the requested
+			// need to change the trade relations/edges 
+
+
+
+			// close the popup
+			$('[data-popup="modify-trade"]').fadeOut(350, function(){
+				// refresh the window (display newly added book trade)
+				location.reload();
+			});
+		});
 	});
 });

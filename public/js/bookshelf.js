@@ -295,8 +295,11 @@ $(document).ready(function(){
 	// confirm button on edit trade confirmation page
 	$("#confirmTradeChangesButton").click(function(e){
 		// TODO: some funky back end stuff
-		// need to modify the wanted books in the backend for the requested
-		// need to change the trade relations/edges 
+		// first want to remove the old wanted books from the list as well as the trade edges
+
+		// second want to add the new wanted books and trade edges
+
+		
 
 		// close the popup
 		$('[data-popup="modify-trade"]').fadeOut(350, function(){

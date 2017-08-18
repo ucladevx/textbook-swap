@@ -265,7 +265,7 @@ $(document).ready(function(){
 
 		// display the wanted books list
 		// clear the list before adding entries (in case user modifies then comes back, don't want duplicates)
-		$(".confirmBooksList").empty();
+		$("#confirmTradeBooksList").empty();
 		// fetch and display info for all wanted
 		var wanted_books_info = book_info[cardIndex]["wanted_books_info"];
 		wanted_books_info.forEach(function(wanted_book) {
@@ -276,7 +276,7 @@ $(document).ready(function(){
 			var img_url = wanted_book["img_url"];
 
 			// and the rest of your code
-			$(".confirmBooksList").append('<li class="list-group-item" id="' + book_id + '" data-title="' + title + '" data-author="' + author + '" data-isbn="' + isbn + '" data-img_url="' + img_url + '">' + '<div class="row"> <div class="col-md-3">' + '<img src="' + img_url + '"> ' + '</div>' + '<div class="col-md-9">' + '<p>' + title + '</p> <p>' + author + '</p>' + '</div> </div>' + '</li>');
+			$("#confirmTradeBooksList").append('<li class="list-group-item" id="' + book_id + '" data-title="' + title + '" data-author="' + author + '" data-isbn="' + isbn + '" data-img_url="' + img_url + '">' + '<div class="row"> <div class="col-md-3">' + '<img src="' + img_url + '"> ' + '</div>' + '<div class="col-md-9">' + '<p>' + title + '</p> <p>' + author + '</p>' + '</div> </div>' + '</li>');
 		});
 	});
 
@@ -316,22 +316,19 @@ $(document).ready(function(){
 		if (slideFrom == 0 && slideTo == 1) {
 			// display the wanted books list
 			// clear the list before adding entries (in case user modifies then comes back, don't want duplicates)
-			$(".wantedBooksList").empty();
+			$("#wantedTradeBooksList").empty();
 
-			$.each($('.confirmBooksList'), function(index, wantedBook) {
-				var book_id = wantedBook["book_id"];
-				var title = wantedBook["title"];
-				var author = wantedBook["author"];
-				var isbn = wantedBook["isbn"];
-				var img_url = wantedBook["img_url"];
+			$.each($('#confirmTradeBooksList li'), function(index, wantedBook) {
+				var wantedBook = $(this);
 
-				console.log(title);
+				var book_id = wantedBook.attr("id").substr(4);
+				var title = wantedBook.attr("data-title");
+				var author = wantedBook.attr("data-author");
+				var isbn = wantedBook.attr("data-isbn");
+				var img_url = wantedBook.attr("data-img_url");
 
-				// and the rest of your code
-				// TODO: figure out why not displaying
-
-				$(".wantedBooksList").prepend('<li class="list-group-item" id="item' + book_id + '" data-title="' + title + '" data-author="' + author + '" data-isbn="' + isbn + '" data-img_url="' + img_url + '">' + "<a class=\"closeButton\" href=\"#\">x</a>" + "<img src=" + img_url + "> " + '</li>');
-				$('.wantedBooksList').animate({
+				$("#wantedTradeBooksList").prepend('<li class="list-group-item" id="item' + book_id + '" data-title="' + title + '" data-author="' + author + '" data-isbn="' + isbn + '" data-img_url="' + img_url + '">' + "<a class=\"closeButton\" href=\"#\">x</a>" + "<img src=" + img_url + "> " + '</li>');
+				$('#wantedTradeBooksList').animate({
 					scrollTop: "0px"
 					}, 350);
 			});

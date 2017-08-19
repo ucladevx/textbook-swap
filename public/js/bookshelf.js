@@ -255,7 +255,9 @@ $(document).ready(function(){
 		var title = ownedCard[1].nodeValue.toUpperCase();
 		var author = ownedCard[2].nodeValue.toUpperCase();
 		var isbn = ownedCard[4].nodeValue.toUpperCase();
-		var cardIndex = ownedCard[6].nodeValue.toUpperCase();
+		var cardIndex = ownedCard[6].nodeValue;
+
+		console.log(cardIndex);
 
 		// send owned book info values to the front-end (html)
 		document.getElementById("confirmTradeOwnedBookImg").src = img_url;
@@ -265,7 +267,7 @@ $(document).ready(function(){
 
 		// display the wanted books list
 		// clear the list before adding entries (in case user modifies then comes back, don't want duplicates)
-		$("#confirmTradeBooksList").empty();
+		$("#confirmEditTradeBooksList").empty();
 		// fetch and display info for all wanted
 		var wanted_books_info = book_info[cardIndex]["wanted_books_info"];
 		wanted_books_info.forEach(function(wanted_book) {
@@ -276,7 +278,7 @@ $(document).ready(function(){
 			var img_url = wanted_book["img_url"];
 
 			// and the rest of your code
-			$("#confirmTradeBooksList").append('<li class="list-group-item" id="' + book_id + '" data-title="' + title + '" data-author="' + author + '" data-isbn="' + isbn + '" data-img_url="' + img_url + '">' + '<div class="row"> <div class="col-md-3">' + '<img src="' + img_url + '"> ' + '</div>' + '<div class="col-md-9">' + '<p>' + title + '</p> <p>' + author + '</p>' + '</div> </div>' + '</li>');
+			$("#confirmEditTradeBooksList").append('<li class="list-group-item" id="' + book_id + '" data-title="' + title + '" data-author="' + author + '" data-isbn="' + isbn + '" data-img_url="' + img_url + '">' + '<div class="row"> <div class="col-md-3">' + '<img src="' + img_url + '"> ' + '</div>' + '<div class="col-md-9">' + '<p>' + title + '</p> <p>' + author + '</p>' + '</div> </div>' + '</li>');
 		});
 	});
 
@@ -299,7 +301,7 @@ $(document).ready(function(){
 
 		// second want to add the new wanted books and trade edges
 
-		
+
 
 		// close the popup
 		$('[data-popup="modify-trade"]').fadeOut(350, function(){
@@ -319,9 +321,9 @@ $(document).ready(function(){
 		if (slideFrom == 0 && slideTo == 1) {
 			// display the wanted books list
 			// clear the list before adding entries (in case user modifies then comes back, don't want duplicates)
-			$("#wantedTradeBooksList").empty();
+			$("#wantedEditTradeBooksList").empty();
 
-			$.each($('#confirmTradeBooksList li'), function(index, wantedBook) {
+			$.each($('#confirmEditTradeBooksList li'), function(index, wantedBook) {
 				var wantedBook = $(this);
 
 				var book_id = wantedBook.attr("id").substr(4);
@@ -330,8 +332,8 @@ $(document).ready(function(){
 				var isbn = wantedBook.attr("data-isbn");
 				var img_url = wantedBook.attr("data-img_url");
 
-				$("#wantedTradeBooksList").prepend('<li class="list-group-item" id="item' + book_id + '" data-title="' + title + '" data-author="' + author + '" data-isbn="' + isbn + '" data-img_url="' + img_url + '">' + "<a class=\"closeButton\" href=\"#\">x</a>" + "<img src=" + img_url + "> " + '</li>');
-				$('#wantedTradeBooksList').animate({
+				$("#wantedEditTradeBooksList").prepend('<li class="list-group-item" id="item' + book_id + '" data-title="' + title + '" data-author="' + author + '" data-isbn="' + isbn + '" data-img_url="' + img_url + '">' + "<a class=\"closeButton\" href=\"#\">x</a>" + "<img src=" + img_url + "> " + '</li>');
+				$('#wantedEditTradeBooksList').animate({
 					scrollTop: "0px"
 					}, 350);
 			});

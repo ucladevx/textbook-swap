@@ -6,10 +6,7 @@ $(document).ready(function(){
 	/* Helper function to reset pop-up form input */
 	var resetFormInput = function() {
 		// clear input and search results for owned books (slide 1)
-		var ownedInputList = document.getElementsByClassName("ownedInput");
-		for (n = 0; n < ownedInputList.length; ++n) {
-		    ownedInputList[n].value="";
-		}
+		document.getElementById("ownedInput").value = "";
 		$("#ownedSearchResultsList").empty();
 		// clear input and search results for owned books (slide 3)
 		var wantedInputList = document.getElementsByClassName("wantedInput");
@@ -302,7 +299,7 @@ $(document).ready(function(){
 		);
 
 		// add confirmed wanted books
-		$('.confirmBooksList li').each(function() {
+		$('#confirmTradeBooksList li').each(function() {
 			var confirmedBook = $(this);
 
 			console.log(confirmedBook);
@@ -433,8 +430,8 @@ $(document).ready(function(){
 			if (slideFrom == 2 && slideTo == 3) {
 				// display the wanted books list
 				// clear the list before adding entries (in case user modifies then comes back, don't want duplicates)
-				$(".confirmBooksList").empty();
-				$('.wantedBooksList li').each(function() {
+				$("#confirmTradeBooksList").empty();
+				$('#wantedTradeBooksList li').each(function() {
 					var wantedBook = $(this);
 
 					console.log(wantedBook);
@@ -446,7 +443,7 @@ $(document).ready(function(){
 					var img_url = wantedBook.attr("data-img_url");
 
 					// and the rest of your code
-					$(".confirmBooksList").append('<li class="list-group-item" id="' + book_id + '" data-title="' + title + '" data-author="' + author + '" data-isbn="' + isbn + '" data-img_url="' + img_url + '">' + '<div class="row"> <div class="col-md-3">' + '<img src="' + img_url + '"> ' + '</div>' + '<div class="col-md-9">' + '<p>' + title + '</p> <p>' + author + '</p>' + '</div> </div>' + '</li>');
+					$("#confirmTradeBooksList").append('<li class="list-group-item" id="' + book_id + '" data-title="' + title + '" data-author="' + author + '" data-isbn="' + isbn + '" data-img_url="' + img_url + '">' + '<div class="row"> <div class="col-md-3">' + '<img src="' + img_url + '"> ' + '</div>' + '<div class="col-md-9">' + '<p>' + title + '</p> <p>' + author + '</p>' + '</div> </div>' + '</li>');
 				});
 			}
 

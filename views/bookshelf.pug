@@ -112,7 +112,7 @@ html
                                         p.card-title #{books[i + 1].title}
                                         p.card-author #{books[i + 1].author}
                                     .col-md-5
-                                        .owned(data-title=books[i + 1].title, data-author=books[i + 1].author, data-id=books[i + 1].book_id, data-isbn=books[i + 1].isbn, data-img=books[i + 1].img_url, data-index=i)
+                                        .owned(data-title=books[i + 1].title, data-author=books[i + 1].author, data-id=books[i + 1].book_id, data-isbn=books[i + 1].isbn, data-img=books[i + 1].img_url, data-index=(i+1))
                                             img.book-img(src=books[i + 1].img_url, alt='Card image cap')
                                 .row.info-row
                                     .col-md-12.info
@@ -164,7 +164,7 @@ html
                                         p.card-title #{books[i + 2].title}
                                         p.card-author #{books[i + 2].author}
                                     .col-md-5
-                                        .owned(data-title=books[i + 2].title, data-author=books[i + 2].author, data-id=books[i + 2].book_id, data-isbn=books[i + 2].isbn, data-img=books[i + 2].img_url, data-index=i)
+                                        .owned(data-title=books[i + 2].title, data-author=books[i + 2].author, data-id=books[i + 2].book_id, data-isbn=books[i + 2].isbn, data-img=books[i + 2].img_url, data-index=(i+2))
                                             img.book-img(src=books[i + 2].img_url, alt='Card image cap')
                                 .row.info-row
                                     .col-md-12.info

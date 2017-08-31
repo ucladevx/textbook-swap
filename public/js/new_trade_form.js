@@ -163,6 +163,7 @@ $(document).ready(function(){
 		$(this).addClass('highlight-wanted');
 
 		$('#wanted_list_next').prop('disabled', false);
+		$('#confirmTradeChangesButton').prop('disabled', false);
 	});
 
 	/*
@@ -241,9 +242,11 @@ $(document).ready(function(){
 		var isbn = searchResult.dataset.isbn;
 		var img_url = searchResult.dataset.img_url;
 
+		console.log("add wanted search");
+
 		// add new selected item to wanted list
-		var selector = "#item" + book_id
-		var selectorID = "item" + book_id
+		var selector = "#item" + book_id;
+		var selectorID = "item" + book_id;
 
 		if($(".wantedBooksList").find(selector).length) {
 			document.getElementById(selectorID).scrollIntoView({behavior: 'smooth'});
@@ -259,8 +262,18 @@ $(document).ready(function(){
 	$(".wantedBooksList").on("click", ".closeButton", function(){
 		var wantedBook = $(this).parent();
 		wantedBook.remove();
-		if ($('.wantedBooksList li').length == 0)
+
+		console.log("remove wanted");
+
+		if ($('#wantedTradeBooksList').children().length == 0) {
+			console.log("disable new trade button");
 			$('#wanted_list_next').prop('disabled', true);
+		}
+
+		if ($('#wantedEditTradeBooksList').children().length == 0) {
+			console.log("disable edit trade button");
+			$('#confirmTradeChangesButton').prop('disabled', true);
+		}
 		// don't scroll user to top
 		return false;
 	});

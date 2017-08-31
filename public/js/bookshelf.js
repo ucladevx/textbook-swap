@@ -197,34 +197,7 @@ $(document).ready(function(){
 	});
 
 	$(".Requested:not(.Matched)").on('click', function(e){
-		console.log("requested book");
-
 		var ownedCard = $(this).find(".owned")[0].attributes;
-
-		// var header = "<div class=\"row\" id=\"top-row\">"
-		// 	+ "<div class=\"col-xs-3 text-left\">"
-		// 	+ "<a class=\"requested-popup-close\" data-requested-popup-close=\"" + "requested-popup-requested-trade"
-		// 	+ "\" href=\"\">x</a>" 
-		// 	+ "</div>"
-		// 	+ "<div class=\"col-xs-6 text-center\">"
-		// 	+ "<h4>EDIT TRADE</h4>"
-  //           + "</div>"
-  //           + "<div class=\"col-xs-3\">"
-  //           + "<img src=\"./images/book4.svg\" id=\"book-corner\">"
-		// 	+ "</div>"
-		// 	+ "</div>"
-
-		// $("body").append("<div class=\"requested-popup\" data-requested-popup=\"" 
-		// 	+ "requested-popup-requested-trade"
-		// 	+ "\"><div class=\"requested-popup-inner\" id=\"requested\">"
-		// 	+ "<div class=\"first-page\">"
-		// 	+ header
-		// 	+ "</div>"
-		// 	+ "</div>"
-		// 	+ "</div>"
-		// );
-
-		// $('[data-requested-popup="' + "requested-popup" + '"]').fadeIn(350);
 		
 		// start at the first popup screen
 		$('.carousel').carousel(0);
@@ -254,10 +227,9 @@ $(document).ready(function(){
 		var img_url = ownedCard[5].nodeValue;
 		var title = ownedCard[1].nodeValue.toUpperCase();
 		var author = ownedCard[2].nodeValue.toUpperCase();
+		var owned_book_id = ownedCard[3].nodeValue.toUpperCase();
 		var isbn = ownedCard[4].nodeValue.toUpperCase();
 		var cardIndex = ownedCard[6].nodeValue;
-
-		console.log(cardIndex);
 
 		// send owned book info values to the front-end (html)
 		document.getElementById("confirmTradeOwnedBookImg").src = img_url;
@@ -278,7 +250,7 @@ $(document).ready(function(){
 			var img_url = wanted_book["img_url"];
 
 			// and the rest of your code
-			$("#confirmEditTradeBooksList").append('<li class="list-group-item" id="' + book_id + '" data-title="' + title + '" data-author="' + author + '" data-isbn="' + isbn + '" data-img_url="' + img_url + '">' + '<div class="row"> <div class="col-md-3">' + '<img src="' + img_url + '"> ' + '</div>' + '<div class="col-md-9">' + '<p>' + title + '</p> <p>' + author + '</p>' + '</div> </div>' + '</li>');
+			$("#confirmEditTradeBooksList").append('<li class="list-group-item" id="' + book_id + '" data-title="' + title + '" data-author="' + author + '" data-isbn="' + isbn + '" data-owned_book_id="' + owned_book_id + '" data-img_url="' + img_url + '">' + '<div class="row"> <div class="col-md-3">' + '<img src="' + img_url + '"> ' + '</div>' + '<div class="col-md-9">' + '<p>' + title + '</p> <p>' + author + '</p>' + '</div> </div>' + '</li>');
 		});
 	});
 
@@ -296,11 +268,95 @@ $(document).ready(function(){
 
 	// confirm button on edit trade confirmation page
 	$("#confirmTradeChangesButton").click(function(e){
+
+		console.log("confirm edit trade button");
+		// will initialize this inside of confirm edit trade books list
+		var owned_book_id = 0;
+
 		// TODO: some funky back end stuff
-		// first want to remove the old wanted books from the list as well as the trade edges
+		// first want to remove the old wanted books from the list (which will also remove the trade edges)
+		$('#confirmEditTradeBooksList li').each(function() {
+			var book_to_remove = $(this);
+
+			console.log("removing book:", book_to_remove.attr("data-title"));
+
+			owned_book_id = book_to_remove.attr("data-owned_book_id");
+
+			console.log("owned book:", owned_book_id);
+
+			var book_to_remove_id = book_to_remove.attr("id");
+
+			console.log("remove book id", book_to_remove_id);
+
+			// remove wanted books from wish list
+			$.post("/api/wish_list/remove", { user_id: "user", book_id: book_to_remove_id },
+				function(data){
+					if(data.status === 0){
+						console.log('successfully removed wanted book from wish_list');
+					}
+					else if(data.status === 1)
+						console.log('db connection error for removing from wish_list');
+					else if(data.status === 2)
+						console.log('db query error for removing from wish_list');
+					else if(data.status === 3){
+						console.log('wanted book already removed');
+					}
+				},
+				"json"
+			);
+		});
+		
 
 		// second want to add the new wanted books and trade edges
+		// add confirmed wanted books
+		$('#wantedEditTradeBooksList li').each(function() {
+			var confirmedBook = $(this);
 
+			console.log("adding book:", confirmedBook.attr("data-title"));
+
+			var wanted_book_id = confirmedBook.attr("id").substring(4);
+			// just in case book doesn't have book id?
+			if (wanted_book_id.length == 0)
+				return;
+
+			console.log("wanted_book_id when adding:", wanted_book_id);
+
+			var relationStatus = 'V';  // V = verified
+
+			// add wanted book to wish list
+			$.post("/api/wish_list/add", { user_id: "user", book_id: wanted_book_id },
+				function(data){
+					if(data.status === 0){
+						console.log('successfully added wanted book to wish_list');
+					}
+					else if(data.status === 1)
+						console.log('db connection error for adding to wish_list');
+					else if(data.status === 2)
+						console.log('db query error for adding to wish_list');
+					else if(data.status === 3){
+						console.log('wanted book already exists');
+					}
+				},
+				"json"
+			);
+
+			// add trade relation between owned book and wanted book
+			$.post("/api/possible_trades/add", { user_id: "user", owned_book_id: owned_book_id, wanted_book_id: wanted_book_id, status: relationStatus },
+				function(data){
+					if(data.status === 0){
+						console.log('successfully added trade relation to possible_trades');
+					}
+					else if(data.status === 1)
+						console.log('db connection error for possible_trades');
+					else if(data.status === 2)
+						console.log('db query error for possible_trades');
+					else if(data.status === 3){
+						console.log('trade relation already exists');
+					}
+				},
+				"json"
+			);
+		});
 
 
 		// close the popup

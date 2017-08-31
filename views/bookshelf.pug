@@ -4,18 +4,12 @@ html
         meta(charset='utf-8')
         title Loops - Dashboard
         script(src='https://code.jquery.com/jquery-3.2.1.min.js', crossorigin='anonymous')
+        link(rel="stylesheet", type="text/css", href="/assets/sweetalert/dist/sweetalert.css")
         link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', integrity='sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u', crossorigin='anonymous')
         link(rel='stylesheet' type="text/css" href="css/bookshelf.css")
         link(rel='stylesheet' type="text/css" href="css/new_trade_form.css")
         link(href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet")
         //- link(rel='stylesheet' type="text/css" href="css/bookshelf_navbar.css")
-        script(type='text/javascript').
-            var book_info = !{JSON.stringify(books)};
-        script(src="/assets/isotope.pkgd.min.js")
-        script(src='https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js', integrity='sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb', crossorigin='anonymous')
-        script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js', integrity='sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa', crossorigin='anonymous')
-        script(src="/js/bookshelf.js")
-        script(src="/js/new_trade_form.js")
 
     body
         include bookshelf_navbar.pug
@@ -57,3 +51,11 @@ html
                 else
                     include book_grid
             - }
+        script(type='text/javascript').
+            var book_info = !{JSON.stringify(books)};
+        script(src="/assets/isotope.pkgd.min.js")
+        script(src="/assets/sweetalert/dist/sweetalert.min.js")
+        script(src='https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js', integrity='sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb', crossorigin='anonymous')
+        script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js', integrity='sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa', crossorigin='anonymous')
+        script(src="/js/bookshelf.js")
+        script(src="/js/new_trade_form.js")

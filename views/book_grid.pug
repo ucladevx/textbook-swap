@@ -33,8 +33,10 @@ else if books[i]["status"] == "A"
                 else if class_name == "Accepted"
                     p NEW ACCEPTED TRADE for #{books[i]['book_have'].title}
                 p NEW MATCH for #{books[i]['book_have'].title}
-else
+else if books[i]["status"] == "R"
     .card.col-md-4.grid-item.All.Rejected
+        //a.rejected-dismiss(data-id=books[i]['book_have'].book_id) x
+        img.rejected-dismiss(src='images/facebook-angry.svg', data-id=books[i]['book_have'].book_id)
         .row
             .col-md-5
                 .owned(data-title=books[i]['book_have'].title, data-author=books[i]['book_have'].author, data-id=books[i]['book_have'].book_id, data-isbn=books[i]['book_have'].isbn, data-img=books[i]['book_have'].img_url)

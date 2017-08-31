@@ -3,6 +3,37 @@ $(document).ready(function(){
         itemSelector: '.grid-item',
 	});
 
+	$('.rejected-dismiss').on('click', function() {
+		var book_id = $(this).attr("data-id");
+		swal({
+				title: "Are you sure?",
+				text: "You will remove this trade from your list! If you still would like to trade this book, please add it again.",
+				type: "warning",
+				showCancelButton: true,
+				confirmButtonColor: "#DD6B55",
+				confirmButtonText: "Confirm",
+				closeOnConfirm: false
+			},
+			function(){
+				swal("Dismissed!", "Your trade has been dismissed.", "success");
+				$.post("/api/owned_books/remove", {book_id: book_id },
+					function(data){
+						if(data.status === 0){
+							console.log('successfully removed owned book from owned_books');
+						}
+						else if(data.status === 1)
+							console.log('db connection error for removing from owned_books');
+						else if(data.status === 2)
+							console.log('db query error for removing from wish_list');
+						else if(data.status === 3){
+							console.log('wanted book already removed');
+						}
+					},
+					"json"
+				);
+			});
+	});
+
 	// filter items on button click
 	$('.filter-button-group').on( 'click', 'button', function() {
 	    var filterValue = $(this).attr('data-filter');

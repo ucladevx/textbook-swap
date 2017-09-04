@@ -312,7 +312,7 @@ $(document).ready(function(){
 		$('#wantedEditTradeBooksList li').each(function() {
 			var confirmedBook = $(this);
 
-			console.log("adding book:", confirmedBook.attr("data-title"));
+			console.log("adding book:", confirmedBook.attr("data-title"), confirmedBook.attr("id"));
 
 			var wanted_book_id = confirmedBook.attr("id").substring(4);
 			// just in case book doesn't have book id?
@@ -327,7 +327,7 @@ $(document).ready(function(){
 			$.post("/api/wish_list/add", { user_id: "user", book_id: wanted_book_id },
 				function(data){
 					if(data.status === 0){
-						console.log('successfully added wanted book to wish_list');
+						console.log('successfully added wanted book to wish_list', confirmedBook.attr("data-title"));
 					}
 					else if(data.status === 1)
 						console.log('db connection error for adding to wish_list');
@@ -382,7 +382,7 @@ $(document).ready(function(){
 			$.each($('#confirmEditTradeBooksList li'), function(index, wantedBook) {
 				var wantedBook = $(this);
 
-				var book_id = wantedBook.attr("id").substr(4);
+				var book_id = wantedBook.attr("id");
 				var title = wantedBook.attr("data-title");
 				var author = wantedBook.attr("data-author");
 				var isbn = wantedBook.attr("data-isbn");

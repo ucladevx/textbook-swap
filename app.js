@@ -14,6 +14,12 @@ const session = require('express-session');
 const require_login = require('connect-ensure-login');
 
 /*
+ * Constants
+ */
+const secsInADay = 60 * 60 * 24;
+const millisecsInADay = 1000 * secsInADay;
+
+/*
  * Load environment variables from .env file, where API keys and passwords are configured.
  */
 dotenv.config();
@@ -159,6 +165,12 @@ app.get('/logout/facebook', passportController.logout);
 
 // Implement "profile" view
 app.get('/profile', require('connect-ensure-login').ensureLoggedIn(), passportController.profile);
+
+// Run the algorithm once every day
+var algorithmInterval = setInterval(function(){
+    require('./models/algorithm').run_algorithm();
+    console.log("Ran algorithm!");
+}, millisecsInADay);
 
 /*
  * Start Express server.

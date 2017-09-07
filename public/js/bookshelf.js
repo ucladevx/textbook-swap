@@ -300,6 +300,35 @@ $(document).ready(function(){
 		$('#myEditTradeCarousel').carousel('prev');
 	});
 
+	$(".deleteButton").click(function(){
+		// will get value from confirm edit trades book list item
+		var owned_book_id = $("#confirmEditTradeBooksList > li:first").attr("data-owned_book_id");
+		console.log("delete button with owned book id", owned_book_id);
+
+		// delete the owned book, which will also delete trades and graph edges
+		 $.post("api/owned_books/remove", { user_id: "user", book_id: owned_book_id},
+				function(data){
+					if(data.status === 0){
+						console.log('successfully removed owned book from owned book list');
+					}
+					else if(data.status === 1)
+						console.log('db connection error for removing owned book');
+					else if(data.status === 2)
+						console.log('db query error for removing owned book');
+					else if(data.status === 3){
+						console.log('owned book already removed');
+					}
+				},
+				"json"
+			);
+
+		// close the popup
+		$('[data-popup="modify-trade"]').fadeOut(350, function(){
+			// refresh the window (display newly added book trade)
+			location.reload();
+		});
+	});
+
 	// confirm button on edit trade confirmation page
 	$("#confirmTradeChangesButton").click(function(e){
 

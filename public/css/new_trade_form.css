@@ -147,7 +147,7 @@
 	background-color: rgb(242, 242, 242);
 }
 
-.popup .nextButton, .popup .editButton, .popup .prevButton, .popup .undoEditButton, .popup .btn:focus, .popup .btn:active, .popup .btn:hover, .popup #pick_book_next, .popup #wanted_list_next {
+.popup .nextButton, .popup .deleteButton, .popup .editButton, .popup .prevButton, .popup .undoEditButton, .popup .btn:focus, .popup .btn:active, .popup .btn:hover, .popup #pick_book_next, .popup #wanted_list_next {
 	background-color: rgb(253, 206, 48);
 	border-color: rgb(253, 206, 48);
 	border-radius: 0;

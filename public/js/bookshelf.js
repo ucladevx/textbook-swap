@@ -292,6 +292,7 @@ $(document).ready(function(){
 	 */
 
 	$(".editButton").click(function(){
+		$('#confirmTradeChangesButton').prop('disabled', false);
 		$('#myEditTradeCarousel').carousel('next');
 	});
 
@@ -337,61 +338,59 @@ $(document).ready(function(){
 				},
 				"json"
 			);
+		}).promise().done(function() {
+			// second want to add the new wanted books and trade edges
+			// add confirmed wanted books
+			$('#wantedEditTradeBooksList li').each(function() {
+				var confirmedBook = $(this);
+
+				console.log("adding book:", confirmedBook.attr("data-title"), confirmedBook.attr("id"));
+
+				var wanted_book_id = confirmedBook.attr("id").substring(4);
+				// just in case book doesn't have book id?
+				if (wanted_book_id.length == 0)
+					return;
+
+				console.log("wanted_book_id when adding:", wanted_book_id);
+
+				var relationStatus = 'V';  // V = verified
+
+				// add wanted book to wish list
+				$.post("/api/wish_list/add", { user_id: "user", book_id: wanted_book_id },
+					function(data){
+						if(data.status === 0){
+							console.log('successfully added wanted book to wish_list', confirmedBook.attr("data-title"));
+						}
+						else if(data.status === 1)
+							console.log('db connection error for adding to wish_list');
+						else if(data.status === 2)
+							console.log('db query error for adding to wish_list');
+						else if(data.status === 3){
+							console.log('wanted book already exists');
+						}
+					},
+					"json"
+				);
+
+				// add trade relation between owned book and wanted book
+				$.post("/api/possible_trades/add", { user_id: "user", owned_book_id: owned_book_id, wanted_book_id: wanted_book_id, status: relationStatus },
+					function(data){
+						if(data.status === 0){
+							console.log('successfully added trade relation to possible_trades');
+						}
+						else if(data.status === 1)
+							console.log('db connection error for possible_trades');
+						else if(data.status === 2)
+							console.log('db query error for possible_trades');
+						else if(data.status === 3){
+							console.log('trade relation already exists');
+						}
+					},
+					"json"
+				);
+			});
 		});
 		
-
-		// second want to add the new wanted books and trade edges
-		// add confirmed wanted books
-		$('#wantedEditTradeBooksList li').each(function() {
-			var confirmedBook = $(this);
-
-			console.log("adding book:", confirmedBook.attr("data-title"), confirmedBook.attr("id"));
-
-			var wanted_book_id = confirmedBook.attr("id").substring(4);
-			// just in case book doesn't have book id?
-			if (wanted_book_id.length == 0)
-				return;
-
-			console.log("wanted_book_id when adding:", wanted_book_id);
-
-			var relationStatus = 'V';  // V = verified
-
-			// add wanted book to wish list
-			$.post("/api/wish_list/add", { user_id: "user", book_id: wanted_book_id },
-				function(data){
-					if(data.status === 0){
-						console.log('successfully added wanted book to wish_list', confirmedBook.attr("data-title"));
-					}
-					else if(data.status === 1)
-						console.log('db connection error for adding to wish_list');
-					else if(data.status === 2)
-						console.log('db query error for adding to wish_list');
-					else if(data.status === 3){
-						console.log('wanted book already exists');
-					}
-				},
-				"json"
-			);
-
-			// add trade relation between owned book and wanted book
-			$.post("/api/possible_trades/add", { user_id: "user", owned_book_id: owned_book_id, wanted_book_id: wanted_book_id, status: relationStatus },
-				function(data){
-					if(data.status === 0){
-						console.log('successfully added trade relation to possible_trades');
-					}
-					else if(data.status === 1)
-						console.log('db connection error for possible_trades');
-					else if(data.status === 2)
-						console.log('db query error for possible_trades');
-					else if(data.status === 3){
-						console.log('trade relation already exists');
-					}
-				},
-				"json"
-			);
-		});
-
-
 		// close the popup
 		$('[data-popup="modify-trade"]').fadeOut(350, function(){
 			// refresh the window (display newly added book trade)

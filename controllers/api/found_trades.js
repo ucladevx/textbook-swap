@@ -90,3 +90,23 @@ exports.get_trade_by_wanted_book = function(req, res) {
         res.json({status: status, data: data})
     });
 };
+
+/*
+ * POST /api/found_trades/dismiss_rejected_trade
+ * Removes a found trade by user_id and book_have
+ */
+exports.dismiss_rejected_trade = function(req, res) {
+    var user_id = req.user.id;
+    var owned_book = req.body.owned_book;
+    console.log(user_id, owned_book);
+
+    found_trades.remove_trade_by_book_owned(user_id, owned_book, function(status){
+        if (status == error_codes.found_trades_errors.DB_SUCCESS)
+            console.log("Successfully dismissed trade!");
+        else{
+            console.log("DB error")
+        }
+
+        res.json({status: status});
+    });
+};

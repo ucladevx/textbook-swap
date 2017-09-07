@@ -1,13 +1,14 @@
 $(document).ready(function(){
+	// This is the
 	var $grid = $('.grid').isotope({
-        itemSelector: '.grid-item',
+        itemSelector: '.grid-item'
 	});
 
 	$('.rejected-dismiss').on('click', function() {
 		var book_id = $(this).attr("data-id");
 		swal({
 				title: "Are you sure?",
-				text: "You will remove this trade from your list! If you still would like to trade this book, please add it again.",
+				text: "You will remove this rejected trade from your list! If you still would like to trade this book, please add it again.",
 				type: "warning",
 				showCancelButton: true,
 				confirmButtonColor: "#DD6B55",
@@ -16,7 +17,7 @@ $(document).ready(function(){
 			},
 			function(){
 				swal("Dismissed!", "Your trade has been dismissed.", "success");
-				$.post("/api/owned_books/remove", {book_id: book_id },
+				$.post("/api/found_trades/dismiss_rejected_trade", {owned_book: book_id },
 					function(data){
 						if(data.status === 0){
 							console.log('successfully removed owned book from owned_books');
@@ -28,6 +29,7 @@ $(document).ready(function(){
 						else if(data.status === 3){
 							console.log('wanted book already removed');
 						}
+						window.location.reload(true);
 					},
 					"json"
 				);
@@ -291,7 +293,7 @@ $(document).ready(function(){
 
 	$(".editButton").click(function(){
 		$('#myEditTradeCarousel').carousel('next');
-	})
+	});
 
 	$(".undoEditButton").click(function(){
 		$('#myEditTradeCarousel').carousel('prev');

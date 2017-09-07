@@ -101,8 +101,6 @@ app.get('/api/owned_books/get_users', ownedBooksController.get_users);
 // Wanted books
 app.post('/api/wish_list/add', wishListController.add_book);
 app.post('/api/wish_list/remove', wishListController.remove_book);
-app.get('/api/wish_list/get_books', wishListController.get_books);
-app.get('/api/wish_list/get_users', wishListController.get_users);
 
 // Possible trades
 app.post('/api/possible_trades/add', possibleTradesController.add_relation);

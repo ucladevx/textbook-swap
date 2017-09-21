@@ -76,6 +76,13 @@ function dfs(curr, maxDepth, visited){
  * @param visited: An array of the visited nodes in the loop.
  */
 function process(visited){
+    for(var i = 0; i < visited.length; i++){
+        for(var j = i + 1; j < visited.length; j++){
+            if(visited[i][0] == visited[j][0])
+                return;
+        }
+    }
+
     console.log(visited);
     visited.push(visited[0]);
 

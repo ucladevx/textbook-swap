@@ -4,20 +4,17 @@ html
         meta(charset='utf-8')
         title Loops - Dashboard
         script(src='https://code.jquery.com/jquery-3.2.1.min.js', crossorigin='anonymous')
+        link(rel="stylesheet", type="text/css", href="/assets/sweetalert/dist/sweetalert.css")
         link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', integrity='sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u', crossorigin='anonymous')
         link(rel='stylesheet' type="text/css" href="css/bookshelf.css")
         link(rel='stylesheet' type="text/css" href="css/new_trade_form.css")
         link(href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet")
         //- link(rel='stylesheet' type="text/css" href="css/bookshelf_navbar.css")
-        script(src="/assets/isotope.pkgd.min.js")
-        script(src='https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js', integrity='sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb', crossorigin='anonymous')
-        script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js', integrity='sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa', crossorigin='anonymous')
-        script(src="/js/bookshelf.js")
-        script(src="/js/new_trade_form.js")
 
     body
         include bookshelf_navbar.pug
         include newtradeform.pug
+        include modifytrade.pug
         .bookshelf_navbar_container
             .row.bookshelf_navbar
                 .col-md-3.welcome_dialog_container
@@ -36,123 +33,29 @@ html
                     img(src='images/Bookshelf_Dashboard.svg')
 
         .grid.carousel-inner
-            - for(var i = -1; i < books.length; i += 3){
-                .row.shelf
-                    if i == -1
-                        .card.col-md-4.grid-item.All.Requested.Matched.Rejected.new-trade-card(data-popup-open='popup-1', href='#')
-                            .row.card_row
-                                .col-md-4
-                                .col-md-4
-                                    img.card-img-top(src='/images/grey_plus.png', alt='Card image cap')
-                                .col-md-4
-                            .row
-                                .card-block
-                                    h4#new-trade-title NEW TRADE
-                    else
-                        if books[i].title
-                            .card.col-md-4.grid-item.Requested.All
+            - for(var i = -1; i < books.length; i++){
+                if (i + 3) % 3 == 2
+                    .row.shelf
+                        if i == -1
+                            .card.col-md-4.grid-item.All.Requested.Matched.Rejected.new-trade-card(data-popup-open='popup-1', href='#')
+                                .row.card_row
+                                    .col-md-4
+                                    .col-md-4
+                                        img.card-img-top(src='/images/grey_plus.png', alt='Card image cap')
+                                    .col-md-4
                                 .row
-                                    .col-md-7.book-info
-                                        p.card-title #{books[i].title}
-                                        p.card-author #{books[i].author}
-                                    .col-md-5
-                                        .owned(data-title=books[i].title, data-author=books[i].author, data-id=books[i].book_id, data-isbn=books[i].isbn, data-img=books[i].img_url)
-                                            img.book-img(src=books[i].img_url, alt='Card image cap')
-                                .row.info-row
-                                    .col-md-12.info
-                                        - var book_id = books[i].book_id.toString();
-                                        - var num_books = book_nums[book_id] ? book_nums[book_id] : 0;
-                                        p #{num_books} books wanted in exchange
+                                    .card-block
+                                        h4#new-trade-title NEW TRADE
                         else
-                            - var class_name = books[i]["status"] == "A" ? "Accepted" : books["status"] == "R" ? "Rejected" : "Matched";
-                            .card.col-md-4.grid-item.All.Matched
-                                .row
-                                    .col-md-5
-                                        .owned(data-title=books[i]['book_have'].title, data-author=books[i]['book_have'].author, data-id=books[i]['book_have'].book_id, data-isbn=books[i]['book_have'].isbn, data-img=books[i]['book_have'].img_url)
-                                            img.book-img(src=books[i]['book_have'].img_url, alt='Card image cap')
-                                        p.title #{books[i]['book_have'].title}
-                                    .col-md-2
-                                        p.arrow.align-middle &harr;
-                                    .col-md-5
-                                        .wanted(data-title=books[i]['book_want'].title, data-author=books[i]['book_want'].author, data-id=books[i]['book_want'].book_id, data-isbn=books[i]['book_want'].isbn, data-img=books[i]['book_want'].img_url)
-                                            img.book-img(src=books[i]['book_want'].img_url, alt='Card image cap')
-                                        p.title #{books[i]['book_want'].title}
-                                .row.info-row
-                                    .col-md-12.info
-                                        if class_name == "Matched"
-                                            p NEW MATCH for #{books[i]['book_have'].title}
-                                        else if class_name == "Accepted"
-                                            p NEW ACCEPTED TRADE for #{books[i]['book_have'].title}
-
-                    if i + 1 < books.length
-                        if books[i + 1].title
-                            .card.col-md-4.grid-item.Requested.All
-                                .row
-                                    .col-md-7.book-info
-                                        p.card-title #{books[i + 1].title}
-                                        p.card-author #{books[i + 1].author}
-                                    .col-md-5
-                                        .owned(data-title=books[i + 1].title, data-author=books[i + 1].author, data-id=books[i + 1].book_id, data-isbn=books[i + 1].isbn, data-img=books[i + 1].img_url)
-                                            img.book-img(src=books[i + 1].img_url, alt='Card image cap')
-                                .row.info-row
-                                    .col-md-12.info
-                                        - var book_id = books[i+1].book_id.toString();
-                                        - var num_books = book_nums[book_id] ? book_nums[book_id] : 0;
-                                        p #{num_books} books wanted in exchange
-                        else
-                            - var class_name = books[i + 1]["status"] == "A" ? "Accepted" : books["status"] == "R" ? "Rejected" : "Matched";
-                            .card.col-md-4.grid-item.All.Matched
-                                .row
-                                    .col-md-5
-                                        .owned(data-title=books[i + 1]['book_have'].title, data-author=books[i + 1]['book_have'].author, data-id=books[i + 1]['book_have'].book_id, data-isbn=books[i + 1]['book_have'].isbn, data-img=books[i + 1]['book_have'].img_url)
-                                            img.book-img(src=books[i + 1]['book_have'].img_url, alt='Card image cap')
-                                        p.title #{books[i + 1]['book_have'].title}
-                                    .col-md-2
-                                        p.arrow.align-middle &harr;
-                                    .col-md-5
-                                        .wanted(data-title=books[i + 1]['book_want'].title, data-author=books[i + 1]['book_want'].author, data-id=books[i + 1]['book_want'].book_id, data-isbn=books[i + 1]['book_want'].isbn, data-img=books[i + 1]['book_want'].img_url)
-                                            img.book-img(src=books[i + 1]['book_want'].img_url, alt='Card image cap')
-                                        p.title #{books[i + 1]['book_want'].title}
-                                .row.info-row
-                                    .col-md-12.info
-                                        if class_name == "Matched"
-                                            p NEW MATCH for #{books[i + 1]['book_have'].title}
-                                        else if class_name == "Accepted"
-                                            p NEW ACCEPTED TRADE for #{books[i + 1]['book_have'].title}
-
-                    if i + 2 < books.length
-                        if books[i + 2].title
-                            .card.col-md-4.grid-item.Requested.All
-                                .row
-                                    .col-md-7.book-info
-                                        p.card-title #{books[i + 2].title}
-                                        p.card-author #{books[i + 2].author}
-                                    .col-md-5
-                                        .owned(data-title=books[i + 2].title, data-author=books[i + 2].author, data-id=books[i + 2].book_id, data-isbn=books[i + 2].isbn, data-img=books[i + 2].img_url)
-                                            img.book-img(src=books[i + 2].img_url, alt='Card image cap')
-                                .row.info-row
-                                    .col-md-12.info
-                                        - var book_id = books[i+2].book_id.toString();
-                                        - var num_books = book_nums[book_id] ? book_nums[book_id] : 0;
-                                        p #{num_books} books wanted in exchange
-                        else
-                            - var class_name = books[i + 2]["status"] == "A" ? "Accepted" : books["status"] == "R" ? "Rejected" : "Matched";
-                            .card.col-md-4.grid-item.All.Matched
-                                .row
-                                    .col-md-5
-                                        .owned(data-title=books[i + 2]['book_have'].title, data-author=books[i + 2]['book_have'].author, data-id=books[i + 2]['book_have'].book_id, data-isbn=books[i + 2]['book_have'].isbn, data-img=books[i + 2]['book_have'].img_url)
-                                            img.book-img(src=books[i + 2]['book_have'].img_url, alt='Card image cap')
-                                        p.title #{books[i + 2]['book_have'].title}
-                                    .col-md-2
-                                        p.arrow.align-middle &harr;
-                                    .col-md-5
-                                        .wanted(data-title=books[i + 2]['book_want'].title, data-author=books[i + 2]['book_want'].author, data-id=books[i + 2]['book_want'].book_id, data-isbn=books[i + 2]['book_want'].isbn, data-img=books[i + 2]['book_want'].img_url)
-                                            img.book-img(src=books[i + 2]['book_want'].img_url, alt='Card image cap')
-                                        p.title #{books[i + 2]['book_want'].title}
-                                .row.info-row
-                                    .col-md-12.info
-                                        if class_name == "Matched"
-                                            p NEW MATCH for #{books[i + 2]['book_have'].title}
-                                        else if class_name == "Accepted"
-                                            p NEW ACCEPTED TRADE for #{books[i + 2]['book_have'].title}
+                            include book_grid
+                else
+                    include book_grid
             - }
+        script(type='text/javascript').
+            var book_info = !{JSON.stringify(books)};
+        script(src="/assets/isotope.pkgd.min.js")
+        script(src="/assets/sweetalert/dist/sweetalert.min.js")
+        script(src='https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js', integrity='sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb', crossorigin='anonymous')
+        script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js', integrity='sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa', crossorigin='anonymous')
+        script(src="/js/bookshelf.js")
+        script(src="/js/new_trade_form.js")

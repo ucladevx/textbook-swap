@@ -1,6 +1,39 @@
 $(document).ready(function(){
+	// This is the
 	var $grid = $('.grid').isotope({
-        itemSelector: '.grid-item',
+        itemSelector: '.grid-item'
+	});
+
+	$('.rejected-dismiss').on('click', function() {
+		var book_id = $(this).attr("data-id");
+		swal({
+				title: "Are you sure?",
+				text: "You will remove this rejected trade from your list! If you still would like to trade this book, please add it again.",
+				type: "warning",
+				showCancelButton: true,
+				confirmButtonColor: "#DD6B55",
+				confirmButtonText: "Confirm",
+				closeOnConfirm: false
+			},
+			function(){
+				swal("Dismissed!", "Your trade has been dismissed.", "success");
+				$.post("/api/found_trades/dismiss_rejected_trade", {owned_book: book_id },
+					function(data){
+						if(data.status === 0){
+							console.log('successfully removed owned book from owned_books');
+						}
+						else if(data.status === 1)
+							console.log('db connection error for removing from owned_books');
+						else if(data.status === 2)
+							console.log('db query error for removing from wish_list');
+						else if(data.status === 3){
+							console.log('wanted book already removed');
+						}
+						window.location.reload(true);
+					},
+					"json"
+				);
+			});
 	});
 
 	// filter items on button click
@@ -195,4 +228,233 @@ $(document).ready(function(){
 
 		e.preventDefault();
 	});
+
+	$(".Requested:not(.Matched)").on('click', function(e){
+		var ownedCard = $(this).find(".owned")[0].attributes;
+		
+		// start at the first popup screen
+		$('.carousel').carousel(0);
+
+		$('[data-popup="' + "modify-trade" + '"]').fadeIn(350);
+		e.preventDefault();
+
+		// center the popup
+		var w = $(window).width();
+		var h = $(window).height();
+		var d = $('.popup-inner');
+		var divW = $(d).width();
+		var divH = $(d).height();
+
+		d.css({ 'position': "absolute",
+			'top': (h/2)-(divH/2)+"px",
+			'left': (w/2)-(divW/2)+"px"
+		});
+
+		// start carousel
+		$('.carousel').carousel({
+			pause: true,
+			interval: false
+		});
+
+		// display info for the requested book
+		var img_url = ownedCard[5].nodeValue;
+		var title = ownedCard[1].nodeValue.toUpperCase();
+		var author = ownedCard[2].nodeValue.toUpperCase();
+		var owned_book_id = ownedCard[3].nodeValue.toUpperCase();
+		var isbn = ownedCard[4].nodeValue.toUpperCase();
+		var cardIndex = ownedCard[6].nodeValue;
+
+		// send owned book info values to the front-end (html)
+		document.getElementById("confirmTradeOwnedBookImg").src = img_url;
+		document.getElementById("confirmTradeOwnedBookTitle").innerHTML = "Title: " + title;
+		document.getElementById("confirmTradeOwnedBookAuthor").innerHTML = "Author: " + author;
+		document.getElementById("confirmTradeOwnedBookIsbn").innerHTML = "ISBN: " + isbn;
+
+		// display the wanted books list
+		// clear the list before adding entries (in case user modifies then comes back, don't want duplicates)
+		$("#confirmEditTradeBooksList").empty();
+		// fetch and display info for all wanted
+		var wanted_books_info = book_info[cardIndex]["wanted_books_info"];
+		wanted_books_info.forEach(function(wanted_book) {
+			var book_id = wanted_book["book_id"];
+			var title = wanted_book["title"];
+			var author = wanted_book["author"];
+			var isbn = wanted_book["isbn"];
+			var img_url = wanted_book["img_url"];
+
+			// and the rest of your code
+			$("#confirmEditTradeBooksList").append('<li class="list-group-item" id="' + book_id + '" data-title="' + title + '" data-author="' + author + '" data-isbn="' + isbn + '" data-owned_book_id="' + owned_book_id + '" data-img_url="' + img_url + '">' + '<div class="row"> <div class="col-md-3">' + '<img src="' + img_url + '"> ' + '</div>' + '<div class="col-md-9">' + '<p>' + title + '</p> <p>' + author + '</p>' + '</div> </div>' + '</li>');
+		});
+	});
+
+	/*
+	 * Code needed for carousel transitions
+	 */
+
+	$(".editButton").click(function(){
+		$('#confirmTradeChangesButton').prop('disabled', false);
+		$('#myEditTradeCarousel').carousel('next');
+	});
+
+	$(".undoEditButton").click(function(){
+		$('#myEditTradeCarousel').carousel('prev');
+	});
+
+	$(".deleteButton").click(function(){
+		// will get value from confirm edit trades book list item
+		var owned_book_id = $("#confirmEditTradeBooksList > li:first").attr("data-owned_book_id");
+		console.log("delete button with owned book id", owned_book_id);
+
+		// delete the owned book, which will also delete trades and graph edges
+		 $.post("api/owned_books/remove", { user_id: "user", book_id: owned_book_id},
+				function(data){
+					if(data.status === 0){
+						console.log('successfully removed owned book from owned book list');
+					}
+					else if(data.status === 1)
+						console.log('db connection error for removing owned book');
+					else if(data.status === 2)
+						console.log('db query error for removing owned book');
+					else if(data.status === 3){
+						console.log('owned book already removed');
+					}
+				},
+				"json"
+			);
+
+		// close the popup
+		$('[data-popup="modify-trade"]').fadeOut(350, function(){
+			// refresh the window (display newly added book trade)
+			location.reload();
+		});
+	});
+
+	// confirm button on edit trade confirmation page
+	$("#confirmTradeChangesButton").click(function(e){
+
+		console.log("confirm edit trade button");
+		// will initialize this inside of confirm edit trade books list
+		var owned_book_id = 0;
+
+		// TODO: some funky back end stuff
+		// first want to remove the old wanted books from the list (which will also remove the trade edges)
+		$('#confirmEditTradeBooksList li').each(function() {
+			var book_to_remove = $(this);
+
+			console.log("removing book:", book_to_remove.attr("data-title"));
+
+			owned_book_id = book_to_remove.attr("data-owned_book_id");
+
+			console.log("owned book:", owned_book_id);
+
+			var book_to_remove_id = book_to_remove.attr("id");
+
+			console.log("remove book id", book_to_remove_id);
+
+			// remove wanted books from wish list
+			$.post("/api/wish_list/remove", { user_id: "user", book_id: book_to_remove_id },
+				function(data){
+					if(data.status === 0){
+						console.log('successfully removed wanted book from wish_list');
+					}
+					else if(data.status === 1)
+						console.log('db connection error for removing from wish_list');
+					else if(data.status === 2)
+						console.log('db query error for removing from wish_list');
+					else if(data.status === 3){
+						console.log('wanted book already removed');
+					}
+				},
+				"json"
+			);
+		}).promise().done(function() {
+			// second want to add the new wanted books and trade edges
+			// add confirmed wanted books
+			$('#wantedEditTradeBooksList li').each(function() {
+				var confirmedBook = $(this);
+
+				console.log("adding book:", confirmedBook.attr("data-title"), confirmedBook.attr("id"));
+
+				var wanted_book_id = confirmedBook.attr("id").substring(4);
+				// just in case book doesn't have book id?
+				if (wanted_book_id.length == 0)
+					return;
+
+				console.log("wanted_book_id when adding:", wanted_book_id);
+
+				var relationStatus = 'V';  // V = verified
+
+				// add wanted book to wish list
+				$.post("/api/wish_list/add", { user_id: "user", book_id: wanted_book_id },
+					function(data){
+						if(data.status === 0){
+							console.log('successfully added wanted book to wish_list', confirmedBook.attr("data-title"));
+						}
+						else if(data.status === 1)
+							console.log('db connection error for adding to wish_list');
+						else if(data.status === 2)
+							console.log('db query error for adding to wish_list');
+						else if(data.status === 3){
+							console.log('wanted book already exists');
+						}
+					},
+					"json"
+				);
+
+				// add trade relation between owned book and wanted book
+				$.post("/api/possible_trades/add", { user_id: "user", owned_book_id: owned_book_id, wanted_book_id: wanted_book_id, status: relationStatus },
+					function(data){
+						if(data.status === 0){
+							console.log('successfully added trade relation to possible_trades');
+						}
+						else if(data.status === 1)
+							console.log('db connection error for possible_trades');
+						else if(data.status === 2)
+							console.log('db query error for possible_trades');
+						else if(data.status === 3){
+							console.log('trade relation already exists');
+						}
+					},
+					"json"
+				);
+			});
+		});
+		
+		// close the popup
+		$('[data-popup="modify-trade"]').fadeOut(350, function(){
+			// refresh the window (display newly added book trade)
+			location.reload();
+		});
+	});
+
+	$("#myEditTradeCarousel").on('slide.bs.carousel',function(e){
+		// figure out when slides we are transitioning between
+		var slideFrom = $(this).find('.active').index();
+		var slideTo = $(e.relatedTarget).index();
+		console.log(slideFrom+' =>> '+slideTo);
+		// var ownedCard = $(this).find(".owned")[0].attributes;
+
+		// confirm the trade
+		if (slideFrom == 0 && slideTo == 1) {
+			// display the wanted books list
+			// clear the list before adding entries (in case user modifies then comes back, don't want duplicates)
+			$("#wantedEditTradeBooksList").empty();
+
+			$.each($('#confirmEditTradeBooksList li'), function(index, wantedBook) {
+				var wantedBook = $(this);
+
+				var book_id = wantedBook.attr("id");
+				var title = wantedBook.attr("data-title");
+				var author = wantedBook.attr("data-author");
+				var isbn = wantedBook.attr("data-isbn");
+				var img_url = wantedBook.attr("data-img_url");
+
+				$("#wantedEditTradeBooksList").prepend('<li class="list-group-item" id="item' + book_id + '" data-title="' + title + '" data-author="' + author + '" data-isbn="' + isbn + '" data-img_url="' + img_url + '">' + "<a class=\"closeButton\" href=\"#\">x</a>" + "<img src=" + img_url + "> " + '</li>');
+				$('#wantedEditTradeBooksList').animate({
+					scrollTop: "0px"
+					}, 350);
+			});
+		}
+	});
+
 });

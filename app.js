@@ -14,6 +14,12 @@ const session = require('express-session');
 const require_login = require('connect-ensure-login');
 
 /*
+ * Constants
+ */
+const secsInADay = 60 * 60 * 24;
+const millisecsInADay = 1000 * secsInADay;
+
+/*
  * Load environment variables from .env file, where API keys and passwords are configured.
  */
 dotenv.config();
@@ -101,8 +107,6 @@ app.get('/api/owned_books/get_users', ownedBooksController.get_users);
 // Wanted books
 app.post('/api/wish_list/add', wishListController.add_book);
 app.post('/api/wish_list/remove', wishListController.remove_book);
-app.get('/api/wish_list/get_books', wishListController.get_books);
-app.get('/api/wish_list/get_users', wishListController.get_users);
 
 // Possible trades
 app.post('/api/possible_trades/add', possibleTradesController.add_relation);
@@ -125,6 +129,7 @@ app.get('/api/book_info/get_pair_book_info', bookInfoController.get_pair_book_in
 app.post('/api/found_trades/update_status_accepted', foundTradesController.update_status_accepted);
 app.post('/api/found_trades/update_status_rejected', foundTradesController.update_status_rejected);
 app.get('/api/found_trades/get_trade_by_wanted_book', foundTradesController.get_trade_by_wanted_book);
+app.post('/api/found_trades/dismiss_rejected_trade', foundTradesController.dismiss_rejected_trade);
 
 // Algorithm (FOR DEVELOPMENT ONLY)
 app.get('/api/algorithm/run', runAlgorithmController.run_algorithm);
@@ -160,6 +165,12 @@ app.get('/logout/facebook', passportController.logout);
 
 // Implement "profile" view
 app.get('/profile', require('connect-ensure-login').ensureLoggedIn(), passportController.profile);
+
+// Run the algorithm once every day
+var algorithmInterval = setInterval(function(){
+    require('./models/algorithm').run_algorithm();
+    console.log("Ran algorithm!");
+}, millisecsInADay);
 
 /*
  * Start Express server.

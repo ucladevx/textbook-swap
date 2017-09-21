@@ -15,7 +15,7 @@ body{
 	padding-top: 10px;
 	padding-bottom: 0;
 	text-align: center;
-	overflow-y: hidden;
+	overflow: visible;
 	box-shadow: -5px 5px 20px -5px rgba(0,0,0,0.5);
 }
 
@@ -37,6 +37,31 @@ body{
 
 .Accepted:not(.Matched){
 	background-color: green;
+}
+
+.Rejected:not(.Matched){
+	background-color: #e88154;
+}
+
+.rejected-dismiss {
+	text-align: center;
+	line-height: 25px;
+	font-size: 18px;
+	background-color: black;
+	color: white;
+	position: absolute;
+	height: 30px;
+	width: 30px;
+	border-radius: 15px;
+	right: -15px;
+	top: -15px;
+	z-index: 2;
+	text-decoration: none;
+}
+
+.rejected-dismiss:hover {
+	text-decoration: none;
+	color: white;
 }
 
 .card-img-top {
@@ -72,15 +97,22 @@ body{
 	padding-bottom: 10px;
 }
 
-.Matched .owned, .wanted {
+.grid-item .owned, .grid-item .wanted {
 	text-align: center;
-	background-color: rgb(201, 232, 235);
 	padding-top: 10px;
 	padding-bottom: 10px;
 }
 
+.Matched .owned, .Matched .wanted {
+	background-color: rgb(201, 232, 235);
+}
+
+.Rejected .owned, .Rejected .wanted {
+	background-color: rgb(234, 170, 141);
+}
+
 .book-img {
-	width: 60%;
+	height: 130px;
 }
 
 .title{
@@ -259,10 +291,6 @@ body {
     font-size: 300%;
 }
 
-.Matched .info{
-	background-color: #47a3b2;
-}
-
 .info-row{
 	width: 100%;
 	position: absolute;
@@ -270,8 +298,16 @@ body {
 	left: 15px;
 }
 
+.Matched .info{
+	background-color: #47a3b2;
+}
+
 .Requested .info{
 	background-color: #efb745;
+}
+
+.Rejected .info{
+	background-color: #cc6b4e;
 }
 
 .info{
@@ -302,6 +338,39 @@ body {
 
 .Rejected_but.active{
 	border-bottom: 1px solid #e88154;
+}
+
+/* edit existing trade relation */
+.modify-trade-popup {
+	background: rgba(0, 0, 0, 0.75);
+	color: rgb(114, 114, 114);
+	display: none;
+	height: 100%;
+	left: 0;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 10;
+}
+
+/* Close button for pop up*/
+.modify-trade-popup-close, .modify-trade-popup-close:hover {
+	color: rgb(149, 149, 149);
+	font-size: 20px;
+	text-decoration: none;
+}
+
+.modify-trade-popup-inner {
+	background: rgb(254, 254, 254);
+	border-radius: 3px;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 1);
+	height: 70vh;
+	overflow: hidden;
+	padding-left: 15px;
+	padding-top: 10px;
+	position: absolute;  /* TODO: used to be absolute */
+	width: 65vw;
+	z-index: 20;
 }
 
 .filter-button-group button:focus{
@@ -621,4 +690,10 @@ body {
 
 .btn {
 	border-radius: 0;
+}
+
+/* Image for owned book */
+#confirmTradeOwnedBookImg {
+	height: 100%;
+	width: 100%;
 }

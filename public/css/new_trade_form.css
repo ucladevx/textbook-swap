@@ -15,7 +15,7 @@
 }
 
 /* search box for user input */
-#ownedInput, #wantedInput, .form-control::-webkit-input-placeholder {
+#ownedInput, .wantedInput, .form-control::-webkit-input-placeholder {
 	background-color: rgb(35, 188, 212);
 	border-color: rgb(35, 188, 212);
 	border-radius: 0;
@@ -23,7 +23,7 @@
 }
 
 /* little magnifying glass icon beside search box */
-#ownedInputAddon, #wantedInputAddon {
+#ownedInputAddon, .wantedInputAddon {
 	background-color: rgb(24, 166, 181);
 	border-color: rgb(24, 166, 181);
 	border-radius: 0;
@@ -31,7 +31,7 @@
 }
 
 /* list of entries from search query results */
-#ownedSearchResultsList, #wantedSearchResultsList, .wantedBooksList, .confirmBooksList {
+#ownedSearchResultsList, .wantedSearchResultsList, .wantedBooksList, .confirmBooksList {
 	background-color: rgb(254, 254, 254);
 	height: 32vh;
 	margin-bottom: 0;
@@ -39,7 +39,7 @@
 	overflow-y: scroll;
 }
 
-#ownedSearchResultsList::-webkit-scrollbar-thumb, #wantedSearchResultsList::-webkit-scrollbar-thumb {
+#ownedSearchResultsList::-webkit-scrollbar-thumb, .wantedSearchResultsList::-webkit-scrollbar-thumb {
 	-webkit-box-shadow: inset 0 0 8px rgba(0, 0, 0, .2);
 	background-color: rgb(146, 214, 225);
 	border-radius: 5px;
@@ -147,7 +147,7 @@
 	background-color: rgb(242, 242, 242);
 }
 
-.popup .nextButton, .popup .prevButton, .popup .btn:focus, .popup .btn:active, .popup .btn:hover, .popup #pick_book_next, .popup #wanted_list_next {
+.popup .nextButton, .popup .deleteButton, .popup .editButton, .popup .prevButton, .popup .undoEditButton, .popup .btn:focus, .popup .btn:active, .popup .btn:hover, .popup #pick_book_next, .popup #wanted_list_next {
 	background-color: rgb(253, 206, 48);
 	border-color: rgb(253, 206, 48);
 	border-radius: 0;

@@ -9,8 +9,12 @@ $(document).ready(function(){
 		document.getElementById("ownedInput").value = "";
 		$("#ownedSearchResultsList").empty();
 		// clear input and search results for owned books (slide 3)
-		document.getElementById("wantedInput").value = "";
-		$("#wantedSearchResultsList").empty();
+		var wantedInputList = document.getElementsByClassName("wantedInput");
+		for (n = 0; n < wantedInputList.length; ++n) {
+		    wantedInputList[n].value="";
+		}
+		$(".wantedSearchResultsList").empty();
+		
 		$(".wantedBooksList").empty();
 
 		$('#wanted_list_next').prop('disabled', true);
@@ -20,7 +24,7 @@ $(document).ready(function(){
 	 * Functions needed for pop-up form input
 	 */
 
-// open the popup
+	// open the popup
 	$('.new-trade-card').on('click', function(e)  {
 		// new pop-up, so reset form input from previous instance of the pop-up
 		resetFormInput();
@@ -52,7 +56,7 @@ $(document).ready(function(){
 
 	});
 
-// close the pop-up using the button on the top right corner
+	// close the pop-up using the button on the top right corner
 	$('[data-popup-close]').on('click', function(e)  {
 		var targeted_popup_class = jQuery(this).attr('data-popup-close');
 		$('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
@@ -92,7 +96,7 @@ $(document).ready(function(){
 	 * Searching and adding entries to the owned books list
 	 */
 
-// get input from search box as user types, character by character and query the database for textbooks
+	// get input from search box as user types, character by character and query the database for textbooks
 	$("#ownedInput").keyup(function() {
 		var ownedInput = $("#ownedInput").val();
 		// only query for results if the input is at least three characters long
@@ -153,12 +157,13 @@ $(document).ready(function(){
 		$('.carousel').carousel('next');
 	});
 
-	$("#wantedSearchResultsList").on("click", ".list-group-item", function(){
+	$(".wantedSearchResultsList").on("click", ".list-group-item", function(){
 		// highlight the selected results list entry
 		$('.highlight-wanted').removeClass('highlight-wanted');
 		$(this).addClass('highlight-wanted');
 
 		$('#wanted_list_next').prop('disabled', false);
+		$('#confirmTradeChangesButton').prop('disabled', false);
 	});
 
 	/*
@@ -166,8 +171,8 @@ $(document).ready(function(){
 	 */
 
 	// get input from search box as user types, character by character and query the database for textbooks
-	$("#wantedInput").keyup(function() {
-		var wantedInput = $("#wantedInput").val();
+	$(".wantedInput").keyup(function() {
+		var wantedInput = $(this).val();
 		// only query for results if the input is at least three characters long
 		if (wantedInput.length >= 3) {
 			$.get("/api/search/search_textbooks", { search_input: wantedInput }, function(object) {
@@ -184,7 +189,7 @@ $(document).ready(function(){
 				if (object.status == 0) {
 					// new search results found, so display them
 					if (searchResults.length > 0) {
-						$("#wantedSearchResultsList").empty();
+						$(".wantedSearchResultsList").empty();
 						// display all of the search results on the screen
 
 						// don't display books inside user's owned books list
@@ -208,7 +213,7 @@ $(document).ready(function(){
 										var author = searchResults[i]["author"];
 										var isbn = searchResults[i]["isbn"];
 										var img_url = searchResults[i]["img_url"];
-										$("#wantedSearchResultsList").append('<li class="list-group-item" id="' + book_id + '" data-title="' + title + '" data-author="' + author + '" data-isbn="' + isbn + '" data-img_url="' + img_url +'">' + title + ', ' + author + '</li>');
+										$(".wantedSearchResultsList").append('<li class="list-group-item" id="' + book_id + '" data-title="' + title + '" data-author="' + author + '" data-isbn="' + isbn + '" data-img_url="' + img_url +'">' + title + ', ' + author + '</li>');
 									}
 								}
 							}
@@ -223,12 +228,12 @@ $(document).ready(function(){
 		}
 		else {
 			// input too small to query so clear the search results list
-			$("#wantedSearchResultsList").empty();
+			$(".wantedSearchResultsList").empty();
 		}
 	});
 
-// add search result to wanted books list that use has selected
-	$("#wantedSearchResultsList").on("click", ".list-group-item", function(){
+	// add search result to wanted books list that user has selected
+	$(".wantedSearchResultsList").on("click", ".list-group-item", function(){
 		// get data from list element tags
 		var searchResult = this;
 		var book_id = searchResult.id;
@@ -237,9 +242,11 @@ $(document).ready(function(){
 		var isbn = searchResult.dataset.isbn;
 		var img_url = searchResult.dataset.img_url;
 
+		console.log("add wanted search");
+
 		// add new selected item to wanted list
-		var selector = "#item" + book_id
-		var selectorID = "item" + book_id
+		var selector = "#item" + book_id;
+		var selectorID = "item" + book_id;
 
 		if($(".wantedBooksList").find(selector).length) {
 			document.getElementById(selectorID).scrollIntoView({behavior: 'smooth'});
@@ -251,12 +258,22 @@ $(document).ready(function(){
 		}
 	});
 
-// remove the book from the wanted list
+	// remove the book from the wanted list
 	$(".wantedBooksList").on("click", ".closeButton", function(){
 		var wantedBook = $(this).parent();
 		wantedBook.remove();
-		if ($('.wantedBooksList li').length == 0)
+
+		console.log("remove wanted");
+
+		if ($('#wantedTradeBooksList').children().length == 0) {
+			console.log("disable new trade button");
 			$('#wanted_list_next').prop('disabled', true);
+		}
+
+		if ($('#wantedEditTradeBooksList').children().length == 0) {
+			console.log("disable edit trade button");
+			$('#confirmTradeChangesButton').prop('disabled', true);
+		}
 		// don't scroll user to top
 		return false;
 	});
@@ -266,11 +283,11 @@ $(document).ready(function(){
 	 */
 
 	$(".nextButton").click(function(){
-		$('.carousel').carousel('next');
-	});
+		$('#myCarousel').carousel('next');
+	})
 
 	$(".prevButton").click(function(){
-		$('.carousel').carousel('prev');
+		$('#myCarousel').carousel('prev');
 	});
 
 	$("#confirmButton").click(function(){
@@ -295,7 +312,7 @@ $(document).ready(function(){
 		);
 
 		// add confirmed wanted books
-		$('.confirmBooksList li').each(function() {
+		$('#confirmTradeBooksList li').each(function() {
 			var confirmedBook = $(this);
 
 			console.log(confirmedBook);
@@ -340,8 +357,8 @@ $(document).ready(function(){
 
 		// close the popup
 		$('[data-popup="popup-1"]').fadeOut(350, function(){
-				// refresh the window (display newly added book trade)
-				location.reload();
+			// refresh the window (display newly added book trade)
+			location.reload();
 		});
 	});
 
@@ -426,9 +443,8 @@ $(document).ready(function(){
 			if (slideFrom == 2 && slideTo == 3) {
 				// display the wanted books list
 				// clear the list before adding entries (in case user modifies then comes back, don't want duplicates)
-				$(".confirmBooksList").empty();
-				$('.wantedBooksList li').each(function() {
-					// var wantedBook = $(li);
+				$("#confirmTradeBooksList").empty();
+				$('#wantedTradeBooksList li').each(function() {
 					var wantedBook = $(this);
 
 					console.log(wantedBook);
@@ -440,7 +456,7 @@ $(document).ready(function(){
 					var img_url = wantedBook.attr("data-img_url");
 
 					// and the rest of your code
-					$(".confirmBooksList").append('<li class="list-group-item" id="' + book_id + '" data-title="' + title + '" data-author="' + author + '" data-isbn="' + isbn + '" data-img_url="' + img_url + '">' + '<div class="row"> <div class="col-md-3">' + '<img src="' + img_url + '"> ' + '</div>' + '<div class="col-md-9">' + '<p>' + title + '</p> <p>' + author + '</p>' + '</div> </div>' + '</li>');
+					$("#confirmTradeBooksList").append('<li class="list-group-item" id="' + book_id + '" data-title="' + title + '" data-author="' + author + '" data-isbn="' + isbn + '" data-img_url="' + img_url + '">' + '<div class="row"> <div class="col-md-3">' + '<img src="' + img_url + '"> ' + '</div>' + '<div class="col-md-9">' + '<p>' + title + '</p> <p>' + author + '</p>' + '</div> </div>' + '</li>');
 				});
 			}
 

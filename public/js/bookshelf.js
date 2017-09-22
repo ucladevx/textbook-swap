@@ -302,6 +302,10 @@ $(document).ready(function(){
 
 	$(".deleteButton").click(function(){
 		// will get value from confirm edit trades book list item
+		var debug_book = $("#confirmEditTradeBooksList > li:first");
+		console.log("book elem", debug_book);
+
+
 		var owned_book_id = $("#confirmEditTradeBooksList > li:first").attr("data-owned_book_id");
 		console.log("delete button with owned book id", owned_book_id);
 

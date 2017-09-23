@@ -182,11 +182,15 @@ $(document).ready(function(){
 		});
 
 		//get trade for reject/accept buttons
-		$.ajax({url: "/api/found_trades/get_trade_by_wanted_book",
-			data: { wanted_book: wantedCard[3].nodeValue },
+		$.ajax({url: "/api/found_trades/get_trade_by_book_owned",
+			data: { owned_book: ownedCard[3].nodeValue },
 			success: function(response){
 				if(response.status === 0){
 					var trade = response.data[0];
+
+					console.log("accept button trade", trade);
+					console.log("owned card", ownedCard);
+					console.log("wanted card", wantedCard);
 
 					//confirm reject trade button
 					$(".confirm").click(function(e){

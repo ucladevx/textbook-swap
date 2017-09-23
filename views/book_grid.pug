@@ -24,7 +24,7 @@ else if books[i]["status"] == "R"
                     img.book-img(src=books[i]['book_have'].img_url, alt='Card image cap')
                 p.title #{books[i]['book_have'].title}
             .col-md-2
-                p.arrow.align-middle &harr;
+                p.arrow.align-middle &nharr;
             .col-md-5
                 .wanted(data-title=books[i]['book_want'].title, data-author=books[i]['book_want'].author, data-id=books[i]['book_want'].book_id, data-isbn=books[i]['book_want'].isbn, data-img=books[i]['book_want'].img_url)
                     img.book-img(src=books[i]['book_want'].img_url, alt='Card image cap')

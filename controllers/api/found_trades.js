@@ -11,6 +11,9 @@ const found_trades = require('../../models/found_trades');
  * Update a trade to accepted & check if all trades with same trade_id are accepted
  * Replies with a json object containing the status of the database operation and a boolean telling whether entire trade has been accepted.
  */
+
+// TODO: modify yes
+
 exports.update_status_accepted = function(req, res) {
     var user_id = req.user.id;
     var trade_id = req.body.trade_id;
@@ -83,6 +86,26 @@ exports.get_trade_by_wanted_book = function(req, res) {
     found_trades.get_trade_by_wanted_book(user_id, wanted_book, function(status, data){
         if (status == error_codes.found_trades_errors.DB_SUCCESS)
             console.log("Successfully got trade!");
+        else{
+            console.log("DB error")
+        }
+
+        res.json({status: status, data: data})
+    });
+};
+
+/*
+ * GET http://localhost:3000/api/found_trades/get_trade_by_book_owned
+ * Get a trade by the user_id and book_owned
+ * Replies with a json object containing the status of the database operation and the row for the trade
+ */
+exports.get_trade_by_book_owned = function(req, res) {
+    var user_id = req.user.id;
+    var owned_book = req.query.owned_book;
+
+    found_trades.get_trade_by_book_owned(user_id, owned_book, function(status, data){
+        if (status == error_codes.found_trades_errors.DB_SUCCESS)
+            console.log("Successfully got trade by owned book!");
         else{
             console.log("DB error")
         }

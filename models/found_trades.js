@@ -5,6 +5,7 @@
 'use strict';
 const pg = require('pg');
 const error_codes = require('../error_codes');
+const found_trades = require('./found_trades');
 
 /*
  *  Purpose: Add a loop graph edge into the database
@@ -84,7 +85,7 @@ exports.get_trade_by_wanted_book = function(user_id, wanted_book, next){
             console.error("Error connection to client while querying found_trades table: ", err);
             return next(error_codes.found_trades_errors.DB_CONNECTION_ERROR, []);
         }
-        client.query("SELECT * FROM found_trades WHERE trade_id IN (SELECT trade_id FROM found_trades WHERE user_id=$1::VARCHAR AND book_want=$2::INTEGER)",
+        client.query("SELECT * FROM found_trades WHERE user_id=$1::VARCHAR AND book_want=$2::INTEGER",
             [user_id, wanted_book], function(err, result){
                 if(err){
                     console.error("Error querying database", err);
@@ -108,7 +109,7 @@ exports.get_trade_by_book_owned = function(user_id, owned_book, next){
             console.error("Error connection to client while querying found_trades table: ", err);
             return next(error_codes.found_trades_errors.DB_CONNECTION_ERROR, []);
         }
-        client.query("SELECT * FROM found_trades WHERE trade_id IN (SELECT trade_id FROM found_trades WHERE user_id=$1::VARCHAR AND book_have=$2::INTEGER)",
+        client.query("SELECT * FROM found_trades WHERE user_id=$1::VARCHAR AND book_have=$2::INTEGER",
             [user_id, owned_book], function(err, result){
                 if(err){
                     console.error("Error querying database", err);
@@ -220,10 +221,15 @@ exports.get_number_of_loops = function(next){
 
 
 /*
- * Purpose: Update the status of a found trade to accepted
+ * Purpose: Update the status of a found trade to accepted or waiting (depending on if others have accepted)
+ * 'A' = everyone in the loop has accepted
+ * 'W' = you have accepted the trade, but others in the loop have not responded yet
  * Inputs: next:trade_id and its corresponding graph edge
  * Output: Returns the callback function that has an error code (or success) passed back as a parameter
 */
+
+// TODO: update to accepted or waiting
+
 exports.update_status_accepted = function(trade_id, user_id, owned_book, target_user, wanted_book, next){
     pg.connect(process.env.DATABASE_URL, function(err, client, done){
         done();
@@ -232,13 +238,55 @@ exports.update_status_accepted = function(trade_id, user_id, owned_book, target_
             console.error("Error connection to client while querying found_trades table: ", err);
             return next(error_codes.found_trades_errors.DB_CONNECTION_ERROR, []);
         }
-        client.query("UPDATE found_trades SET status=$1::VARCHAR WHERE trade_id=$2::INTEGER AND user_id=$3::VARCHAR AND book_have=$4::INTEGER AND target_id=$5::VARCHAR AND book_want=$6::INTEGER",
-            ['A', trade_id, user_id, owned_book, target_user, wanted_book], function(err, result){
-            if(err){
-                console.error("Error querying database", err);
-                return next(error_codes.found_trades_errors.DB_QUERY_ERROR, []);
+
+        var matched = true;
+        // TODO: check if this works
+        // check if everyone else has accepted the trade or not
+        found_trades.get_trade_by_id(trade_id, function(status, data){
+            for (var i = 0; i < data.length; i++) {
+                // someone else has not accepted the trade yet
+                console.log("trades", data);
+
+                if(
+                    (data[i]["status"] != 'W' && data[i]["status"] != 'A') &&
+                    data[i]["user_id"] != user_id
+                ){
+                    matched = false;
+                }
             }
-            return next(error_codes.found_trades_errors.DB_SUCCESS);
+
+            // everyone has accepted the trade, so set all trades to 'A'
+            if (matched) {
+                client.query("UPDATE found_trades SET status=$1::VARCHAR WHERE trade_id=$2::INTEGER",
+                    ['A', trade_id], function(err, result){
+                    if(err){
+                        console.error("Error querying database for all accepted trades", err);
+                        return next(error_codes.found_trades_errors.DB_QUERY_ERROR, []);
+                    }
+
+                    console.log("set all edges to A");
+
+                    return next(error_codes.found_trades_errors.DB_SUCCESS);
+                });
+            } 
+            // not everyone has accepted the trade yet, so set the current trade edge(s) to 'W'
+            // need to set all edges for a owned_book => wanted book
+            else {
+
+                console.log(trade_id, user_id, owned_book, target_user, wanted_book);
+
+                client.query("UPDATE found_trades SET status=$1::VARCHAR WHERE trade_id=$2::INTEGER AND user_id=$3::VARCHAR AND book_have=$4::INTEGER",
+                    ['W', trade_id, user_id, owned_book], function(err, result){
+                    if(err){
+                        console.error("Error querying database for waiting trades", err);
+                        return next(error_codes.found_trades_errors.DB_QUERY_ERROR, []);
+                    }
+
+                    console.log("set edge to W");
+
+                    return next(error_codes.found_trades_errors.DB_SUCCESS);
+                });
+            }
         });
     });
 };
@@ -312,6 +360,8 @@ exports.get_matched_trades = function (user_id, next){
             });
     });
 };
+
+// TODO: change this
 
 exports.get_trades_status = function (trade_id, next) {
     pg.connect(process.env.DATABASE_URL, function(err, client, done){

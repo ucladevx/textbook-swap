@@ -129,6 +129,7 @@ app.get('/api/book_info/get_pair_book_info', bookInfoController.get_pair_book_in
 app.post('/api/found_trades/update_status_accepted', foundTradesController.update_status_accepted);
 app.post('/api/found_trades/update_status_rejected', foundTradesController.update_status_rejected);
 app.get('/api/found_trades/get_trade_by_wanted_book', foundTradesController.get_trade_by_wanted_book);
+app.get('/api/found_trades/get_trade_by_book_owned', foundTradesController.get_trade_by_book_owned);
 app.post('/api/found_trades/dismiss_rejected_trade', foundTradesController.dismiss_rejected_trade);
 
 // Algorithm (FOR DEVELOPMENT ONLY)

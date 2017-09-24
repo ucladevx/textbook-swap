@@ -36,6 +36,7 @@
     "express": "^4.15.2",
     "express-session": "^1.11.3",
     "morgan": "^1.6.1",
+    "nodemailer": "^4.1.0",
     "nodemon": "^1.11.0",
     "passport": "^0.2.2",
     "passport-facebook": "^2.0.0",

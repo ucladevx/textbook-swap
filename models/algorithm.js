@@ -8,6 +8,8 @@ const wish_list = require('./wish_list');
 const possible_trades = require('./possible_trades');
 const found_trades = require('./found_trades');
 const found_trades_id = require('./found_trades_id');
+const users = require('./users');
+const books = require('./book_info');
 
 var edges = {}; // adjacency list of all nodes
 var matched = {}; // already matched nodes
@@ -137,9 +139,71 @@ function process(visited){
             else
                 console.log("Error updating statuses: " + status);
         });
+        var name, email, wanted_book_name, wanted_book_author, have_book_name, have_book_author, target_name;
+        get_email_data(visited[i][0], visited[i][1], visited[i + 1][0], visited[i + 1][1], function(err, email_data){
+            if(err) console.log(err);
+            console.log(email_data);
+            send_email(email_data);
+        });
     }
 
     tradeID++;
+}
+
+//gets all relevant data from database queries
+//TODO: fix callback hell!!!
+function get_email_data(user_id, owned_book, target_user, wanted_book, next) {
+    var data = {};
+    users.get_user_name(user_id, function(err, user_name) {
+        if (err) next(err);
+        else data.user_name = user_name[0].user_name;
+        users.get_user_email(user_id, function(err, user_email) {
+            if (err) next(err);
+            else data.user_email = user_email[0].user_email;
+            users.get_user_name(target_user, function(err, user_name) {
+                if (err) next(err);
+                else data.target_name = user_name[0].user_name;
+                books.get_book_info(owned_book, function(err, book_info) {
+                    if (err) next(err);
+                    else{
+                        data.have_book_name = book_info[0].title;
+                        data.have_book_author = book_info[0].author;
+                    } 
+                    books.get_book_info(wanted_book, function(err, book_info) {
+                        if (err) next(err);
+                        else{
+                            data.wanted_book_name = book_info[0].title;
+                            data.wanted_book_author = book_info[0].author;
+                            next(null, data);
+                        } 
+                    });
+                });
+            });
+        });
+    });
+}
+
+function send_email(email_data){
+    const nodemailer = require('nodemailer');
+    const transport = nodemailer.createTransport({
+        service: 'Gmail',
+        auth: {
+            user: 'LoopDevX@gmail.com',
+            pass: 'loopDevX2017!',
+        },
+    });
+    const mailOptions = {
+        from: 'LoopDevX@gmail.com',
+        to: email_data.user_email,
+        subject: 'Loop: You Got A Book Match!',
+        html: 'hello world!',
+    };
+    transport.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            console.log(error);
+        }
+        console.log(`Message sent: ${info.response}`);
+    });
 }
 
 

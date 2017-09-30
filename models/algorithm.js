@@ -10,7 +10,17 @@ const found_trades = require('./found_trades');
 const found_trades_id = require('./found_trades_id');
 const users = require('./users');
 const books = require('./book_info');
-
+const fs = require('fs');
+const matched_email_html = fs.readFileSync(__dirname + '/../public/assets/matched_email_notification.html', 'UTF-8');
+const nodemailer = require('nodemailer');
+const transport = nodemailer.createTransport({
+    service: 'Gmail',
+    auth: {
+        user: 'LoopDevX@gmail.com',
+        pass: 'loopDevX2017!',
+    },
+});
+const handlebars = require('handlebars');
 var edges = {}; // adjacency list of all nodes
 var matched = {}; // already matched nodes
 var tradeID = 0; // current trade ID
@@ -183,20 +193,24 @@ function get_email_data(user_id, owned_book, target_user, wanted_book, next) {
     });
 }
 
+//Function to send formatted custom email in html format
+//TODO: Fix images in html??
 function send_email(email_data){
-    const nodemailer = require('nodemailer');
-    const transport = nodemailer.createTransport({
-        service: 'Gmail',
-        auth: {
-            user: 'LoopDevX@gmail.com',
-            pass: 'loopDevX2017!',
-        },
-    });
+    var replacements = {
+        owner_user_name: email_data.user_name,
+        target_user_name: email_data.target_name,
+        target_book_name: email_data.wanted_book_name,
+        target_book_author: email_data.wanted_book_author,
+        owned_book_name: email_data.have_book_name,
+        owned_book_author: email_data.have_book_author
+    }
+    var template = handlebars.compile(matched_email_html);
+    var custom_html = template(replacements);
     const mailOptions = {
         from: 'LoopDevX@gmail.com',
         to: email_data.user_email,
         subject: 'Loop: You Got A Book Match!',
-        html: 'hello world!',
+        html: custom_html,
     };
     transport.sendMail(mailOptions, (error, info) => {
         if (error) {

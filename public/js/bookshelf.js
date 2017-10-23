@@ -45,6 +45,10 @@ $(document).ready(function(){
         $(".carousel-inner #first-popup").addClass('active');
 	});
 
+	/*
+	 * Code needed to generate matched trade popups
+	 */
+
 	$(".Matched:not(.Requested)").on('click', function(e){
 		var ownedCard = $(this).find(".owned")[0].attributes;
 		var wantedCard = $(this).find(".wanted")[0].attributes;
@@ -188,10 +192,6 @@ $(document).ready(function(){
 				if(response.status === 0){
 					var trade = response.data[0];
 
-					console.log("accept button trade", trade);
-					console.log("owned card", ownedCard);
-					console.log("wanted card", wantedCard);
-
 					//confirm reject trade button
 					$(".confirm").click(function(e){
 						$.post("/api/found_trades/update_status_rejected",
@@ -232,6 +232,10 @@ $(document).ready(function(){
 
 		e.preventDefault();
 	});
+
+	/*
+	 * Code needed for editing an existing trade
+	 */
 
 	$(".Requested:not(.Matched)").on('click', function(e){
 		var ownedCard = $(this).find(".owned")[0].attributes;

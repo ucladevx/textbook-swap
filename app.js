@@ -22,7 +22,7 @@ const millisecsInADay = 1000 * secsInADay;
 /*
  * Load environment variables from .env file, where API keys and passwords are configured.
  */
-dotenv.config();
+// dotenv.config();
 
 /*
  * Controllers (route handlers).
@@ -166,6 +166,33 @@ app.get('/logout/facebook', passportController.logout);
 
 // Implement "profile" view
 app.get('/profile', require('connect-ensure-login').ensureLoggedIn(), passportController.profile);
+//
+// var nodemailer = require('nodemailer');
+//
+// var transporter = nodemailer.createTransport({
+// 	service: "Gmail",
+//     auth: {
+//         user: "LoopDevX@gmail.com",
+//         pass: "loopDevX2017!"
+//     }
+// });
+//
+// app.get('/send', function(req, res){
+//     // setup e-mail data with unicode symbols
+//     var mailOptions = {
+//         from: 'LoopDevX@gmail.com', // sender address
+//         to: 'jerrylinew@gmail.com', // list of receivers
+//         subject: "hello", // Subject line
+//         text: "Hello World" // plaintext body
+//         // html: '<b>Hello world 🐴</b>' // html body
+//     };
+//     transporter.sendMail(mailOptions, function(error, info){
+//         if(error){
+//             return res.send(error);
+//         }
+//         return res.send("mail send successfully");
+//     });
+// });
 
 // Run the algorithm once every day
 var algorithmInterval = setInterval(function(){

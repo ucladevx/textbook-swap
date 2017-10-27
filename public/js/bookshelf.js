@@ -348,7 +348,6 @@ $(document).ready(function(){
 		// will initialize this inside of confirm edit trade books list
 		var owned_book_id = 0;
 
-		// TODO: some funky back end stuff
 		// first want to remove the old wanted books from the list (which will also remove the trade edges)
 		$('#confirmEditTradeBooksList li').each(function() {
 			var book_to_remove = $(this);

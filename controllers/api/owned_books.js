@@ -81,13 +81,13 @@ exports.remove_book = function(req, res) {
  */
 exports.get_owned_cards = function(req, res) {
     var user_id = req.user.id;
-
-    owned_books.get_owned_books_info(user_id, function(status, books_data){
+    owned_books.get_owned_books_info(user_id, function(status, data){
         if (status == error_codes.owned_books_errors.DB_SUCCESS)
             console.log("Successfully found books from the database!");
 
         // return the info for all the books
-        res.json({status: status, data: books_data});
+        res.json({status: error_status, data: books_data});
+
     });
 };
 

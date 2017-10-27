@@ -87,7 +87,6 @@ exports.get_owned_cards = function(req, res) {
 
         // return the info for all the books
         res.json({status: error_status, data: books_data});
-
     });
 };
 

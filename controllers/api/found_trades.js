@@ -21,22 +21,13 @@ exports.update_status_accepted = function(req, res) {
     var target_user = req.body.target_user;
     var wanted_book = req.body.wanted_book;
 
-    found_trades.update_status_accepted(trade_id, user_id, owned_book, target_user, wanted_book, function(status){
+    found_trades.update_status_accepted(trade_id, user_id, owned_book, target_user, wanted_book, function(status, matched){
         if (status == error_codes.found_trades_errors.DB_SUCCESS)
             console.log("Successfully updated trade status to accepted!");
         else{
             console.log("DB error")
         }
-
-        found_trades.get_statuses_by_id(trade_id, function(status, data){
-            var matched = true;
-            for (var i = 0; i < data.length; i++) {
-                if(data[i]["status"] != 'A'){
-                    matched = false;
-                }
-            }
-            res.json({status: status, matched: matched});
-        });
+        res.json({status: status, matched: matched});
     });
 };
 
@@ -48,29 +39,14 @@ exports.update_status_accepted = function(req, res) {
 exports.update_status_rejected = function(req, res) {
     var user_id = req.user.id;
     var trade_id = req.body.trade_id;
-    var owned_book = req.body.owned_book;
-    var target_user = req.body.target_user;
-    var wanted_book = req.body.wanted_book;
 
-    found_trades.update_status_rejected(trade_id, user_id, owned_book, target_user, wanted_book, function(status){
+    found_trades.update_status_rejected_by_id(trade_id, function(status){
         if (status == error_codes.found_trades_errors.DB_SUCCESS)
             console.log("Successfully updated trade status to rejected!");
         else{
             console.log("DB error")
         }
-
-        found_trades.get_trade_by_id(trade_id, function(status, data){
-            for (var i = 0; i < data.length; i++) {
-                found_trades.update_status_rejected(data[i]["trade_id"], data[i]["user_id"], data[i]["book_have"], data[i]["target_id"], data[i]["book_want"], function(status){
-                    if (status == error_codes.found_trades_errors.DB_SUCCESS)
-                        console.log("Successfully updated trade status to rejected!");
-                    else{
-                        console.log("DB error")
-                    }
-                });
-            }
-            res.json({status: status});
-        });
+        res.json({status: status});
     });
 };
 

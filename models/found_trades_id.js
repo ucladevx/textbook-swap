@@ -84,7 +84,6 @@ exports.insert_id = function(loop_id, next){
                     });
                 }
                 else{
-                    console.error("ERROR: There is already a trade_id in the database");
                     return next(error_codes.found_trades_id_errors.ID_ALREADY_EXISTS);
                 }
             });

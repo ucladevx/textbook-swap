@@ -29,21 +29,11 @@ exports.add_book = function(req, res) {
     });
 
     // find all (A,B,C) in possible_trades where C=book_id and add (A,B,user_id,C) to the graph_edges table
-    possible_trades.get_rows_by_want(book_id, function(status, rows) {
-        if (status == error_codes.possible_trades_errors.DB_SUCCESS)
-            console.log("Successfully found possible trades by wanted book in the database!");
-
-        // go through each of the returned rows and add (A, B, user_id, C) to graph_edges 
-        for (var i = 0; i < rows.length; i++) {
-            graph_edges.add_edge(rows[i]["user_id"], rows[i]["book_have"], user_id, book_id, function(status) {
-                if (status == error_codes.graph_edges_errors.DB_SUCCESS)
-                    console.log("Edge added successfully to the database!");
-                else if (status == error_codes.graph_edges_errors.GRAPH_EDGE_ALREADY_EXISTS)
-                    console.log("Edge already exists in the database!");
-                else
-                    console.log("Error trying to add edge to database!");
-            });
-        }
+    graph_edges.add_owned_book_edges(user_id, book_id, function(status, rows) {
+        if (status == error_codes.graph_edges_errors.DB_SUCCESS)
+            console.log("Successfully inserted graph edges for owned book in the database!");
+        else if (status == error_codes.possible_trades_errors.DB_QUERY_ERROR) 
+            console.log("Error inserting graph edges for owned book in database!");
     });
 };
 

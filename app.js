@@ -54,10 +54,9 @@ const passportConfig = require('./config/passport')(passport, FacebookStrategy);
  */
 
 const initDB = require('./models/init');
-initDB.create_tables(function(){
-    const tradeIDInit = require('./models/found_trades_id').insert_id(0, function(){
-        console.log("initialized");
-    });
+initDB.create_tables(function(err){
+    if(!err)
+        console.info("Database is ready.");
 });
 
 /*

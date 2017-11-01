@@ -5,6 +5,7 @@
 'use strict';
 const pg = require('pg');
 const async = require('async');
+const found_trades_id = require('./found_trades_id');
 
 /*
  * Initializes the database by creating all the tables if they do not already exist.
@@ -44,8 +45,10 @@ exports.create_tables = function(next){
                 callback(err, result);
             });
         }, function(err, results){
-            done();
-            return next();
+            found_trades_id.insert_id(0, function(){
+                done();
+                return next(err);
+            });
         });
     });
 };

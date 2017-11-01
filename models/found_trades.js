@@ -266,7 +266,7 @@ exports.update_status_accepted = function(trade_id, user_id, owned_book, target_
 
                     console.log("set all edges to A");
 
-                    return next(error_codes.found_trades_errors.DB_SUCCESS);
+                    return next(error_codes.found_trades_errors.DB_SUCCESS, matched);
                 });
             } 
             // not everyone has accepted the trade yet, so set the current trade edge(s) to 'W'
@@ -284,7 +284,7 @@ exports.update_status_accepted = function(trade_id, user_id, owned_book, target_
 
                     console.log("set edge to W");
 
-                    return next(error_codes.found_trades_errors.DB_SUCCESS);
+                    return next(error_codes.found_trades_errors.DB_SUCCESS, matched);
                 });
             }
         });
@@ -306,6 +306,30 @@ exports.update_status_rejected = function(trade_id, user_id, owned_book, target_
         }
         client.query("UPDATE found_trades SET status=$1::VARCHAR WHERE trade_id=$2::INTEGER AND user_id=$3::VARCHAR AND book_have=$4::INTEGER AND target_id=$5::VARCHAR AND book_want=$6::INTEGER",
             ['R', trade_id, user_id, owned_book, target_user, wanted_book], function(err, result){
+            if(err){
+                console.error("Error querying database", err);
+                return next(error_codes.found_trades_errors.DB_QUERY_ERROR, []);
+            }
+            return next(error_codes.found_trades_errors.DB_SUCCESS);
+        });
+    });
+};
+
+/*
+ * Purpose: Update the status of all trades with trade_id to rejected
+ * Inputs: trade_id and a callback function
+ * Output: Returns the callback function that has an error code (or success) passed back as a parameter
+ */
+exports.update_status_rejected_by_id = function(trade_id, next){
+    pg.connect(process.env.DATABASE_URL, function(err, client, done){
+        done();
+
+        if (err){
+            console.error("Error connection to client while querying found_trades table: ", err);
+            return next(error_codes.found_trades_errors.DB_CONNECTION_ERROR, []);
+        }
+        client.query("UPDATE found_trades SET status=$1::VARCHAR WHERE trade_id=$2::INTEGER",
+            ['R', trade_id], function(err, result){
             if(err){
                 console.error("Error querying database", err);
                 return next(error_codes.found_trades_errors.DB_QUERY_ERROR, []);

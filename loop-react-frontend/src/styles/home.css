@@ -11,6 +11,59 @@ body{
 	min-height: 40vh;
 }
 
+.detailSection{
+    background-color: #ECECEC;
+}
+
+.hero{
+/*    background-color: black;*/
+    width: 100vw;
+    height: 100vh;
+    background-size: cover; 
+    background-repeat: no-repeat;
+    background-position: center center; 
+/*    transform: scale(1.1);*/
+}
+
+.loopImg{
+    width: 50vh;
+    object-fit: contain;
+}
+
+.detailContainer{
+    padding-top: 5%;
+    padding-bottom: 5%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: 110%;
+    color: #353535;;
+}
+
+.heroText{
+    padding-top: 75vh;
+}
+
+.col1{
+    flex: 2; 
+}
+
+.col2{
+    flex: 1;
+    width: 80%;
+    margin: 2%;
+/*    background-color: white;*/
+}
+
+.col3{
+    flex: 1; 
+    width: 80%;
+    margin: 2%;
+/*    background-color: white;*/
+    padding-right: 10%;
+}
+
+
 #first{
 	height: 100vh;
 	padding-bottom: 10vh;
@@ -40,11 +93,13 @@ body{
 	/*background-color: #FECF67;
 	border:0px;*/
 	color: white;
+    padding: 8px 14px;
 	/*box-shadow: 5px 5px 10px #CCCCCC;*/
 	text-align: center;
 	line-height: 4vh;
-	margin-top: 3vh;
-	font-size:125%;
+/*	margin-top: 3vh;*/
+	font-size:135%;
+    text-decoration: none;
 }
 
 .btn:active:focus {

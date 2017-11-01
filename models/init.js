@@ -5,6 +5,7 @@
 'use strict';
 const pg = require('pg');
 const async = require('async');
+const found_trades_id = require('./found_trades_id');
 
 /*
  * Initializes the database by creating all the tables if they do not already exist.
@@ -14,10 +15,10 @@ exports.create_tables = function(next){
         if (err) {
             return console.error('error fetching client from pool', err)
         }
-        const book_to_class_data = "'" + __dirname + "/data/book_to_class_clean.csv'";
+        const book_to_class_data = (process.env.DATA_PATH || "'" + __dirname + "/data/") + "book_to_class_clean.csv'";
         const book_to_class_query = 
           'CREATE TEMP TABLE tmp_table AS SELECT * FROM book_to_class WITH NO DATA; COPY tmp_table FROM ' + book_to_class_data + ' DELIMITER \',\' CSV; INSERT INTO book_to_class SELECT DISTINCT ON (book_id, professor_name, class_name) * FROM tmp_table ON CONFLICT DO NOTHING; DROP TABLE tmp_table; UPDATE book_to_class SET tsv = to_tsvector(\'english\', professor_name) || to_tsvector(\'english\', class_name);';
-        const book_info_data = "'" + __dirname + "/data/book_info_clean.csv'";
+        const book_info_data = (process.env.DATA_PATH || "'" + __dirname + "/data/") + "book_info_clean.csv'";
         const book_info_query = 
           'CREATE TEMP TABLE tmp_table_two AS SELECT * FROM book_info WITH NO DATA; COPY tmp_table_two FROM ' + book_info_data + ' DELIMITER \',\' CSV; INSERT INTO book_info SELECT DISTINCT ON (book_id) * FROM tmp_table_two ON CONFLICT DO NOTHING; DROP TABLE tmp_table_two; UPDATE book_info SET tsv = to_tsvector(\'english\', title) || to_tsvector(\'english\', author) || to_tsvector(\'english\', isbn);';
         
@@ -44,8 +45,10 @@ exports.create_tables = function(next){
                 callback(err, result);
             });
         }, function(err, results){
-            done();
-            return next();
+            found_trades_id.insert_id(0, function(){
+                done();
+                return next(err);
+            });
         });
     });
 };

@@ -54,10 +54,9 @@ const passportConfig = require('./config/passport')(passport, FacebookStrategy);
  */
 
 const initDB = require('./models/init');
-initDB.create_tables(function(){
-    const tradeIDInit = require('./models/found_trades_id').insert_id(0, function(){
-        console.log("initialized");
-    });
+initDB.create_tables(function(err){
+    if(!err)
+        console.info("Database is ready.");
 });
 
 /*
@@ -166,6 +165,33 @@ app.get('/logout/facebook', passportController.logout);
 
 // Implement "profile" view
 app.get('/profile', require('connect-ensure-login').ensureLoggedIn(), passportController.profile);
+//
+// var nodemailer = require('nodemailer');
+//
+// var transporter = nodemailer.createTransport({
+// 	service: "Gmail",
+//     auth: {
+//         user: "LoopDevX@gmail.com",
+//         pass: "loopDevX2017!"
+//     }
+// });
+//
+// app.get('/send', function(req, res){
+//     // setup e-mail data with unicode symbols
+//     var mailOptions = {
+//         from: 'LoopDevX@gmail.com', // sender address
+//         to: 'jerrylinew@gmail.com', // list of receivers
+//         subject: "hello", // Subject line
+//         text: "Hello World" // plaintext body
+//         // html: '<b>Hello world 🐴</b>' // html body
+//     };
+//     transporter.sendMail(mailOptions, function(error, info){
+//         if(error){
+//             return res.send(error);
+//         }
+//         return res.send("mail send successfully");
+//     });
+// });
 
 // Run the algorithm once every day
 var algorithmInterval = setInterval(function(){

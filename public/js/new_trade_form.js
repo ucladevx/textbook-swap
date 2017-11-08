@@ -298,7 +298,7 @@ $(document).ready(function(){
 		$.post("/api/owned_books/add", { user_id: "user", book_id: owned_book_id },
 			function(data){
 				if(data.status === 0){
-					console.log('successfully added wanted book to owned_books');
+					console.log('successfully added owned book to owned_books');
 				}
 				else if(data.status === 1)
 					console.log('db connection error for owned_books');

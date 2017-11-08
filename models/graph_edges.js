@@ -74,6 +74,32 @@ exports.add_owned_book_edges = function(user, book, next){
 };
 
 /*
+Purpose: This function is used to add the graph edges needed for this trade relation
+         Find all (A,B) in the owned_book table where B=wanted_book_id and insert 
+         (user_id, owned_book_id, A, wanted_book_id) into the graph
+Inputs: User_id, owned_book_id, wanted_book_id to be added, and callback function
+Output: Returns the callback function with a success or error code passed as a parameter
+ */
+exports.add_trade_relation_edges = function(user, owned_book, wanted_book, next){
+    pg.connect(process.env.DATABASE_URL, function(err, client, done){
+        done();
+        if (err){
+            console.error("Error connection to client while querying graph_edges table: ", err);
+            return next(error_codes.graph_edges_errors.DB_CONNECTION_ERROR);
+        }
+
+        // insert owned_book edges
+        client.query("INSERT INTO graph_edges (user_id, book_have, target_id, book_want) SELECT $1::VARCHAR, $2::INTEGER, user_id, $3::INTEGER FROM owned_books WHERE book_id=$3::INTEGER", [user, owned_book, wanted_book], function(err, result){
+            if (err){
+                console.error("Error inserting into graph_edges table", err);
+                return next(error_codes.graph_edges_errors.DB_QUERY_ERROR);
+            }
+            return next(error_codes.graph_edges_errors.DB_SUCCESS);
+        });
+    });
+};
+
+/*
  * Purpose: Remove a graph edge into the database
  * Inputs: User: user that owns a book, owned_book: book id of owned book, target_user: the user that owns a book the
  * User wants, wanted_book: book id of the wanted book, next: a callback function

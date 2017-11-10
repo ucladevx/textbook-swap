@@ -330,6 +330,9 @@ $(document).ready(function(){
 					else if(data.status === 3){
 						console.log('owned book already removed');
 					}
+					else {
+						console.log('owned book error status', data.status);
+					}
 				},
 				"json"
 			);

@@ -3,7 +3,7 @@
  */
 
 const request = require('request');
-const ec = require('../../error_codes');
+const ec = require('../../utilities');
 const db = require('../../models/wish_list');
 const bt = require('../../models/books');
 const pt = require('../../models/possible_trades');

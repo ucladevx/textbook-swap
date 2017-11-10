@@ -75,3 +75,9 @@ exports.found_trades_id_errors = Object.freeze({
     ID_DNE : 4,
     MULTIPLE_ID_EXISTS : 5
 });
+
+if(process.env.NODE_ENV == "test"){
+    exports.database_url = process.env.DATABASE_URL_TEST;
+} else {
+    exports.database_url = process.env.DATABASE_URL;
+}

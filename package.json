@@ -4,8 +4,8 @@
   "description": "An innovative way for college students to trade textbooks and save money though algorithmically discovered trade circles.",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
-    "test": "mocha"
+    "start": "NODE_ENV=dev node app.js",
+    "test": "NODE_ENV=test mocha"
   },
   "repository": {
     "type": "git",

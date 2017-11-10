@@ -3,7 +3,7 @@
  */
 
 const request = require('request');
-const ec = require('../../error_codes');
+const ec = require('../../utilities');
 const db = require('../../models/possible_trades');
 const ob = require('../../models/owned_books');
 const ge = require('../../models/graph_edges');
@@ -86,7 +86,7 @@ exports.remove_relation = function(req, res) {
 //     var owned_book_id = req.body.owned_book_id;
 //
 //     owned_books.remove_relation_have(user_id, owned_book_id, function(status){
-//         if (status == error_codes.possible_trades_errors.DB_SUCCESS)
+//         if (status == utilities.possible_trades_errors.DB_SUCCESS)
 //             console.log("Successfully removed relation-have from the database!");
 //
 //         res.json({status: status});
@@ -103,7 +103,7 @@ exports.remove_relation = function(req, res) {
 //     var wanted_book_id = req.body.wanted_book_id;
 //
 //     owned_books.remove_relation_want(user_id, wanted_book_id, function(status){
-//         if (status == error_codes.possible_trades_errors.DB_SUCCESS)
+//         if (status == utilities.possible_trades_errors.DB_SUCCESS)
 //             console.log("Successfully removed relation-want from the database!");
 //
 //         res.json({status: status});

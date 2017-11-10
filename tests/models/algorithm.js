@@ -2,7 +2,7 @@
  * Basic testing of the algorithm.
  */
 
-const ec = require('../../error_codes');
+const ec = require('../../utilities');
 const ob = require('../../models/owned_books');
 const wl = require('../../models/wish_list');
 const pt = require('../../models/possible_trades');

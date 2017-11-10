@@ -2,7 +2,7 @@
  * FOR DEVELOPMENT ONLY: API for running the algorithm.
  */
 
-const error_codes = require('../../error_codes');
+const utilities = require('../../utilities');
 const algorithm = require('../../models/algorithm');
 
 /*

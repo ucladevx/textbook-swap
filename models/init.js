@@ -6,12 +6,13 @@
 const pg = require('pg');
 const async = require('async');
 const found_trades_id = require('./found_trades_id');
+const utilities = require('../utilities');
 
 /*
  * Initializes the database by creating all the tables if they do not already exist.
  */
 exports.create_tables = function(next){
-    pg.connect(process.env.DATABASE_URL, function (err, client, done) {
+    pg.connect(utilities.database_url, function (err, client, done) {
         if (err) {
             return console.error('error fetching client from pool', err)
         }

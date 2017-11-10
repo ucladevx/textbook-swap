@@ -363,7 +363,7 @@ $(document).ready(function(){
 			console.log("remove book id", book_to_remove_id);
 
 			// remove wanted books from wish list
-			$.post("/api/wish_list/remove", { user_id: "user", book_id: book_to_remove_id },
+			$.post("api/possible_trades/remove", { user_id: "user", owned_book_id: owned_book_id, wanted_book_id: book_to_remove_id },
 				function(data){
 					if(data.status === 0){
 						console.log('successfully removed wanted book from wish_list');

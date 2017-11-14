@@ -1,12 +1,16 @@
 import React from 'react';
-import '../styles/home.css'
+import ReactSVG from 'react-svg';
+import Responsive from 'react-responsive';
+
 import Book1 from '../img/book1.svg'
 import Book2 from '../img/book2.svg'
 import Hero from '../new_images/hero_min.png'
 import HeroMobile from '../new_images/hero_mobile.png'
 import Animation from '../new_images/loop-animation.gif'
-import ReactSVG from 'react-svg';
-import Responsive from 'react-responsive';
+import Footer from './footer'
+
+import '../styles/home.css'
+
 
 const Desktop = ({ children }) => <Responsive minWidth={992} children={children} />;
 const Tablet = ({ children }) => <Responsive minWidth={768} maxWidth={992} children={children} />;
@@ -14,79 +18,97 @@ const Mobile = ({ children }) => <Responsive maxWidth={768} children={children} 
 const Default = ({ children }) => <Responsive minWidth={768} children={children} />;
 
 const Landing = () => {
-  var heroStyles = {
-      desktop: {
+
+  var mobileStyles = {
+      hero: {
+          backgroundImage: `url(${HeroMobile})`
+      },
+      heroText: {
+          paddingTop: '70vh'
+      },
+      section: {
+          flexDirection: 'column'
+      }
+  }
+  
+  var desktopStyles = {
+      hero: {
           backgroundImage: `url(${Hero})`
       },
-      mobile: {
-          backgroundImage: `url(${HeroMobile})`
-      }
-  }
-  
-  var heroTextStyles = {
-      desktop: {
-        paddingTop: '75vh'
+      heroText: {
+          paddingTop: '75vh'
       },
-      mobile: {
-        paddingTop: '70vh'
+      sectionStyle: {
+          flexDirection: 'row'
       }
   }
-  
   return (
     <div>
         <Desktop>
-            <div className="hero" style={heroStyles.desktop}>
-              <div className="heroText" style={heroTextStyles.mobile}>
+            <div className="hero" style={desktopStyles.hero}>
+              <div className="heroText" style={desktopStyles.heroText}>
                     <a className="btn btn-default" href="/login/facebook" role="button">LOGIN WITH FACEBOOK</a>
               </div>
             </div>
+            <section className="detailSection detailContainer">
+                <div className="detailImage">
+                    <img src={Animation} className="loopImage"></img>
+                </div>
+                <div className="detailText">
+                    <h2 className="detailTitle">What is Loop?</h2>
+                    Loop is an innovative way to trade, buy, and sell textbooks.
+                    <br></br>
+                    <br></br>
+                    Users pick what textbooks they want and what they're willing to trade for them, and our algorithm will do the rest.
+                    <br></br>
+                    <br></br>
+                    By comparing book lists of all of our users, Loop automatically generates the smartest trade circles that maximize the number of people who get what they want, with almost no effort involved on the part of the user.
+                    <br></br>
+                    <br></br>
+                    People who get matched up with a trade can then meet up in person to complete the exchange.
+                    <br></br>
+                    <br></br>
+                    Don't want to trade textbooks, but just want to buy or sell them with or for cash? No problem! When adding a book to your lists, just specify that you want to trade books for cash (or vice versa), and set a price that you're willing to accept.
+                    <br></br>
+                    <br></br>
+                </div>
+            </section>
+            <Footer></Footer>
         </Desktop>
         <Mobile>
-            <div className="hero" style={heroStyles.mobile}>
-              <div className="heroText" style={heroTextStyles.mobile}>
+            <div className="hero" style={mobileStyles.hero}>
+              <div className="heroText" style={mobileStyles.heroText}>
                     <a className="btn btn-default" href="/login/facebook" role="button">LOGIN WITH FACEBOOK</a>
               </div>
             </div>
+            <section className="detailSection detailContainer" 
+                style={mobileStyles.section}>
+                <div className="detailImage">
+                    <img src={Animation} className="loopImage"></img>
+                </div>
+                <div className="detailText">
+                    <h2 className="detailTitle">What is Loop?</h2>
+                    Loop is an innovative way to trade, buy, and sell textbooks.
+                    <br></br>
+                    <br></br>
+                    Users pick what textbooks they want and what they're willing to trade for them, and our algorithm will do the rest.
+                    <br></br>
+                    <br></br>
+                    By comparing book lists of all of our users, Loop automatically generates the smartest trade circles that maximize the number of people who get what they want, with almost no effort involved on the part of the user.
+                    <br></br>
+                    <br></br>
+                    People who get matched up with a trade can then meet up in person to complete the exchange.
+                    <br></br>
+                    <br></br>
+                    Don't want to trade textbooks, but just want to buy or sell them with or for cash? No problem! When adding a book to your lists, just specify that you want to trade books for cash (or vice versa), and set a price that you're willing to accept.
+                    <br></br>
+                    <br></br>
+                </div>
+            </section>
+            <Footer></Footer>
         </Mobile>
-        <Tablet>
-            <div className="hero" style={heroStyles.desktop}>
-              <div className="heroText" style={heroTextStyles.mobile}>
-                    <a className="btn btn-default" href="/login/facebook" role="button">LOGIN WITH FACEBOOK</a>
-              </div>
-            </div>
-        </Tablet>
     </div>
   );
 }
 
 export default Landing
-
-{/*              <div className="hero" style={heroStyles}>
-                  <div className="heroText">
-                        <a className="btn btn-default fbLogin" href="/login/facebook" role="button">LOGIN WITH FACEBOOK</a>
-                  </div>
-              </div>
-              <div id="first">
-        <div className="container">
-          <div className="col-md-4 col-md-offset-8">
-            <img id="top-right-book" src={Book1} />
-          </div>
-        </div>
-        <div className="container" id="logo">
-          <div className="col-xs-3">
-            <img id="bottom-left-book" src={Book2} />
-          </div>
-          <div className="col-xs-6" />
-            {/*<ReactSVG
-                path="../img/logo.svg"
-                callback={svg => console.log(svg)}
-            />*
-            {Logo}
-          <div className="col-xs-3" />
-        </div>
-        <div className="container bottom-align-text" id="buttons">
-          <span className="col-xs-4 col-xs-offset-4 text-center">
-            <a className="btn btn-default" href="/login/facebook" role="button">LOGIN WITH FACEBOOK</a>
-          </span>
-        </div>
-      </div>*/}

@@ -3,10 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "axios": "^0.17.0",
+    "axios": "^0.17.1",
     "bootstrap": "^3.3.7",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
+    "react-icons": "^2.2.7",
     "react-redux": "^5.0.6",
     "react-responsive": "^3.0.0",
     "react-router": "^4.2.0",

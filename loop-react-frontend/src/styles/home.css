@@ -12,7 +12,13 @@ body{
 }
 
 .detailSection{
+    display: flex;
     background-color: #ECECEC;
+    align-items: center;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    font-size: 110%;
+/*    height: 90vh;*/
 }
 
 .hero{
@@ -30,39 +36,33 @@ body{
     object-fit: contain;
 }
 
-.detailContainer{
-    padding-top: 5%;
-    padding-bottom: 5%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    font-size: 110%;
-    color: #353535;;
+.detailImage{
+    flex: 0 0 45%;
+/*    padding-left: 5%;*/
+/*    padding-right: 5%;*/
+/*    background-color: aquamarine;*/
+}
+
+.loopImage{
+    width: 400px;
+    height: 400px;
+}
+
+.detailTitle{
+    color: rgb(89, 185, 208);
+    font-size: 150%;
+}
+
+.detailText{
+    flex: 0 0 45%;
+    padding-left: 5%;
+    padding-right: 5%;
+/*    background-color: wheat;*/
 }
 
 .heroText{
     padding-top: 75vh;
 }
-
-.col1{
-    flex: 2; 
-}
-
-.col2{
-    flex: 1;
-    width: 80%;
-    margin: 2%;
-/*    background-color: white;*/
-}
-
-.col3{
-    flex: 1; 
-    width: 80%;
-    margin: 2%;
-/*    background-color: white;*/
-    padding-right: 10%;
-}
-
 
 #first{
 	height: 100vh;

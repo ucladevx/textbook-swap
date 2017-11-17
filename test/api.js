@@ -1,25 +1,26 @@
 const assert = require('assert');
+const request = require('request');
 const bookInfo = require('../models/book_info');
 
 exports.test_api = function() {
-    describe('api.book_info', function () {
-        describe('#get_book_info()', function () {
-            it('should return the Algorithm Design textbook information', function (done) {
-                bookInfo.get_book_info(253, function (err, result) {
-                    assert.equal('Algorithm Design', result[0]['title']);
-                    if (err) done(err);
-                    else done();
-                });
-            });
-        });
-
-        describe('#get_books_info()', function () {
-            it('should return the book information for all passed in book IDs', function (done) {
-                bookInfo.get_books_info([253, 300], function (err, result) {
-                    assert.equal('Algorithm Design', result[0]['title']);
-                    assert.equal('Kreps', result[1]['author']);
-                    if (err) done(err);
-                    else done();
+    describe ('api.book_info', function(){
+        describe('GET /api/book_info/get_book_info', function() {
+            it('should return the Algorithm Design textbook information', function(done) {
+                request.get('http://localhost:3000/api/book_info/get_book_info?id=253', function(err, res, body){
+                    assert.equal(200, res.statusCode);
+                    body_status = JSON.parse(body)['status'];
+                    body_data = JSON.parse(body)['data'][0];
+                    assert.equal(0, body_status);
+                    expected_body_data = { book_id: 253,
+                                           title: 'Algorithm Design',
+                                           author: 'Kleinberg',
+                                           isbn: '9780321295354',
+                                           img_url: 'https://coverimages.verbacompete.com/0a393b60-28b2-5649-81d9-60eb956cb2cf.jpg',
+                                           tsv: '\'9780321295354\':4 \'algorithm\':1 \'design\':2 \'kleinberg\':3' }
+                    for (key in body_data){
+                        assert.equal(body_data[key], expected_body_data[key])
+                    }
+                    done();
                 });
             });
         });

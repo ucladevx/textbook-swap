@@ -82,11 +82,10 @@
 }
 
 
-
 /* CSS used for positioning the footers at the bottom of the page. */
 /* You can remove this. */
 
-.container{
+.footer-container{
     display: flex;
     display: -webkit-flex;
     flex-direction: column;
@@ -94,7 +93,7 @@
     height: 100%;
 }
 
-.content{
+.footer-content{
 	flex: 1 0 auto;
 	-webkit-flex: 1 0 auto;
 	min-height: 200px;

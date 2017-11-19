@@ -15,11 +15,11 @@ const utilities = require('../utilities');
 exports.get_book_info = function(book_id, next){
     pg.connect(utilities.database_url, function(err, client, done){
         client.query("SELECT * FROM book_info WHERE book_id=$1::INTEGER", [book_id], function(err, result){
+            client.end();
             if(err){
                 logger.error("Error querying database", err);
                 return next(utilities.book_info_errors.DB_QUERY_ERROR, []);
             }
-            client.end();
             return next(utilities.book_info_errors.DB_SUCCESS, result.rows);
         });
     });
@@ -34,11 +34,11 @@ exports.get_books_info = function(book_ids, next) {
     pg.connect(utilities.database_url, function(err, client, done){
         // get the book info for all books
         client.query("SELECT book_id, title, author, isbn, img_url FROM book_info WHERE book_id = any ($1)", [book_ids], function(err, books_info_result) {
+            client.end();
             if (err) {
                 logger.error("Error querying database", err);
                 return next(utilities.book_info_errors.DB_QUERY_ERROR);
             }
-            client.end();
             return next(utilities.book_info_errors.DB_SUCCESS, books_info_result.rows);
         });
     });

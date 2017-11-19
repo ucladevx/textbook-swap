@@ -15,6 +15,7 @@ const utilities = require('../utilities');
 exports.create_tables = function(next){
     pg.connect(utilities.database_url, function (err, client, done) {
         if (err) {
+            client.end();
             return logger.error('error fetching client from pool', err)
         }
         const book_to_class_data = (process.env.DATA_PATH || "'" + __dirname + "/data/") + "book_to_class_clean.csv'";

@@ -14,15 +14,10 @@ Output: Returns the callback function with a success or error code passed as a p
  */
 exports.add_book = function(user, book, next){
     pg.connect(utilities.database_url, function(err, client, done){
-        done();
-        if (err){
-            logger.error("Error connection to client while querying owned_books table: ", err);
-            return next(utilities.owned_books_errors.DB_CONNECTION_ERROR);
-        }
-
         //check if the relation exists already
         client.query("SELECT COUNT(user_id) FROM owned_books WHERE user_id=$1::VARCHAR AND book_id=$2::INTEGER", [user, book], function(err, result){
             if (err){
+                client.end();
                 logger.error("Error querying table owned_books", err);
                 return next(utilities.owned_books_errors.DB_QUERY_ERROR);
             }
@@ -30,6 +25,7 @@ exports.add_book = function(user, book, next){
             //if relationship doesn't exist, it inserts it, if it does, it returns and error
             if(result.rows[0].count == 0){
                 client.query("INSERT INTO owned_books (user_id, book_id) VALUES ($1::VARCHAR, $2::INTEGER)", [user, book], function(err, result){
+                    client.end();
                     if (err){
                         logger.error("Error inserting into owned_books table", err);
                         return next(utilities.owned_books_errors.DB_QUERY_ERROR);
@@ -39,6 +35,7 @@ exports.add_book = function(user, book, next){
                 });
             }
             else{
+                client.end();
                 logger.error("UserID, BookID association already exists in owned_books table");
                 return next(utilities.owned_books_errors.OWNED_BOOK_ALREADY_EXISTS);
             }
@@ -53,13 +50,8 @@ exports.add_book = function(user, book, next){
  */
 exports.remove_book = function(user, book, next){
     pg.connect(utilities.database_url, function(err, client, done){
-        done();
-        if (err){
-            logger.error("Error connection to client while querying owned_books table: ", err);
-            return next(utilities.owned_books_errors.DB_CONNECTION_ERROR);
-        }
-
         client.query("DELETE FROM owned_books WHERE user_id=$1::VARCHAR AND book_id=$2::INTEGER", [user, book], function(err, result){
+            client.end();
             if(err){
                 logger.error("Error querying database", err);
                 return next(utilities.owned_books_errors.DB_QUERY_ERROR);
@@ -76,13 +68,8 @@ exports.remove_book = function(user, book, next){
  */
 exports.get_owned_books = function(user, next){
     pg.connect(utilities.database_url, function(err, client, done){
-        done();
-        if (err){
-            logger.error("Error connection to client while querying owned_books table: ", err);
-            return next(utilities.owned_books_errors.DB_CONNECTION_ERROR, []);
-        }
-
         client.query("SELECT book_id FROM owned_books WHERE user_id=$1::VARCHAR", [user], function(err, result){
+            client.end();
             if(err){
                 logger.error("Error querying database", err);
                 return next(utilities.owned_books_errors.DB_QUERY_ERROR, []);
@@ -98,13 +85,8 @@ exports.get_owned_books = function(user, next){
  */
 exports.get_users = function(book, next){
     pg.connect(utilities.database_url, function(err, client, done){
-        done();
-        if (err){
-            logger.error("Error connection to client while querying owned_books table: ", err);
-            return next(utilities.owned_books_errors.DB_CONNECTION_ERROR);
-        }
-
         client.query("SELECT user_id FROM owned_books WHERE book_id=$1::INTEGER", [book], function(err, result){
+            client.end();
             if(err){
                 logger.error("Error querying database", err);
                 return next(utilities.owned_books_errors.DB_QUERY_ERROR);

@@ -14,13 +14,8 @@ const utilities = require('../utilities');
  */
 exports.get_book_id = function(class_id, professor_id, next){
     pg.connect(utilities.database_url, function(err, client, done){
-        done();
-        if (err){
-            logger.error("Error connection to client while querying book_to_class table: ", err);
-            return next(utilities.book_to_class_errors.DB_CONNECTION_ERROR, []);
-        }
-
         client.query("SELECT book_id FROM book_to_class WHERE professor_name=$1::VARCHAR AND class_name=$2::VARCHAR", [professor_id, class_id], function(err, result){
+            client.end();
             if(err){
                 logger.error("Error querying database", err);
                 return next(utilities.book_to_class_errors.DB_QUERY_ERROR, []);
@@ -38,13 +33,8 @@ exports.get_book_id = function(class_id, professor_id, next){
  */
 exports.get_professor_class_id = function(book_id, next){
     pg.connect(utilities.database_url, function(err, client, done){
-        done();
-        if (err){
-            logger.error("Error connection to client while querying book_to_class table: ", err);
-            return next(utilities.book_to_class_errors.DB_CONNECTION_ERROR, []);
-        }
-
         client.query("SELECT professor_name, class_name FROM book_to_class WHERE book_id=$1::INTEGER", [book_id], function(err, result){
+            client.end();
             if(err){
                 logger.error("Error querying database", err);
                 return next(utilities.book_to_class_errors.DB_QUERY_ERROR, []);

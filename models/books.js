@@ -36,19 +36,13 @@ var add_books_results = function(database_rows, results, keys_visited){
  */
 exports.get_books_info = function(book_ids, next) {
     pg.connect(utilities.database_url, function(err, client, done){
-        done();
-        if (err) {
-            logger.error("Error connection to client while querying books table: ", err);
-            return next(utilities.book_info_errors.DB_CONNECTION_ERROR);
-        }
-
         // get the book info for all books
         client.query("SELECT book_id, title, author, isbn, img_url FROM book_info WHERE book_id = any ($1)", [book_ids], function(err, books_info_result) {
+            client.end();
             if (err) {
                 logger.error("Error querying database", err);
                 return next(utilities.book_info_errors.DB_QUERY_ERROR);
             }
-
             return next(utilities.book_info_errors.DB_SUCCESS, books_info_result.rows);
         });
     });
@@ -62,19 +56,19 @@ exports.get_books_info = function(book_ids, next) {
  */
 exports.get_search_results = function(search_input, next){
     pg.connect(utilities.database_url, function(err, client, done){
-        done();
-        if (err){
-            logger.error("Error connection to client while querying books table: ", err);
-            return next(utilities.book_info_errors.DB_CONNECTION_ERROR);
-        }
-
         client.query("SELECT book_id, professor_name, class_name, ts_rank_cd(tsv, query, 1) AS rank FROM book_to_class, plainto_tsquery($1::VARCHAR) query WHERE tsv @@ query ORDER BY rank DESC LIMIT 10", [search_input], function(err, books_result){
             if(err){
+                client.end();
                 logger.error("Error querying database", err);
                 return next(utilities.book_to_class_errors.DB_QUERY_ERROR);
             }
 
             client.query("SELECT book_id, title, author, isbn, ts_rank_cd(tsv, query, 1) AS rank FROM book_info, plainto_tsquery($1::VARCHAR) query WHERE tsv @@ query ORDER BY rank DESC LIMIT 10", [search_input], function(err, books_info_result){
+                client.end();
+                if(err){
+                    logger.error("Error querying database", err);
+                    return next(utilities.book_to_class_errors.DB_QUERY_ERROR);
+                }
                 var books_result_rows = books_result.rows;
                 var books_info_rows = books_info_result.rows;
 
@@ -89,7 +83,6 @@ exports.get_search_results = function(search_input, next){
                 results.sort(function(a,b) {
                     return b.rank - a.rank;
                 });
-
                 // returns a array of javascript objects EX. [{book_id: 1231, rank: 0.071}, ...]
                 return next(utilities.book_info_errors.DB_SUCCESS, results);
             });

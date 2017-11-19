@@ -16,8 +16,8 @@ exports.test_api = function() {
                                            author: 'Kleinberg',
                                            isbn: '9780321295354',
                                            img_url: 'https://coverimages.verbacompete.com/0a393b60-28b2-5649-81d9-60eb956cb2cf.jpg',
-                                           tsv: '\'9780321295354\':4 \'algorithm\':1 \'design\':2 \'kleinberg\':3' }
-                    for (key in body_data){
+                                           tsv: '\'9780321295354\':4 \'algorithm\':1 \'design\':2 \'kleinberg\':3' };
+                    for (var key in body_data){
                         assert.equal(body_data[key], expected_body_data[key])
                     }
                     done();
@@ -25,4 +25,4 @@ exports.test_api = function() {
             });
         });
     });
-}
+};

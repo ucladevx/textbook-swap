@@ -1,6 +1,8 @@
 /*
 error codes for the database queries - could expand to more later
  */
+const dotenv = require('dotenv');
+dotenv.config();
 
 exports.owned_books_errors = Object.freeze({
     DB_SUCCESS : 0,

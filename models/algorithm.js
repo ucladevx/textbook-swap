@@ -1,6 +1,7 @@
 /*
  * Functions to run the loop-finding algorithms.
  */
+const logger = require('tracer').colorConsole();
 const utilities = require('../utilities');
 const graph_edges = require('./graph_edges');
 const owned_books = require('./owned_books');
@@ -14,7 +15,7 @@ var matched = {}; // already matched nodes
 var tradeID = 0; // current trade ID
 
 exports.run_algorithm = function(){
-    console.log("running algorithm");
+    logger.log("running algorithm");
     load_data(function(){
         for(var i = 2; i <= 4; i++){
             var keys = Object.keys(edges);
@@ -27,9 +28,9 @@ exports.run_algorithm = function(){
 
         found_trades_id.update_id(tradeID, function(status){
             if(status == utilities.found_trades_id_errors.DB_SUCCESS)
-                console.log("Successfully updated trade ID to " + tradeID);
+                logger.log("Successfully updated trade ID to " + tradeID);
             else
-                console.log("Failed to update trade ID.")
+                logger.log("Failed to update trade ID.")
         });
     });
 };
@@ -83,7 +84,7 @@ function process(visited){
         }
     }
 
-    console.log(visited);
+    logger.log(visited);
     visited.push(visited[0]);
 
     for(var i = 0; i < visited.length - 1; i++){
@@ -91,51 +92,51 @@ function process(visited){
 
         found_trades.add_loop_edge(tradeID, visited[i][0], visited[i][1], visited[i + 1][0], visited[i + 1][1], function(status){
             if(status == utilities.found_trades_errors.DB_SUCCESS)
-                console.log("Successfully added edge to the found_trades table!");
+                logger.log("Successfully added edge to the found_trades table!");
             else
-                console.log("Error adding edge to the found_trades table: " + status);
+                logger.log("Error adding edge to the found_trades table: " + status);
         });
 
         owned_books.remove_book(visited[i][0], visited[i][1], function(status){
             if(status == utilities.owned_books_errors.DB_SUCCESS)
-                console.log("Successfully removed book from owned_books table!");
+                logger.log("Successfully removed book from owned_books table!");
             else
-                console.log("Error removing book from the owned_books table: " + status);
+                logger.log("Error removing book from the owned_books table: " + status);
         });
 
         wish_list.remove_book(visited[i][0], visited[i + 1][1], function(status){
             if(status == utilities.wish_list_errors.DB_SUCCESS)
-                console.log("Successfully removed book from wish_list table!");
+                logger.log("Successfully removed book from wish_list table!");
             else
-                console.log("Error removing book from the wish_list table: " + status);
+                logger.log("Error removing book from the wish_list table: " + status);
         });
 
         graph_edges.remove_owned_book(visited[i][0], visited[i][1], function(status){
             if(status == utilities.graph_edges_errors.DB_SUCCESS)
-                console.log("Successfully removed edges!");
+                logger.log("Successfully removed edges!");
             else
-                console.log("Error removing edges from the graph_edges table: " + status);
+                logger.log("Error removing edges from the graph_edges table: " + status);
         });
 
         graph_edges.remove_wanted_book(visited[i][0], visited[i + 1][1], function(status){
             if(status == utilities.graph_edges_errors.DB_SUCCESS)
-                console.log("Successfully removed edges!");
+                logger.log("Successfully removed edges!");
             else
-                console.log("Error removing edges from the graph_edges table: " + status);
+                logger.log("Error removing edges from the graph_edges table: " + status);
         });
 
         possible_trades.update_status_by_owned_book('I', visited[i][0], visited[i][1], function(status){
             if(status == utilities.possible_trades_errors.DB_SUCCESS)
-                console.log("Successfully updated statuses!");
+                logger.log("Successfully updated statuses!");
             else
-                console.log("Error updating statuses: " + status);
+                logger.log("Error updating statuses: " + status);
         });
 
         possible_trades.update_status_by_wanted_book('I', visited[i][0], visited[i + 1][1], function(status){
             if(status == utilities.possible_trades_errors.DB_SUCCESS)
-                console.log("Successfully updated statuses!");
+                logger.log("Successfully updated statuses!");
             else
-                console.log("Error updating statuses: " + status);
+                logger.log("Error updating statuses: " + status);
         });
     }
 

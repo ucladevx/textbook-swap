@@ -1,8 +1,12 @@
  /*
  * Interface to query and modify the table found_trades.
+ * Status list:
+ * Accepted: Everyone has accepted the trade, and email notifications have been sent out to facilitate a meetup.
+ * Rejected: Someone has rejected this trade, so the entire trade is rejected.
+ * Pending: User has received a matched trade, but needs to accept or reject it. Will automatically reject after 2 days if no response
+ * Waiting: User has accepted the matched trade, but is waiting for everyone else to accept it.
  */
 
-'use strict';
 const pg = require('pg');
 const logger = require('tracer').colorConsole();
 const utilities = require('../utilities');

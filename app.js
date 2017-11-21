@@ -92,6 +92,7 @@ app.use(passport.session());
  */
 app.get('/', homeController.index);
 app.get('/bookshelf', require_login.ensureLoggedIn(), bookShelfController.index);
+app.use('/pdf/', express.static(__dirname + '/pdf/'));
 
 /*
  * API routes.

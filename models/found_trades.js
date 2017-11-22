@@ -365,6 +365,14 @@ exports.get_statuses_by_id = function (trade_id, next){
     });
 };
 
+/**
+ * Get all found trades for a user
+ *
+ * @param user_id  user id
+ * @return found trades (rows from the database)
+ * @return database error code
+ */
+
 exports.get_matched_trades = function (user_id, next){
     pg.connect(process.env.DATABASE_URL, function(err, client, done){
         done();
@@ -384,6 +392,15 @@ exports.get_matched_trades = function (user_id, next){
             });
     });
 };
+
+
+/**
+ * Get trade status for a given trade
+ *
+ * @param trade_id  trade id
+ * @return trade status ('W', 'R', 'A', 'P')
+ * @return database error code
+ */
 
 // TODO: change this
 
@@ -424,5 +441,32 @@ exports.get_trades_status = function (trade_id, next) {
                 result = 'P';
             return next(error_codes.found_trades_errors.DB_SUCCESS, result);
         });
+    });
+};
+
+/**
+ * Remove all trades where one person in the loop has not responded to the trade ("pending") for more than two days
+ *
+ * @return database error code
+ */
+
+exports.automatic_reject_old_trades = function (next){
+    pg.connect(process.env.DATABASE_URL, function(err, client, done){
+        done();
+        if (err){
+            console.error("Error connection to client while querying found_trades table: ", err);
+            return next(error_codes.found_trades_errors.DB_CONNECTION_ERROR);
+        }
+
+        // TODO: modify this query to remove if timestamp for 'P' is more than two days old
+        client.query("SELECT trade_id, book_have, book_want FROM found_trades",
+            [], function(err, result){
+                if(err){
+                    console.error("Error querying database", err);
+                    return next(error_codes.found_trades_errors.DB_QUERY_ERROR);
+                }
+
+                return next(error_codes.found_trades_errors.DB_SUCCESS);
+            });
     });
 };

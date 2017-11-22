@@ -23,7 +23,6 @@ exports.create_tables = function(next){
           'CREATE TEMP TABLE tmp_table_two AS SELECT * FROM book_info WITH NO DATA; COPY tmp_table_two FROM ' + book_info_data + ' DELIMITER \',\' CSV; INSERT INTO book_info SELECT DISTINCT ON (book_id) * FROM tmp_table_two ON CONFLICT DO NOTHING; DROP TABLE tmp_table_two; UPDATE book_info SET tsv = to_tsvector(\'english\', title) || to_tsvector(\'english\', author) || to_tsvector(\'english\', isbn);';
         
         var queries = ['CREATE TABLE IF NOT EXISTS owned_books(user_id VARCHAR, book_id INTEGER, PRIMARY KEY (user_id, book_id))',
-                       'CREATE TABLE IF NOT EXISTS wish_list(user_id VARCHAR, book_id INTEGER, PRIMARY KEY (user_id, book_id))',
                        'CREATE TABLE IF NOT EXISTS possible_trades(user_id VARCHAR, book_have INTEGER, book_want INTEGER, status VARCHAR(1), PRIMARY KEY (user_id, book_have, book_want))',
                        'CREATE TABLE IF NOT EXISTS graph_edges(user_id VARCHAR, book_have INTEGER, target_id VARCHAR, book_want INTEGER, PRIMARY KEY (user_id, book_have, target_id, book_want))',
                        'CREATE TABLE IF NOT EXISTS book_to_class(book_id INTEGER, professor_name VARCHAR, class_name VARCHAR, tsv TSVECTOR, PRIMARY KEY(book_id, professor_name, class_name))',

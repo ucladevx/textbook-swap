@@ -101,7 +101,7 @@ exports.remove_relation = function(req, res) {
 // };
 
 /*
- * GET http://localhost:3000/api/wish_list/get_book_wants
+ * GET http://localhost:3000/api/possible_trades/get_book_wants
  * Gets a list of wanted books associated with a specific user and owned book.
  */
 exports.get_book_wants = function(req, res) {

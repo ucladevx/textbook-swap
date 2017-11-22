@@ -25,9 +25,9 @@ $(document).ready(function(){
 						else if(data.status === 1)
 							console.log('db connection error for removing from owned_books');
 						else if(data.status === 2)
-							console.log('db query error for removing from wish_list');
+							console.log('db query error for removing from found_trades');
 						else if(data.status === 3){
-							console.log('wanted book already removed');
+							console.log('wanted book already removed from found_trades');
 						}
 						window.location.reload(true);
 					},
@@ -365,16 +365,16 @@ $(document).ready(function(){
 
 			console.log("remove book id", book_to_remove_id);
 
-			// remove wanted books from wish list
+			// remove wanted books from possible_trades
 			$.post("api/possible_trades/remove", { user_id: "user", owned_book_id: owned_book_id, wanted_book_id: book_to_remove_id },
 				function(data){
 					if(data.status === 0){
-						console.log('successfully removed wanted book from wish_list');
+						console.log('successfully removed wanted book from possible_trades');
 					}
 					else if(data.status === 1)
-						console.log('db connection error for removing from wish_list');
+						console.log('db connection error for removing from possible_trades');
 					else if(data.status === 2)
-						console.log('db query error for removing from wish_list');
+						console.log('db query error for removing from possible_trades');
 					else if(data.status === 3){
 						console.log('wanted book already removed');
 					}
@@ -397,23 +397,6 @@ $(document).ready(function(){
 				console.log("wanted_book_id when adding:", wanted_book_id);
 
 				var relationStatus = 'V';  // V = verified
-
-				// add wanted book to wish list
-				$.post("/api/wish_list/add", { user_id: "user", book_id: wanted_book_id },
-					function(data){
-						if(data.status === 0){
-							console.log('successfully added wanted book to wish_list', confirmedBook.attr("data-title"));
-						}
-						else if(data.status === 1)
-							console.log('db connection error for adding to wish_list');
-						else if(data.status === 2)
-							console.log('db query error for adding to wish_list');
-						else if(data.status === 3){
-							console.log('wanted book already exists');
-						}
-					},
-					"json"
-				);
 
 				// add trade relation between owned book and wanted book
 				$.post("/api/possible_trades/add", { user_id: "user", owned_book_id: owned_book_id, wanted_book_id: wanted_book_id, status: relationStatus },

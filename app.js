@@ -92,6 +92,12 @@ app.use(passport.session());
  */
 app.get('/', homeController.index);
 app.get('/bookshelf', require_login.ensureLoggedIn(), bookShelfController.index);
+
+
+/*
+* Route for help page pdf
+ */
+
 app.use('/pdf/', express.static(__dirname + '/pdf/'));
 
 /*

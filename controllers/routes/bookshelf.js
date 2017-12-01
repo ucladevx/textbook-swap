@@ -7,7 +7,7 @@ const async = require("async");
 const users = require('../../models/users');
 const owned_books = require('../../models/owned_books');
 const book_info = require('../../models/book_info');
-const error_codes = require('../../error_codes');
+const utilities = require('../../utilities');
 const found_trades = require('../../models/found_trades');
 const possible_trades = require('../../models/possible_trades');
 

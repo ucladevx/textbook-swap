@@ -200,3 +200,5 @@ var algorithmInterval = setInterval(function(){
 app.listen(app.get('port'), function(){
     console.log('%s Express server listening on port %d.', chalk.green('✓'), app.get('port'));
 });
+
+module.exports = app;

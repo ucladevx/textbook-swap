@@ -1,0 +1,11 @@
+Redux Stuff
+
+After log in:
+    GET my trade cards
+
+React State:
+    GET array of books on search query
+    GET book details on click
+    Create arrays of books wanted, books giving
+    Compile trade object
+    POST new trade

@@ -3,6 +3,8 @@ import {BrowserRouter, Route, Switch} from 'react-router-dom'
 import {connect} from 'react-redux';
 
 import Home from './containers/home'
+import Bookshelf from './containers/bookshelf'
+import Form from './components/form'
 
 class App extends Component {
     componentDidMount(){
@@ -15,6 +17,10 @@ class App extends Component {
             <div className="App">
                 <Route exact path="/" component={() => (
                         <Home/>
+                    )}>
+                </Route>
+                <Route exact path="/bookshelf" component={() => (
+                        <Form/>
                     )}>
                 </Route>
             </div>

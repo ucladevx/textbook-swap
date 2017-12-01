@@ -2,6 +2,8 @@
 import React from 'react';
 import ReactSVG from 'react-svg';
 import Responsive from 'react-responsive';
+import FacebookLogin from 'react-facebook-login';
+import axios from 'axios'
 
 // Resources
 import Book1 from '../img/book1.svg'
@@ -21,24 +23,46 @@ const Tablet = ({ children }) => <Responsive minWidth={768} maxWidth={992} child
 const Mobile = ({ children }) => <Responsive maxWidth={768} children={children} />;
 const Default = ({ children }) => <Responsive minWidth={768} children={children} />;
 
+const responseFacebook = (response) => {
+  console.log(response);
+}
+
+const loadStuff = () => {
+    const req = axios.get('/api/search/search_textbooks?search_input=matrix')
+        .then((res) => {
+            console.log("Load", res.data)
+        })
+}
+
+
+
 const Landing = () => {
+  loadStuff();
   var mobileStyles = {
       hero: {
           backgroundImage: `url(${HeroMobile})`
       }
   }
-  
+
   var desktopStyles = {
       hero: {
           backgroundImage: `url(${Hero})`
       }
   }
-  
+
   return (
       <div>
         <Default>
             <div className="hero" style={desktopStyles.hero}>
                 <div className="heroText">
+                    {/*<FacebookLogin
+                        appId="238591543282201"
+                        autoLoad={true}
+                        fields="name,email,picture"
+                        callback={responseFacebook}
+                        cssClass="my-facebook-button-class"
+                        icon="fa-facebook"
+                    />*/}
                     <a className="button button-default" href="/login/facebook" role="button">LOGIN WITH FACEBOOK</a>
                 </div>
             </div>
@@ -50,7 +74,7 @@ const Landing = () => {
                 </div>
             </div>
         </Mobile>
-          
+
 
         <section className="detailSection detailContainer">
             <div className="detailImage">

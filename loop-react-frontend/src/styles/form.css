@@ -1,0 +1,26 @@
+.form-container{
+    width: 500px;
+    height: 400px;
+    background-color: aliceblue;
+    align-items: center;
+    text-align: center;
+}
+
+.formButton::first{
+    margin-top: 10%;
+}
+.formButton{
+    font-family: inherit;
+    font-size: 150%;
+    padding: 0.5em 1em;
+    color: #444;
+    color: rgba(0, 0, 0, 0.80);
+    border: 1px solid #999;
+    border: none rgba(0, 0, 0, 0);
+    background-color: #E6E6E6;
+    text-decoration: none;
+    border-radius: 2px;
+    display: block;
+    margin:0 auto; 
+    margin-bottom: 10%;
+}

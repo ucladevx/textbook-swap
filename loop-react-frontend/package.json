@@ -8,6 +8,7 @@
     "react": "^16.0.0",
     "react-bootstrap": "^0.31.5",
     "react-dom": "^16.0.0",
+    "react-facebook-login": "^3.7.2",
     "react-icons": "^2.2.7",
     "react-redux": "^5.0.6",
     "react-responsive": "^3.0.0",
@@ -19,6 +20,11 @@
     "redux-form": "^7.1.1",
     "redux-promise": "^0.5.3",
     "redux-thunk": "^2.2.0"
+  },
+  "proxy": {
+      "/*": {
+        "target": "http://52.53.151.12"
+      }
   },
   "scripts": {
     "start": "react-scripts start",

@@ -457,10 +457,10 @@ exports.automatic_reject_old_trades = function (next){
         }
 
         // TODO: modify this query to remove if timestamp for 'P' is more than two days old
-        client.query("SELECT trade_id, book_have, book_want FROM found_trades",
-            [], function(err, result){
+        client.query("DELETE FROM found_trades WHERE trade_id in (SELECT trade_id FROM found_trades WHERE status=$1::VARCHAR AND extract(day from now()::timestamp - ts) > 2",
+            ['P'], function(err, result){
                 if(err){
-                    console.error("Error querying database", err);
+                    console.error("Error deleting two day old database", err);
                     return next(error_codes.found_trades_errors.DB_QUERY_ERROR);
                 }
 

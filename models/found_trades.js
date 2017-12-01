@@ -368,9 +368,8 @@ exports.get_statuses_by_id = function (trade_id, next){
 /**
  * Get all found trades for a user
  *
- * @param user_id  user id
- * @return found trades (rows from the database)
- * @return database error code
+ * @param user_id  user id for the current user
+ * @return error code for the database query
  */
 
 exports.get_matched_trades = function (user_id, next){
@@ -392,7 +391,6 @@ exports.get_matched_trades = function (user_id, next){
             });
     });
 };
-
 
 /**
  * Get trade status for a given trade
@@ -445,7 +443,7 @@ exports.get_trades_status = function (trade_id, next) {
 };
 
 /**
- * Remove all trades where one person in the loop has not responded to the trade ("pending") for more than two days
+ * Purpose: Automatically remove all trades where one person in the loop has not responded to the trade ("pending") for more than two days
  *
  * @return database error code
  */

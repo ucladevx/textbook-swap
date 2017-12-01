@@ -298,7 +298,7 @@ $(document).ready(function(){
 		$.post("/api/owned_books/add", { user_id: "user", book_id: owned_book_id },
 			function(data){
 				if(data.status === 0){
-					console.log('successfully added wanted book to owned_books');
+					console.log('successfully added owned book to owned_books');
 				}
 				else if(data.status === 1)
 					console.log('db connection error for owned_books');
@@ -319,23 +319,6 @@ $(document).ready(function(){
 
 			var wanted_book_id = confirmedBook.attr("id");
 			var relationStatus = 'V';  // V = verified
-
-			// add wanted book to wish list
-			$.post("/api/wish_list/add", { user_id: "user", book_id: wanted_book_id },
-				function(data){
-					if(data.status === 0){
-						console.log('successfully added wanted book to wish_list');
-					}
-					else if(data.status === 1)
-						console.log('db connection error for wish_list');
-					else if(data.status === 2)
-						console.log('db query error for wish_list');
-					else if(data.status === 3){
-						console.log('wanted book already exists');
-					}
-				},
-				"json"
-			);
 
 			// add trade relation between owned book and wanted book
 			$.post("/api/possible_trades/add", { user_id: "user", owned_book_id: owned_book_id, wanted_book_id: wanted_book_id, status: relationStatus },

@@ -3,7 +3,7 @@
  */
 
 const request = require('request');
-const ec = require('../../error_codes');
+const ec = require('../../utilities');
 const btc = require('../../models/book_to_class');
 
 /*

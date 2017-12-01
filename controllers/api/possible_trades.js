@@ -29,22 +29,12 @@ exports.add_relation = function(req, res) {
     });
 
     //find all (A,B) in the owned_book table where B=wanted_book_id and insert (user_id, owned_book_id, A, wanted_book_id) into the graph
-    ob.get_users(wanted_book_id, function(status, rows){
-        if (status == ec.possible_trades_errors.DB_SUCCESS)
-            console.log("Successfully found possible trades by wanted book in the database!");
-
-        // go through each of the returned rows and add (user_id, owned_book_id, A, wanted_book_id) to graph_edges
-        for (var i = 0; i < rows.length; i++) {
-            ge.add_edge(user_id, owned_book_id, rows[i]["user_id"], wanted_book_id, function(status) {
-
-                if (status == ec.graph_edges_errors.DB_SUCCESS)
-                    console.log("Edge added successfully to the database!");
-                else if (status == ec.graph_edges_errors.GRAPH_EDGE_ALREADY_EXISTS)
-                    console.log("Edge already exists in the database!");
-                else
-                    console.log("Error trying to add edge to database!");
-            });
-        }
+    //someone owns the book you want
+    ge.add_trade_relation_edges(user_id, owned_book_id, wanted_book_id, function(status, rows) {
+        if (status == ec.graph_edges_errors.DB_SUCCESS)
+            console.log("Successfully inserted graph edges for trade relation in the database!");
+        else if (status == ec.possible_trades_errors.DB_QUERY_ERROR) 
+            console.log("Error inserting trade relation graph edges for owned book in database!");
     });
 };
 
@@ -111,7 +101,7 @@ exports.remove_relation = function(req, res) {
 // };
 
 /*
- * GET http://localhost:3000/api/wish_list/get_book_wants
+ * GET http://localhost:3000/api/possible_trades/get_book_wants
  * Gets a list of wanted books associated with a specific user and owned book.
  */
 exports.get_book_wants = function(req, res) {

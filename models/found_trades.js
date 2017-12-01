@@ -312,6 +312,12 @@ exports.get_statuses_by_id = function (trade_id, next){
     });
 };
 
+/**
+ * Get all matched trades for a specific user
+ *
+ * @param user_id  user id for the current user
+ * @return error code for the database query
+ */
 exports.get_matched_trades = function (user_id, next){
     pg.connect(utilities.database_url, function(err, client, done){
         client.query("SELECT trade_id, book_have, book_want FROM found_trades WHERE user_id=$1::VARCHAR",
@@ -327,8 +333,13 @@ exports.get_matched_trades = function (user_id, next){
     });
 };
 
-// TODO: change this
-
+/**
+ * Get trade status for a specific trade
+ *
+ * @param trade_id  trade id for a found trade
+ * @return error code for the database query
+ * @return trade status ('W', 'A', 'R', 'P')
+ */
 exports.get_trades_status = function (trade_id, next) {
     var rejected = false;
     var accepted = true;
@@ -358,5 +369,30 @@ exports.get_trades_status = function (trade_id, next) {
         else
             result = 'P';
         return next(utilities.found_trades_errors.DB_SUCCESS, result);
+    });
+};
+
+/**
+ * Automatically reject all trades in the database that have been pending for more than two days
+ *
+ * @return error code for the database query
+ */
+exports.automatically_reject_old_trades = function (next){
+    pg.connect(process.env.DATABASE_URL, function(err, client, done){
+        done();
+
+        if (err){
+            console.error("Error connection to client while querying found_trades table: ", err);
+            return next(error_codes.found_trades_errors.DB_CONNECTION_ERROR, []);
+        }
+        client.query("SELECT trade_id, book_have, book_want FROM found_trades WHERE user_id=$1::VARCHAR",
+            [user_id], function(err, result){
+                if(err){
+                    console.error("Error querying database", err);
+                    return next(error_codes.found_trades_errors.DB_QUERY_ERROR, []);
+                }
+
+                return next(error_codes.found_trades_errors.DB_SUCCESS, result.rows);
+            });
     });
 };

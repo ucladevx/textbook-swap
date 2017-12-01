@@ -4,7 +4,6 @@
 
 const ec = require('../../utilities');
 const ob = require('../../models/owned_books');
-const wl = require('../../models/wish_list');
 const pt = require('../../models/possible_trades');
 const ge = require('../../models/graph_edges');
 const algorithm = require('../../models/algorithm');

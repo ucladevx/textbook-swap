@@ -5,7 +5,6 @@ const logger = require('tracer').colorConsole();
 const utilities = require('../utilities');
 const graph_edges = require('./graph_edges');
 const owned_books = require('./owned_books');
-const wish_list = require('./wish_list');
 const possible_trades = require('./possible_trades');
 const found_trades = require('./found_trades');
 const found_trades_id = require('./found_trades_id');
@@ -102,13 +101,6 @@ function process(visited){
                 logger.log("Successfully removed book from owned_books table!");
             else
                 logger.log("Error removing book from the owned_books table: " + status);
-        });
-
-        wish_list.remove_book(visited[i][0], visited[i + 1][1], function(status){
-            if(status == utilities.wish_list_errors.DB_SUCCESS)
-                logger.log("Successfully removed book from wish_list table!");
-            else
-                logger.log("Error removing book from the wish_list table: " + status);
         });
 
         graph_edges.remove_owned_book(visited[i][0], visited[i][1], function(status){

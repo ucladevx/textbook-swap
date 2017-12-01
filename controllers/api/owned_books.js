@@ -29,21 +29,11 @@ exports.add_book = function(req, res) {
     });
 
     // find all (A,B,C) in possible_trades where C=book_id and add (A,B,user_id,C) to the graph_edges table
-    possible_trades.get_rows_by_want(book_id, function(status, rows) {
-        if (status == utilities.possible_trades_errors.DB_SUCCESS)
-            console.log("Successfully found possible trades by wanted book in the database!");
-
-        // go through each of the returned rows and add (A, B, user_id, C) to graph_edges 
-        for (var i = 0; i < rows.length; i++) {
-            graph_edges.add_edge(rows[i]["user_id"], rows[i]["book_have"], user_id, book_id, function(status) {
-                if (status == utilities.graph_edges_errors.DB_SUCCESS)
-                    console.log("Edge added successfully to the database!");
-                else if (status == utilities.graph_edges_errors.GRAPH_EDGE_ALREADY_EXISTS)
-                    console.log("Edge already exists in the database!");
-                else
-                    console.log("Error trying to add edge to database!");
-            });
-        }
+    graph_edges.add_owned_book_edges(user_id, book_id, function(status, rows) {
+        if (status == utilities.graph_edges_errors.DB_SUCCESS)
+            console.log("Successfully inserted graph edges for owned book in the database!");
+        else if (status == utilities.possible_trades_errors.DB_QUERY_ERROR)
+            console.log("Error inserting graph edges for owned book in database!");
     });
 };
 
@@ -92,24 +82,12 @@ exports.remove_book = function(req, res) {
 exports.get_owned_cards = function(req, res) {
     var user_id = req.user.id;
 
-    owned_books.get_owned_books(user_id, function(status, data){
+    owned_books.get_owned_books_info(user_id, function(status, data){
         if (status == utilities.owned_books_errors.DB_SUCCESS)
             console.log("Successfully found books from the database!");
 
-        // convert from array of Javascript objects to just array of book_ids
-        var book_ids = new Array();
-        for (var i = 0; i < data.length; i++) {
-            book_ids.push(data[i]["book_id"]);
-        }
-
-        // get the book info corresponding to each book_id 
-        book_info.get_books_info(book_ids, function(error_status, books_data) {
-            if (error_status) {
-                console.error("Error querying database", error_status);
-            }
-            // return the info for all the books
-            res.json({status: error_status, data: books_data});
-        });
+        // return the info for all the books
+        res.json({status: status, data: data});
     });
 };
 

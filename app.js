@@ -36,7 +36,6 @@ const bookShelfController = require('./controllers/routes/bookshelf');
  * Controllers (API)
  */
 const ownedBooksController = require('./controllers/api/owned_books');
-const wishListController = require('./controllers/api/wish_list');
 const possibleTradesController = require('./controllers/api/possible_trades');
 const textbookSearchController = require('./controllers/api/search');
 const bookToClassController = require('./controllers/api/book_to_class');
@@ -102,10 +101,6 @@ app.post('/api/owned_books/add', ownedBooksController.add_book);
 app.post('/api/owned_books/remove', ownedBooksController.remove_book);
 app.get('/api/owned_books/get_owned_cards', ownedBooksController.get_owned_cards);
 app.get('/api/owned_books/get_users', ownedBooksController.get_users);
-
-// Wanted books
-app.post('/api/wish_list/add', wishListController.add_book);
-app.post('/api/wish_list/remove', wishListController.remove_book);
 
 // Possible trades
 app.post('/api/possible_trades/add', possibleTradesController.add_relation);

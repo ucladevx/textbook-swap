@@ -78,6 +78,30 @@ exports.get_owned_books = function(user, next){
         });
     });
 };
+
+/*
+ Purpose: This function is used to get all the book info for the books that a user owns
+ Inputs: User_id that you want to know what books he or she owns and callback function
+ Output: Returns the callback function with a success or error code passed as a parameter and a list of the book_ids related to the user
+ */
+exports.get_owned_books_info = function(user, next){
+    pg.connect(process.env.DATABASE_URL, function(err, client, done){
+        done();
+        if (err){
+            console.error("Error connection to client while querying owned_books table: ", err);
+            return next(error_codes.owned_books_errors.DB_CONNECTION_ERROR, []);
+        }
+
+        client.query("SELECT book_id, title, author, isbn, img_url FROM book_info WHERE book_id in (SELECT book_id FROM owned_books WHERE user_id=$1::VARCHAR)", [user], function(err, result){
+            if(err){
+                console.error("Error querying database", err);
+                return next(error_codes.owned_books_errors.DB_QUERY_ERROR, []);
+            }
+            return next(error_codes.owned_books_errors.DB_SUCCESS, result.rows);
+        });
+    });
+};
+
 /*
     Purpose: The users that own a specific book in the database
     Inputs: The book_id that you want to get all the users that own it, and callback function

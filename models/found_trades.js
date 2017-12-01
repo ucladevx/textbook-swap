@@ -387,7 +387,7 @@ exports.automatic_reject_old_trades = function (next){
         done();
         if (err){
             console.error("Error connection to client while querying found_trades table: ", err);
-            return next(error_codes.found_trades_errors.DB_CONNECTION_ERROR);
+            return next(utilities.found_trades_errors.DB_CONNECTION_ERROR);
         }
 
         // TODO: modify this query to remove if timestamp for 'P' is more than two days old
@@ -395,10 +395,10 @@ exports.automatic_reject_old_trades = function (next){
             ['R', 'P'], function(err, result){
                 if(err){
                     console.error("Error deleting two day old pending trades database", err);
-                    return next(error_codes.found_trades_errors.DB_QUERY_ERROR);
+                    return next(utilities.found_trades_errors.DB_QUERY_ERROR);
                 }
 
-                return next(error_codes.found_trades_errors.DB_SUCCESS);
+                return next(utilities.found_trades_errors.DB_SUCCESS);
             });
     });
 };

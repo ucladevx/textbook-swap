@@ -383,21 +383,16 @@ exports.get_trades_status = function (trade_id, next) {
  */
 
 exports.automatic_reject_old_trades = function (next){
-    pg.connect(process.env.DATABASE_URL, function(err, client, done){
-        done();
-        if (err){
-            console.error("Error connection to client while querying found_trades table: ", err);
-            return next(utilities.found_trades_errors.DB_CONNECTION_ERROR);
-        }
-
-        // TODO: modify this query to remove if timestamp for 'P' is more than two days old
-        client.query("UPDATE found_trades SET status=$1::VARCHAR WHERE trade_id in (SELECT trade_id FROM found_trades WHERE status=$2::VARCHAR AND extract(day from now()::timestamp - ts) > 2",
+    pg.connect(utilities.database_url, function(err, client, done){
+        client.query("UPDATE found_trades SET status=$1::VARCHAR WHERE trade_id in (SELECT trade_id FROM found_trades WHERE status=$2::VARCHAR AND extract(day from now()::timestamp - ts) > 2)",
             ['R', 'P'], function(err, result){
+                client.end();
                 if(err){
-                    console.error("Error deleting two day old pending trades database", err);
+                    logger.error("Error deleting two day old pending trades database", err);
                     return next(utilities.found_trades_errors.DB_QUERY_ERROR);
                 }
 
+                logger.info("Successfully set two day old trades to rejected");
                 return next(utilities.found_trades_errors.DB_SUCCESS);
             });
     });

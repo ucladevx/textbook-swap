@@ -13,7 +13,6 @@ exports.create_database = function(next){
             if (err) {
                 logger.error('error happened during query', err);
             }
-
             client.end();
             return next();
         });

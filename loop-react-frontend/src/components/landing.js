@@ -27,17 +27,14 @@ const responseFacebook = (response) => {
   console.log(response);
 }
 
-const loadStuff = () => {
-    const req = axios.get('/api/search/search_textbooks?search_input=matrix')
-        .then((res) => {
-            console.log("Load", res.data)
-        })
-}
-
-
+//const loadStuff = () => {
+//    const req = axios.get('/api/search/search_textbooks?search_input=matrix')
+//        .then((res) => {
+//            console.log("Load", res.data)
+//        })
+//}
 
 const Landing = () => {
-  loadStuff();
   var mobileStyles = {
       hero: {
           backgroundImage: `url(${HeroMobile})`

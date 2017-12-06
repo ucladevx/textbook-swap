@@ -22,9 +22,9 @@
     "redux-thunk": "^2.2.0"
   },
   "proxy": {
-      "/*": {
-        "target": "http://52.53.151.12"
-      }
+    "/*": {
+      "target": "http://52.53.151.12"
+    }
   },
   "scripts": {
     "start": "react-scripts start",

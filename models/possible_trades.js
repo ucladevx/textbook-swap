@@ -268,6 +268,53 @@ exports.update_status_by_wanted_book = function(status_id, user_id, book_want_id
     });
 };
 
+/*
+ * remove all possible trades where a user owns
+ * a specific book {user_id:string , book_have_id:int }
+ * Replies with either an error_code
+ */
+exports.remove_trade_by_owned_book = function(user_id, owned_book, next) {
+    pg.connect(process.env.DATABASE_URL, function(err, client, done){
+        done();
+        if (err){
+            console.error("Error connection to client while querying possible_trades table: ", err);
+            return next(error_codes.possible_trades_errors.DB_CONNECTION_ERROR);
+        }
+
+        client.query("DELETE FROM possible_trades WHERE user_id=$1::VARCHAR AND book_have=$2::INTEGER", [user_id, owned_book], function(err, result){
+            if(err){
+                console.error("Error querying database", err);
+                return next(error_codes.possible_trades_errors.DB_QUERY_ERROR);
+            }
+            return next(error_codes.possible_trades_errors.DB_SUCCESS);
+        });
+    });
+};
+
+
+/*
+ * remove all possible trades where a user wants
+ * a specific book {user_id:string , book_want_id:int }
+ * Replies with either an error_code
+ */
+exports.remove_trade_by_wanted_book = function(user_id, book_want_id, next) {
+    pg.connect(process.env.DATABASE_URL, function(err, client, done){
+        done();
+        if (err){
+            console.error("Error connection to client while querying possible_trades table: ", err);
+            return next(error_codes.possible_trades_errors.DB_CONNECTION_ERROR);
+        }
+
+        client.query("DELETE FROM possible_trades WHERE user_id=$1::VARCHAR AND book_want=$2::INTEGER", [user_id, book_want_id], function(err, result){
+            if(err){
+                console.error("Error querying database", err);
+                return next(error_codes.possible_trades_errors.DB_QUERY_ERROR);
+            }
+            return next(error_codes.possible_trades_errors.DB_SUCCESS);
+        });
+    });
+};
+
 
 /*
  * gets status of possible trade { user_id:string , book_have_id:int, book_want_id:int }

@@ -116,7 +116,7 @@ function process(visited){
                 console.log("Error removing edges from the graph_edges table: " + status);
         });
 
-        possible_trades.remove_trade_by_book_owned(visited[i][0], visited[i][1], function(status){
+        possible_trades.remove_trade_by_owned_book(visited[i][0], visited[i][1], function(status){
             if(status == error_codes.possible_trades_errors.DB_SUCCESS)
                 console.log("Successfully removed possible trades by owned book!");
             else

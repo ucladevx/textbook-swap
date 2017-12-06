@@ -33,7 +33,6 @@ exports.add_new_user = function(user_id, user_name, user_email, next) {
                 });
             } else {
                 client.end();
-                logger.error("User already exists in users table");
                 return next(utilities.users_errors.USERS_ALREADY_EXISTS);
             }
         });

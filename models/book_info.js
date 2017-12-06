@@ -31,7 +31,9 @@ exports.get_book_info = function(book_id, next){
  Output: Returns a callback function that has an success or error code passed as a parameter and the resulting list of [book_id, title, author, isbn] as another parameter
  */
 exports.get_books_info = function(book_ids, next) {
+    logger.log("here");
     pg.connect(utilities.database_url, function(err, client, done){
+        logger.log("here");
         // get the book info for all books
         client.query("SELECT book_id, title, author, isbn, img_url FROM book_info WHERE book_id = any ($1)", [book_ids], function(err, books_info_result) {
             client.end();

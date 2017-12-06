@@ -129,7 +129,6 @@ exports.get_num_trades = function(user_id, next) {
             // value: count of book_wants associated with each book_have
             var book_to_count = {};
             var num_books = result.rows.length;
-            logger.log(num_books);
             if (num_books == 0) {
                 client.end();
                 return next(utilities.possible_trades_errors.DB_SUCCESS, null);

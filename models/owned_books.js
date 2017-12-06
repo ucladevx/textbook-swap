@@ -86,15 +86,10 @@ exports.get_owned_books = function(user, next){
  */
 exports.get_owned_books_info = function(user, next){
     pg.connect(process.env.DATABASE_URL, function(err, client, done){
-        done();
-        if (err){
-            console.error("Error connection to client while querying owned_books table: ", err);
-            return next(utilities.owned_books_errors.DB_CONNECTION_ERROR, []);
-        }
-
         client.query("SELECT book_id, title, author, isbn, img_url FROM book_info WHERE book_id in (SELECT book_id FROM owned_books WHERE user_id=$1::VARCHAR)", [user], function(err, result){
+            client.end();
             if(err){
-                console.error("Error querying database", err);
+                logger.error("Error querying database", err);
                 return next(utilities.owned_books_errors.DB_QUERY_ERROR, []);
             }
             return next(utilities.owned_books_errors.DB_SUCCESS, result.rows);

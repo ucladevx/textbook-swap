@@ -10,6 +10,7 @@ const book_info = require('../../models/book_info');
 const utilities = require('../../utilities');
 const found_trades = require('../../models/found_trades');
 const possible_trades = require('../../models/possible_trades');
+const logger = require('tracer').colorConsole();
 
 exports.index = function(req, res) {
     var user_id = req.user.id;
@@ -23,6 +24,7 @@ exports.index = function(req, res) {
                             book_want_ids.push(pt_ids[j]["book_want"]);
                         }
                         book_info.get_books_info(book_want_ids, function(book_want_error, book_want_info) {
+                            logger.log("hello world");
                            map_callback(null, book_want_info);
                         });
                     });
@@ -37,7 +39,7 @@ exports.index = function(req, res) {
         possible_trades_info: function(callback){
             possible_trades.get_num_trades(user_id, function(error_status, num_books) {
                 if (error_status) {
-                    console.error("Error querying database", error_status);
+                    logger.error("Error querying database", error_status);
                 }
                 callback(null, num_books);
             });
@@ -45,16 +47,15 @@ exports.index = function(req, res) {
         user_name: function(callback){
             users.get_user_name(user_id, function(error_status, user_name) {
                 if (error_status) {
-                    console.error("Error querying database", error_status);
+                    logger.error("Error querying database", error_status);
                 }
-
                 callback(null, user_name);
             });
         },
         matched_trades_info: function(callback){
             found_trades.get_matched_trades(user_id, function(error_status, matched_trades_data){
                 if(error_status){
-                    console.error("Error querying database", error_status);
+                    logger.error("Error querying database", error_status);
                 }
 
                 async.map(matched_trades_data, function(item, map_callback){

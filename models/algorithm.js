@@ -117,18 +117,18 @@ function process(visited){
                 logger.log("Error removing edges from the graph_edges table: " + status);
         });
 
-        possible_trades.update_status_by_owned_book('I', visited[i][0], visited[i][1], function(status){
+        possible_trades.remove_trade_by_book_owned(visited[i][0], visited[i][1], function(status){
             if(status == utilities.possible_trades_errors.DB_SUCCESS)
-                logger.log("Successfully updated statuses!");
+                logger.log("Successfully removed possible trades by owned book!");
             else
-                logger.log("Error updating statuses: " + status);
+                logger.log("Error removing possible trades by owned book: " + status);
         });
 
-        possible_trades.update_status_by_wanted_book('I', visited[i][0], visited[i + 1][1], function(status){
+        possible_trades.remove_trade_by_wanted_book(visited[i][0], visited[i + 1][1], function(status){
             if(status == utilities.possible_trades_errors.DB_SUCCESS)
-                logger.log("Successfully updated statuses!");
+                logger.log("Successfully removed possible trades by wanted book!");
             else
-                logger.log("Error updating statuses: " + status);
+                logger.log("Error removing possible trades by wanted book: " + status);
         });
     }
 

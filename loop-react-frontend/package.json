@@ -23,7 +23,7 @@
   },
   "proxy": {
       "/*": {
-        "target": "http://52.53.151.12"
+        "target": "http://52.52.27.3"
       }
   },
   "scripts": {

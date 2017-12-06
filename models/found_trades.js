@@ -383,16 +383,16 @@ exports.automatically_reject_old_trades = function (next){
 
         if (err){
             console.error("Error connection to client while querying found_trades table: ", err);
-            return next(error_codes.found_trades_errors.DB_CONNECTION_ERROR, []);
+            return next(utilties.found_trades_errors.DB_CONNECTION_ERROR, []);
         }
         client.query("SELECT trade_id, book_have, book_want FROM found_trades WHERE user_id=$1::VARCHAR",
             [user_id], function(err, result){
                 if(err){
                     console.error("Error querying database", err);
-                    return next(error_codes.found_trades_errors.DB_QUERY_ERROR, []);
+                    return next(utilties.found_trades_errors.DB_QUERY_ERROR, []);
                 }
 
-                return next(error_codes.found_trades_errors.DB_SUCCESS, result.rows);
+                return next(utilties.found_trades_errors.DB_SUCCESS, result.rows);
             });
     });
 };

@@ -57,16 +57,16 @@ exports.add_owned_book_edges = function(user, book, next){
         done();
         if (err){
             console.error("Error connection to client while querying graph_edges table: ", err);
-            return next(error_codes.graph_edges_errors.DB_CONNECTION_ERROR);
+            return next(utilities.graph_edges_errors.DB_CONNECTION_ERROR);
         }
 
         // insert owned_book edges
         client.query("INSERT INTO graph_edges (user_id, book_have, target_id, book_want) SELECT user_id, book_have, $1::VARCHAR, book_want FROM possible_trades WHERE book_want=$2::INTEGER", [user, book], function(err, result){
             if (err){
                 console.error("Error inserting into graph_edges table", err);
-                return next(error_codes.graph_edges_errors.DB_QUERY_ERROR);
+                return next(utilities.graph_edges_errors.DB_QUERY_ERROR);
             }
-            return next(error_codes.graph_edges_errors.DB_SUCCESS);
+            return next(utilities.graph_edges_errors.DB_SUCCESS);
         });
     });
 };
@@ -83,16 +83,16 @@ exports.add_trade_relation_edges = function(user, owned_book, wanted_book, next)
         done();
         if (err){
             console.error("Error connection to client while querying graph_edges table: ", err);
-            return next(error_codes.graph_edges_errors.DB_CONNECTION_ERROR);
+            return next(utilities.graph_edges_errors.DB_CONNECTION_ERROR);
         }
 
         // insert owned_book edges
         client.query("INSERT INTO graph_edges (user_id, book_have, target_id, book_want) SELECT $1::VARCHAR, $2::INTEGER, user_id, $3::INTEGER FROM owned_books WHERE book_id=$3::INTEGER", [user, owned_book, wanted_book], function(err, result){
             if (err){
                 console.error("Error inserting into graph_edges table", err);
-                return next(error_codes.graph_edges_errors.DB_QUERY_ERROR);
+                return next(utilities.graph_edges_errors.DB_QUERY_ERROR);
             }
-            return next(error_codes.graph_edges_errors.DB_SUCCESS);
+            return next(utilities.graph_edges_errors.DB_SUCCESS);
         });
     });
 };

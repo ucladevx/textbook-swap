@@ -116,14 +116,14 @@ function process(visited){
                 console.log("Error removing edges from the graph_edges table: " + status);
         });
 
-        possible_trades.remove_trade_by_owned_book(visited[i][0], visited[i][1], function(status){
+        possible_trades.remove_relation_have(visited[i][0], visited[i][1], function(status){
             if(status == error_codes.possible_trades_errors.DB_SUCCESS)
                 console.log("Successfully removed possible trades by owned book!");
             else
                 console.log("Error removing possible trades by owned book: " + status);
         });
 
-        possible_trades.remove_trade_by_wanted_book(visited[i][0], visited[i + 1][1], function(status){
+        possible_trades.remove_relation_want(visited[i][0], visited[i + 1][1], function(status){
             if(status == error_codes.possible_trades_errors.DB_SUCCESS)
                 console.log("Successfully removed possible trades by wanted book!");
             else

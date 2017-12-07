@@ -146,7 +146,7 @@ exports.remove_trade_by_id = function(trade_id, next){
 };
 
 /*
- * Purpose: remove a trade with a specific user who owns a book
+ * Purpose: dismiss a trade with a specific user who owns a book
  * Inputs:  user_id: user that owns the book, owned_book: book id that is owned by the user, next:callback function
  * Output: Returns the callback function that has an error code (or success) passed back as a parameter
  */
@@ -158,7 +158,7 @@ exports.remove_trade_by_book_owned = function(user_id, owned_book, next){
             console.error("Error connection to client while querying found_trades table: ", err);
             return next(error_codes.found_trades_errors.DB_CONNECTION_ERROR, []);
         }
-        client.query("DELETE FROM found_trades WHERE trade_id IN (SELECT trade_id FROM found_trades WHERE user_id=$1::VARCHAR AND book_have=$2::INTEGER)",
+        client.query("DELETE FROM found_trades WHERE user_id=$1::VARCHAR AND book_have=$2::INTEGER)",
             [user_id, owned_book], function(err, result){
                 if(err){
                     console.error("Error querying database", err);

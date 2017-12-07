@@ -158,7 +158,7 @@ exports.remove_trade_by_book_owned = function(user_id, owned_book, next){
             console.error("Error connection to client while querying found_trades table: ", err);
             return next(error_codes.found_trades_errors.DB_CONNECTION_ERROR, []);
         }
-        client.query("DELETE FROM found_trades WHERE user_id=$1::VARCHAR AND book_have=$2::INTEGER)",
+        client.query("DELETE FROM found_trades WHERE user_id=$1::VARCHAR AND book_have=$2::INTEGER",
             [user_id, owned_book], function(err, result){
                 if(err){
                     console.error("Error querying database", err);

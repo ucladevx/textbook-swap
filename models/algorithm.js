@@ -8,6 +8,8 @@ const owned_books = require('./owned_books');
 const possible_trades = require('./possible_trades');
 const found_trades = require('./found_trades');
 const found_trades_id = require('./found_trades_id');
+const emailer = require('./emailer.js');
+
 
 var edges = {}; // adjacency list of all nodes
 var matched = {}; // already matched nodes
@@ -130,6 +132,15 @@ function process(visited){
             else
                 logger.log("Error removing possible trades by wanted book: " + status);
         });
+        emailer.setup_potential_trade_email(visited[i][0], visited[i][1], visited[i + 1][0], visited[i + 1][1], function(err, email_data){
+                if(err) {
+                    console.log(err);
+                }
+                else {
+                    console.log(email_data);
+                    emailer.send_potential_trade_email(email_data);
+                }
+            });
     }
 
     tradeID++;

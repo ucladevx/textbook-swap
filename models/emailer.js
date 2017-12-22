@@ -1,8 +1,8 @@
-const dotenv = require('dotenv');
+require('dotenv').config();
 const users = require('./users');
 const books = require('./book_info');
 const fs = require('fs');
-const matched_email_html = fs.readFileSync(__dirname + '/../public/assets/matched_email_notification.html', 'UTF-8');
+const matched_email_html = fs.readFileSync(__dirname + '/../public/assets/potential_trade_email_notif.html', 'UTF-8');
 const nodemailer = require('nodemailer');
 
 const transport = nodemailer.createTransport({

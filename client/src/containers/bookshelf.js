@@ -6,7 +6,6 @@ import NavBar from '../components/navbar'
 import Footer from '../components/footer'
 import Card from '../components/card'
 
-
 class Bookshelf extends Component{
     constructor(props){
         super(props)

@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import Home from './containers/home'
 import Bookshelf from './containers/bookshelf'
 import Form from './components/form'
+import SearchBox from './components/searchBox'
 
 class App extends Component {
     componentDidMount(){
@@ -21,7 +22,7 @@ class App extends Component {
                 </Route>
                 <Route exact path="/bookshelf" component={() => (
                         <Form/>
-                    )}>
+                )}>
                 </Route>
             </div>
         </BrowserRouter>

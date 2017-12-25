@@ -3,7 +3,6 @@ import React from 'react';
 import ReactSVG from 'react-svg';
 import Responsive from 'react-responsive';
 import FacebookLogin from 'react-facebook-login';
-import axios from 'axios'
 
 // Resources
 import Book1 from '../img/book1.svg'
@@ -52,22 +51,14 @@ const Landing = () => {
         <Default>
             <div className="hero" style={desktopStyles.hero}>
                 <div className="heroText">
-                    {/*<FacebookLogin
-                        appId="238591543282201"
-                        autoLoad={true}
-                        fields="name,email,picture"
-                        callback={responseFacebook}
-                        cssClass="my-facebook-button-class"
-                        icon="fa-facebook"
-                    />*/}
-                    <a className="button button-default" href="/login/facebook" role="button">LOGIN WITH FACEBOOK</a>
+                    <a className="button button-default" href="http://localhost:5000/login/facebook" role="button">LOGIN WITH FACEBOOK</a>
                 </div>
             </div>
         </Default>
         <Mobile>
             <div className="hero" style={mobileStyles.hero}>
                 <div className="heroText">
-                    <a className="button button-default" href="/login/facebook" role="button">LOGIN WITH FACEBOOK</a>
+                    <a className="button button-default" href="/api/login/facebook" role="button">LOGIN WITH FACEBOOK</a>
                 </div>
             </div>
         </Mobile>
@@ -82,7 +73,7 @@ const Landing = () => {
                 Loop is an innovative way to trade, buy, and sell textbooks.
                 <br></br>
                 <br></br>
-                Users pick what textbooks they want and what they're willing to trade for them, and our algorithm will do the rest.
+                Users pick what textbooks they want and what theyre willing to trade for them, and our algorithm will do the rest.
                 <br></br>
                 <br></br>
                 By comparing book lists of all of our users, Loop automatically generates the smartest trade circles that maximize the number of people who get what they want, with almost no effort involved on the part of the user.

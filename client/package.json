@@ -21,11 +21,6 @@
     "redux-promise": "^0.5.3",
     "redux-thunk": "^2.2.0"
   },
-  "proxy": {
-      "/*": {
-        "target": "http://52.52.27.3"
-      }
-  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

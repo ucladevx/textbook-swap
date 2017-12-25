@@ -9,6 +9,17 @@
 .formButton::first{
     margin-top: 10%;
 }
+
+.formContents{
+    display: block;
+}
+
+.formInput{
+    display: block;
+    width: 80%;
+    align-self: center;
+}
+
 .formButton{
     font-family: inherit;
     font-size: 150%;

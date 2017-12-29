@@ -58,7 +58,7 @@ const Landing = () => {
         <Mobile>
             <div className="hero" style={mobileStyles.hero}>
                 <div className="heroText">
-                    <a className="button button-default" href="/api/login/facebook" role="button">LOGIN WITH FACEBOOK</a>
+                    <a className="button button-default" href="http://localhost:5000/login/facebook" role="button">LOGIN WITH FACEBOOK</a>
                 </div>
             </div>
         </Mobile>

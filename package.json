@@ -47,7 +47,6 @@
     "path": "^0.12.7",
     "pg": "^6.1.5",
     "pug": "^2.0.0-beta11",
-    "react-select": "^1.1.0",
     "request": "^2.81.0",
     "sweetalert": "^1.1.3"
   }

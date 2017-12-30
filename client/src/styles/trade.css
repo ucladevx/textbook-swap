@@ -1,0 +1,22 @@
+.trade-splash{
+    width: 100%;
+    padding: 5%;
+    background-color: aliceblue;
+}
+.trade-container{
+    padding: 1%;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    background-color: white;
+}
+
+.trade-left{
+    flex: 1;
+    padding-right: 1%;
+}
+
+.trade-right{
+    flex: 1;
+    padding-left: 1%;
+}

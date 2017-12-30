@@ -4,10 +4,9 @@ import {withRouter} from "react-router-dom";
 import axios from 'axios'
 
 import SearchBox from './searchBox'
+import Summary from './summary'
 
 import '../styles/form.css'
-import '../styles/vendors/buttons-core.css'
-import '../styles/vendors/buttons.css'
 
 const ROOT = 'https://cors.io/?http://www.loop-trading.com'
 
@@ -46,14 +45,12 @@ class Form extends Component{
                 page
             })
         }
-    }
-    
+    } 
     setOffer(value){
         this.setState({
             offer: value
         })
     }
-    
     setWant(value){
         this.setState({
             want: value
@@ -127,7 +124,8 @@ class Form extends Component{
                 case 2:
                      return (
                          <div>
-                            <h3>Confirm books offered</h3>                             
+                            <h3>Confirm books offered</h3>
+                            <Summary books={this.state.offer}></Summary>
                             <button onClick={()=>this.setPage({option, screen: screen-1})}>Prev</button>
                             <button onClick={()=>this.setPage({option, screen: screen+1})}>Next</button>
                          </div>

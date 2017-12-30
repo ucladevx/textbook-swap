@@ -37,7 +37,6 @@ class searchBox extends Component{
             return fetch(ROOT+'/api/search/search_textbooks?search_input='+input)
             .then((res) => res.json())
             .then((json) => {
-                this.setState({searchResults: json.data})
                 return { options: json.data };
             })
         }
@@ -114,9 +113,7 @@ class searchBox extends Component{
 				<AsyncComponent multi={this.state.multi} value={this.state.value} onChange={this.onChange} onValueClick={this.gotoUser} valueKey="book_id" labelKey="title" loadOptions={this.getBooks} backspaceRemoves={this.state.backspaceRemoves} />
 			</div>
 		);
-	}
-    
-    
+	} 
 }
 
 export default searchBox

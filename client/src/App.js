@@ -5,14 +5,16 @@ import {connect} from 'react-redux';
 import Home from './containers/home'
 import Bookshelf from './containers/bookshelf'
 import Form from './components/form'
+import Trade from './components/trade'
 import SearchBox from './components/searchBox'
+import Summary from './components/summary'
 
 class App extends Component {
     componentDidMount(){
         console.log("Load initial app state")
     }
 
-  render() {
+    render() {
     return (
         <BrowserRouter>
             <div className="App">
@@ -21,7 +23,9 @@ class App extends Component {
                     )}>
                 </Route>
                 <Route exact path="/bookshelf" component={() => (
-                        <Form/>
+                        <div>
+                            <Trade></Trade>
+                        </div>
                 )}>
                 </Route>
             </div>

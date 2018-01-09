@@ -222,7 +222,6 @@ exports.update_status_by_wanted_book = function(status_id, user_id, book_want_id
     });
 };
 
-
 /*
  * gets status of possible trade { user_id:string , book_have_id:int, book_want_id:int }
  * Replies with either an error_code or the status of the possible_trade (valid, invalid, etc.)

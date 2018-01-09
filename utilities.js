@@ -1,6 +1,8 @@
 /*
 error codes for the database queries - could expand to more later
  */
+const dotenv = require('dotenv');
+dotenv.config();
 
 exports.owned_books_errors = Object.freeze({
     DB_SUCCESS : 0,
@@ -67,3 +69,9 @@ exports.found_trades_id_errors = Object.freeze({
     ID_DNE : 4,
     MULTIPLE_ID_EXISTS : 5
 });
+
+if(process.env.NODE_ENV == "test"){
+    exports.database_url = process.env.DATABASE_URL_TEST;
+} else {
+    exports.database_url = process.env.DATABASE_URL;
+}

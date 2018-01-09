@@ -58,7 +58,7 @@ $(document).ready(function(){
 		var header = "<div class=\"row\" id=\"top-row\">"
 			+ "<div class=\"col-xs-3 text-left\">"
 			+ "<a class=\"matched-popup-close\" data-matched-popup-close=\"" + "matched-popup-matched-trade"
-			+ "\" href=\"\">x</a>" 
+			+ "\" href=\"\">x</a>"
 			+ "</div>"
 			+ "<div class=\"col-xs-6 text-center\">"
 			+ "<h4>MATCHED TRADE</h4>"
@@ -68,11 +68,11 @@ $(document).ready(function(){
 			+ "</div>"
 			+ "</div>"
 
-		$("body").append("<div class=\"matched-popup\" data-matched-popup=\"" 
+		$("body").append("<div class=\"matched-popup\" data-matched-popup=\""
 			+ "matched-popup-matched-trade"
 			+ "\"><div class=\"matched-popup-inner\" id=\"matched\">"
 			+ "<div class=\"first-page\">"
-			
+
 			+ header
 
 			+ "<div class=\"row matched-inner\">"
@@ -81,7 +81,7 @@ $(document).ready(function(){
 			+ "Title: " + ownedCard[1].nodeValue.toUpperCase() + "<br>"
 			+ "Author: " + ownedCard[2].nodeValue.toUpperCase() + "<br>"
 			+ "ISBN: " + ownedCard[4].nodeValue.toUpperCase() + "<br>"
-			+ "<img class=\"matchbook\"src=\"" + ownedCard[5].nodeValue + "\"> <br>" 
+			+ "<img class=\"matchbook\"src=\"" + ownedCard[5].nodeValue + "\"> <br>"
 			+ "</p>"
 			+ "</div>" //close col
 
@@ -111,7 +111,7 @@ $(document).ready(function(){
 			+ "</div>" //close first-page
 			+ "</div></div>" //close matched-popup-inner and matched-popup
 		);
-		
+
 		$('[data-matched-popup="' + "matched-popup-matched-trade" + '"]').fadeIn(350);
 
 		// close the matched-popup if you are clicking outside of it

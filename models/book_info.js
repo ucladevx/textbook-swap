@@ -4,7 +4,8 @@
 
 'use strict';
 const pg = require('pg');
-const error_codes = require('../error_codes');
+const logger = require('tracer').colorConsole();
+const utilities = require('../utilities');
 
 /*
  * Purpose: This function is used to get all the information associated with a particular book_id's in the book_info database
@@ -12,19 +13,14 @@ const error_codes = require('../error_codes');
  * Output: Returns the callback function with a success or error code passed as a parameter and a row related to the book_id
  */
 exports.get_book_info = function(book_id, next){
-    pg.connect(process.env.DATABASE_URL, function(err, client, done){
-        done();
-        if (err){
-            console.error("Error connection to client while querying book_info table: ", err);
-            return next(error_codes.book_info_errors.DB_CONNECTION_ERROR, []);
-        }
-
+    pg.connect(utilities.database_url, function(err, client, done){
         client.query("SELECT * FROM book_info WHERE book_id=$1::INTEGER", [book_id], function(err, result){
+            client.end();
             if(err){
-                console.error("Error querying database", err);
-                return next(error_codes.book_info_errors.DB_QUERY_ERROR, []);
+                logger.error("Error querying database", err);
+                return next(utilities.book_info_errors.DB_QUERY_ERROR, []);
             }
-            return next(error_codes.book_info_errors.DB_SUCCESS, result.rows);
+            return next(utilities.book_info_errors.DB_SUCCESS, result.rows);
         });
     });
 };
@@ -35,21 +31,17 @@ exports.get_book_info = function(book_id, next){
  Output: Returns a callback function that has an success or error code passed as a parameter and the resulting list of [book_id, title, author, isbn] as another parameter
  */
 exports.get_books_info = function(book_ids, next) {
-    pg.connect(process.env.DATABASE_URL, function(err, client, done){
-        done();
-        if (err) {
-            console.error("Error connection to client while querying books table: ", err);
-            return next(error_codes.book_info_errors.DB_CONNECTION_ERROR);
-        }
-
+    logger.log("here");
+    pg.connect(utilities.database_url, function(err, client, done){
+        logger.log("here");
         // get the book info for all books
         client.query("SELECT book_id, title, author, isbn, img_url FROM book_info WHERE book_id = any ($1)", [book_ids], function(err, books_info_result) {
+            client.end();
             if (err) {
-                console.error("Error querying database", err);
-                return next(error_codes.book_info_errors.DB_QUERY_ERROR);
+                logger.error("Error querying database", err);
+                return next(utilities.book_info_errors.DB_QUERY_ERROR);
             }
-
-            return next(error_codes.book_info_errors.DB_SUCCESS, books_info_result.rows);
+            return next(utilities.book_info_errors.DB_SUCCESS, books_info_result.rows);
         });
     });
 };

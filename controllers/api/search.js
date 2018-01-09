@@ -3,8 +3,9 @@
  */
 
 const request = require('request');
-const ec = require('../../error_codes');
+const ec = require('../../utilities');
 const bt = require('../../models/books');
+const logger = require('tracer').colorConsole();
 
 /*
  * GET http://localhost:3000/api/search/search_textbooks
@@ -13,12 +14,12 @@ const bt = require('../../models/books');
 exports.search_textbooks = function(req, res) {
     var search_input = req.query.search_input;
     // log user input from search box
-    console.log(search_input);
+    logger.log(search_input);
 
     // search the books database based on user input
     bt.get_search_results(search_input, function(status, data) {
     	if (status == ec.books_errors.DB_SUCCESS) {
-            console.log("Successfully found textbook search results in the database!");
+            logger.log("Successfully found textbook search results in the database!");
 
             // convert from array of Javascript objects to just array of book_ids
             var book_ids = new Array();
@@ -29,7 +30,7 @@ exports.search_textbooks = function(req, res) {
             // get the book info corresponding to each book_id 
             bt.get_books_info(book_ids, function(error_status, books_data) {
             	if (error_status) {
-	                console.error("Error querying database", error_status);
+	                logger.error("Error querying database", error_status);
 	            }
 
 	            // return the info for all the books
@@ -38,6 +39,6 @@ exports.search_textbooks = function(req, res) {
 
     	}
         else if (status == ec.books_errors.DB_QUERY_ERROR)
-        	console.log("Error querying database for textbook search results!");
+        	logger.log("Error querying database for textbook search results!");
     });
 };

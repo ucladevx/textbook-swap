@@ -92,6 +92,13 @@ app.use(passport.session());
 app.get('/', homeController.index);
 app.get('/bookshelf', require_login.ensureLoggedIn(), bookShelfController.index);
 
+
+/*
+* Route for help page pdf
+ */
+
+app.use('/pdf/', express.static(__dirname + '/pdf/'));
+
 /*
  * API routes.
  */
@@ -200,3 +207,5 @@ var algorithmInterval = setInterval(function(){
 app.listen(app.get('port'), function(){
     console.log('%s Express server listening on port %d.', chalk.green('✓'), app.get('port'));
 });
+
+module.exports = app;

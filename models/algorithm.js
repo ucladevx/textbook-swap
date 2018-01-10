@@ -17,7 +17,11 @@ exports.run_algorithm = function(){
     logger.log("running algorithm");
     edges = {}; // adjacency list of all nodes
     matched = {}; // already matched nodes
+    logger.log(edges);
+    logger.log(matched);
     load_data(function(){
+        logger.log(edges);
+        logger.log(matched);
         for(var i = 2; i <= 4; i++){
             var keys = Object.keys(edges);
             for(var j = 0; j < keys.length; j++){

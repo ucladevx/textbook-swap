@@ -9,12 +9,14 @@ const possible_trades = require('./possible_trades');
 const found_trades = require('./found_trades');
 const found_trades_id = require('./found_trades_id');
 
-var edges = {}; // adjacency list of all nodes
-var matched = {}; // already matched nodes
 var tradeID = 0; // current trade ID
+var edges;
+var matched;
 
 exports.run_algorithm = function(){
     logger.log("running algorithm");
+    edges = {}; // adjacency list of all nodes
+    matched = {}; // already matched nodes
     load_data(function(){
         for(var i = 2; i <= 4; i++){
             var keys = Object.keys(edges);

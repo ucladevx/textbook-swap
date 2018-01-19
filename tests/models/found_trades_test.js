@@ -4,7 +4,7 @@
  */
 
 
-const ec = require('../../error_codes');
+const ec = require('../../utilities');
 const found_trades = require('../../models/found_trades');
 const found_trades_id = require('../../models/found_trades_id');
 

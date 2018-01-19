@@ -1,4 +1,4 @@
-const ec = require('../../error_codes');
+const ec = require('../../utilities');
 const initModel = require('../../models/init');
 const bookInfo = require('../../models/book_info');
 

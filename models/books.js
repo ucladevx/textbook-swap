@@ -4,7 +4,7 @@
 
 'use strict';
 const pg = require('pg');
-const error_codes = require('../error_codes');
+const utilities = require('../utilities');
 
 var searchAndReplace = function(results, book_num, ranking){
     for (var k = 0; k < results.length; k++) {
@@ -38,17 +38,17 @@ exports.get_books_info = function(book_ids, next) {
         done();
         if (err) {
             console.error("Error connection to client while querying books table: ", err);
-            return next(error_codes.book_info_errors.DB_CONNECTION_ERROR);
+            return next(utilities.book_info_errors.DB_CONNECTION_ERROR);
         }
 
         // get the book info for all books
         client.query("SELECT book_id, title, author, isbn, img_url FROM book_info WHERE book_id = any ($1)", [book_ids], function(err, books_info_result) {
             if (err) {
                 console.error("Error querying database", err);
-                return next(error_codes.book_info_errors.DB_QUERY_ERROR);
+                return next(utilities.book_info_errors.DB_QUERY_ERROR);
             }
 
-            return next(error_codes.book_info_errors.DB_SUCCESS, books_info_result.rows);
+            return next(utilities.book_info_errors.DB_SUCCESS, books_info_result.rows);
         });
     });
 };
@@ -64,13 +64,13 @@ exports.get_search_results = function(search_input, next){
         done();
         if (err){
             console.error("Error connection to client while querying books table: ", err);
-            return next(error_codes.book_info_errors.DB_CONNECTION_ERROR);
+            return next(utilities.book_info_errors.DB_CONNECTION_ERROR);
         }
 
         client.query("SELECT book_id, professor_name, class_name, ts_rank_cd(tsv, query, 1) AS rank FROM book_to_class, plainto_tsquery($1::VARCHAR) query WHERE tsv @@ query ORDER BY rank DESC LIMIT 10", [search_input], function(err, books_result){
             if(err){
                 console.error("Error querying database", err);
-                return next(error_codes.book_to_class_errors.DB_QUERY_ERROR);
+                return next(utilities.book_to_class_errors.DB_QUERY_ERROR);
             }
 
             client.query("SELECT book_id, title, author, isbn, ts_rank_cd(tsv, query, 1) AS rank FROM book_info, plainto_tsquery($1::VARCHAR) query WHERE tsv @@ query ORDER BY rank DESC LIMIT 10", [search_input], function(err, books_info_result){
@@ -90,7 +90,7 @@ exports.get_search_results = function(search_input, next){
                 });
 
                 // returns a array of javascript objects EX. [{book_id: 1231, rank: 0.071}, ...]
-                return next(error_codes.book_info_errors.DB_SUCCESS, results);
+                return next(utilities.book_info_errors.DB_SUCCESS, results);
             });
         });
     });

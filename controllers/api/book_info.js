@@ -3,7 +3,7 @@
  */
 
 const request = require('request');
-const error_codes = require('../../error_codes');
+const utilities = require('../../utilities');
 const books = require('../../models/book_info');
 
 /*
@@ -15,7 +15,7 @@ exports.get_book_info = function(req, res) {
 	var book_id = req.query.id;
 
 	books.get_book_info(book_id, function(status, data){
-		if(status == error_codes.book_info_errors.DB_SUCCESS)
+		if(status == utilities.book_info_errors.DB_SUCCESS)
 			console.log("Successfully got book info from database!");
 
 		res.json({status: status, data: data});
@@ -35,13 +35,13 @@ exports.get_pair_book_info = function(req, res) {
 	var book2_data;
 
 	books.get_book_info(book_id1, function(status, data){
-		if(status == error_codes.book_info_errors.DB_SUCCESS)
+		if(status == utilities.book_info_errors.DB_SUCCESS)
 			console.log("Successfully got book info from database!");
 		
 		book1_data = data;
 	});
 	books.get_book_info(book_id2, function(status, data){
-		if(status == error_codes.book_info_errors.DB_SUCCESS)
+		if(status == utilities.book_info_errors.DB_SUCCESS)
 			console.log("Successfully got book info from database!");
 		
 		book2_data = data;

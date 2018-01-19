@@ -1,6 +1,7 @@
 const ec = require('../../utilities');
 const initModel = require('../../models/init');
 const ownedBooks = require('../../models/owned_books');
+const logger = require('tracer').colorConsole();
 
 exports.test = function(){
     /*
@@ -13,16 +14,16 @@ exports.test = function(){
 
     function test_n(errorcode){
         if (errorcode == ec.owned_books_errors.OWNED_BOOK_ALREADY_EXISTS){
-            console.log("book is in the database");
+            logger.log("book is in the database");
         }
     }
 
     function test_next(result_code, result){
         if (result_code == ec.owned_books_errors.DB_SUCCESS){
-            console.log("YAY");
+            logger.log("YAY");
         }
         if (result_code == ec.owned_books_errors.DB_QUERY_ERROR){
-            console.log("wtf");
+            logger.log("wtf");
         }
     }
 };

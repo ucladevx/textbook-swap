@@ -7,6 +7,7 @@ const ec = require('../../utilities');
 const db = require('../../models/possible_trades');
 const ob = require('../../models/owned_books');
 const ge = require('../../models/graph_edges');
+const logger = require('tracer').colorConsole();
 
 /*
  * POST http://localhost:3000/api/possible_trades/add
@@ -21,9 +22,9 @@ exports.add_relation = function(req, res) {
 
     db.add_relation(user_id, owned_book_id, wanted_book_id, function(status){
         if (status == ec.possible_trades_errors.DB_SUCCESS)
-            console.log("Successfully added relation to the database!");
+            logger.log("Successfully added relation to the database!");
         else if (status == ec.possible_trades_errors.POSSIBLE_TRADE_ALREADY_EXISTS)
-            console.log("Relation is already in the database.");
+            logger.log("Relation is already in the database.");
 
         res.json({status: status});
     });
@@ -32,9 +33,9 @@ exports.add_relation = function(req, res) {
     //someone owns the book you want
     ge.add_trade_relation_edges(user_id, owned_book_id, wanted_book_id, function(status, rows) {
         if (status == ec.graph_edges_errors.DB_SUCCESS)
-            console.log("Successfully inserted graph edges for trade relation in the database!");
+            logger.log("Successfully inserted graph edges for trade relation in the database!");
         else if (status == ec.possible_trades_errors.DB_QUERY_ERROR) 
-            console.log("Error inserting trade relation graph edges for owned book in database!");
+            logger.log("Error inserting trade relation graph edges for owned book in database!");
     });
 };
 
@@ -51,18 +52,18 @@ exports.remove_relation = function(req, res) {
 
     db.remove_relation(user_id, owned_book_id, wanted_book_id, function(status){
         if (status == ec.possible_trades_errors.DB_SUCCESS)
-            console.log("Successfully removed relation from the database!");
+            logger.log("Successfully removed relation from the database!");
         else
-            console.log("Error trying to remove relation from database.");
+            logger.log("Error trying to remove relation from database.");
 
         res.json({status: status});
     });
 
     ge.remove_user_owned_want(user_id, owned_book_id, wanted_book_id, function(status){
         if (status == ec.possible_trades_errors.DB_SUCCESS)
-            console.log("Successfully removed edges from the database!");
+            logger.log("Successfully removed edges from the database!");
         else
-            console.log("Error trying to remove relation from database.");
+            logger.log("Error trying to remove relation from database.");
     });
 };
 
@@ -77,7 +78,7 @@ exports.remove_relation = function(req, res) {
 //
 //     owned_books.remove_relation_have(user_id, owned_book_id, function(status){
 //         if (status == utilities.possible_trades_errors.DB_SUCCESS)
-//             console.log("Successfully removed relation-have from the database!");
+//             logger.log("Successfully removed relation-have from the database!");
 //
 //         res.json({status: status});
 //     });
@@ -94,7 +95,7 @@ exports.remove_relation = function(req, res) {
 //
 //     owned_books.remove_relation_want(user_id, wanted_book_id, function(status){
 //         if (status == utilities.possible_trades_errors.DB_SUCCESS)
-//             console.log("Successfully removed relation-want from the database!");
+//             logger.log("Successfully removed relation-want from the database!");
 //
 //         res.json({status: status});
 //     });
@@ -110,7 +111,7 @@ exports.get_book_wants = function(req, res) {
 
     db.get_book_wants(user_id, owned_book_id, function(status, data){
         if (status == ec.possible_trades_errors.DB_SUCCESS)
-            console.log("Successfully found wanted books from the database!");
+            logger.log("Successfully found wanted books from the database!");
 
         res.json({status: status, data: data});
     });

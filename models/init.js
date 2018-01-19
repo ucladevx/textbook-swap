@@ -7,6 +7,7 @@ const pg = require('pg');
 const utilities = require('../utilities');
 const async = require('async');
 const found_trades_id = require('./found_trades_id');
+const logger = require('tracer').colorConsole();
 
 /*
  * Initializes the database by creating all the tables if they do not already exist.
@@ -14,7 +15,7 @@ const found_trades_id = require('./found_trades_id');
 exports.create_tables = function(next){
     pg.connect(process.env.DATABASE_URL, function (err, client, done) {
         if (err) {
-            return console.error('error fetching client from pool', err)
+            return logger.error('error fetching client from pool', err)
         }
         const book_to_class_data = (process.env.DATA_PATH || "'" + __dirname + "/data/") + "book_to_class_clean.csv'";
         const book_to_class_query = 
@@ -39,7 +40,7 @@ exports.create_tables = function(next){
         async.map(queries, function(item, callback){
             client.query(item, function (err, result) {
                 if (err) {
-                    console.error('error happened during query', err);
+                    logger.error('error happened during query', err);
                     return callback(err, result);
                 }
                 callback(err, result);

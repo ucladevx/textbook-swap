@@ -1,6 +1,7 @@
 const ec = require('../../utilities');
 const initModel = require('../../models/init');
 const bookToClass = require('../../models/book_to_class');
+const logger = require('tracer').colorConsole();
 
 exports.test = function() {
     /*
@@ -21,11 +22,11 @@ exports.test = function() {
 
     function test_next(result_code, result) {
         if (result_code == ec.book_to_class_errors.DB_SUCCESS) {
-            console.log("YAY");
+            logger.log("YAY");
         }
         if (result_code == ec.book_to_class_errors.DB_QUERY_ERROR) {
-            console.log("wtf");
+            logger.log("wtf");
         }
-        console.log(result);
+        logger.log(result);
     }
 };

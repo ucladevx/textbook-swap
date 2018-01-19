@@ -6,7 +6,7 @@ import Home from './containers/home'
 
 class App extends Component {
     componentDidMount(){
-        console.log("Load initial app state")
+        logger.log("Load initial app state")
     }
 
   render() {

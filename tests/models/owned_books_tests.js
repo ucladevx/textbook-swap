@@ -6,12 +6,13 @@
 
 const owned_books = require('../../models/owned_books');
 const utilities = require('../../utilities');
+const logger = require('tracer').colorConsole();
 
 function add_book_next(result){
     if (result == utilities.owned_books_errors.DB_SUCCESS){
         owned_books.add_book('Adi', 5, function(result){
             if (result == utilities.owned_books_errors.OWNED_BOOK_ALREADY_EXISTS){
-                console.log("Add book was successful!")
+                logger.log("Add book was successful!")
             }
             else{
                 throw new Error("Adding repeat book test failed!");
@@ -32,7 +33,7 @@ function remove_book_next(result){
     if (result == utilities.owned_books_errors.DB_SUCCESS || result == utilities.owned_books_errors.OWNED_BOOK_ALREADY_EXISTS){
         owned_books.remove_book('Adi', 5, function(result){
            if (result == utilities.owned_books_errors.DB_SUCCESS){
-               console.log("remove book test is success");
+               logger.log("remove book test is success");
            }
            else{
                throw new Error("Removing book test failed!");

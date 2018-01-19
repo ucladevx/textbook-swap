@@ -2,6 +2,7 @@
  * API keys and Passport configuration.
  */
 const passportConfig = require('../config/auth');
+const logger = require('tracer').colorConsole();
 
 /* 
  * Facebook Authentication
@@ -30,9 +31,9 @@ module.exports = function(passport, FacebookStrategy) {
       // be associated with a user record in the application's database, which
       // allows for account linking and authentication with other identity
       // providers.
-      console.log(profile.displayName);  // full name
-      console.log(profile.id);  // user ID
-      //console.log(profile.emails[0].value);  // email address
+      logger.log(profile.displayName);  // full name
+      logger.log(profile.id);  // user ID
+      //logger.log(profile.emails[0].value);  // email address
       return cb(null, profile);
     }));
 

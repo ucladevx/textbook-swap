@@ -5,6 +5,7 @@
 const request = require('request');
 const utilities = require('../../utilities');
 const found_trades = require('../../models/found_trades');
+const logger = require('tracer').colorConsole();
 
 /*
  * POST http://localhost:3000/api/found_trades/update_status_accepted
@@ -23,9 +24,9 @@ exports.update_status_accepted = function(req, res) {
 
     found_trades.update_status_accepted(trade_id, user_id, owned_book, target_user, wanted_book, function(status, matched){
         if (status == utilities.found_trades_errors.DB_SUCCESS)
-            console.log("Successfully updated trade status to accepted!");
+            logger.log("Successfully updated trade status to accepted!");
         else{
-            console.log("DB error")
+            logger.log("DB error")
         }
         res.json({status: status, matched: matched});
     });
@@ -42,9 +43,9 @@ exports.update_status_rejected = function(req, res) {
 
     found_trades.update_status_rejected_by_id(trade_id, function(status){
         if (status == utilities.found_trades_errors.DB_SUCCESS)
-            console.log("Successfully updated trade status to rejected!");
+            logger.log("Successfully updated trade status to rejected!");
         else{
-            console.log("DB error")
+            logger.log("DB error")
         }
         res.json({status: status});
     });
@@ -61,9 +62,9 @@ exports.get_trade_by_wanted_book = function(req, res) {
 
     found_trades.get_trade_by_wanted_book(user_id, wanted_book, function(status, data){
         if (status == utilities.found_trades_errors.DB_SUCCESS)
-            console.log("Successfully got trade!");
+            logger.log("Successfully got trade!");
         else{
-            console.log("DB error")
+            logger.log("DB error")
         }
 
         res.json({status: status, data: data})
@@ -81,9 +82,9 @@ exports.get_trade_by_book_owned = function(req, res) {
 
     found_trades.get_trade_by_book_owned(user_id, owned_book, function(status, data){
         if (status == utilities.found_trades_errors.DB_SUCCESS)
-            console.log("Successfully got trade by owned book!");
+            logger.log("Successfully got trade by owned book!");
         else{
-            console.log("DB error")
+            logger.log("DB error")
         }
 
         res.json({status: status, data: data})
@@ -97,13 +98,13 @@ exports.get_trade_by_book_owned = function(req, res) {
 exports.dismiss_rejected_trade = function(req, res) {
     var user_id = req.user.id;
     var owned_book = req.body.owned_book;
-    console.log(user_id, owned_book);
+    logger.log(user_id, owned_book);
 
     found_trades.remove_trade_by_book_owned(user_id, owned_book, function(status){
         if (status == utilities.found_trades_errors.DB_SUCCESS)
-            console.log("Successfully dismissed trade!");
+            logger.log("Successfully dismissed trade!");
         else{
-            console.log("DB error")
+            logger.log("DB error")
         }
 
         res.json({status: status});

@@ -1,0 +1,29 @@
+version: "3.3"
+
+services:
+  db:
+    image: postgres
+    container_name: postgres_db
+    environment:
+      POSTGRES_DB: loopsDB
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - .:/data
+  web:
+    build: .
+    container_name: web
+    ports:
+      - 3000:3000
+    depends_on:
+      - db
+    volumes:
+      - .:/app
+    environment:
+      - DATABASE_URL=postgres://postgres@db/loopsDB
+      - DATABASE_HOST=db
+      - DATABASE_USER=postgres
+      - DATABASE_NAME=loopsDB
+      - DATA_PATH='/data/models/data/
+
+volumes:
+  postgres_data:

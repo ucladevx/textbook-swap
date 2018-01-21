@@ -31,7 +31,7 @@ var isIE8 = function() {
 var logStr = function(string) {
   if (window.console) {
     // IE...
-    window.logger.log('SweetAlert: ' + string);
+    window.console.log('SweetAlert: ' + string);
   }
 };
 

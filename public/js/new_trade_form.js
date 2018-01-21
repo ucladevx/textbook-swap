@@ -66,14 +66,14 @@ $(document).ready(function(){
 
 // close the popup if you are clicking outside of it
 	$(".popup").click(function(e){
-		logger.log($(this).attr('class'));
+		console.log($(this).attr('class'));
 		var targeted_popup_class = jQuery(this).attr('data-popup');
 		$('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
 	});
 
 // do not close the pop-up if you are clicking inside of it
 	$(".popup-inner").click(function(e){
-		logger.log($(this).attr('class'));
+		console.log($(this).attr('class'));
 		e.stopPropagation();
 	});
 
@@ -119,12 +119,12 @@ $(document).ready(function(){
 							for (var j = 0; j < userBooksInfo.length; j++) {
 								ownedBooksSet.add(userBooksInfo[j]["book_id"]);
 
-								logger.log(userBooksInfo[j]["book_id"]);
+								console.log(userBooksInfo[j]["book_id"]);
 							}
 
 							// display all of the search results on the screen
 							for (var i = 0; i < searchResults.length; i++) {
-								// logger.log(book_id);
+								// console.log(book_id);
 								var book_id = searchResults[i]["book_id"];
 								if (!ownedBooksSet.has(book_id)) {
 									var title = searchResults[i]["title"];
@@ -140,7 +140,7 @@ $(document).ready(function(){
 				}
 				// error when querying
 				else if (object.status === 2)
-					logger.log('db query error');
+					console.log('db query error');
 			});
 		}
 		else {
@@ -198,12 +198,12 @@ $(document).ready(function(){
 							for (var j = 0; j < userBooksInfo.length; j++) {
 								ownedBooksSet.add(userBooksInfo[j]["book_id"]);
 
-								logger.log(userBooksInfo[j]["book_id"]);
+								console.log(userBooksInfo[j]["book_id"]);
 							}
 
 							// display all of the search results on the screen
 							for (var i = 0; i < searchResults.length; i++) {
-								// logger.log(book_id);
+								// console.log(book_id);
 								var book_id = searchResults[i]["book_id"];
 								if (!ownedBooksSet.has(book_id)) {
 									// display each line of the search result
@@ -223,7 +223,7 @@ $(document).ready(function(){
 				}
 				// error when querying
 				else if (object.status === 2)
-					logger.log('db query error');
+					console.log('db query error');
 			});
 		}
 		else {
@@ -242,7 +242,7 @@ $(document).ready(function(){
 		var isbn = searchResult.dataset.isbn;
 		var img_url = searchResult.dataset.img_url;
 
-		logger.log("add wanted search");
+		console.log("add wanted search");
 
 		// add new selected item to wanted list
 		var selector = "#item" + book_id;
@@ -263,15 +263,15 @@ $(document).ready(function(){
 		var wantedBook = $(this).parent();
 		wantedBook.remove();
 
-		logger.log("remove wanted");
+		console.log("remove wanted");
 
 		if ($('#wantedTradeBooksList').children().length == 0) {
-			logger.log("disable new trade button");
+			console.log("disable new trade button");
 			$('#wanted_list_next').prop('disabled', true);
 		}
 
 		if ($('#wantedEditTradeBooksList').children().length == 0) {
-			logger.log("disable edit trade button");
+			console.log("disable edit trade button");
 			$('#confirmTradeChangesButton').prop('disabled', true);
 		}
 		// don't scroll user to top
@@ -291,21 +291,21 @@ $(document).ready(function(){
 	});
 
 	$("#confirmButton").click(function(){
-		logger.log("confirm button click");
+		console.log("confirm button click");
 		// add owned book
 		var selectedOwnedBook = $("li.highlight-owned.list-group-item");
 		var owned_book_id = selectedOwnedBook.attr("id");
 		$.post("/api/owned_books/add", { user_id: "user", book_id: owned_book_id },
 			function(data){
 				if(data.status === 0){
-					logger.log('successfully added owned book to owned_books');
+					console.log('successfully added owned book to owned_books');
 				}
 				else if(data.status === 1)
-					logger.log('db connection error for owned_books');
+					console.log('db connection error for owned_books');
 				else if(data.status === 2)
-					logger.log('db query error for owned_books');
+					console.log('db query error for owned_books');
 				else if(data.status === 3){
-					logger.log('owned book already exists');
+					console.log('owned book already exists');
 				}
 			},
 			"json"
@@ -315,7 +315,7 @@ $(document).ready(function(){
 		$('#confirmTradeBooksList li').each(function() {
 			var confirmedBook = $(this);
 
-			logger.log(confirmedBook);
+			console.log(confirmedBook);
 
 			var wanted_book_id = confirmedBook.attr("id");
 			var relationStatus = 'V';  // V = verified
@@ -324,14 +324,14 @@ $(document).ready(function(){
 			$.post("/api/possible_trades/add", { user_id: "user", owned_book_id: owned_book_id, wanted_book_id: wanted_book_id, status: relationStatus },
 				function(data){
 					if(data.status === 0){
-						logger.log('successfully added trade relation to possible_trades');
+						console.log('successfully added trade relation to possible_trades');
 					}
 					else if(data.status === 1)
-						logger.log('db connection error for possible_trades');
+						console.log('db connection error for possible_trades');
 					else if(data.status === 2)
-						logger.log('db query error for possible_trades');
+						console.log('db query error for possible_trades');
 					else if(data.status === 3){
-						logger.log('trade relation already exists');
+						console.log('trade relation already exists');
 					}
 				},
 				"json"
@@ -353,7 +353,7 @@ $(document).ready(function(){
 		// figure out when slides we are transitioning between
 		var slideFrom = $(this).find('.active').index();
 		var slideTo = $(e.relatedTarget).index();
-		logger.log(slideFrom+' => '+slideTo);
+		console.log(slideFrom+' => '+slideTo);
 
 		// distinguish what to do in each case
 		// user selected which book they want to offer
@@ -406,7 +406,7 @@ $(document).ready(function(){
 					}
 					// error when querying
 					else if (object.status === 2)
-						logger.log('db query error');
+						console.log('db query error');
 				});
 				// send the book info values to the front-end (html)
 				document.getElementById("ownedBookImg").src = img_url;
@@ -430,7 +430,7 @@ $(document).ready(function(){
 				$('#wantedTradeBooksList li').each(function() {
 					var wantedBook = $(this);
 
-					logger.log(wantedBook);
+					console.log(wantedBook);
 
 					var book_id = wantedBook.attr("id").substr(4);
 					var title = wantedBook.attr("data-title");

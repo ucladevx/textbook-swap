@@ -1,6 +1,7 @@
 const ec = require('../../utilities');
 const initModel = require('../../models/init');
 const users = require('../../models/users');
+const logger = require('tracer').colorConsole();
 
 exports.test = function() {
     /*
@@ -24,7 +25,7 @@ exports.test = function() {
 
     function test_n(errorcode) {
         if (errorcode == ec.users_errors.USER_ALREADY_EXISTS) {
-            console.log("relation is in the database");
+            logger.log("relation is in the database");
         }
         user_count++;
         if (user_count == 3) {
@@ -36,15 +37,15 @@ exports.test = function() {
 
     function test_print(errorcode, result) {
         if (errorcode == ec.users_errors.USER_ALREADY_EXISTS) {
-            console.log("relation is in the database");
+            logger.log("relation is in the database");
         }
-        console.log("gets to result");
-        console.log(result);
+        logger.log("gets to result");
+        logger.log(result);
     }
 
     function test(errorcode) {
         if (errorcode == ec.users_errors.USER_ALREADY_EXISTS) {
-            console.log("relation is in the database");
+            logger.log("relation is in the database");
         }
     }
 };

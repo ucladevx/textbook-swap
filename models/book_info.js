@@ -5,6 +5,7 @@
 'use strict';
 const pg = require('pg');
 const utilities = require('../utilities');
+const logger = require('tracer').colorConsole();
 
 /*
  * Purpose: This function is used to get all the information associated with a particular book_id's in the book_info database
@@ -15,13 +16,13 @@ exports.get_book_info = function(book_id, next){
     pg.connect(process.env.DATABASE_URL, function(err, client, done){
         done();
         if (err){
-            console.error("Error connection to client while querying book_info table: ", err);
+            logger.error("Error connection to client while querying book_info table: ", err);
             return next(utilities.book_info_errors.DB_CONNECTION_ERROR, []);
         }
 
         client.query("SELECT * FROM book_info WHERE book_id=$1::INTEGER", [book_id], function(err, result){
             if(err){
-                console.error("Error querying database", err);
+                logger.error("Error querying database", err);
                 return next(utilities.book_info_errors.DB_QUERY_ERROR, []);
             }
             return next(utilities.book_info_errors.DB_SUCCESS, result.rows);
@@ -38,14 +39,14 @@ exports.get_books_info = function(book_ids, next) {
     pg.connect(process.env.DATABASE_URL, function(err, client, done){
         done();
         if (err) {
-            console.error("Error connection to client while querying books table: ", err);
+            logger.error("Error connection to client while querying books table: ", err);
             return next(utilities.book_info_errors.DB_CONNECTION_ERROR);
         }
 
         // get the book info for all books
         client.query("SELECT book_id, title, author, isbn, img_url FROM book_info WHERE book_id = any ($1)", [book_ids], function(err, books_info_result) {
             if (err) {
-                console.error("Error querying database", err);
+                logger.error("Error querying database", err);
                 return next(utilities.book_info_errors.DB_QUERY_ERROR);
             }
 

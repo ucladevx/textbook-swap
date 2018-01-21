@@ -20,14 +20,14 @@ $(document).ready(function(){
 				$.post("/api/found_trades/dismiss_rejected_trade", {owned_book: book_id },
 					function(data){
 						if(data.status === 0){
-							console.log('successfully removed owned book from owned_books');
+							logger.log('successfully removed owned book from owned_books');
 						}
 						else if(data.status === 1)
-							console.log('db connection error for removing from owned_books');
+							logger.log('db connection error for removing from owned_books');
 						else if(data.status === 2)
-							console.log('db query error for removing from found_trades');
+							logger.log('db query error for removing from found_trades');
 						else if(data.status === 3){
-							console.log('wanted book already removed from found_trades');
+							logger.log('wanted book already removed from found_trades');
 						}
 
 						setTimeout(function() {
@@ -318,27 +318,27 @@ $(document).ready(function(){
 	$(".deleteButton").click(function(){
 		// will get value from confirm edit trades book list item
 		var debug_book = $("#confirmEditTradeBooksList > li:first");
-		console.log("book elem", debug_book);
+		logger.log("book elem", debug_book);
 
 
 		var owned_book_id = $("#confirmEditTradeBooksList > li:first").attr("data-owned_book_id");
-		console.log("delete button with owned book id", owned_book_id);
+		logger.log("delete button with owned book id", owned_book_id);
 
 		// delete the owned book, which will also delete trades and graph edges
 		 $.post("api/owned_books/remove", { user_id: "user", book_id: owned_book_id},
 				function(data){
 					if(data.status === 0){
-						console.log('successfully removed owned book from owned book list');
+						logger.log('successfully removed owned book from owned book list');
 					}
 					else if(data.status === 1)
-						console.log('db connection error for removing owned book');
+						logger.log('db connection error for removing owned book');
 					else if(data.status === 2)
-						console.log('db query error for removing owned book');
+						logger.log('db query error for removing owned book');
 					else if(data.status === 3){
-						console.log('owned book already removed');
+						logger.log('owned book already removed');
 					}
 					else {
-						console.log('owned book error status', data.status);
+						logger.log('owned book error status', data.status);
 					}
 				},
 				"json"
@@ -354,7 +354,7 @@ $(document).ready(function(){
 	// confirm button on edit trade confirmation page
 	$("#confirmTradeChangesButton").click(function(e){
 
-		console.log("confirm edit trade button");
+		logger.log("confirm edit trade button");
 		// will initialize this inside of confirm edit trade books list
 		var owned_book_id = 0;
 
@@ -362,28 +362,28 @@ $(document).ready(function(){
 		$('#confirmEditTradeBooksList li').each(function() {
 			var book_to_remove = $(this);
 
-			console.log("removing book:", book_to_remove.attr("data-title"));
+			logger.log("removing book:", book_to_remove.attr("data-title"));
 
 			owned_book_id = book_to_remove.attr("data-owned_book_id");
 
-			console.log("owned book:", owned_book_id);
+			logger.log("owned book:", owned_book_id);
 
 			var book_to_remove_id = book_to_remove.attr("id");
 
-			console.log("remove book id", book_to_remove_id);
+			logger.log("remove book id", book_to_remove_id);
 
 			// remove wanted books from possible_trades
 			$.post("api/possible_trades/remove", { user_id: "user", owned_book_id: owned_book_id, wanted_book_id: book_to_remove_id },
 				function(data){
 					if(data.status === 0){
-						console.log('successfully removed wanted book from possible_trades');
+						logger.log('successfully removed wanted book from possible_trades');
 					}
 					else if(data.status === 1)
-						console.log('db connection error for removing from possible_trades');
+						logger.log('db connection error for removing from possible_trades');
 					else if(data.status === 2)
-						console.log('db query error for removing from possible_trades');
+						logger.log('db query error for removing from possible_trades');
 					else if(data.status === 3){
-						console.log('wanted book already removed');
+						logger.log('wanted book already removed');
 					}
 				},
 				"json"
@@ -394,14 +394,14 @@ $(document).ready(function(){
 			$('#wantedEditTradeBooksList li').each(function() {
 				var confirmedBook = $(this);
 
-				console.log("adding book:", confirmedBook.attr("data-title"), confirmedBook.attr("id"));
+				logger.log("adding book:", confirmedBook.attr("data-title"), confirmedBook.attr("id"));
 
 				var wanted_book_id = confirmedBook.attr("id").substring(4);
 				// just in case book doesn't have book id?
 				if (wanted_book_id.length == 0)
 					return;
 
-				console.log("wanted_book_id when adding:", wanted_book_id);
+				logger.log("wanted_book_id when adding:", wanted_book_id);
 
 				var relationStatus = 'V';  // V = verified
 
@@ -409,14 +409,14 @@ $(document).ready(function(){
 				$.post("/api/possible_trades/add", { user_id: "user", owned_book_id: owned_book_id, wanted_book_id: wanted_book_id, status: relationStatus },
 					function(data){
 						if(data.status === 0){
-							console.log('successfully added trade relation to possible_trades');
+							logger.log('successfully added trade relation to possible_trades');
 						}
 						else if(data.status === 1)
-							console.log('db connection error for possible_trades');
+							logger.log('db connection error for possible_trades');
 						else if(data.status === 2)
-							console.log('db query error for possible_trades');
+							logger.log('db query error for possible_trades');
 						else if(data.status === 3){
-							console.log('trade relation already exists');
+							logger.log('trade relation already exists');
 						}
 					},
 					"json"
@@ -435,7 +435,7 @@ $(document).ready(function(){
 		// figure out when slides we are transitioning between
 		var slideFrom = $(this).find('.active').index();
 		var slideTo = $(e.relatedTarget).index();
-		console.log(slideFrom+' =>> '+slideTo);
+		logger.log(slideFrom+' =>> '+slideTo);
 		// var ownedCard = $(this).find(".owned")[0].attributes;
 
 		// confirm the trade

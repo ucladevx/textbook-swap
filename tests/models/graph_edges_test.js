@@ -3,6 +3,7 @@
 
 const ec = require('../../utilities');
 const graph_edges = require('../../models/graph_edges');
+const logger = require('tracer').colorConsole();
 
 exports.test_add_edges = function(){
     graph_edges.add_edge('Adi', 2, 'Jay', 1, test_add_next);
@@ -11,9 +12,9 @@ exports.test_add_edges = function(){
     graph_edges.add_edge('Adi', 12, 'Lawrence', 15, test_add_next);
     function test_add_next(err_code){
         if (err_code == ec.graph_edges_errors.DB_SUCCESS)
-            console.log("TEST PASSED");
+            logger.log("TEST PASSED");
         else{
-            console.log("TEST FAILED");
+            logger.log("TEST FAILED");
         }
     }
 };
@@ -24,9 +25,9 @@ exports.test_add_repeat = function(){
 
     function test_add_next(err_code){
         if (err_code == ec.graph_edges_errors.GRAPH_EDGE_ALREADY_EXISTS)
-            console.log("TEST PASSED");
+            logger.log("TEST PASSED");
         else{
-            console.log("TEST FAILED");
+            logger.log("TEST FAILED");
         }
     }
 };
@@ -37,10 +38,10 @@ exports.test_remove_edge = function(){
 
     function test_remove_next(err_code){
         if (err_code == ec.graph_edges_errors.DB_SUCCESS){
-            console.log("TEST PASSED");
+            logger.log("TEST PASSED");
         }
         else{
-            console.log("TEST FAILED");
+            logger.log("TEST FAILED");
         }
     }
 };
@@ -50,11 +51,11 @@ exports.test_get_graph = function(){
 
   function next(err_code, result){
       if (err_code == ec.graph_edges_errors.DB_SUCCESS){
-          console.log(result);
-          console.log("TEST SUCCESS");
+          logger.log(result);
+          logger.log("TEST SUCCESS");
       }
       else{
-          console.log("TEST FAILED");
+          logger.log("TEST FAILED");
       }
   }
 };
@@ -64,10 +65,10 @@ exports.test_remove_owned_book = function(){
 
     function test_remove_owned_next(err_code){
         if(err_code == ec.graph_edges_errors.DB_SUCCESS){
-            console.log("TEST SUCCCESS");
+            logger.log("TEST SUCCCESS");
         }
         else{
-            console.log("TEST FAIL");
+            logger.log("TEST FAIL");
         }
     }
 };
@@ -77,10 +78,10 @@ exports.test_remove_wanted_book = function(){
 
     function next(err_code){
         if(err_code == ec.graph_edges_errors.DB_SUCCESS){
-            console.log("TEST SUCCESS");
+            logger.log("TEST SUCCESS");
         }
         else{
-            console.log("TEST FAILURE");
+            logger.log("TEST FAILURE");
         }
     }
 };
@@ -92,7 +93,7 @@ exports.cleanup = function(){
     graph_edges.remove_edge('Adi', 12, 'Lawrence', 15, next);
 
     function next(){
-        console.log("cleanup");
+        logger.log("cleanup");
     }
 
 };

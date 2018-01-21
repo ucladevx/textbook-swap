@@ -7,6 +7,7 @@ const ob = require('../../models/owned_books');
 const pt = require('../../models/possible_trades');
 const ge = require('../../models/graph_edges');
 const algorithm = require('../../models/algorithm');
+const logger = require('tracer').colorConsole();
 
 exports.test_algorithm = function(){
     ob.add_book('A', 1, a);
@@ -53,7 +54,7 @@ exports.test_algorithm = function(){
 
     function test_add_next(err_code){
         if (err_code == ec.graph_edges_errors.DB_SUCCESS)
-            console.log("Edge added to database.");
+            logger.log("Edge added to database.");
     }
 
     function a(err){

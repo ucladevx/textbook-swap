@@ -31,12 +31,12 @@ var isIE8 = function() {
 var logStr = function(string) {
   if (window.console) {
     // IE...
-    window.console.log('SweetAlert: ' + string);
+    window.logger.log('SweetAlert: ' + string);
   }
 };
 
 /*
- * Set hover, active and focus-states for buttons 
+ * Set hover, active and focus-states for buttons
  * (source: http://www.sitepoint.com/javascript-generate-lighter-darker-color)
  */
 var colorLuminance = function(hex, lum) {

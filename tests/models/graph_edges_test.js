@@ -1,7 +1,7 @@
 //NOTE these tests suck. you need to have very strict control of the database and what is in it for these tests to work.
 // I just used them for quick validation
 
-const ec = require('../../error_codes');
+const ec = require('../../utilities');
 const graph_edges = require('../../models/graph_edges');
 
 exports.test_add_edges = function(){

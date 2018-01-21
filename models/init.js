@@ -4,6 +4,7 @@
 
 'use strict';
 const pg = require('pg');
+const utilities = require('../utilities');
 const async = require('async');
 const found_trades_id = require('./found_trades_id');
 

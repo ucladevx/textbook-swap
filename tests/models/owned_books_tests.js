@@ -5,12 +5,12 @@
 'use strict';
 
 const owned_books = require('../../models/owned_books');
-const error_codes = require('../../error_codes');
+const utilities = require('../../utilities');
 
 function add_book_next(result){
-    if (result == error_codes.owned_books_errors.DB_SUCCESS){
+    if (result == utilities.owned_books_errors.DB_SUCCESS){
         owned_books.add_book('Adi', 5, function(result){
-            if (result == error_codes.owned_books_errors.OWNED_BOOK_ALREADY_EXISTS){
+            if (result == utilities.owned_books_errors.OWNED_BOOK_ALREADY_EXISTS){
                 console.log("Add book was successful!")
             }
             else{
@@ -29,9 +29,9 @@ function test_add_book(){
 
 
 function remove_book_next(result){
-    if (result == error_codes.owned_books_errors.DB_SUCCESS || result == error_codes.owned_books_errors.OWNED_BOOK_ALREADY_EXISTS){
+    if (result == utilities.owned_books_errors.DB_SUCCESS || result == utilities.owned_books_errors.OWNED_BOOK_ALREADY_EXISTS){
         owned_books.remove_book('Adi', 5, function(result){
-           if (result == error_codes.owned_books_errors.DB_SUCCESS){
+           if (result == utilities.owned_books_errors.DB_SUCCESS){
                console.log("remove book test is success");
            }
            else{

@@ -31,7 +31,7 @@ exports.add_new_user = function(user_id, user_name, user_email, next) {
               client.query("INSERT INTO users (user_id, user_name, user_email) VALUES ($1::VARCHAR, $2::VARCHAR, $3::VARCHAR)", [user_id, user_name, user_email], function(err, result){
                   if (err){
                       console.error("Error inserting into users table", err);
-                      return next(utilities(utilities.users_errors.DB_QUERY_ERROR));
+                      return next(utilities.users_errors.DB_QUERY_ERROR);
                   }
                   return next(utilities.users_errors.DB_SUCCESS);
               });

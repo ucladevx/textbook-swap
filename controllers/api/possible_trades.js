@@ -9,6 +9,7 @@ const ob = require('../../models/owned_books');
 const ge = require('../../models/graph_edges');
 const logger = require('tracer').colorConsole();
 
+
 /*
  * POST http://localhost:3000/api/possible_trades/add
  * Add a trade relation for a user, owned book, and wanted book to the possible_trades table.

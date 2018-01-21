@@ -56,7 +56,7 @@ const passportConfig = require('./config/passport')(passport, FacebookStrategy);
 const initDB = require('./models/init');
 initDB.create_tables(function(err){
     if(!err)
-        console.info("Database is ready.");
+        logger.info("Database is ready.");
 });
 
 /*

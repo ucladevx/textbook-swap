@@ -6,7 +6,7 @@
 const pg = require('pg');
 const utilities = require('../utilities');
 const found_trades = require('./found_trades');
- const logger = require('tracer').colorConsole();
+const logger = require('tracer').colorConsole();
 
 /*
  *  Purpose: Add a loop graph edge into the database

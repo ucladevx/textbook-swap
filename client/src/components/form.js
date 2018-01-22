@@ -5,6 +5,7 @@ import axios from 'axios'
 
 import SearchBox from './searchBox'
 import Summary from './summary'
+import MinSummary from './minSummary'
 
 import '../styles/form.css'
 
@@ -24,6 +25,12 @@ class Form extends Component{
         this.setOffer = this.setOffer.bind(this)
         this.setWant = this.setWant.bind(this)
         this.createTrade = this.createTrade.bind(this)
+        
+        this.wrangle = this.wrangle.bind(this)
+        this.processOffer = this.processOffer.bind(this)
+        this.processWant = this.processWant.bind(this)
+        
+        
         
         this.state = {
             page: 0,
@@ -54,6 +61,63 @@ class Form extends Component{
     setWant(value){
         this.setState({
             want: value
+        })
+    }
+    
+       
+    wrangle(profClassInfo){
+        var profSet = new Set();
+        // set of classes
+        var classSet = new Set();
+        var profs =""
+        var classes=""
+        // successful query
+            // create strings of professors and classes
+            for (var i = 0; i < profClassInfo.length; i++) {
+                // professor name already seen
+                if (!profSet.has(profClassInfo[i]["professor_name"])) {
+                    profs = profs + profClassInfo[i]["professor_name"] + ", ";;
+                    profSet.add(profClassInfo[i]["professor_name"]);
+                }
+
+                // class name already seen
+                if (!classSet.has(profClassInfo[i]["class_name"])) {
+                    classes = classes + profClassInfo[i]["class_name"] + ", ";;
+                    classSet.add(profClassInfo[i]["class_name"]);
+                }
+            // get rid of extraneous ", " at the end
+            profs = profs.substring(0, profs.length - 2);
+            classes = classes.substring(0, classes.length - 2);
+            return ({
+                profs, classes
+            })
+        }
+    }
+    
+    processOffer(value){
+        axios.get('http://www.loop-trading.com/api/book_to_class/get_prof_class_info?book_id='+value.book_id)
+            .then((res)=>{
+                value.details = this.wrangle(res.data.data)
+                this.setOffer(value)
+                console.log("Set Offer", value)
+            })
+            .catch((e)=>console.log(e))
+    }
+    
+    processWant(values){
+        if (values.length == 0){
+            this.setWant(null)
+            return
+        }
+        values.forEach((book, i)=>{
+             axios.get('http://www.loop-trading.com/api/book_to_class/get_prof_class_info?book_id='+values[i].book_id)
+            .then((res)=>{
+                values[i].details = this.wrangle(res.data.data)
+                if (i == values.length - 1){
+                    this.setWant(values)
+                }
+            })
+            .catch((e)=>console.log(e))
         })
     }
     
@@ -108,13 +172,12 @@ class Form extends Component{
                             <h3>Pick a book to offer</h3>
                             
                             <SearchBox 
-                                onChange={this.setOffer} 
-                                multi={true} 
+                                onChange={this.processOffer} 
+                                multi={false} 
                                 initState={this.state.offer}
                             />
                             
                             <button onClick={()=>this.setPage(0)}>Prev</button>
-                            
                             {
                                 this.state.offer != null &&
                                 <button onClick={()=>this.setPage({option, screen: screen+1})}>Next</button>
@@ -125,7 +188,7 @@ class Form extends Component{
                      return (
                          <div>
                             <h3>Confirm books offered</h3>
-                            <Summary books={this.state.offer}></Summary>
+                            <Summary books={this.state.offer} multi={false}></Summary>
                             <button onClick={()=>this.setPage({option, screen: screen-1})}>Prev</button>
                             <button onClick={()=>this.setPage({option, screen: screen+1})}>Next</button>
                          </div>
@@ -134,13 +197,17 @@ class Form extends Component{
                     return (
                         <div>Pick the book you want to obtain
                             <SearchBox 
-                                onChange={this.setWant} 
+                                onChange={this.processWant} 
                                 multi={true} 
                                 initState={this.state.want}
                             />
-                            
+                                                    
+                            {
+                                this.state.want != null && 
+                                <Summary books={this.state.want} multi={true}></Summary>
+                            }
                             <button onClick={()=>this.setPage({option, screen: screen-1})}>Prev</button>
-                            
+
                             {
                                 this.state.want != null &&
                                 <button onClick={()=>this.setPage({option, screen: screen+1})}>Next</button>
@@ -149,7 +216,17 @@ class Form extends Component{
                     )
                 case 4:
                      return (
-                         <div>Confirm
+                         <div>Confirm Trade
+                            <div className='trade-container'>
+                                <div className='trade-left'>
+                                    Books Offered
+                                    <Summary books={this.state.offer} multi={false}/>
+                                </div>
+                                <div className='trade-right'>
+                                    Books Wanted
+                                    <MinSummary books={this.state.want}/>
+                                </div>
+                            </div>
                             <button onClick={()=>this.setPage({option, screen: screen-1})}>Prev</button>
                             <button onClick={()=>this.createTrade("TRADE")}>Create Trade</button>
                          </div>

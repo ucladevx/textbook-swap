@@ -1,17 +1,46 @@
 .form-container{
-    width: 90%;
-    height: 80%;
+    width: 70vw;
+    height: 80vh;
     background-color: aliceblue;
-    align-items: center;
+    align-self: center;
+/*    align-items: center;*/
     text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
 
-.formButton::first{
-    margin-top: 10%;
+.formTitle{
+    font-size: 2em;
+    padding-top: 1%;
+    padding-bottom: 3%;
+}
+
+.formMessage{
+    font-size: 1.25em;
+    text-align: left;
+    padding-bottom: 2%;
+}
+
+.formBox{
+    background-color: lightgray;
+}
+
+/*
+.formPrev{
+    
+}
+*/
+
+.formSummary{
+    padding-top: 5%;
+    background-color: coral;
 }
 
 .formContents{
     display: block;
+    background-color: lightgray;
+    width: 75%;
 }
 
 .formInput{
@@ -33,5 +62,5 @@
     border-radius: 2px;
     display: block;
     margin:0 auto; 
-    margin-bottom: 10%;
+    margin-bottom: 5%;
 }

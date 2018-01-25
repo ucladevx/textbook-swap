@@ -94,7 +94,7 @@ class Trade extends Component{
     render(){
         return (
             <div className='trade-splash'>
-                <h1>Create a Trade</h1>
+                <h1>NEW TRADE</h1>
                 <div className='trade-container'>
                     <div className='trade-left'>
                         <h2>Pick books to offer</h2>

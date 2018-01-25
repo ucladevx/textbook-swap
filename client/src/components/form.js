@@ -29,11 +29,14 @@ class Form extends Component{
         this.wrangle = this.wrangle.bind(this)
         this.processOffer = this.processOffer.bind(this)
         this.processWant = this.processWant.bind(this)
-        
+        this.renderSummary = this.renderSummary.bind(this)
         
         
         this.state = {
-            page: 0,
+            page: {
+                option: "trade",
+                screen: 1
+            },
             offer: null,
             want: null
         }
@@ -64,6 +67,12 @@ class Form extends Component{
         })
     }
     
+    renderSummary(){
+        console.log("Render Summary")
+        return (
+            <Summary books={this.state.offer} multi={false}></Summary>
+        )
+    }
        
     wrangle(profClassInfo){
         var profSet = new Set();
@@ -95,6 +104,10 @@ class Form extends Component{
     }
     
     processOffer(value){
+        if (!value) {
+            this.setOffer(null)
+            return
+        }
         axios.get('http://www.loop-trading.com/api/book_to_class/get_prof_class_info?book_id='+value.book_id)
             .then((res)=>{
                 value.details = this.wrangle(res.data.data)
@@ -105,6 +118,10 @@ class Form extends Component{
     }
     
     processWant(values){
+        if (!values) {
+            this.setOffer(null)
+            return
+        }
         if (values.length == 0){
             this.setWant(null)
             return
@@ -135,8 +152,8 @@ class Form extends Component{
     getChild(page){
         if (page === 0){
             return (
-                    <div>
-                        <h1>Create a Trade</h1>
+                    <div className="formBox">
+                        <h1 className="formTitle">CREATE A TRADE</h1>
                         <button className="formButton" onClick={()=>this.setPage({option: "trade", screen: 1})}>
                             I want to trade a textbook
                         </button>
@@ -169,18 +186,27 @@ class Form extends Component{
                 case 1:
                     return (
                         <div className="formContents">
-                            <h3>Pick a book to offer</h3>
+                            <h1 className="formTitle">NEW TRADE</h1>
+                            <h3 className="formMessage">Select the book you can offer.</h3>
                             
-                            <SearchBox 
+                            <SearchBox
                                 onChange={this.processOffer} 
                                 multi={false} 
                                 initState={this.state.offer}
                             />
                             
-                            <button onClick={()=>this.setPage(0)}>Prev</button>
                             {
                                 this.state.offer != null &&
-                                <button onClick={()=>this.setPage({option, screen: screen+1})}>Next</button>
+                                <Summary 
+                                    books={this.state.offer} multi={false}
+                                    className="formSummary"
+                                 />
+                            }
+                            
+                            <button className="formPrev" onClick={()=>this.setPage(0)}>Prev</button>
+                            {
+                                this.state.offer != null &&
+                                <button className="formPrev" onClick={()=>this.setPage({option, screen: screen+2})}>Next</button>
                             }
                         </div>
                     )
@@ -206,7 +232,7 @@ class Form extends Component{
                                 this.state.want != null && 
                                 <Summary books={this.state.want} multi={true}></Summary>
                             }
-                            <button onClick={()=>this.setPage({option, screen: screen-1})}>Prev</button>
+                            <button onClick={()=>this.setPage({option, screen: screen-2})}>Prev</button>
 
                             {
                                 this.state.want != null &&

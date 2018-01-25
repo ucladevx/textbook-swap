@@ -4,7 +4,7 @@ import axios from 'axios';
 import fetch from 'isomorphic-fetch';
 import 'react-select/dist/react-select.css';
 
-const ROOT = 'https://cors.io/?http://www.loop-trading.com'
+const ROOT = 'http://www.loop-trading.com'
 
 class searchBox extends Component{
     constructor(props){
@@ -110,7 +110,17 @@ class searchBox extends Component{
 
 		return (
 			<div className="section">
-				<AsyncComponent multi={this.state.multi} value={this.state.value} onChange={this.onChange} onValueClick={this.gotoUser} valueKey="book_id" labelKey="title" loadOptions={this.getBooks} backspaceRemoves={this.state.backspaceRemoves} />
+				<AsyncComponent 
+                    multi={this.state.multi} 
+                    value={this.state.value} 
+                    onChange={this.onChange} 
+                    onValueClick={this.gotoUser} 
+                    valueKey="book_id" 
+                    labelKey="title" 
+                    loadOptions={this.getBooks}
+                    backspaceRemoves={this.state.backspaceRemoves} 
+                    placeholder="Search by title, professor or class"
+            />
 			</div>
 		);
 	} 

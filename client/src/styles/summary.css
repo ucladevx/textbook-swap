@@ -1,11 +1,12 @@
 .summaryContainer{
-    background-color: aliceblue;
     display: flex;
+    background-color: white;
     flex-direction: row;
     align-items: center;
 /*    justify-content: center;*/
     width: 100%;
     padding: 1%;
+    margin-top: 5%;
 }
 
 .summaryText{

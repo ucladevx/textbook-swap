@@ -1,4 +1,4 @@
-require('dotenv').config();
+const dotenv = require('dotenv'); // loads environment variables
 const users = require('./users');
 const books = require('./book_info');
 const fs = require('fs');

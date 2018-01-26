@@ -72,19 +72,20 @@ exports.remove_user = function(user_id, next){
  * Replies with either an error_code or a Javascript Object
  */
 exports.get_user_email = function(user_id, next) {
-  pg.connect(process.env.DATABASE_URL, function(err, client, done){
-    done();
-    if (err){
-    	logger.error("Error connection to client while querying users table: ", err);
-    	return next(utilities.users_errors.DB_CONNECTION_ERROR);
-    }
-
-    client.query("SELECT user_email FROM users WHERE user_id=$1::VARCHAR", [user_id], function(err, result){
-        if(err){
-            logger.error("Error querying database", err);
-            return next(utilities.users_errors.DB_QUERY_ERROR);
+    pg.connect(process.env.DATABASE_URL, function (err, client, done) {
+        done();
+        if (err) {
+            logger.error("Error connection to client while querying users table: ", err);
+            return next(utilities.users_errors.DB_CONNECTION_ERROR);
         }
-        return next(utilities.users_errors.DB_SUCCESS, result.rows);
+
+        client.query("SELECT user_email FROM users WHERE user_id=$1::VARCHAR", [user_id], function (err, result) {
+            if (err) {
+                logger.error("Error querying database", err);
+                return next(utilities.users_errors.DB_QUERY_ERROR);
+            }
+            return next(utilities.users_errors.DB_SUCCESS, result.rows);
+        });
     });
 };
 
@@ -93,18 +94,19 @@ exports.get_user_email = function(user_id, next) {
  * Replies with either an error_code or a Javascript Object
  */
 exports.get_user_name = function(user_id, next) {
-  pg.connect(process.env.DATABASE_URL, function(err, client, done){
-    done();
-    if (err){
-    	logger.error("Error connection to client while querying users table: ", err);
-    	return next(utilities.users_errors.DB_CONNECTION_ERROR);
-    }
-
-    client.query("SELECT user_name FROM users WHERE user_id=$1::VARCHAR", [user_id], function(err, result){
-        if(err){
-            logger.error("Error querying database", err);
-            return next(utilities.users_errors.DB_QUERY_ERROR);
+    pg.connect(process.env.DATABASE_URL, function (err, client, done) {
+        done();
+        if (err) {
+            logger.error("Error connection to client while querying users table: ", err);
+            return next(utilities.users_errors.DB_CONNECTION_ERROR);
         }
-        return next(utilities.users_errors.DB_SUCCESS, result.rows);
+
+        client.query("SELECT user_name FROM users WHERE user_id=$1::VARCHAR", [user_id], function (err, result) {
+            if (err) {
+                logger.error("Error querying database", err);
+                return next(utilities.users_errors.DB_QUERY_ERROR);
+            }
+            return next(utilities.users_errors.DB_SUCCESS, result.rows);
+        });
     });
 };

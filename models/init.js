@@ -8,8 +8,6 @@ const utilities = require('../utilities');
 const async = require('async');
 const logger = require('tracer').colorConsole();
 const found_trades_id = require('./found_trades_id');
-const logger = require('tracer').colorConsole();
-
 /*
  * Initializes the database by creating all the tables if they do not already exist.
  */

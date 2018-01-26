@@ -1,7 +1,7 @@
 /*
  * Functions to run the loop-finding algorithms.
  */
-const logger = require('tracer').colorConsole();
+
 const utilities = require('../utilities');
 const graph_edges = require('./graph_edges');
 const owned_books = require('./owned_books');
@@ -9,7 +9,7 @@ const possible_trades = require('./possible_trades');
 const found_trades = require('./found_trades');
 const found_trades_id = require('./found_trades_id');
 const emailer = require('./emailer.js');
-
+const logger = require('tracer').colorConsole();
 
 var edges = {}; // adjacency list of all nodes
 var matched = {}; // already matched nodes
@@ -119,14 +119,14 @@ function process(visited){
                 logger.log("Error removing edges from the graph_edges table: " + status);
         });
 
-        possible_trades.remove_trade_by_book_owned(visited[i][0], visited[i][1], function(status){
+        possible_trades.remove_relation_have(visited[i][0], visited[i][1], function(status){
             if(status == utilities.possible_trades_errors.DB_SUCCESS)
                 logger.log("Successfully removed possible trades by owned book!");
             else
                 logger.log("Error removing possible trades by owned book: " + status);
         });
 
-        possible_trades.remove_trade_by_wanted_book(visited[i][0], visited[i + 1][1], function(status){
+        possible_trades.remove_relation_want(visited[i][0], visited[i + 1][1], function(status){
             if(status == utilities.possible_trades_errors.DB_SUCCESS)
                 logger.log("Successfully removed possible trades by wanted book!");
             else

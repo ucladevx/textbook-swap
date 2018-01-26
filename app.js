@@ -12,6 +12,7 @@ const morgan = require('morgan');
 const cookie = require('cookie-parser');
 const session = require('express-session');
 const require_login = require('connect-ensure-login');
+const logger = require('tracer').colorConsole();
 
 /*
  * Constants
@@ -55,7 +56,7 @@ const passportConfig = require('./config/passport')(passport, FacebookStrategy);
 const initDB = require('./models/init');
 initDB.create_tables(function(err){
     if(!err)
-        console.info("Database is ready.");
+        logger.info("Database is ready.");
 });
 
 /*
@@ -198,14 +199,12 @@ app.get('/profile', require('connect-ensure-login').ensureLoggedIn(), passportCo
 // Run the algorithm once every day
 var algorithmInterval = setInterval(function(){
     require('./models/algorithm').run_algorithm();
-    console.log("Ran algorithm!");
+    logger.log("Ran algorithm!");
 }, millisecsInADay);
 
 /*
  * Start Express server.
  */
 app.listen(app.get('port'), function(){
-    console.log('%s Express server listening on port %d.', chalk.green('✓'), app.get('port'));
+    logger.log('%s Express server listening on port %d.', chalk.green('✓'), app.get('port'));
 });
-
-module.exports = app;

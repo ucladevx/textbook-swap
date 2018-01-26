@@ -4,6 +4,7 @@
 
 const utilities = require('../../utilities');
 const algorithm = require('../../models/algorithm');
+const logger = require('tracer').colorConsole();
 
 /*
  * GET http://localhost:3000/api/algorithm/run

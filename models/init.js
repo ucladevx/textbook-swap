@@ -4,10 +4,11 @@
 
 'use strict';
 const pg = require('pg');
+const utilities = require('../utilities');
 const async = require('async');
 const logger = require('tracer').colorConsole();
 const found_trades_id = require('./found_trades_id');
-const utilities = require('../utilities');
+const logger = require('tracer').colorConsole();
 
 /*
  * Initializes the database by creating all the tables if they do not already exist.
@@ -15,7 +16,6 @@ const utilities = require('../utilities');
 exports.create_tables = function(next){
     pg.connect(utilities.database_url, function (err, client, done) {
         if (err) {
-            client.end();
             return logger.error('error fetching client from pool', err)
         }
         const book_to_class_data = (process.env.DATA_PATH || "'" + __dirname + "/data/") + "book_to_class_clean.csv'";

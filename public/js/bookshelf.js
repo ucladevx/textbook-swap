@@ -29,7 +29,10 @@ $(document).ready(function(){
 						else if(data.status === 3){
 							console.log('wanted book already removed from found_trades');
 						}
-						window.location.reload(true);
+
+						setTimeout(function() {
+							window.location.reload(true);
+						}, 1500);
 					},
 					"json"
 				);
@@ -176,7 +179,11 @@ $(document).ready(function(){
 			$('[data-matched-popup="' + targeted_matched_popup_class + '"]').fadeOut(350);
 			$('[data-matched-popup="' + targeted_matched_popup_class + '"]').remove();
 			e.preventDefault();
+<<<<<<< HEAD
 			location.reload();
+=======
+			window.location.reload(true);
+>>>>>>> origin/new-master
 		});
 
 		//go back button on reject page
@@ -204,7 +211,13 @@ $(document).ready(function(){
 						$(".reject-page").hide();
 						$(".rejected-page").show();
 						e.preventDefault();
+<<<<<<< HEAD
 						location.reload();
+=======
+						setTimeout(function() {
+							window.location.reload(true);
+						}, 1500);
+>>>>>>> origin/new-master
 					});
 
 					//accept button

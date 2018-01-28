@@ -13,6 +13,7 @@ const cookie = require('cookie-parser');
 const session = require('express-session');
 const require_login = require('connect-ensure-login');
 const logger = require('tracer').colorConsole();
+const cors = require('cors');
 
 /*
  * Constants
@@ -70,6 +71,14 @@ const app = express();
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
+
+/*
+ * Cross origin resource sharing
+ */
+ app.use(cors({
+   credentials: true,
+   origin: 'http://localhost:5000'
+ }));
 
 /*
  * Use application-level middleware for common functionality, including logging, parsing, and session handling.

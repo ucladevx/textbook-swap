@@ -83,6 +83,12 @@ app.use(cookie());
 app.use(session({ secret: 'keyboard', resave: false, saveUninitialized: false }));
 
 /*
+* CORS: Cross origin resource sharing
+*/
+
+
+
+/*
  * Initialize Passport and restore authentication state, if any, from the session.
  */
 app.use(passport.initialize());

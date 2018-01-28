@@ -4,7 +4,9 @@ import axios from 'axios';
 import fetch from 'isomorphic-fetch';
 import 'react-select/dist/react-select.css';
 
-const ROOT = 'http://www.loop-trading.com'
+const ROOT = 'http://localhost:3000'
+
+axios.defaults.withCredentials = true;
 
 class searchBox extends Component{
     constructor(props){
@@ -20,7 +22,7 @@ class searchBox extends Component{
         this.toggleCreatable = this.toggleCreatable.bind(this)
         this.getBooks = this.getBooks.bind(this)
     }
-    
+
     // Take this from parent, so that state is saved in the form itself
     onChange (value) {
         this.props.onChange(value)
@@ -28,7 +30,7 @@ class searchBox extends Component{
 			value: value,
 		});
 	}
-    
+
     getBooks(input){
         if (input.length < 3) {
 			return Promise.resolve({ options: [] });
@@ -37,11 +39,16 @@ class searchBox extends Component{
             return fetch(ROOT+'/api/search/search_textbooks?search_input='+input)
             .then((res) => res.json())
             .then((json) => {
+                axios.get(ROOT+'/api/owned_books/get_owned_cards?user_id=user')
+                    .then((userData) => {
+                        console.log(userData.data)
+                    })
                 return { options: json.data };
             })
         }
     }
-    
+
+/*
     stuff(e){
 		var input = e
         if (input.length >= 3){
@@ -53,18 +60,18 @@ class searchBox extends Component{
                     if (res.data.status == 0){
                         var searchResults = res.data.data
                         console.log(searchResults)
-                        //TODO: Clear the search result UI state    
-                        /*
+                        //TODO: Clear the search result UI state
                         console.log("Making user request")
                         axios.get(ROOT+'/api/owned_books/get_owned_cards?user_id=user')
                             .then((userData) => {
-                            
+
                                 var userBooksInfo = userData.data;
+                                console.log(userBooksInfo);
 							    for (var j = 0; j < userBooksInfo.length; j++) {
 								    ownedBooksSet.add(userBooksInfo[j]["book_id"]);
 								    console.log(userBooksInfo[j]["book_id"]);
 							     }
-                            
+
                                 for (var i = 0; i < searchResults.length; i++){
                                     var book_id = searchResults[i]["book_id"];
 								    if (!ownedBooksSet.has(book_id)) {
@@ -77,32 +84,32 @@ class searchBox extends Component{
                                 }
                                 this.setState({search: displayList})
                             })
-                            .catch((e)=>console.log(e)) 
-                        */  
+                            .catch((e)=>console.log(e))
                         this.setState({search: searchResults})
                         return (searchResults)
-                    }  
+                    }
                 })
                 .catch((e)=>console.log(e))
         }
 	}
-    
+    */
+
     gotoUser (value, event) {
 		console.log("Selected", value)
 	}
-    
+
 	toggleBackspaceRemoves () {
 		this.setState({
 			backspaceRemoves: !this.state.backspaceRemoves
 		})
 	}
-    
+
 	toggleCreatable () {
 		this.setState({
 			creatable: !this.state.creatable
 		})
 	}
-    
+
     render () {
 		const AsyncComponent = this.state.creatable
 			? Select.AsyncCreatable
@@ -110,20 +117,20 @@ class searchBox extends Component{
 
 		return (
 			<div className="section">
-				<AsyncComponent 
-                    multi={this.state.multi} 
-                    value={this.state.value} 
-                    onChange={this.onChange} 
-                    onValueClick={this.gotoUser} 
-                    valueKey="book_id" 
-                    labelKey="title" 
+				<AsyncComponent
+                    multi={this.state.multi}
+                    value={this.state.value}
+                    onChange={this.onChange}
+                    onValueClick={this.gotoUser}
+                    valueKey="book_id"
+                    labelKey="title"
                     loadOptions={this.getBooks}
-                    backspaceRemoves={this.state.backspaceRemoves} 
+                    backspaceRemoves={this.state.backspaceRemoves}
                     placeholder="Search by title, professor or class"
             />
 			</div>
 		);
-	} 
+	}
 }
 
 export default searchBox

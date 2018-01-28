@@ -1,12 +1,8 @@
 // Libraries
 import React from 'react';
-import ReactSVG from 'react-svg';
 import Responsive from 'react-responsive';
-import FacebookLogin from 'react-facebook-login';
 
 // Resources
-import Book1 from '../img/book1.svg'
-import Book2 from '../img/book2.svg'
 import Hero from '../new_images/hero_min.png'
 import HeroMobile from '../new_images/hero_mobile.png'
 import Animation from '../new_images/loop-animation.gif'
@@ -26,13 +22,6 @@ const responseFacebook = (response) => {
   console.log(response);
 }
 
-//const loadStuff = () => {
-//    const req = axios.get('/api/search/search_textbooks?search_input=matrix')
-//        .then((res) => {
-//            console.log("Load", res.data)
-//        })
-//}
-
 const Landing = () => {
   var mobileStyles = {
       hero: {
@@ -51,14 +40,14 @@ const Landing = () => {
         <Default>
             <div className="hero" style={desktopStyles.hero}>
                 <div className="heroText">
-                    <a className="button button-default" href="http://localhost:5000/login/facebook" role="button">LOGIN WITH FACEBOOK</a>
+                    <a className="button button-default" href="http://localhost:3000/login/facebook" role="button">LOGIN WITH FACEBOOK</a>
                 </div>
             </div>
         </Default>
         <Mobile>
             <div className="hero" style={mobileStyles.hero}>
                 <div className="heroText">
-                    <a className="button button-default" href="http://localhost:5000/login/facebook" role="button">LOGIN WITH FACEBOOK</a>
+                    <a className="button button-default" href="http://localhost:3000/login/facebook" role="button">LOGIN WITH FACEBOOK</a>
                 </div>
             </div>
         </Mobile>

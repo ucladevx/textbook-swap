@@ -3,11 +3,8 @@ import {BrowserRouter, Route, Switch} from 'react-router-dom'
 import {connect} from 'react-redux';
 
 import Home from './containers/home'
-import Bookshelf from './containers/bookshelf'
 import Form from './components/form'
-import Trade from './components/trade'
 import SearchBox from './components/searchBox'
-import Summary from './components/summary'
 
 class App extends Component {
     componentDidMount(){
@@ -34,4 +31,4 @@ class App extends Component {
   }
 }
 
-export default  connect(null)(App);
+export default connect(null)(App);

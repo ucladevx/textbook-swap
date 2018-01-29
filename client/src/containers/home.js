@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from '../img/logo_1.svg';
 import {withRouter} from "react-router-dom";
 import {connect} from 'react-redux'
 
@@ -9,10 +8,6 @@ import NavBar from '../components/navbar'
 import Footer from '../components/footer'
 
 class Home extends Component{
-    constructor(props){
-        super(props)
-    }
-
     render(){
         return (
             <div className="App">

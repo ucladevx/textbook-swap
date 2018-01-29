@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from "react-router-dom";
+import {bindActionCreators} from 'redux';
+import {userLogin} from '../actions';
 import axios from 'axios'
 
 import SearchBox from './searchBox'
@@ -19,6 +21,11 @@ TODO:
 */
 
 class Form extends Component{
+    componentDidMount(){
+        console.log("Component Did Mount");
+        this.props.userLogin
+    }
+
     constructor(props){
         super(props)
         this.getChild = this.getChild.bind(this)
@@ -31,7 +38,6 @@ class Form extends Component{
         this.processOffer = this.processOffer.bind(this)
         this.processWant = this.processWant.bind(this)
         this.renderSummary = this.renderSummary.bind(this)
-        this.testRoutes = this.testRoutes.bind(this)
 
         this.state = {
             page: {
@@ -109,6 +115,7 @@ class Form extends Component{
             this.setOffer(null)
             return
         }
+
         axios.get(ROOT+'/api/book_to_class/get_prof_class_info?book_id='+value.book_id)
             .then((res)=>{
                 value.details = this.wrangle(res.data.data)
@@ -123,7 +130,7 @@ class Form extends Component{
             this.setOffer(null)
             return
         }
-        if (values.length == 0){
+        if (values.length === 0){
             this.setWant(null)
             return
         }
@@ -131,7 +138,7 @@ class Form extends Component{
              axios.get(ROOT+'/api/book_to_class/get_prof_class_info?book_id='+values[i].book_id)
             .then((res)=>{
                 values[i].details = this.wrangle(res.data.data)
-                if (i == values.length - 1){
+                if (i === values.length - 1){
                     this.setWant(values)
                 }
             })
@@ -148,13 +155,6 @@ class Form extends Component{
         }
         console.log("Trade Created", trade)
         console.log("Redirect...")
-    }
-
-    testRoutes(){
-        axios.post(ROOT + '/api/owned_books/owned_books/add', {book_id: '4211'})
-            .then((res) => {
-                console.log(res.data)
-            })
     }
 
     getChild(page){
@@ -188,8 +188,6 @@ class Form extends Component{
 
         var option = page.option
         var screen = page.screen
-
-        this.testRoutes()
 
         if (option === "trade"){
             switch (page.screen){
@@ -377,7 +375,17 @@ class Form extends Component{
     }
 }
 
-export default connect(null)(withRouter(Form))
+function mapStateToProps(state){
+    return {
+        user: state.user
+    }
+}
+
+function mapDispatchToProps(dispatch){
+    return bindActionCreators({userLogin}, dispatch)
+}
+
+export default connect(mapStateToProps, userLogin)(withRouter(Form))
 
 /*
 NOTES:

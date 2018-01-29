@@ -44,6 +44,7 @@ const bookToClassController = require('./controllers/api/book_to_class');
 const bookInfoController = require('./controllers/api/book_info');
 const foundTradesController = require('./controllers/api/found_trades');
 const runAlgorithmController = require('./controllers/api/run_algorithm');
+const userInfoController = require('./controllers/api/user_info');
 
 /*
  * API keys and Passport configuration.
@@ -135,6 +136,9 @@ app.get('/api/book_to_class/get_prof_class_info', bookToClassController.get_prof
 // Book info
 app.get('/api/book_info/get_book_info', bookInfoController.get_book_info);
 app.get('/api/book_info/get_pair_book_info', bookInfoController.get_pair_book_info);
+
+//
+app.get('/api/user_info', userInfoController.get_user_info);
 
 // Found trades
 app.post('/api/found_trades/update_status_accepted', foundTradesController.update_status_accepted);

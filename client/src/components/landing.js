@@ -34,6 +34,8 @@ const Landing = () => {
           backgroundImage: `url(${Hero})`
       }
   }
+  
+  
 
   return (
       <div>

@@ -3,6 +3,7 @@ import {BrowserRouter, Route, Switch} from 'react-router-dom'
 import {connect} from 'react-redux';
 
 import Home from './containers/home'
+import Dashboard from './containers/dashboard'
 import Form from './components/form'
 import SearchBox from './components/searchBox'
 
@@ -22,6 +23,12 @@ class App extends Component {
                 <Route exact path="/bookshelf" component={() => (
                         <div>
                             <Form></Form>
+                        </div>
+                )}>
+                </Route>
+                <Route exact path="/dashboard" component={() => (
+                        <div>
+                            <Dashboard></Dashboard>
                         </div>
                 )}>
                 </Route>

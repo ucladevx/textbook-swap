@@ -1,0 +1,23 @@
+.summaryContainer{
+    display: flex;
+    background-color: white;
+    flex-direction: row;
+    align-items: center;
+/*    justify-content: center;*/
+    width: 100%;
+    padding: 1%;
+    margin-top: 5%;
+}
+
+.summaryText{
+    flex: 1;
+    text-align: left;
+/*    background-color: cornflowerblue;*/
+    font-size: 1.2em;
+}
+
+.imageContainer{
+    flex: 1;
+    width: 100px;
+    height: 200px;
+}

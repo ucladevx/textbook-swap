@@ -1,0 +1,26 @@
+/* navbar */
+
+.navbar-fixed-top {
+    transition: all ease-out;
+    background: #52b9d1;
+    border: 0;
+    margin-right: -1vw;
+    margin-bottom: 10px;
+}
+
+.nav.navbar-nav.navbar-right li a{
+    color: white;
+    font-size:120%;
+}
+
+.nav.navbar-nav.navbar-right{
+    padding-right: 2vh;
+}
+
+#navbar_logo{
+    height: 30px;
+}
+
+.navbar-brand{
+    padding-top: 10px;
+}

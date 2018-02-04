@@ -18,8 +18,6 @@ services:
       - 3000:3000
     depends_on:
       - db
-    volumes:
-      - .:/app
     environment:
       - DATABASE_URL=postgres://postgres@db:5432/loopsDB
       - DATA_PATH='/data/models/data/

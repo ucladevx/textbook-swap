@@ -1,0 +1,18 @@
+.ciContainer{
+/*    background-color: cornflowerblue;*/
+}
+
+.ciImageBox{
+/*    background-color: skyblue;*/
+    padding: 12px;
+}
+
+.ciImage{
+    object-fit: contain;
+    max-height: 10vw;
+}
+
+.ciText{
+    padding-top: 5px;
+    color: white;
+}

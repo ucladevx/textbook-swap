@@ -18,9 +18,7 @@ class Home extends Component{
               <p className="App-intro">
                 To get started, edit <code>src/Main.js</code> and save to reload.
               </p>*/}
-              <NavBar></NavBar>
               <Landing/>
-              <Footer></Footer>
             </div>
         )
     }

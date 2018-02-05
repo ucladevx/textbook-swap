@@ -102,6 +102,17 @@
     color: rgb(255, 255, 255);
 }
 
+/* multi input search box */
+.Select.is-focused:not(.is-open) > .Select-control {
+    border-color: rgb(255, 255, 255);
+    background: rgb(35, 188, 212);
+}
+
+.Select--multi a.Select-value-label, .Select--multi .Select-value-icon:hover, .Select--multi .Select-value-icon:focus, .Select--multi .Select-value {
+    color: rgb(255, 255, 255);
+    border-color: rgb(255, 255, 255);
+}
+
 /* result from search box */
 /*.Select-menu-outer {
     max-height: 100%;

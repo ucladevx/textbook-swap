@@ -1,13 +1,14 @@
 .form-container{
     width: 70vw;
     height: 80vh;
-    background-color: aliceblue;
+    background-color: darkgray;
     align-self: center;
-/*    align-items: center;*/
-    text-align: center;
+/*    align-items: center;
+*/    text-align: center;
     display: flex;
     flex-direction: row;
     justify-content: center;
+    color: rgb(114, 114, 114);
 }
 
 .formTitle{
@@ -39,8 +40,13 @@
 
 .formContents{
     display: block;
-    background-color: lightgray;
+    background: rgb(254, 254, 254);
+    border-radius: 3px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 1);
     width: 75%;
+    position: relative;
+    text-align: center;
+    overflow: auto;
 }
 
 .formInput{
@@ -64,3 +70,70 @@
     margin:0 auto; 
     margin-bottom: 5%;
 }
+
+/*
+ * First page of the form
+ */
+
+ /* search box for user input */
+.Select-control, .Select-placeholder, .Select.is-focused > .Select-control, .Select-value {
+    background-color: rgb(35, 188, 212);
+    border-color: rgb(35, 188, 212);
+    border-radius: 0;
+    color: rgb(255, 255, 255);
+}
+
+/* arrow for search box */
+.Select-arrow, .Select .Select-arrow-zone:hover .Select-arrow {
+    border-top-color: rgb(255, 255, 255);
+}
+
+.Select.is-open.is-focused.is-searchable .Select-arrow {
+    border-bottom-color: rgb(255, 255, 255);
+}
+
+/* the [x] mark beside the selected value */
+.Select-clear {
+    color: rgb(255, 255, 255);
+}
+
+/* input in search box after selecting */
+.Select.has-value.Select--single > .Select-control .Select-value .Select-value-label, .Select.has-value.is-pseudo-focused.Select--single > .Select-control .Select-value .Select-value-label {
+    color: rgb(255, 255, 255);
+}
+
+/* result from search box */
+/*.Select-menu-outer {
+    max-height: 100%;
+    border-radius: 0;
+}*/
+
+.Select-menu {
+    max-height: 70%;
+}
+
+.Select-option.is-selected, .Select-option.is-focused {
+  background-color: rgb(242, 242, 242);
+}
+
+/* transition buttons */
+.transitionButtonRow {
+    position: absolute;
+    margin-top: 3vh;
+    bottom: 3vh;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* TODO: figure out how to center the buttons, maybe use Bootstrap? */
+.transitionButtonRow button {
+    background-color: rgb(253, 206, 48);
+    border-color: rgb(253, 206, 48);
+    border-radius: 0;
+    box-shadow: none;
+    outline: none;
+    color: #ffffff;
+}
+

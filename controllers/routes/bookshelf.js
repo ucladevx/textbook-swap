@@ -57,7 +57,6 @@ exports.index = function(req, res) {
                 if(error_status){
                     logger.error("Error querying database", error_status);
                 }
-
                 async.map(matched_trades_data, function(item, map_callback){
                     async.series({
                         book_have: function(cb){
@@ -71,7 +70,7 @@ exports.index = function(req, res) {
                             });
                         },
                         status: function(cb){
-                            found_trades.get_trades_status(item["trade_id"], function(error, trades_status){
+                            found_trades.get_trade_status(user_id, item["book_have"], function(error, trades_status){
                                 cb(null, trades_status);
                             });
                         }
@@ -84,7 +83,12 @@ exports.index = function(req, res) {
             });
         }
     }, function(err, results){
-        logger.log(results['owned_books_info']);
+        logger.log({
+            status: err,
+            books: [].concat(results['matched_trades_info'], results['owned_books_info']),
+            username: results['user_name'],
+            book_nums: results['possible_trades_info']
+        });
         res.render('bookshelf', {
             status: err,
             books: [].concat(results['matched_trades_info'], results['owned_books_info']),

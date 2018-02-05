@@ -282,9 +282,6 @@ exports.update_status_accepted = function(trade_id, user_id, owned_book, target_
                         logger.error("Error querying database for waiting trades", err);
                         return next(utilities.found_trades_errors.DB_QUERY_ERROR, []);
                     }
-
-                    logger.log("set edge to W");
-
                     return next(utilities.found_trades_errors.DB_SUCCESS, matched);
                 });
             }
@@ -393,13 +390,15 @@ exports.get_matched_trades = function (user_id, next){
 };
 
 /**
- * Get trade status for a specific trade
+ * Get trade status for a specific edge of a matched trade
  *
- * @param trade_id  trade id for a found trade
+ * @param user_id  user id for the current user
+ * @param book_have  the owned book that we want to get the status of
+ * @param next  callback function
  * @return error code for the database query
  * @return trade status ('W', 'A', 'R', 'P')
  */
-exports.get_trades_status = function (trade_id, next) {
+exports.get_trade_status = function (user_id, book_have, next) {
     pg.connect(process.env.DATABASE_URL, function(err, client, done){
         done();
 
@@ -407,35 +406,15 @@ exports.get_trades_status = function (trade_id, next) {
             logger.error("Error connection to client while querying found_trades table: ", err);
             return next(utilities.found_trades_errors.DB_CONNECTION_ERROR, []);
         }
-        var rejected = false;
-        var accepted = true;
-        var result;
-        exports.get_statuses_by_id(trade_id, function(error_code, statuses) {
-            logger.log(statuses);
-            for(var i = 0; i < statuses.length; i++){
-                var row = statuses[i];
-                switch(row['status']) {
-                    case 'A':
-                        break;
-                    case 'P':
-                        accepted = false;
-                        break;
-                    case 'R':
-                        rejected = true;
-                        accepted = false;
-                        break;
-                    default:
-                        break;
+        client.query("SELECT status FROM found_trades WHERE user_id=$1::VARCHAR AND book_have=$2::INTEGER",
+            [user_id, book_have], function(err, result){
+                if(err){
+                    logger.error("Error querying database", err);
+                    return next(utilities.found_trades_errors.DB_QUERY_ERROR, []);
                 }
-            }
-            if(rejected)
-                result = 'R';
-            else if(accepted)
-                result = 'A';
-            else
-                result = 'P';
-            return next(utilities.found_trades_errors.DB_SUCCESS, result);
-        });
+                logger.log(result.rows);
+                return next(utilities.found_trades_errors.DB_SUCCESS, result.rows[0].status);
+            });
     });
 };
 

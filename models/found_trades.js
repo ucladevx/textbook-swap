@@ -412,7 +412,6 @@ exports.get_trade_status = function (user_id, book_have, next) {
                     logger.error("Error querying database", err);
                     return next(utilities.found_trades_errors.DB_QUERY_ERROR, []);
                 }
-                logger.log(result.rows);
                 return next(utilities.found_trades_errors.DB_SUCCESS, result.rows[0].status);
             });
     });

@@ -130,11 +130,13 @@
 /* transition buttons */
 .transitionButtonRow {
     position: absolute;
-    bottom: 10%;
+    bottom: 5%;
     text-align: center;
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: row;
+    width: 85%; 
 }
 
 /* TODO: figure out how to center the buttons, maybe use Bootstrap? */
@@ -145,6 +147,7 @@
     box-shadow: none;
     outline: none;
     color: #ffffff;
+    margin: 0% 5%;
 }
 
 /* want books search box and results */

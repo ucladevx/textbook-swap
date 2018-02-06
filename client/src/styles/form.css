@@ -47,6 +47,7 @@
     position: relative;
     text-align: center;
     overflow: auto;
+    padding: 5%;
 }
 
 .formInput{
@@ -130,8 +131,7 @@
 /* transition buttons */
 .transitionButtonRow {
     position: absolute;
-    margin-top: 3vh;
-    bottom: 3vh;
+    bottom: 5%;
     text-align: center;
     display: flex;
     justify-content: center;
@@ -148,3 +148,22 @@
     color: #ffffff;
 }
 
+/* owned book summary */
+/*.summaryContainer {
+  display: flex;
+  flex-flow: row wrap;
+  width: 100%;
+  height: 60%;
+}
+
+.imageContainer {
+    width: 50%;
+}
+
+.imageContainer > img {
+    width: 80%;
+}
+
+.summaryText {
+    width: 50%;
+}*/

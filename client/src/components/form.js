@@ -239,7 +239,7 @@ class Form extends Component{
                         <div className="formContents">
                             <h1 className="formTitle">NEW TRADE</h1>
                             <h3 className="formMessage">Select the book(s) you want to receive in return.</h3>
-                            <div>
+                            <div className="searchBoxAndResults">
                                 <SearchBox
                                     onChange={this.processWant}
                                     multi={true}

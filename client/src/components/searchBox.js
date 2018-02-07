@@ -48,6 +48,8 @@ class searchBox extends Component{
         }
     }
 
+    // 
+
 /*
     stuff(e){
 		var input = e
@@ -121,7 +123,7 @@ class searchBox extends Component{
                     multi={this.state.multi}
                     value={this.state.value}
                     onChange={this.onChange}
-                    onValueClick={this.gotoUser}
+                    onValueClick={this.gotoUser} // TODO: this makes the value a link in the search bar, so remove later?
                     valueKey="book_id"
                     labelKey="title"
                     loadOptions={this.getBooks}

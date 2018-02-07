@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {withRouter} from "react-router-dom";
 import {connect} from 'react-redux'
 import NavBar from '../components/navbar'
+import CardContainer from '../containers/cardContainer'
 import '../styles/dashboard.css'
 
 class Dashboard extends Component{
@@ -12,7 +13,6 @@ class Dashboard extends Component{
     render(){
         return (
             <div className="dashboardContainer">
-                <NavBar></NavBar>
                 <div className="topBar">
                     <p>Hi Suyash Saxena, this is your dashboard</p>
                     <button>ALL</button>
@@ -21,7 +21,7 @@ class Dashboard extends Component{
                     <button>REJECTED</button>
                 </div>
                 <div className="cardContainer">
-                     
+                     <CardContainer/>
                 </div>
             </div>
         )

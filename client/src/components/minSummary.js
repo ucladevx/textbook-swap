@@ -16,8 +16,8 @@ class MinSummary extends Component{
                     className='minBookImage'/>
                 </div>
                 <div className='minSummaryText'>
-                    <p>Title: {book.title}</p>
-                    <p>Author: {book.author}</p>
+                    <p>{book.title}</p>
+                    <p>{book.author}</p>
                     {/*<p>ISBN: {book.isbn}</p>
                     <p>Class: {book.details.classes}</p>
                     <p>Prof: {book.details.profs}</p>*/}

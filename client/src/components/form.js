@@ -45,7 +45,7 @@ class Form extends Component{
                 screen: 1
             },
             offer: null,
-            want: null
+            want: null,
         }
     }
 
@@ -196,73 +196,93 @@ class Form extends Component{
                         <div className="formContents">
                             <h1 className="formTitle">NEW TRADE</h1>
                             <h3 className="formMessage">Select the book you can offer.</h3>
+                                <SearchBox
+                                    onChange={this.processOffer}
+                                    multi={false}
+                                    initState={this.state.offer}
+                                />
 
-                            <SearchBox
-                                onChange={this.processOffer}
-                                multi={false}
-                                initState={this.state.offer}
-                            />
+                                {
+                                    this.state.offer != null &&
+                                    <Summary
+                                        books={this.state.offer} multi={false}
+                                        className="formSummary"
+                                     />
+                                }
 
-                            {
-                                this.state.offer != null &&
-                                <Summary
-                                    books={this.state.offer} multi={false}
-                                    className="formSummary"
-                                 />
-                            }
+                            <div className="transitionButtonRow">
 
-                            <button className="formPrev" onClick={()=>this.setPage(0)}>Prev</button>
-                            {
-                                this.state.offer != null &&
-                                <button className="formPrev" onClick={()=>this.setPage({option, screen: screen+2})}>Next</button>
-                            }
+                                <button className="formPrev" onClick={()=>this.setPage(0)}>Previous</button>
+                                {
+                                    this.state.offer != null &&
+                                    <button className="formNext" onClick={()=>this.setPage({option, screen: screen+2})}>Next</button>
+                                }
+
+                            </div>
                         </div>
                     )
                 case 2:
                      return (
-                         <div>
-                            <h3>Confirm books offered</h3>
-                            <Summary books={this.state.offer} multi={false}></Summary>
-                            <button onClick={()=>this.setPage({option, screen: screen-1})}>Prev</button>
-                            <button onClick={()=>this.setPage({option, screen: screen+1})}>Next</button>
-                         </div>
+                         <div className="formContents">
+                             <div>
+                                <h3>Confirm books offered</h3>
+                                <Summary books={this.state.offer} multi={false}></Summary>
+                                <div className="transitionButtonRow">
+                                    <button className="formPrev" onClick={()=>this.setPage({option, screen: screen-1})}>Previous</button>
+                                    <button className="formNext" onClick={()=>this.setPage({option, screen: screen+1})}>Next</button>
+                                </div>
+                             </div>
+                        </div>
                      )
                 case 3:
                     return (
-                        <div>Pick the book you want to obtain
-                            <SearchBox
-                                onChange={this.processWant}
-                                multi={true}
-                                initState={this.state.want}
-                            />
+                        <div className="formContents">
+                            <h1 className="formTitle">NEW TRADE</h1>
+                            <h3 className="formMessage">Select the book(s) you want to receive in return.</h3>
+                            <div className="searchBoxAndResults">
+                                <SearchBox
+                                    onChange={this.processWant}
+                                    multi={true}
+                                    initState={this.state.want}
+                                />
 
-                            {
-                                this.state.want != null &&
-                                <Summary books={this.state.want} multi={true}></Summary>
-                            }
-                            <button onClick={()=>this.setPage({option, screen: screen-2})}>Prev</button>
-
-                            {
-                                this.state.want != null &&
-                                <button onClick={()=>this.setPage({option, screen: screen+1})}>Next</button>
-                            }
+                                <div className="searchResults">
+                                    {
+                                        this.state.want != null &&
+                                        <Summary books={this.state.want} multi={true}></Summary>
+                                    }
+                                </div>
+                            </div>
+                            <div className="transitionButtonRow">
+                                <button className="formPrev" onClick={()=>this.setPage({option, screen: screen-2})}>Previous</button>
+                                {
+                                    this.state.want != null &&
+                                    <button className="formNext" onClick={()=>this.setPage({option, screen: screen+1})}>Next</button>
+                                }
+                            </div>
                         </div>
                     )
                 case 4:
                      return (
-                         <div>Confirm Trade
-                            <div className='trade-container'>
-                                <div className='trade-left'>
-                                    Books Offered
-                                    <Summary books={this.state.offer} multi={false}/>
+                         <div className="formContents">
+                            <h1 className="formTitle">NEW TRADE</h1>
+                            <h3 className="formMessage">Confirm your trades!</h3>
+                            <div className='confirmTradeContainer'>
+                                <div className='confirmTradeLeft'>
+                                    <h5> Offered Book </h5>
+                                    <div className="ownedBookSummary">
+                                        <Summary books={this.state.offer} multi={false}/>
+                                    </div>
                                 </div>
-                                <div className='trade-right'>
-                                    Books Wanted
+                                <div className='confirmTradeRight'>
+                                    <h5> Wanted Books </h5>
                                     <MinSummary books={this.state.want}/>
                                 </div>
                             </div>
-                            <button onClick={()=>this.setPage({option, screen: screen-1})}>Prev</button>
-                            <button onClick={()=>this.createTrade("TRADE")}>Create Trade</button>
+                            <div className="transitionButtonRow">
+                                <button className="formPrev" onClick={()=>this.setPage({option, screen: screen-1})}>Previous</button>
+                                <button className="formNext" onClick={()=>this.createTrade("TRADE")}>Create Trade</button>
+                            </div>
                          </div>
                      )
             }
@@ -288,7 +308,7 @@ class Form extends Component{
                 case 2:
                      return (
                          <div>Confirm book
-                            <button onClick={()=>this.setPage({option, screen: screen-1})}>Prev</button>
+                            <button onClick={()=>this.setPage({option, screen: screen-1})}>Previous</button>
                             <button onClick={()=>this.setPage({option, screen: screen+1})}>Next</button>
                          </div>
                      )
@@ -300,7 +320,7 @@ class Form extends Component{
                                  value={this.state.offer != null ? this.state.offer : ""}
                                  onChange={(e)=>this.setOffer(e.target.value)}
                             />
-                            <button onClick={()=>this.setPage({option, screen: screen-1})}>Prev</button>
+                            <button onClick={()=>this.setPage({option, screen: screen-1})}>Previous</button>
                             {this.state.offer != null &&
                             <button onClick={()=>this.setPage({option, screen: screen+1})}>Next</button>}
                         </div>
@@ -308,7 +328,7 @@ class Form extends Component{
                 case 4:
                      return (
                          <div>Confirm
-                            <button onClick={()=>this.setPage({option, screen: screen-1})}>Prev</button>
+                            <button onClick={()=>this.setPage({option, screen: screen-1})}>Previous</button>
                             <button onClick={()=>this.createTrade("BUY")}>Create Trade</button>
                          </div>
                      )

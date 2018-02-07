@@ -93,33 +93,26 @@ exports.get_user_info = function(req, res){
     });
 };
 /*
+trades schema:
+all book_want properties is a list of book objects. There will only be one object for 'W', 'A', 'R', 'P' statuses, but
+can be multiple for 'N' status (no match yet, contains all possible books they are willing to receive)
 [
  {
-    type: "matched",
-    myBook: {Book Object},
-    tradedBook: {Book Object}
+    status: "A",
+    book_have: {Book Object},
+    book_want: [{Book Object}]
  },
  {
-    type: "declined",
-    myBook: {Book Object},
-    tradedBooks: [Book Objects]
+    status: "N",
+    book_have: {Book Object},
+    book_want: [{Book Objects}]
  },
- {
-    type: "pending",
-    myBook: {Book Object},
-    tradedBooks: [Book Objects]
- }
+ ...
 ]
-*/
-
-/*
-1 - No Match --> 1 to many
-2 - Pending your Response --> 1 to 1
-3
 */
 
 // ACCEPTED --> Everyone => 1 to 1
 // PENDING YOUR RESPONSE --> You need to respond => 1 to 1
 // REJECTED --> You/someone else REJECTED => 1 to 1
 // NO MATCH --> 1 to many
-// WAITING FOR MATCHERS TO CONFIRM -->
+// WAITING FOR MATCHERS TO CONFIRM --> 1 to 1

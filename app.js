@@ -137,7 +137,7 @@ app.get('/api/book_to_class/get_prof_class_info', bookToClassController.get_prof
 app.get('/api/book_info/get_book_info', bookInfoController.get_book_info);
 app.get('/api/book_info/get_pair_book_info', bookInfoController.get_pair_book_info);
 
-//
+// Get user info
 app.get('/api/user_info', userInfoController.get_user_info);
 
 // Found trades

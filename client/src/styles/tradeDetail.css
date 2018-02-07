@@ -1,0 +1,75 @@
+.tdContainer{
+    background-color: #47AFCB;
+    width: 70vw;
+    height: 85vh;
+    align-items: center;
+    justify-content: center;
+}
+
+.tdDetailContainer{
+    width: 85%;
+    min-height: 70%;
+    background-color: whitesmoke;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+.tdTitle{
+    color: white;
+    padding-bottom: 2%;
+}
+
+.tdLeft{
+    flex: 2;
+    margin: 5%;
+}
+
+.tdCenter{
+    width: 5%;
+    flex: 1;
+}
+
+.tdRight{
+    flex: 2;
+    margin: 5%;
+}
+
+.tdImage {
+    width: 50%;
+}
+
+.rejectButton {
+    background-color: #E37449;
+    border: 0px;
+    color: white;
+    margin-top: 3%;
+    padding: 10px;
+    font-size: 1.1em;
+    margin-right: 5%;
+}
+
+.acceptButton {
+    background-color: #4BB242;
+    border: 0px;
+    color: white;
+    margin-top: 3%;
+    padding: 10px;
+    font-size: 1.1em;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

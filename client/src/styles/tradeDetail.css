@@ -4,6 +4,7 @@
     height: 85vh;
     align-items: center;
     justify-content: center;
+    position: relative;
 }
 
 .tdDetailContainer{
@@ -39,6 +40,18 @@
 
 .tdImage {
     width: 50%;
+}
+
+/* navigation buttons */
+.tdButtonRow {
+    position: absolute;
+    bottom: 5%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    width: 100%;
 }
 
 .rejectButton {

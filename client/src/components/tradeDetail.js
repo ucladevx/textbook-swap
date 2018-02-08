@@ -32,32 +32,38 @@ class TradeDetail extends Component {
                             <CardDetailView></CardDetailView>
                         </div>
                     </div>
-                    <button onClick={()=>this.setState({page: 1})} className="rejectButton">REJECT</button>
-                    <button onClick={()=>this.setState({page: 2})} className="acceptButton">ACCEPT</button>
+                    <div className="tdButtonRow">
+                        <button onClick={()=>this.setState({page: 1})} className="rejectButton">REJECT</button>
+                        <button onClick={()=>this.setState({page: 2})} className="acceptButton">ACCEPT</button>
+                    </div>
                 </div>
             )
         }
         if (page === 1){
             return (
                 <div>
-                <div className="tdDetailContainer">
-                    <h3>Are you sure you wanna reject the trade?</h3>
-                </div>
-                <button onClick={()=>this.setState({page: 0})} 
-                    className="rejectButton">No... Take me back</button>
-                <button className="acceptButton">Yep</button>
+                    <div className="tdDetailContainer">
+                        <h3>Are you sure you wanna reject the trade?</h3>
+                    </div>
+                    <div className="tdButtonRow">
+                        <button onClick={()=>this.setState({page: 0})} 
+                            className="rejectButton">No... Take me back</button>
+                        <button className="acceptButton">Yep</button>
+                    </div>
                 </div>
             )
         }
         if (page === 2){
             return (
                 <div>
-                <div className="tdDetailContainer">
-                    <h3>Are you sure you wanna accept the trade?</h3>
-                    <h4>You will be emailed details of your loop'ers on confirmation</h4>
-                </div>
-                <button onClick={()=>this.setState({page: 0})} className="rejectButton">No... Take me back</button>
-                <button className="acceptButton">Yep</button>
+                    <div className="tdDetailContainer">
+                        <h3>Are you sure you wanna accept the trade?</h3>
+                        <h4>You will be emailed details of your loop'ers on confirmation</h4>
+                    </div>
+                    <div className="tdButtonRow">
+                        <button onClick={()=>this.setState({page: 0})} className="rejectButton">No... Take me back</button>
+                        <button className="acceptButton">Yep</button>
+                    </div>
                 </div>
             )
         }

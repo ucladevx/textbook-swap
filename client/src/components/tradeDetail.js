@@ -20,7 +20,7 @@ class TradeDetail extends Component {
         var page = this.state.page
         if (page === 0){
             return (
-                <div>
+                <div className="tdDetailContents">
                     <div className="tdDetailContainer">
                         <div className="tdLeft">
                             <CardDetailView></CardDetailView>
@@ -41,9 +41,9 @@ class TradeDetail extends Component {
         }
         if (page === 1){
             return (
-                <div>
+                <div className="tdDetailContents">
                     <div className="tdDetailContainer">
-                        <h3>Are you sure you wanna reject the trade?</h3>
+                        <h3>Are you sure you want to reject the trade?</h3>
                     </div>
                     <div className="tdButtonRow">
                         <button onClick={()=>this.setState({page: 0})} 
@@ -55,10 +55,10 @@ class TradeDetail extends Component {
         }
         if (page === 2){
             return (
-                <div>
+                <div className="tdDetailContents">
                     <div className="tdDetailContainer">
-                        <h3>Are you sure you wanna accept the trade?</h3>
-                        <h4>You will be emailed details of your loop'ers on confirmation</h4>
+                        <h3>Are you sure you want accept the trade?
+                        You will be emailed the details of the other members in your trade loop on confirmation.</h3>
                     </div>
                     <div className="tdButtonRow">
                         <button onClick={()=>this.setState({page: 0})} className="rejectButton">No... Take me back</button>
@@ -72,7 +72,6 @@ class TradeDetail extends Component {
     render() {
         return (
             <div className="tdContainer">
-                <button>Close</button>
                 <h2 className="tdTitle">MATCHED TRADE</h2>
                 {
                     this.generateDetail()

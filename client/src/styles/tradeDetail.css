@@ -1,21 +1,29 @@
 .tdContainer{
     background-color: #47AFCB;
     width: 70vw;
-    height: 85vh;
-    align-items: center;
-    justify-content: center;
+    height: 80vh;
+/*    align-items: center;
+*/    justify-content: center;
     position: relative;
+    overflow: auto;
+}
+
+/* need this to make sure that setting heights by percentages for child elements works */
+.tdDetailContents {
+    height: 100%;
 }
 
 .tdDetailContainer{
-    width: 85%;
-    min-height: 70%;
-    background-color: whitesmoke;
-    margin: auto;
+    height: 70%;
+    background-color: rgb(254, 254, 254);
+    margin: 0% 5%;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: row;
+    overflow: auto;
+    position: relative;
+    padding: 5%;
 }
 
 .tdTitle{

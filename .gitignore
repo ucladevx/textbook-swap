@@ -3,6 +3,7 @@ node_modules
 npm-debug.log
 .DS_Store
 loop-dev.pem
+config/auth.js
 
 # Database
 *.sqlite

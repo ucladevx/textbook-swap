@@ -13,8 +13,8 @@ class CardDetailView extends Component {
     {
         return (
             <div className="cdContainer">
-                <div className="cdText">HISTORY OF INDIA</div>
-                <div className="cdText">PINKER</div>
+                <div className="cdText"><span style={{color:'rgb(58, 193, 215)'}}> HISTORY OF INDIA </span></div>
+                <div className="cdText"><span style={{color:'rgb(58, 193, 215)'}}> PINKER </span></div>
                 <div className="cdText">ISBN: 1234567</div>
                 <div className="cdImageBox">
                     <img src={BookImage} className="cdImage"></img>

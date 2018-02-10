@@ -3,15 +3,8 @@ const users = require('./users');
 const books = require('./book_info');
 const fs = require('fs');
 const matched_email_html = fs.readFileSync(__dirname + '/../public/assets/potential_trade_email_notif.html', 'UTF-8');
-const nodemailer = require('nodemailer');
+const sgMail = require('@sendgrid/mail');
 
-const transport = nodemailer.createTransport({
-        service: 'Gmail',
-        auth: {
-            user: dotenv.EMAIL_ID,
-            pass: dotenv.EMAIL_PASSWORD,
-        },
-});
 const handlebars = require('handlebars');
 
 //TODO: Refactor to make this much less ugly
@@ -62,17 +55,14 @@ exports.send_potential_trade_email = function(email_data){
     }
     var template = handlebars.compile(matched_email_html);
     var custom_html = template(replacements);
-    const mailOptions = {
-        from: 'LoopDevX@gmail.com',
-        to: email_data.user_email,
-        subject: 'You Got A Book Trading Match on Loop!',
-        html: custom_html,
+
+    sgMail.setApiKey(process.env.EMAIL_KEY);
+    const msg = {
+        to: process.env.EMAIL_ID,
+        from: process.env.EMAIL_ID,
+        subject: 'Loop has found a potential textbook trade',
+        html: n_custom_html,
     };
-    transport.sendMail(mailOptions, (error, info) => {
-            if (error) {
-                console.log(error);
-            }
-            console.log(`Message sent: ${info.response}`);
-    });
+    sgMail.send(msg);
 };
 

@@ -14,8 +14,6 @@ const session = require('express-session');
 const require_login = require('connect-ensure-login');
 const logger = require('tracer').colorConsole();
 
-const testMail = require('./test/test_mail');
-
 /*
  * Constants
  */

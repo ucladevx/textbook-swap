@@ -251,7 +251,7 @@
             <div class="content">
 
                 <!-- START CENTERED WHITE CONTAINER -->
-                <span class="preheader">This is preheader text. Some clients will show this text as a preview.</span>
+                <span class="preheader">Loop has found a potential textbook match!</span>
                 <table class="main">
 
                     <!-- START MAIN CONTENT AREA -->
@@ -260,8 +260,10 @@
                             <table border="0" cellpadding="0" cellspacing="0">
                                 <tr>
                                     <td>
-                                        <p>Hi there,</p>
-                                        <p>Sometimes you just want to send a simple HTML email with a simple design and clear call to action. This is it.</p>
+                                        <p>Hi {{owner_user_name}},</p>
+                                        <p>Loop has found a potential textbook trade match for the following:</p>
+                                        <p>You receive: "{{target_book_name}}", by {{target_book_author}}</p>
+                                        <p>You trade: "{{owned_book_name}}", by {{owned_book_author}}</p>
                                         <table border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
                                             <tbody>
                                             <tr>
@@ -269,7 +271,7 @@
                                                     <table border="0" cellpadding="0" cellspacing="0">
                                                         <tbody>
                                                         <tr>
-                                                            <td> <a href="http://htmlemail.io" target="_blank">Go to your profile</a> </td>
+                                                            <td> <a href="http://loop-trading.com/" target="_blank">Accept the trade</a> </td>
                                                         </tr>
                                                         </tbody>
                                                     </table>
@@ -277,8 +279,8 @@
                                             </tr>
                                             </tbody>
                                         </table>
-                                        <p>This is a really simple email template. Its sole purpose is to get the recipient to click the button with no distractions.</p>
-                                        <p>Good luck! Hope it works.</p>
+                                        <p>Go to your profile on Loop to accept! Remember, you have two days to accept the trade or it will automatically rejected. Also, everyone in your trade loop must accept the trade for it to be confirmed.</p>
+                                        <p>Thank you for using Loop</p>
                                     </td>
                                 </tr>
                             </table>
@@ -293,15 +295,15 @@
                     <table border="0" cellpadding="0" cellspacing="0">
                         <tr>
                             <td class="content-block">
-                                <span class="apple-link">Company Inc, 3 Abbey Road, San Francisco CA 94102</span>
-                                <br> Don't like these emails? <a href="http://i.imgur.com/CScmqnj.gif">Unsubscribe</a>.
+                                <span class="apple-link">Loop: Book trading made easy</span>
+                               <!-- <br> Don't like these emails? <a href="http://i.imgur.com/CScmqnj.gif">Unsubscribe</a>.  -->
                             </td>
                         </tr>
-                        <tr>
+                       <!-- <tr>
                             <td class="content-block powered-by">
                                 Powered by <a href="http://htmlemail.io">HTMLemail</a>.
                             </td>
-                        </tr>
+                        </tr> -->
                     </table>
                 </div>
                 <!-- END FOOTER -->

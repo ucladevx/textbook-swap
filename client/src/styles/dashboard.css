@@ -19,3 +19,45 @@
 /*    padding-right: 0.5%;*/
 }
 
+.filterButtonGroup {
+    margin-top: 3vh;
+}
+
+.filterButtonGroup button:focus{
+    outline: none;
+}
+
+.filterButton {
+    background-color: transparent;
+    color: white;
+    border: 0;
+    margin: 1vw;
+    font-size: 100%;
+    cursor: pointer;
+}
+
+.Requested_but {
+    color: #f8cc45;
+}
+.Matched_but {
+    color: #52b9d1;
+}
+.Rejected_but {
+    color: #e88154;
+}
+
+.All_but:active {
+    border-bottom: 1px solid white;
+}
+
+.Requested_but:active {
+    border-bottom: 1px solid #f8cc45;
+}
+
+.Matched_but:active {
+    border-bottom: 1px solid #52b9d1;
+}
+
+.Rejected_but:active {
+    border-bottom: 1px solid #e88154;
+}

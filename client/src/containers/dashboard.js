@@ -15,10 +15,12 @@ class Dashboard extends Component{
             <div className="dashboardContainer">
                 <div className="topBar">
                     <p>Hi Suyash Saxena, this is your dashboard</p>
-                    <button>ALL</button>
-                    <button>REQUESTED</button>
-                    <button>MATCHED</button>
-                    <button>REJECTED</button>
+                    <div className="filterButtonGroup">
+                        <button className="filterButton All_but active">ALL</button>
+                        <button className="filterButton Requested_but">REQUESTED</button>
+                        <button className="filterButton Matched_but">MATCHED</button>
+                        <button className="filterButton Rejected_but">REJECTED</button>
+                    </div>
                 </div>
                 <div className="cardContainer">
                      <CardContainer/>

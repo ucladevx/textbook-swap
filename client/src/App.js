@@ -9,6 +9,7 @@ import Dashboard from './containers/dashboard'
 import Form from './components/form'
 import SearchBox from './components/searchBox'
 import TradeDetail from './components/tradeDetail'
+import TradingGuide from './components/tradingGuide'
 
 class App extends Component {
     componentDidMount(){
@@ -39,6 +40,12 @@ class App extends Component {
                 <Route exact path="/detail" component={() => (
                         <div>
                             <TradeDetail></TradeDetail>
+                        </div>
+                )}>
+                </Route>
+                <Route exact path="/guide" component={() => (
+                        <div>
+                            <TradingGuide></TradingGuide>
                         </div>
                 )}>
                 </Route>

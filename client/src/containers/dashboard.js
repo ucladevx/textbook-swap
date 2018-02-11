@@ -8,6 +8,7 @@ import {userLogin} from '../actions';
 
 import Form from '../components/form'
 import Modal from 'react-modal';
+import TradeDetail from '../components/tradeDetail'
 
 const customStyles = {
   overlay: {
@@ -34,14 +35,20 @@ class Dashboard extends Component{
         super(props)
         
         this.state = {
-          formModalIsOpen: false
+          formModalIsOpen: false,
+          detailModalIsOpen: false,
+          selectedCard: null,
+          filter: "ALL"
         };
 
         this.openFormModal = this.openFormModal.bind(this);
+        this.openDetailModal = this.openDetailModal.bind(this);
         this.afterOpenFormModal = this.afterOpenFormModal.bind(this);
+        this.afterOpenDetailModal = this.afterOpenDetailModal.bind(this);
         this.closeFormModal = this.closeFormModal.bind(this);
+        this.closeDetailModal = this.closeDetailModal.bind(this);
+        this.setFilter = this.setFilter.bind(this);
     }
-    
     
     openFormModal() {
         this.setState({formModalIsOpen: true});
@@ -53,6 +60,22 @@ class Dashboard extends Component{
 
     closeFormModal() {
         this.setState({formModalIsOpen: false});
+    }
+    
+    openDetailModal() {
+        this.setState({detailModalIsOpen: true});
+    }
+
+    afterOpenDetailModal() {
+    // references are now sync'd and can be accessed.
+    }
+
+    closeDetailModal() {
+        this.setState({detailModalIsOpen: false});
+    }
+    
+    setFilter(type) {
+        this.setState({filter: type});
     }
 
     render(){
@@ -67,11 +90,10 @@ class Dashboard extends Component{
             <div className="dashboardContainer">
                 <div className="topBar">
                     <p>Hi {this.props.user.name}, this is your dashboard</p>
-                    <button>ALL</button>
-                    <button>REQUESTED</button>
-                    <button>MATCHED</button>
-                    <button>REJECTED</button>
-                    <button onClick={this.openFormModal}>Open Modal</button>
+                    <button onClick={()=>this.setFilter("ALL")}>ALL</button>
+                    <button onClick={()=>this.setFilter("REQUESTED")}>REQUESTED</button>
+                    <button onClick={()=>this.setFilter("MATCHED")}>MATCHED</button>
+                    <button onClick={()=>this.setFilter("REJECTED")}>REJECTED</button>
                 </div>
                 <Modal
                   isOpen={this.state.formModalIsOpen}
@@ -81,9 +103,22 @@ class Dashboard extends Component{
                 >
                     <Form onComplete={this.closeFormModal}></Form>
                 </Modal>
+                
+                <Modal
+                  isOpen={this.state.detailModalIsOpen}
+                  onAfterOpen={this.afterOpenDetailModal}
+                  onRequestClose={this.closeDetailModal}
+                  style={customStyles}
+                >
+                    <TradeDetail onComplete={this.closeFormModal}></TradeDetail>
+                </Modal>
 
                 <div className="cardContainer">
-                     <CardContainer openFormModal={this.openFormModal}/>
+                     <CardContainer 
+                         cards={this.props.user.trades} 
+                         openFormModal={this.openFormModal}
+                         filter={this.state.filter}
+                    />
                 </div>
             </div>
         )

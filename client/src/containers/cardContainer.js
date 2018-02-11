@@ -11,35 +11,22 @@ class CardContainer extends Component {
 //        this.cardClicked = this.cardClicked.bind(this)
         this.generateList = this.generateList.bind(this)
         this.mapStatusToColor = this.mapStatusToColor.bind(this)
-//        window.scrollTo(0, 0)
+        this.mapFilterToColorToColor = this.mapFilterToColor.bind(this)
     }
-   
-/*
-    generateListOld(){ 
-        if (!this.props.items){
-            return <div></div>    
-        }
-        return this.props.items.Products.map((item) => (
-                <Card
-                    handleClick={this.cardClicked}
-                    item={item}
-                ></Card>
-        ))     
-    }
-    
-    cardClicked(item){
-        console.log("User Clicked", item._id)
-        this.props.history.push(`/product/${item._id}`)        
-    }
-*/
     
     generateList(){
-        var cards = this.props.user.trades
+        var cards = this.props.cards
+        var filter = this.props.filter
         if (!cards){
             return (<div></div>)
         }
         
         console.log("Cards", cards)
+        
+        if (filter != "ALL"){
+                cards = cards.filter(card => this.mapStatusToColor(card.status) === this.mapFilterToColor(filter))
+                console.log("After filter", filter, cards)
+        }
         
         return cards.map((card, key) => {
             return (
@@ -51,7 +38,6 @@ class CardContainer extends Component {
                 </CardClosedTrade>
             )
         })
-        
     }
     
     // TODO: Separate W and P
@@ -64,6 +50,15 @@ class CardContainer extends Component {
         if (status === 'N')
             return "yellow"
         if (status === 'W' || status === 'P')
+            return "blue"
+    }
+    
+    mapFilterToColor(status){
+        if (status === 'REQUESTED')
+            return "yellow"
+        if (status === 'REJECTED')
+            return "red"
+        if (status === 'MATCHED')
             return "blue"
     }
 

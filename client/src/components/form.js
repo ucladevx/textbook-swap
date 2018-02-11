@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from "react-router-dom";
-import {bindActionCreators} from 'redux';
-import {userLogin} from '../actions';
 import axios from 'axios'
 
 import SearchBox from './searchBox'
@@ -21,10 +19,6 @@ TODO:
 */
 
 class Form extends Component{
-    componentDidMount(){
-        console.log("Component Did Mount");
-        this.props.userLogin
-    }
 
     constructor(props){
         super(props)
@@ -145,16 +139,63 @@ class Form extends Component{
             .catch((e)=>console.log(e))
         })
     }
-
-    createTrade(type){
+    
+    createTrade(){
         // POST...
+        
+        axios.post(ROOT+'/api/owned_books/add', {
+            user_id: "user",
+            book_id: this.state.offer.book_id
+        })
+            .then((res) => {
+                if(res.status === 0)
+                        console.log('successfully added owned book to owned_books');
+                else if(res.status === 1)
+                    console.log('db connection error for owned_books');
+                else if(res.status === 2)
+                    console.log('db query error for owned_books');
+                else if(res.status === 3)
+                    console.log('owned book already exists');
+        })
+            .catch((e)=>console.log(e))
+        
+        var i = 1;
+        var total = this.state.want.length
+        
+        this.state.want.forEach((book) => {
+            axios.post(ROOT+'/api/possible_trades/add', {
+                user_id: "user",
+                owned_book_id: this.state.offer.book_id,
+                wanted_book_id: book.book_id,
+                status: 'V'
+            })
+            .then((res) => {
+                if(res.status === 0)
+                        console.log('successfully added trade relation to possible_trades');
+                else if(res.status === 1)
+                    console.log('db connection error for possible_trades');
+                else if(res.status === 2)
+                    console.log('db query error for possible_trades');
+                else if(res.status === 3)
+                    console.log('trade relation already exists');
+                
+                if (i === total){
+                    this.props.history.push("/bookshelf")
+                }
+                else {
+                    i++
+                }
+            })
+            .catch((e) => console.log(e))
+        })
+        
         var trade = {
-            type,
             offer: this.state.offer,
             want: this.state.want
         }
         console.log("Trade Created", trade)
-        console.log("Redirect...")
+        
+        
     }
 
     getChild(page){
@@ -211,8 +252,6 @@ class Form extends Component{
                                 }
 
                             <div className="transitionButtonRow">
-
-                                <button className="formPrev" onClick={()=>this.setPage(0)}>Previous</button>
                                 {
                                     this.state.offer != null &&
                                     <button className="formNext" onClick={()=>this.setPage({option, screen: screen+2})}>Next</button>
@@ -401,11 +440,7 @@ function mapStateToProps(state){
     }
 }
 
-function mapDispatchToProps(dispatch){
-    return bindActionCreators({userLogin}, dispatch)
-}
-
-export default connect(mapStateToProps, userLogin)(withRouter(Form))
+export default connect(mapStateToProps)(withRouter(Form))
 
 /*
 NOTES:

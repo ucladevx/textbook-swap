@@ -4,17 +4,30 @@ import {connect} from 'react-redux'
 import NavBar from '../components/navbar'
 import CardContainer from '../containers/cardContainer'
 import '../styles/dashboard.css'
+import {userLogin} from '../actions';
 
 class Dashboard extends Component{
+    componentDidMount(){
+        console.log("Component Did Mount");
+        this.props.userLogin
+    }
+    
     constructor(props){
         super(props)
     }
 
     render(){
+        if (this.props.user == null){
+            return (
+            <div className="dashboardContainer">
+                Loading...
+            </div>
+            )
+        } 
         return (
             <div className="dashboardContainer">
                 <div className="topBar">
-                    <p>Hi Suyash Saxena, this is your dashboard</p>
+                    <p>Hi {this.props.user.name}, this is your dashboard</p>
                     <button>ALL</button>
                     <button>REQUESTED</button>
                     <button>MATCHED</button>
@@ -28,4 +41,10 @@ class Dashboard extends Component{
     }
 }
 
-export default connect(null)(withRouter(Dashboard))
+function mapStateToProps(state){
+    return {
+        user: state.user
+    }
+}
+
+export default connect(mapStateToProps, userLogin)(withRouter(Dashboard))

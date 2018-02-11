@@ -8,12 +8,9 @@ import {connect} from 'react-redux'
 class CardContainer extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            route: false,
-            item: null
-        }
 //        this.cardClicked = this.cardClicked.bind(this)
-//        this.generateList = this.generateList.bind(this)
+        this.generateList = this.generateList.bind(this)
+        this.mapStatusToColor = this.mapStatusToColor.bind(this)
 //        window.scrollTo(0, 0)
     }
    
@@ -36,31 +33,55 @@ class CardContainer extends Component {
     }
 */
     
-    generateList(){ 
-        var cards = [1,2,3,4,5]
-        return cards.map((card) => {
-            <CardAdd></CardAdd>
-        })   
+    generateList(){
+        var cards = this.props.user.trades
+        if (!cards){
+            return (<div></div>)
+        }
+        
+        console.log("Cards", cards)
+        
+        return cards.map((card, key) => {
+            return (
+                <CardClosedTrade 
+                    color={this.mapStatusToColor(card.status)}
+                    bookHave={card.book_have}
+                    bookWant={card.book_want[0]}
+                    >
+                </CardClosedTrade>
+            )
+        })
+        
+    }
+    
+    // TODO: Separate W and P
+    
+    mapStatusToColor(status){
+        if (status === 'A')
+            return "green"
+        if (status === 'R')
+            return "red"
+        if (status === 'N')
+            return "yellow"
+        if (status === 'W' || status === 'P')
+            return "blue"
     }
 
     render() {
         return (
             <div>
                 <div className="cardGrid">
-                    <CardAdd></CardAdd>
-                    <CardClosedTrade color="blue"></CardClosedTrade>
-                    <CardClosedTrade color="yellow"></CardClosedTrade>
-                    <CardClosedTrade color="red"></CardClosedTrade>
-                    <CardClosedTrade color="green"></CardClosedTrade>
-                    <CardAdd></CardAdd>
+                    <CardAdd onClick={this.props.openFormModal}></CardAdd>
+                    {this.generateList()}
                 </div>
             </div>
         )
     }
 }
+
 function mapStateToProps(state){
     return {
-        items: state.products
+        user: state.user
     }
 }
 export default connect(mapStateToProps)(withRouter(CardContainer))

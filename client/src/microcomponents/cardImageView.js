@@ -17,6 +17,11 @@ class CardImageView extends Component {
                 backgroundColor: this.props.subtitleColor
             }
         }
+        
+        this.state = {
+            imgUrl: this.props.imgUrl ? this.props.imgUrl : "https://coverimages.verbacompete.com/57f29092-b813-532e-95d0-74f38f1fbb77.jpg",
+            title: this.props.title ? this.props.title : "MATRIX COMPUTATIONS"
+        }
     }
     
     render()
@@ -24,9 +29,9 @@ class CardImageView extends Component {
         return (
             <div className="ciContainer" style={color.title}>
                 <div className="ciImageBox" style={color.subtitle}>
-                    <img src={BookImage} className="ciImage"></img>
+                    <img src={this.state.imgUrl} className="ciImage"></img>
                 </div>
-                <p className="ciText">HISTORY OF INDIA</p>
+                <p className="ciText">{this.state.title}</p>
             </div>
             )
     }

@@ -180,7 +180,8 @@ class Form extends Component{
                     console.log('trade relation already exists');
                 
                 if (i === total){
-                    this.props.history.push("/bookshelf")
+                    window.location.reload();
+                    this.props.onComplete()
                 }
                 else {
                     i++
@@ -188,14 +189,6 @@ class Form extends Component{
             })
             .catch((e) => console.log(e))
         })
-        
-        var trade = {
-            offer: this.state.offer,
-            want: this.state.want
-        }
-        console.log("Trade Created", trade)
-        
-        
     }
 
     getChild(page){
@@ -425,22 +418,14 @@ class Form extends Component{
 
     render(){
         return (
-            <div className="App">
-              <div className="form-container">
+            <div>
                     {this.getChild(this.state.page)}
-              </div>
             </div>
         )
     }
 }
 
-function mapStateToProps(state){
-    return {
-        user: state.user
-    }
-}
-
-export default connect(mapStateToProps)(withRouter(Form))
+export default (withRouter(Form))
 
 /*
 NOTES:

@@ -48,6 +48,7 @@ class Dashboard extends Component{
         this.closeFormModal = this.closeFormModal.bind(this);
         this.closeDetailModal = this.closeDetailModal.bind(this);
         this.setFilter = this.setFilter.bind(this);
+        this.selectCard = this.selectCard.bind(this);
     }
     
     openFormModal() {
@@ -76,6 +77,12 @@ class Dashboard extends Component{
     
     setFilter(type) {
         this.setState({filter: type});
+    }
+    
+    selectCard(card){
+        this.setState({
+            selectedCard: card
+        })
     }
 
     render(){
@@ -110,14 +117,19 @@ class Dashboard extends Component{
                   onRequestClose={this.closeDetailModal}
                   style={customStyles}
                 >
-                    <TradeDetail onComplete={this.closeFormModal}></TradeDetail>
+                    <TradeDetail 
+                        bookHave={this.state.selectedCard ? this.state.selectedCard.bookHave : null}
+                        bookWant={this.state.selectedCard ? this.state.selectedCard.bookWant : null}
+                        onComplete={this.closeFormModal}></TradeDetail>
                 </Modal>
 
                 <div className="cardContainer">
                      <CardContainer 
                          cards={this.props.user.trades} 
                          openFormModal={this.openFormModal}
+                         openDetailModal={this.openDetailModal}
                          filter={this.state.filter}
+                         selectCard={this.selectCard}
                     />
                 </div>
             </div>

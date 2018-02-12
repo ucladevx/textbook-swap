@@ -41,6 +41,7 @@ class CardClosedTrade extends Component {
         }
         this.printMessage = this.printMessage.bind(this)
         this.renderCenter = this.renderCenter.bind(this)
+        this.onClickHandler = this.onClickHandler.bind(this)
     }
     
     printMessage(){
@@ -75,12 +76,21 @@ class CardClosedTrade extends Component {
             )
         }
     }
+    
+    onClickHandler(){
+        this.props.selectCard({
+            bookHave: this.state.bookHave,
+            bookWant: this.state.bookWant
+        })
+        
+        this.props.onClick()
+    }
 
     render()
     {
         var color = this.state.color
         return (
-            <div className="ctCard" style={{backgroundColor: colorMap[color].title}}>
+            <div className="ctCard" onClick={()=>this.onClickHandler()} style={{backgroundColor: colorMap[color].title}}>
                 <div className="ctTop">
                     <div className="ctLeft">
                         <CardImageView 

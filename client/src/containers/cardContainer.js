@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import CardAdd from '../components/cardAdd'
 import CardClosedTrade from '../components/cardClosedTrade'
+import CardPendingTrade from '../components/cardPendingTrade'
 import '../styles/cardContainer.css'
 import {withRouter} from "react-router-dom";
 import {connect} from 'react-redux'
@@ -29,17 +30,30 @@ class CardContainer extends Component {
         }
         
         return cards.map((card, key) => {
+            if (card.status === 'N'){
+                return (
+                    <CardPendingTrade
+                        color="yellow"
+                        bookHave={card.book_have}
+                        booksWant={card.book_want}
+                        onClick={this.props.openDetailModal}
+                        selectCard={this.props.selectCard}
+                    ></CardPendingTrade>
+                )
+            }
+            
             return (
                 <CardClosedTrade 
                     color={this.mapStatusToColor(card.status)}
                     bookHave={card.book_have}
                     bookWant={card.book_want[0]}
+                    onClick={this.props.openDetailModal}
+                    selectCard={this.props.selectCard}
                     >
                 </CardClosedTrade>
             )
         })
     }
-    
     // TODO: Separate W and P
     
     mapStatusToColor(status){
@@ -47,10 +61,10 @@ class CardContainer extends Component {
             return "green"
         if (status === 'R')
             return "red"
-        if (status === 'N')
-            return "yellow"
         if (status === 'W' || status === 'P')
             return "blue"
+        if (status == 'N')
+            return "yellow"
     }
     
     mapFilterToColor(status){

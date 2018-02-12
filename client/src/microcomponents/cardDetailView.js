@@ -13,11 +13,11 @@ class CardDetailView extends Component {
     {
         return (
             <div className="cdContainer">
-                <div className="cdText"><span style={{color:'rgb(58, 193, 215)'}}> HISTORY OF INDIA </span></div>
-                <div className="cdText"><span style={{color:'rgb(58, 193, 215)'}}> PINKER </span></div>
-                <div className="cdText">ISBN: 1234567</div>
+                <div className="cdText"><span>{this.props.book.title}</span></div>
+                <div className="cdText"><span>{this.props.book.author}</span></div>
+                <div className="cdText">ISBN: {this.props.book.isbn}</div>
                 <div className="cdImageBox">
-                    <img src={BookImage} className="cdImage"></img>
+                    <img src={this.props.book.img_url} className="cdImage"></img>
                 </div>
             </div>
             )

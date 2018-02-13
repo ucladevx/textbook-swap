@@ -1,92 +1,190 @@
-.ctCard{
-    height: 17vw;
-    width: 28vw;
-    background-color: white;
-/*    display: flex;*/
-/*    flex-direction: column;*/
-    border: 1px solid rgba(0, 0, 0, 0.125);
-    border-radius: 0.25rem;
-    margin-left: 1%;
-    margin-right: 1%;
-    margin-bottom: 3%;
-    display: flex;
-    flex-direction: column;
-/*    align-items: center;*/
-/*    justify-content: center;*/
-    
+@media only screen and (max-width : 768px) {
+    .ctCard{
+        height: 30vh;
+        width: 95vw;
+        background-color: white;
+    /*    display: flex;*/
+    /*    flex-direction: column;*/
+        border: 1px solid rgba(0, 0, 0, 0.125);
+        border-radius: 0.25rem;
+        margin-left: 1%;
+        margin-right: 1%;
+        margin-bottom: 3%;
+        display: flex;
+        flex-direction: column;
+        color: white;
+    /*    align-items: center;*/
+    /*    justify-content: center;*/
+
+    }
+
+    .ctTop{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .ctLeft{
+        flex: 2;
+        margin: 5%;
+    }
+
+    .ctCenter{
+        width: 50px;
+        flex: 1;
+    }
+
+    .centerImage {
+        width: 50px;
+        height: 50px;
+        object-fit: contain;
+    }
+
+    .centerHalfLoop{
+        width: 55px;
+        height: 55px;
+        object-fit: contain;
+    } 
+
+    .ptRight{
+        flex: 2;
+        margin: 5%;
+        color: white;
+        font-size: 1.5em;
+    }
+
+    .ptBottom{
+        color: white;
+        text-align: right;
+        padding-right: 5px;
+    }
+
+    .cardImage{
+    /*    border-radius: 5px;*/
+        object-fit: contain;
+        max-width: 6.5vw;
+        max-height: 6.5vw;
+        margin-top: 12%;
+    }
+
+    .ptTitle{
+        margin-top: -1%;
+        padding-bottom: 1%;
+    }
+
+    .cardTitle{
+        flex: 1;
+        padding-top: 0.65vw;
+    /*    background-color: blue;*/
+        font-size: 24px;
+        font-weight: 500;
+        text-align: center;
+        color: grey;
+    }
+
+    .cardSubtitle{
+        flex: 1;
+    /*    background-color: green;*/
+        font-size: 24px;
+        font-weight: 300;
+        text-align: left;
+        line-height: 25px;
+        padding-left: 5px;
+        }
 }
 
-.ctTop{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-}
+@media only screen and (min-width : 768px) {
+    .ctCard{
+        height: 17vw;
+        width: 28vw;
+        background-color: white;
+    /*    display: flex;*/
+    /*    flex-direction: column;*/
+        border: 1px solid rgba(0, 0, 0, 0.125);
+        border-radius: 0.25rem;
+        margin-left: 1%;
+        margin-right: 1%;
+        margin-bottom: 3%;
+        display: flex;
+        flex-direction: column;
+    /*    align-items: center;*/
+    /*    justify-content: center;*/
 
-.ctLeft{
-    flex: 2;
-    margin: 5%;
-}
+    }
 
-.ctCenter{
-    width: 50px;
-    flex: 1;
-}
+    .ctTop{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
 
-.centerImage {
-    width: 50px;
-    height: 50px;
-    object-fit: contain;
-}
+    .ctLeft{
+        flex: 2;
+        margin: 5%;
+    }
 
-.centerHalfLoop{
-    width: 55px;
-    height: 55px;
-    object-fit: contain;
-} 
+    .ctCenter{
+        width: 50px;
+        flex: 1;
+    }
 
-.ptRight{
-    flex: 2;
-    margin: 5%;
-    color: white;
-    font-size: 1.5em;
-}
+    .centerImage {
+        width: 50px;
+        height: 50px;
+        object-fit: contain;
+    }
 
-.ptBottom{
-    color: white;
-    text-align: right;
-    padding-right: 5px;
-}
+    .centerHalfLoop{
+        width: 55px;
+        height: 55px;
+        object-fit: contain;
+    } 
 
-.cardImage{
-/*    border-radius: 5px;*/
-    object-fit: contain;
-    max-width: 6.5vw;
-    max-height: 6.5vw;
-    margin-top: 12%;
-}
+    .ptRight{
+        flex: 2;
+        margin: 5%;
+        color: white;
+        font-size: 1.5em;
+    }
 
-.ptTitle{
-    margin-top: -1%;
-    padding-bottom: 1%;
-}
+    .ptBottom{
+        color: white;
+        text-align: right;
+        padding-right: 5px;
+    }
 
-.cardTitle{
-    flex: 1;
-    padding-top: 0.65vw;
-/*    background-color: blue;*/
-    font-size: 24px;
-    font-weight: 500;
-    text-align: center;
-    color: grey;
-}
+    .cardImage{
+    /*    border-radius: 5px;*/
+        object-fit: contain;
+        max-width: 6.5vw;
+        max-height: 6.5vw;
+        margin-top: 12%;
+    }
 
-.cardSubtitle{
-    flex: 1;
-/*    background-color: green;*/
-    font-size: 24px;
-    font-weight: 300;
-    text-align: left;
-    line-height: 25px;
-    padding-left: 5px;
+    .ptTitle{
+        margin-top: -1%;
+        padding-bottom: 1%;
+    }
+
+    .cardTitle{
+        flex: 1;
+        padding-top: 0.65vw;
+    /*    background-color: blue;*/
+        font-size: 24px;
+        font-weight: 500;
+        text-align: center;
+        color: grey;
+    }
+
+    .cardSubtitle{
+        flex: 1;
+    /*    background-color: green;*/
+        font-size: 24px;
+        font-weight: 300;
+        text-align: left;
+        line-height: 25px;
+        padding-left: 5px;
+    }
 }

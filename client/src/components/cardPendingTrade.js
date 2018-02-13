@@ -75,7 +75,7 @@ class CardPendingTrade extends Component {
                 <div className="ctTop">
                     <div className="ctLeft">
                         <CardImageView 
-                            title=" "
+                            title=""
                             imgUrl={this.props.bookHave.img_url}
                             titleColor={colorMap[color].title} 
                             subtitleColor={colorMap[color].subtitle}>

@@ -83,7 +83,7 @@ class CardPendingTrade extends Component {
                     </div>
                     <div className="ptRight">
                         <div className="ptTitle">{this.props.bookHave.title}</div>
-                        <div>{this.props.bookHave.author}</div>
+                        <div className="ptAuthor">{this.props.bookHave.author}</div>
                     </div>
                 </div>
                 <div className="ptBottom" style={{backgroundColor: colorMap[color].bottom}}>

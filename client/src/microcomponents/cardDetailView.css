@@ -1,0 +1,19 @@
+.cdContainer{
+
+}
+
+.cdImageBox{
+/*    background-color: skyblue;*/
+    padding: 12px;
+}
+
+.cdImage{
+    width: 70%;
+    object-fit: contain;
+}
+
+.cdText{
+    margin-top: 0px;
+    font-size: 1.2em;
+    color: black;
+}

@@ -1,0 +1,96 @@
+.tdContainer{
+    background-color: #47AFCB;
+    width: 70vw;
+    height: 80vh;
+/*    align-items: center;
+*/    justify-content: center;
+    position: relative;
+    overflow: auto;
+}
+
+/* need this to make sure that setting heights by percentages for child elements works */
+.tdDetailContents {
+    height: 100%;
+}
+
+.tdDetailContainer{
+    height: 70%;
+    background-color: rgb(254, 254, 254);
+    margin: 0% 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    overflow: auto;
+    position: relative;
+    padding: 5%;
+}
+
+.tdTitle{
+    color: white;
+    padding-bottom: 2%;
+}
+
+.tdLeft{
+    flex: 2;
+    margin: 5%;
+}
+
+.tdCenter{
+    width: 5%;
+    flex: 1;
+}
+
+.tdRight{
+    flex: 2;
+    margin: 5%;
+}
+
+.tdImage {
+    width: 50%;
+}
+
+/* navigation buttons */
+.tdButtonRow {
+    position: absolute;
+    bottom: 5%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    width: 100%;
+}
+
+.rejectButton {
+    background-color: #E37449;
+    border: 0px;
+    color: white;
+    margin-top: 3%;
+    padding: 10px;
+    font-size: 1.1em;
+    margin-right: 5%;
+}
+
+.acceptButton {
+    background-color: #4BB242;
+    border: 0px;
+    color: white;
+    margin-top: 3%;
+    padding: 10px;
+    font-size: 1.1em;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

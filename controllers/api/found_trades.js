@@ -43,8 +43,8 @@ exports.update_status_rejected = function(req, res) {
     var trade_id = req.body.trade_id;
 
     found_trades.update_status_rejected_by_id(trade_id, function(status){
-        if (status == utilities.found_trades_errors.DB_SUCCESS)
-            emailer.send_rejected_trade_email(trade_id, function(status) {
+        if (status == utilities.found_trades_errors.DB_SUCCESS) {
+            emailer.send_rejected_trade_email(trade_id, function (status) {
                 if (status == true) {
                     logger.log("email sent properly");
                 }
@@ -53,6 +53,7 @@ exports.update_status_rejected = function(req, res) {
                 }
             });
             logger.log("Successfully updated trade status to rejected!");
+        }
         else{
             logger.log("DB error")
         }
@@ -95,7 +96,7 @@ exports.get_trade_by_book_owned = function(req, res) {
         else{
             logger.log("DB error")
         }
-        logger.log(data)
+        logger.log(data);
         res.json({status: status, data: data})
     });
 };

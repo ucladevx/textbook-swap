@@ -1,19 +1,31 @@
 .cdContainer{
-
+    height: 60%;
+    justify-content: center;
+    align-items: center;
 }
 
 .cdImageBox{
-/*    background-color: skyblue;*/
     padding: 12px;
+    justify-content: center;
+    align-items: center;
+    margin:0 auto;
 }
 
 .cdImage{
-    width: 70%;
+    width: 50%;
     object-fit: contain;
+    display:block;
+    margin:auto;
 }
 
 .cdText{
     margin-top: 0px;
     font-size: 1.2em;
     color: black;
+    text-align: center;
+}
+
+img {
+    display:block;
+    margin:auto;
 }

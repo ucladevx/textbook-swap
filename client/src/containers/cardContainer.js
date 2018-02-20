@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import CardAdd from '../components/cardAdd'
 import CardClosedTrade from '../components/cardClosedTrade'
+import CardPendingTrade from '../components/cardPendingTrade'
 import '../styles/cardContainer.css'
 import {withRouter} from "react-router-dom";
 import {connect} from 'react-redux'
@@ -8,59 +9,88 @@ import {connect} from 'react-redux'
 class CardContainer extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            route: false,
-            item: null
-        }
 //        this.cardClicked = this.cardClicked.bind(this)
-//        this.generateList = this.generateList.bind(this)
-//        window.scrollTo(0, 0)
+        this.generateList = this.generateList.bind(this)
+        this.mapStatusToColor = this.mapStatusToColor.bind(this)
+        this.mapFilterToColorToColor = this.mapFilterToColor.bind(this)
     }
-   
-/*
-    generateListOld(){ 
-        if (!this.props.items){
-            return <div></div>    
+    
+    generateList(){
+        var cards = this.props.cards
+        var filter = this.props.filter
+        if (!cards){
+            return (<div></div>)
         }
-        return this.props.items.Products.map((item) => (
-                <Card
-                    handleClick={this.cardClicked}
-                    item={item}
-                ></Card>
-        ))     
+        
+        console.log("Cards", cards)
+        
+        if (filter != "ALL"){
+                cards = cards.filter(card => this.mapStatusToColor(card.status) === this.mapFilterToColor(filter))
+                console.log("After filter", filter, cards)
+        }
+        
+        return cards.map((card, key) => {
+            if (card.status === 'N'){
+                return (
+                    <CardPendingTrade
+                        color="yellow"
+                        bookHave={card.book_have}
+                        booksWant={card.book_want}
+                        onClick={this.props.openDetailModal}
+                        selectCard={this.props.selectCard}
+                    ></CardPendingTrade>
+                )
+            }
+            
+            return (
+                <CardClosedTrade 
+                    color={this.mapStatusToColor(card.status)}
+                    bookHave={card.book_have}
+                    bookWant={card.book_want[0]}
+                    onClick={this.props.openDetailModal}
+                    selectCard={this.props.selectCard}
+                    >
+                </CardClosedTrade>
+            )
+        })
+    }
+    // TODO: Separate W and P
+    
+    mapStatusToColor(status){
+        if (status === 'A')
+            return "green"
+        if (status === 'R')
+            return "red"
+        if (status === 'W' || status === 'P')
+            return "blue"
+        if (status == 'N')
+            return "yellow"
     }
     
-    cardClicked(item){
-        console.log("User Clicked", item._id)
-        this.props.history.push(`/product/${item._id}`)        
-    }
-*/
-    
-    generateList(){ 
-        var cards = [1,2,3,4,5]
-        return cards.map((card) => {
-            <CardAdd></CardAdd>
-        })   
+    mapFilterToColor(status){
+        if (status === 'REQUESTED')
+            return "yellow"
+        if (status === 'REJECTED')
+            return "red"
+        if (status === 'MATCHED')
+            return "blue"
     }
 
     render() {
         return (
             <div>
                 <div className="cardGrid">
-                    <CardAdd></CardAdd>
-                    <CardClosedTrade color="blue"></CardClosedTrade>
-                    <CardClosedTrade color="yellow"></CardClosedTrade>
-                    <CardClosedTrade color="red"></CardClosedTrade>
-                    <CardClosedTrade color="green"></CardClosedTrade>
-                    <CardAdd></CardAdd>
+                    <CardAdd onClick={this.props.openFormModal}></CardAdd>
+                    {this.generateList()}
                 </div>
             </div>
         )
     }
 }
+
 function mapStateToProps(state){
     return {
-        items: state.products
+        user: state.user
     }
 }
 export default connect(mapStateToProps)(withRouter(CardContainer))

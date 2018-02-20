@@ -6,6 +6,7 @@ const request = require('request');
 const utilities = require('../../utilities');
 const found_trades = require('../../models/found_trades');
 const logger = require('tracer').colorConsole();
+const emailer = require('../../models/emailer');
 
 /*
  * POST http://localhost:3000/api/found_trades/update_status_accepted
@@ -42,8 +43,17 @@ exports.update_status_rejected = function(req, res) {
     var trade_id = req.body.trade_id;
 
     found_trades.update_status_rejected_by_id(trade_id, function(status){
-        if (status == utilities.found_trades_errors.DB_SUCCESS)
+        if (status == utilities.found_trades_errors.DB_SUCCESS) {
+            emailer.send_rejected_trade_email(trade_id, function (status) {
+                if (status == true) {
+                    logger.log("email sent properly");
+                }
+                else {
+                    logger.log("email error");
+                }
+            });
             logger.log("Successfully updated trade status to rejected!");
+        }
         else{
             logger.log("DB error")
         }
@@ -86,7 +96,7 @@ exports.get_trade_by_book_owned = function(req, res) {
         else{
             logger.log("DB error")
         }
-
+        logger.log(data);
         res.json({status: status, data: data})
     });
 };

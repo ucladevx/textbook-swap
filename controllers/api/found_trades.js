@@ -95,7 +95,7 @@ exports.get_trade_by_book_owned = function(req, res) {
         else{
             logger.log("DB error")
         }
-
+        logger.log(data)
         res.json({status: status, data: data})
     });
 };

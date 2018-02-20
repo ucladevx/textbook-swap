@@ -36,10 +36,12 @@ class CardClosedTrade extends Component {
         super(props);
         this.state = {
             color: this.props.color ? this.props.color : "blue",
-            bookOwned: this.props.bookOwned ? this.props.bookOwned : "History of India"
+            bookHave: this.props.bookHave ? this.props.bookHave : "History of India",
+            bookWant: this.props.bookWant ? this.props.bookWant : "History of India"
         }
         this.printMessage = this.printMessage.bind(this)
         this.renderCenter = this.renderCenter.bind(this)
+        this.onClickHandler = this.onClickHandler.bind(this)
     }
     
     printMessage(){
@@ -74,15 +76,26 @@ class CardClosedTrade extends Component {
             )
         }
     }
+    
+    onClickHandler(){
+        this.props.selectCard({
+            bookHave: this.state.bookHave,
+            bookWant: this.state.bookWant
+        })
+        
+        this.props.onClick()
+    }
 
     render()
     {
         var color = this.state.color
         return (
-            <div className="ctCard" style={{backgroundColor: colorMap[color].title}}>
+            <div className="ctCard" onClick={()=>this.onClickHandler()} style={{backgroundColor: colorMap[color].title}}>
                 <div className="ctTop">
                     <div className="ctLeft">
                         <CardImageView 
+                            title={this.state.bookHave.title}
+                            imgUrl={this.state.bookHave.img_url}
                             titleColor={colorMap[color].title} 
                             subtitleColor={colorMap[color].subtitle}>
                         </CardImageView>
@@ -99,6 +112,8 @@ class CardClosedTrade extends Component {
                         true &&
                         <div className="ctRight">
                             <CardImageView
+                                title={this.state.bookWant.title}
+                                imgUrl={this.state.bookWant.img_url}
                                 titleColor={colorMap[color].title} 
                                 subtitleColor={colorMap[color].subtitle}
                             ></CardImageView>
@@ -108,12 +123,12 @@ class CardClosedTrade extends Component {
                      {
                         false && this.state.color === "yellow" &&
                         <div className="ctRight">
-                            {this.state.bookOwned}
+                            {this.state.bookHave.title}
                         </div>
                      }
                 </div>
                 <div className="ctBottom" style={{backgroundColor: colorMap[color].bottom}}>
-                    {`${this.printMessage()}${this.state.bookOwned}`}
+                    {`${this.printMessage()}${this.state.bookHave.title}`}
                 </div>
             </div>
         )

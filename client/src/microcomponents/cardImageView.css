@@ -1,18 +1,41 @@
-.ciContainer{
-/*    background-color: cornflowerblue;*/
+@media only screen and (min-width : 768px) {
+    .ciContainer{
+    /*    background-color: cornflowerblue;*/
+    }
+
+    .ciImageBox{
+    /*    background-color: skyblue;*/
+        padding: 12px;
+    }
+
+    .ciImage{
+        object-fit: contain;
+        max-height: 10vw;
+    }
+
+    .ciText{
+        padding-top: 5px;
+        color: white;
+        }
 }
 
-.ciImageBox{
-/*    background-color: skyblue;*/
-    padding: 12px;
-}
+@media only screen and (max-width : 768px) {
+    .ciContainer{
+    /*    background-color: cornflowerblue;*/
+    }
 
-.ciImage{
-    object-fit: contain;
-    max-height: 10vw;
-}
+    .ciImageBox{
+    /*    background-color: skyblue;*/
+        padding: 12px;
+    }
 
-.ciText{
-    padding-top: 5px;
-    color: white;
+    .ciImage{
+        object-fit: contain;
+        max-height: 15vh;
+    }
+
+    .ciText{
+        padding-top: 5px;
+        color: white;
+        }
 }

@@ -21,6 +21,8 @@ class searchBox extends Component{
         this.toggleBackspaceRemoves = this.toggleBackspaceRemoves.bind(this)
         this.toggleCreatable = this.toggleCreatable.bind(this)
         this.getBooks = this.getBooks.bind(this)
+        // set custom classname
+        this.className = this.props.className
     }
 
     // Take this from parent, so that state is saved in the form itself
@@ -129,6 +131,7 @@ class searchBox extends Component{
                     loadOptions={this.getBooks}
                     backspaceRemoves={this.state.backspaceRemoves}
                     placeholder="Search by title, professor or class"
+                    className = {this.className}
             />
 			</div>
 		);

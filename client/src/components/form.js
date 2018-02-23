@@ -236,6 +236,7 @@ class Form extends Component{
                                             onChange={this.processOffer}
                                             multi={false}
                                             initState={this.state.offer}
+                                            className={"ownedSearchBox"}
                                         />
 
                                         {
@@ -272,17 +273,18 @@ class Form extends Component{
                      )
                 case 3:
                     return (
-                        <div className="formContents">
+                        <div className="formContents wantedBooksForm">
                             <h1 className="formTitle">NEW TRADE</h1>
                             <h3 className="formMessage">Select the book(s) you want to receive in return.</h3>
                             <div className="searchBoxAndResults">
-                                <SearchBox
-                                    onChange={this.processWant}
-                                    multi={true}
-                                    initState={this.state.want}
-                                />
+                                    <SearchBox
+                                        onChange={this.processWant}
+                                        multi={true}
+                                        initState={this.state.want}
+                                        className={"wantedSearchBox"}
+                                    />
 
-                                <div className="searchResults">
+                                <div className="searchResults wantedSearchResults">
                                     {
                                         this.state.want != null &&
                                         <Summary books={this.state.want} multi={true}></Summary>

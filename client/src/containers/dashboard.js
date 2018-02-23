@@ -9,6 +9,7 @@ import {userLogin} from '../actions';
 import Form from '../components/form'
 import Modal from 'react-modal';
 import TradeDetail from '../components/tradeDetail'
+import EditTrade from '../components/editTrade'
 
 const customStyles = {
   overlay: {
@@ -37,16 +38,17 @@ class Dashboard extends Component{
         this.state = {
           formModalIsOpen: false,
           detailModalIsOpen: false,
+          editModalIsOpen: false,
           selectedCard: null,
           filter: "ALL"
         };
 
         this.openFormModal = this.openFormModal.bind(this);
         this.openDetailModal = this.openDetailModal.bind(this);
-        this.afterOpenFormModal = this.afterOpenFormModal.bind(this);
-        this.afterOpenDetailModal = this.afterOpenDetailModal.bind(this);
+        this.openEditModal = this.openEditModal.bind(this);
         this.closeFormModal = this.closeFormModal.bind(this);
         this.closeDetailModal = this.closeDetailModal.bind(this);
+        this.closeEditModal = this.closeEditModal.bind(this);
         this.setFilter = this.setFilter.bind(this);
         this.selectCard = this.selectCard.bind(this);
     }
@@ -54,23 +56,23 @@ class Dashboard extends Component{
     openFormModal() {
         this.setState({formModalIsOpen: true});
     }
-
-    afterOpenFormModal() {
-    // references are now sync'd and can be accessed.
+    
+     openEditModal() {
+        this.setState({editModalIsOpen: true});
     }
-
+    
     closeFormModal() {
         this.setState({formModalIsOpen: false});
+    }
+    
+    closeEditModal() {
+        this.setState({editModalIsOpen: false});
     }
     
     openDetailModal() {
         this.setState({detailModalIsOpen: true});
     }
-
-    afterOpenDetailModal() {
-    // references are now sync'd and can be accessed.
-    }
-
+    
     closeDetailModal() {
         this.setState({detailModalIsOpen: false});
     }
@@ -104,7 +106,6 @@ class Dashboard extends Component{
                 </div>
                 <Modal
                   isOpen={this.state.formModalIsOpen}
-                  onAfterOpen={this.afterOpenFormModal}
                   onRequestClose={this.closeFormModal}
                   style={customStyles}
                 >
@@ -113,7 +114,6 @@ class Dashboard extends Component{
                 
                 <Modal
                   isOpen={this.state.detailModalIsOpen}
-                  onAfterOpen={this.afterOpenDetailModal}
                   onRequestClose={this.closeDetailModal}
                   style={customStyles}
                 >
@@ -122,12 +122,24 @@ class Dashboard extends Component{
                         bookWant={this.state.selectedCard ? this.state.selectedCard.bookWant : null}
                         onComplete={this.closeFormModal}></TradeDetail>
                 </Modal>
+                
+                <Modal
+                  isOpen={this.state.editModalIsOpen}
+                  onRequestClose={this.closeEditModal}
+                  style={customStyles}
+                >
+                    <EditTrade 
+                        offer={this.state.selectedCard ? this.state.selectedCard.bookHave : null}
+                        want={this.state.selectedCard ? this.state.selectedCard.booksWant : null}
+                        onComplete={this.closeEditModal}></EditTrade>
+                </Modal>
 
                 <div className="cardContainer">
                      <CardContainer 
                          cards={this.props.user.trades} 
                          openFormModal={this.openFormModal}
                          openDetailModal={this.openDetailModal}
+                         openEditModal={this.openEditModal}
                          filter={this.state.filter}
                          selectCard={this.selectCard}
                     />

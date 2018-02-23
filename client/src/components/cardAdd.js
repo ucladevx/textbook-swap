@@ -12,9 +12,9 @@ class CardAdd extends Component {
     render()
     {
         return (
-            <div className="card">
-                <img src={Plus} className="cardImage"></img>
-                <h2 className="cardTitle">NEW TRADE</h2>
+            <div onClick={()=>this.props.onClick()} className="cardAdd">
+                <img src={Plus} className="cardAddImage"></img>
+                <h2 className="cardAddTitle">NEW TRADE</h2>
             </div>
         )
     }

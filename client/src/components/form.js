@@ -230,19 +230,23 @@ class Form extends Component{
                         <div className="formContents">
                             <h1 className="formTitle">NEW TRADE</h1>
                             <h3 className="formMessage">Select the book you can offer.</h3>
-                                <SearchBox
-                                    onChange={this.processOffer}
-                                    multi={false}
-                                    initState={this.state.offer}
-                                />
+                                <div className="ownedBookSearchAndResults">
+                                    <div>
+                                        <SearchBox
+                                            onChange={this.processOffer}
+                                            multi={false}
+                                            initState={this.state.offer}
+                                        />
 
-                                {
-                                    this.state.offer != null &&
-                                    <Summary
-                                        books={this.state.offer} multi={false}
-                                        className="formSummary"
-                                     />
-                                }
+                                        {
+                                            this.state.offer != null &&
+                                            <Summary
+                                                books={this.state.offer} multi={false}
+                                                className="formSummary"
+                                             />
+                                        }
+                                    </div>
+                                </div>
 
                             <div className="transitionButtonRow">
                                 {

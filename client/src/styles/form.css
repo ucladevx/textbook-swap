@@ -170,7 +170,7 @@
 
     /* divider for each search result in the list */
     .searchResults > .summaryContainer {
-        border-bottom: 2px solid rgb(255, 255, 255);
+        border-bottom: 1px solid rgb(255, 255, 255);
     }
 
     /* confirm trade page */
@@ -355,24 +355,12 @@
     .searchBoxAndResults {
         height: 65%;
         position: relative;
+        overflow: auto;
     }
 
     /* divider for each search result in the list */
     .searchResults > .summaryContainer {
-        border-bottom: 2px solid rgb(255, 255, 255);
-    }
-
-    /* search box and query list for wanted books page */
-    .wantedBooksForm .section {
-        width: 50%;
-    }
-
-    /* results for wanted books page */
-    .wantedSearchResults {
-        width: 50%;
-        height: 100%;
-        float: right;
-        overflow: auto;
+        border-bottom: 1px solid rgb(255, 255, 255);
     }
 
     /* confirm trade page */

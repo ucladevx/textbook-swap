@@ -4,7 +4,12 @@ import {connect} from 'react-redux';
 
 import NavBar from '../components/navbar';
 import Footer from '../components/footer';
-import goat_logo from "../img/goat.jpeg";
+import logo from "../img/logo_navbar.svg";
+import step1 from "../img/step1.gif";
+import step2 from "../img/step2.gif";
+import step3 from "../img/step3.gif";
+
+import '../styles/tradingGuide.css'
 
 class TradingGuide extends Component{
     constructor(props){
@@ -33,26 +38,25 @@ class TradingGuide extends Component{
             			</div>
             		</div>
             		<div class="col-md-6">
-            			image <br/>
-            			<img src={goat_logo}/>
+            			<img id='loop_logo' src={logo}/>
             		</div>
             	</div>
             	<div class="row">
             		<h2>How it works</h2>
             		<div class="row">
-            			<div class="col-md-6">
+            			<div class="col-md-4">
             				1. Choose what book you are willing to trade. You can search by title, ISBN, author,
 class name, or professor name
             			</div>
-            			<div class="col-md-6">
+            			<div class="col-md-8">
             				Animation <br/>
-            				<img src={goat_logo}/>
+            				<img class='step' src={step1}/>
             			</div>
             		</div>
             		<div class="row">
             			<div class="col-md-6">
              				Animation <br/>
-            				<img src={goat_logo}/>
+            				<img class='step' src={step2}/>
             			</div>
             			<div class="col-md-6">
             				2.  Choose the books you would be willing to receive a one​ ​to​ ​one​ swap for the
@@ -61,11 +65,11 @@ book you chose in step 1
             		</div>
             		<div class="row">
             			<div class="col-md-6">
-            				3. Submit these preferences - don’t worry, these can be edited later!
+            				3. Submit the trade, and we'll match you up once a trade is found! 
             			</div>
             			<div class="col-md-6">
 	           				Animation <br/>
-            				<img src={goat_logo}/>
+            				<img class='step' src={step3}/>
 
             			</div>
             		</div>

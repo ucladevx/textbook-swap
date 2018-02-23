@@ -36,7 +36,7 @@ class CardContainer extends Component {
                         color="yellow"
                         bookHave={card.book_have}
                         booksWant={card.book_want}
-                        onClick={this.props.openDetailModal}
+                        onClick={this.props.openEditModal}
                         selectCard={this.props.selectCard}
                     ></CardPendingTrade>
                 )

@@ -41,7 +41,6 @@ class CardClosedTrade extends Component {
         }
         this.printMessage = this.printMessage.bind(this)
         this.renderCenter = this.renderCenter.bind(this)
-        this.onClickHandler = this.onClickHandler.bind(this)
     }
     
     printMessage(){

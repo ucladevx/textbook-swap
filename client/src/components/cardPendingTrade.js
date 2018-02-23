@@ -58,10 +58,11 @@ class CardPendingTrade extends Component {
     }
     
     onClickHandler(){
-        return
+        console.log("Clicked Edit...")
+
         this.props.selectCard({
-            bookHave: this.state.bookHave,
-            bookWant: this.state.bookWant
+            bookHave: this.props.bookHave,
+            booksWant: this.props.booksWant
         })
         
         this.props.onClick()

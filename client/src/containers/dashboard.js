@@ -4,12 +4,14 @@ import {connect} from 'react-redux'
 import NavBar from '../components/navbar'
 import CardContainer from '../containers/cardContainer'
 import '../styles/dashboard.css'
+import '../styles/vendors/sweetalert.css'
 import {userLogin} from '../actions';
 
 import Form from '../components/form'
 import Modal from 'react-modal';
 import TradeDetail from '../components/tradeDetail'
 import EditTrade from '../components/editTrade'
+import SweetAlert from 'sweetalert-react';
 
 const customStyles = {
   overlay: {
@@ -40,6 +42,8 @@ class Dashboard extends Component{
           detailModalIsOpen: false,
           editModalIsOpen: false,
           selectedCard: null,
+          approveAlert: false,
+          rejectAlert: false,
           filter: "ALL"
         };
 
@@ -51,10 +55,20 @@ class Dashboard extends Component{
         this.closeEditModal = this.closeEditModal.bind(this);
         this.setFilter = this.setFilter.bind(this);
         this.selectCard = this.selectCard.bind(this);
+        this.openApproveAlert = this.openApproveAlert.bind(this);
+        this.openRejectAlert = this.openRejectAlert.bind(this);
     }
     
     openFormModal() {
         this.setState({formModalIsOpen: true});
+    }
+    
+    openApproveAlert() {
+        this.setState({approveAlert: true});
+    }
+    
+    openRejectAlert() {
+        this.setState({rejectAlert: true});
     }
     
      openEditModal() {
@@ -117,7 +131,8 @@ class Dashboard extends Component{
                   onRequestClose={this.closeDetailModal}
                   style={customStyles}
                 >
-                    <TradeDetail 
+                
+                <TradeDetail 
                         bookHave={this.state.selectedCard ? this.state.selectedCard.bookHave : null}
                         bookWant={this.state.selectedCard ? this.state.selectedCard.bookWant : null}
                         onComplete={this.closeFormModal}></TradeDetail>
@@ -131,9 +146,44 @@ class Dashboard extends Component{
                     <EditTrade 
                         offer={this.state.selectedCard ? this.state.selectedCard.bookHave : null}
                         want={this.state.selectedCard ? this.state.selectedCard.booksWant : null}
-                        onComplete={this.closeEditModal}></EditTrade>
+                        onComplete={this.closeEditModal}>
+                    </EditTrade>
                 </Modal>
 
+                <SweetAlert
+                    show={this.state.approveAlert}
+                    title="Yay! This trade has been completed"
+                    text="You have been emailed the details of your trade loop"
+                    showCancelButton
+                    onConfirm={() => {
+                      console.log('confirm');
+                      this.setState({ approveAlert: false });
+                    }}
+                    onCancel={() => {
+                      console.log('cancel');
+                      this.setState({ approveAlert: false });
+                    }}
+                    onEscapeKey={() => this.setState({ approveAlert: false })}
+                    onOutsideClick={() => this.setState({ approveAlert: false })}
+                />
+                
+                <SweetAlert
+                    show={this.state.rejectAlert}
+                    title="Damn! This trade has been rejected by a member of the loop"
+                    text="Do you want to add this trade again?"
+                    showCancelButton
+                    onConfirm={() => {
+                      console.log('confirm');
+                      this.setState({ rejectAlert: false });
+                    }}
+                    onCancel={() => {
+                      console.log('cancel');
+                      this.setState({ rejectAlert: false });
+                    }}
+                    onEscapeKey={() => this.setState({ rejectAlert: false })}
+                    onOutsideClick={() => this.setState({ rejectAlert: false })}
+                />
+                
                 <div className="cardContainer">
                      <CardContainer 
                          cards={this.props.user.trades} 
@@ -142,6 +192,8 @@ class Dashboard extends Component{
                          openEditModal={this.openEditModal}
                          filter={this.state.filter}
                          selectCard={this.selectCard}
+                         approveAlert={this.openApproveAlert}
+                         rejectAlert={this.openRejectAlert}
                     />
                 </div>
             </div>

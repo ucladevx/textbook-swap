@@ -203,16 +203,16 @@ class EditTrade extends Component{
                  owned_book_id: this.state.offer.book_id,
                  wanted_book_id: book.book_id
                 })
-                .then((data) => {
-                    console.log(data)
-                    if(data.status === 0){
+                .then((res) => {
+                    console.log(res.data)
+                    if(res.data.status === 0){
 						console.log('successfully removed wanted book from possible_trades');
 					}
-					else if(data.status === 1)
+					else if(res.data.status === 1)
 						console.log('db connection error for removing from possible_trades');
-					else if(data.status === 2)
+					else if(res.data.status === 2)
 						console.log('db query error for removing from possible_trades');
-					else if(data.status === 3){
+					else if(res.data.status === 3){
 						console.log('wanted book already removed');
 				    }
                 
@@ -231,22 +231,24 @@ class EditTrade extends Component{
             user_id: "user",
             owned_book_id: this.state.offer.book_id
         })
-            .then((data) => {
-            if(data.status === 0){
+            .then((res) => {
+            console.log(res.data)
+            if(res.data.status === 0){
 				console.log('successfully removed owned book from owned book list');
             }
-            else if(data.status === 1){
+            else if(res.data.status === 1){
                 console.log('db connection error for removing owned book');
             }
-            else if(data.status === 2){
+            else if(res.data.status === 2){
                 console.log('db query error for removing owned book');
             }
-            else if(data.status === 3){
+            else if(res.data.status === 3){
                 console.log('owned book already removed');
             }
             else {
-                console.log('owned book error status', data.status);
+                console.log('owned book error status', res.data.status);
             }
+            console.log('DELETED...')
             window.location.reload();
         })
     }

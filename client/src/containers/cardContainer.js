@@ -42,6 +42,33 @@ class CardContainer extends Component {
                 )
             }
             
+            if (card.status === 'A'){
+                return (
+                    <CardClosedTrade 
+                    color={this.mapStatusToColor(card.status)}
+                    bookHave={card.book_have}
+                    bookWant={card.book_want[0]}
+                    onClick={this.props.approveAlert}
+                    selectCard={this.props.selectCard}
+                    >
+                </CardClosedTrade>
+                )
+            }
+            
+            if (card.status === 'R'){
+                return (
+                    <CardClosedTrade 
+                    color={this.mapStatusToColor(card.status)}
+                    bookHave={card.book_have}
+                    bookWant={card.book_want[0]}
+                    onClick={this.props.rejectAlert}
+                    selectCard={this.props.selectCard}
+                    >
+                </CardClosedTrade>
+                )
+            }
+            
+            
             return (
                 <CardClosedTrade 
                     color={this.mapStatusToColor(card.status)}

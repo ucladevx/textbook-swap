@@ -4,6 +4,7 @@ import Plus from '../new_images/plus.png'
 import Loop from '../new_images/loop.png'
 import Tick from '../new_images/tick.png'
 import HalfLoop from '../new_images/halfLoop.png'
+import Cross from '../new_images/cross.png'
 import '../styles/cardClosedTrade.css'
 
 import CardImageView from '../microcomponents/cardImageView'
@@ -57,9 +58,9 @@ class CardClosedTrade extends Component {
         else return "PENDING MATCH for "
     }
     
-    renderCenter(){
+   renderCenter(){
         var type = this.props.color
-        if (type === "blue" || type === "red"){
+        if (type === "blue"){
             return (
                 <img className="centerImage" src={Loop}></img>
             )
@@ -67,6 +68,11 @@ class CardClosedTrade extends Component {
         else if (type === "green") {
             return (
                 <img className="centerImage" src={Tick}></img>
+            )
+        }
+        else if (type === "red") {
+            return (
+                <img className="centerImage" src={Cross}></img>
             )
         }
         else if (type === "yellow") {
@@ -79,7 +85,8 @@ class CardClosedTrade extends Component {
     onClickHandler(){
         this.props.selectCard({
             bookHave: this.state.bookHave,
-            bookWant: this.state.bookWant
+            bookWant: this.state.bookWant,
+            color: this.props.color
         })
         
         this.props.onClick()

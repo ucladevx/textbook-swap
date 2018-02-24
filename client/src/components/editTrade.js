@@ -26,14 +26,15 @@ class EditTrade extends Component{
         this.setPage = this.setPage.bind(this)
         this.setOffer = this.setOffer.bind(this)
         this.setWant = this.setWant.bind(this)
-        this.createTrade = this.createTrade.bind(this)
+        this.editTrade = this.editTrade.bind(this)
 
         this.wrangle = this.wrangle.bind(this)
         this.processOffer = this.processOffer.bind(this)
         this.processWant = this.processWant.bind(this)
         this.renderSummary = this.renderSummary.bind(this)
         this.cancelTrade = this.cancelTrade.bind(this)
-        this.tradeCallback = this.tradeCallback.bind(this)
+        this.editTradeCallback = this.editTradeCallback.bind(this)
+        this.deleteTrade = this.deleteTrade.bind(this)
 
         this.state = {
             page: {
@@ -153,9 +154,9 @@ class EditTrade extends Component{
         })
     }
     
-    tradeCallback(){
+    editTradeCallback(){
         var booksAdd = this.state.newWant
-        var j = 1;
+        var j = 0;
         var total = booksAdd.length
         console.log("REACHED CALLBACK")
         booksAdd.forEach((book) => {
@@ -174,25 +175,26 @@ class EditTrade extends Component{
                     console.log('db query error for possible_trades');
                 else if(res.status === 3)
                     console.log('trade relation already exists');
+                
+                j++
 
                 if (j === total){
                     console.log("done...")
                     window.location.reload();
                 }
-                else {
-                    j++
-                }
             })
             .catch((e) => console.log(e))
         })
     }
-    // CHANGE THIS
-    createTrade(){
-        // POST...
-        
+
+    editTrade(){        
         var booksRemove = this.state.want
         var l = booksRemove.length
-        var i = 1
+        var i = 0
+        
+        if (l === 0){
+            this.editTradeCallback()
+        }
         
         booksRemove.forEach((book) => {
             console.log("Book:", book, "i:", i)
@@ -202,6 +204,7 @@ class EditTrade extends Component{
                  wanted_book_id: book.book_id
                 })
                 .then((data) => {
+                    console.log(data)
                     if(data.status === 0){
 						console.log('successfully removed wanted book from possible_trades');
 					}
@@ -212,13 +215,41 @@ class EditTrade extends Component{
 					else if(data.status === 3){
 						console.log('wanted book already removed');
 				    }
+                
                     i++
+                
                     if (i === l){
-                        this.tradeCallback()
+                        console.log("i === l, call callback")
+                        this.editTradeCallback()
                     }   
             })
     })
 }
+    
+    deleteTrade(){
+        axios.post(ROOT+'/api/owned_books/remove', {
+            user_id: "user",
+            owned_book_id: this.state.offer.book_id
+        })
+            .then((data) => {
+            if(data.status === 0){
+				console.log('successfully removed owned book from owned book list');
+            }
+            else if(data.status === 1){
+                console.log('db connection error for removing owned book');
+            }
+            else if(data.status === 2){
+                console.log('db query error for removing owned book');
+            }
+            else if(data.status === 3){
+                console.log('owned book already removed');
+            }
+            else {
+                console.log('owned book error status', data.status);
+            }
+            window.location.reload();
+        })
+    }
 
     getChild(page){
         var option = page.option
@@ -251,7 +282,7 @@ class EditTrade extends Component{
                                 {
                                     this.state.want != null &&
                                     this.state.want != this.state.newWant &&
-                                    <button className="formNext" onClick={()=>this.createTrade()}>SUBMIT</button>
+                                    <button className="formNext" onClick={()=>this.editTrade()}>SUBMIT</button>
                                 }
                             </div>
                         </div>
@@ -274,7 +305,7 @@ class EditTrade extends Component{
                             </div>
                             <div className="transitionButtonRow">
                                 <button className="formPrev" onClick={()=>this.setPage({option, screen: 2})}>EDIT TRADE</button>
-                                <button className="formNext" onClick={()=>console.log("DELETE TRADE ROUTE")}>DELETE</button>
+                                <button className="formNext" onClick={()=>this.deleteTrade()}>DELETE</button>
                             </div>
                          </div>
                      )

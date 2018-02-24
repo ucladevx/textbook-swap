@@ -272,7 +272,7 @@ class Form extends Component{
                      )
                 case 3:
                     return (
-                        <div className="formContents">
+                        <div className="formContents wantedBooksPage">
                             <h1 className="formTitle">NEW TRADE</h1>
                             <h3 className="formMessage">Select the book(s) you want to receive in return.</h3>
                             <div className="searchBoxAndResults">
@@ -305,13 +305,13 @@ class Form extends Component{
                             <h3 className="formMessage">Confirm your trades!</h3>
                             <div className='confirmTradeContainer'>
                                 <div className='confirmTradeLeft'>
-                                    <h5> Offered Book </h5>
+                                    <h4> OFFERED BOOK </h4>
                                     <div className="ownedBookSummary">
                                         <Summary books={this.state.offer} multi={false}/>
                                     </div>
                                 </div>
                                 <div className='confirmTradeRight'>
-                                    <h5> Wanted Books </h5>
+                                    <h4> WANTED BOOKS </h4>
                                     <MinSummary books={this.state.want}/>
                                 </div>
                             </div>

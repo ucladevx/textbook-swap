@@ -86,7 +86,7 @@ class CardPendingTrade extends Component {
                         <div className="ptAuthor">{this.props.bookHave.author}</div>
                     </div>
                 </div>
-                <div className="ptBottom" style={{backgroundColor: colorMap[color].bottom}}>
+                <div className="ctBottom" style={{backgroundColor: colorMap[color].bottom}}>
                     {this.props.booksWant.length} book{this.props.booksWant.length != 1 ? "s" : ""} wanted in exchange
                 </div>
             </div>

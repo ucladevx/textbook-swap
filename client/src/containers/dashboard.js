@@ -7,6 +7,9 @@ import '../styles/dashboard.css'
 import '../styles/vendors/sweetalert.css'
 import {userLogin} from '../actions';
 
+import Loading from '../new_images/loading.gif'
+import { ClipLoader } from 'react-spinners';
+
 import Form from '../components/form'
 import Modal from 'react-modal';
 import TradeDetail from '../components/tradeDetail'
@@ -104,8 +107,12 @@ class Dashboard extends Component{
     render(){
         if (this.props.user == null){
             return (
-            <div className="dashboardContainer">
-                Loading...
+            <div className="loadingContainer">
+                <ClipLoader
+                    color={'#52b9d1'} 
+                    loading={true} 
+                    size={60}
+                />
             </div>
             )
         } 

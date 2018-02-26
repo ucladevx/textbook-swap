@@ -19,7 +19,24 @@ TODO:
 */
 
 class EditTrade extends Component{
-
+    componentDidMount(){
+        var values =  this.props.want
+        
+        values.forEach((book, i)=>{
+             axios.get(ROOT+'/api/book_to_class/get_prof_class_info?book_id='+values[i].book_id)
+            .then((res)=>{
+                values[i].details = this.wrangle(res.data.data)
+                if (i === values.length - 1){
+                    this.setState({
+                        want: values
+                    })
+                }
+            })
+            .catch((e)=>console.log(e))
+        })
+        
+    }
+    
     constructor(props){
         super(props)
         this.getChild = this.getChild.bind(this)
@@ -35,7 +52,7 @@ class EditTrade extends Component{
         this.cancelTrade = this.cancelTrade.bind(this)
         this.editTradeCallback = this.editTradeCallback.bind(this)
         this.deleteTrade = this.deleteTrade.bind(this)
-
+        
         this.state = {
             page: {
                 option: "trade",
@@ -66,6 +83,7 @@ class EditTrade extends Component{
             offer: value
         })
     }
+    
     setWant(value){
         this.setState({
             newWant: value
@@ -142,6 +160,7 @@ class EditTrade extends Component{
             this.setWant(null)
             return
         }
+        console.log("Get prof for:", values)
         values.forEach((book, i)=>{
              axios.get(ROOT+'/api/book_to_class/get_prof_class_info?book_id='+values[i].book_id)
             .then((res)=>{
@@ -273,7 +292,7 @@ class EditTrade extends Component{
 
                                 <div className="searchResults">
                                     {
-                                        this.state.want != null &&
+                                        this.state.newWant != null &&
                                         <Summary books={this.state.newWant} multi={true}></Summary>
                                     }
                                 </div>
@@ -284,6 +303,7 @@ class EditTrade extends Component{
                                 {
                                     this.state.want != null &&
                                     this.state.want != this.state.newWant &&
+                                    this.state.newWant != null &&
                                     <button className="formNext" onClick={()=>this.editTrade()}>SUBMIT</button>
                                 }
                             </div>
@@ -295,13 +315,13 @@ class EditTrade extends Component{
                             <h1 className="formTitle">TRADE INFO</h1>
                             <div className='confirmTradeContainer'>
                                 <div className='confirmTradeLeft'>
-                                    <h5> Offered Book </h5>
+                                    <h4> OFFERING </h4>
                                     <div className="ownedBookSummary">
                                         <Summary books={this.state.offer} multi={false}/>
                                     </div>
                                 </div>
                                 <div className='confirmTradeRight'>
-                                    <h5> Wanted Books </h5>
+                                    <h4> TRADES </h4>
                                     <MinSummary books={this.state.want}/>
                                 </div>
                             </div>

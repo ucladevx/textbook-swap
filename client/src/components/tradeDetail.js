@@ -38,6 +38,7 @@ class TradeDetail extends Component {
         })
         .then((res) => {
             if (res.status === 0){
+                console.log("Got Trade", res.data)
                 this.setState({
                     trade: res.data[0]
                 })

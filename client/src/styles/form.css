@@ -20,7 +20,6 @@
     .formMessage{
         font-size: 1.25em;
         text-align: left;
-        padding-bottom: 2%;
     }
 
     .formBox{
@@ -51,6 +50,7 @@
         text-align: center;
         overflow: auto;
         padding: 5%;
+        color: blue;
     }
 
     .formInput{
@@ -188,7 +188,7 @@
         height: 65%;
         position: relative;
         font-size: 12px;
-        overflow: scroll;
+        overflow: none;
         background-color: rgb(236, 236, 236);
     }
 
@@ -394,7 +394,7 @@
 
     /* want books search box and results */
     .searchBoxAndResults {
-        height: 65%;
+        height: 70%;
         position: relative;
         overflow: auto;
     }
@@ -408,8 +408,9 @@
     .confirmTradeContainer {
         display: flex;
         flex-direction: row;
-        height: 70%;
+        height: 80%;
         position: relative;
+        margin-top: 3%;
         font-size: 12px;
         background-color: rgb(236, 236, 236);
     }

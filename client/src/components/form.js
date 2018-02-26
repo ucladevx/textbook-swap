@@ -121,6 +121,7 @@ class Form extends Component{
 
     processWant(values){
         if (!values) {
+            // hmm... should this be setWant?
             this.setOffer(null)
             return
         }
@@ -305,13 +306,13 @@ class Form extends Component{
                             <h3 className="formMessage">Confirm your trades!</h3>
                             <div className='confirmTradeContainer'>
                                 <div className='confirmTradeLeft'>
-                                    <h4> OFFERED BOOK </h4>
+                                    <h4> OFFERING </h4>
                                     <div className="ownedBookSummary">
                                         <Summary books={this.state.offer} multi={false}/>
                                     </div>
                                 </div>
                                 <div className='confirmTradeRight'>
-                                    <h4> WANTED BOOKS </h4>
+                                    <h4> TRADES </h4>
                                     <MinSummary books={this.state.want}/>
                                 </div>
                             </div>

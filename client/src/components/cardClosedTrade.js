@@ -10,17 +10,17 @@ import CardImageView from '../microcomponents/cardImageView'
 
 var colorMap = {
     blue: {
-        title: "#47AFCB",
+        title: "#52B9D1",
         subtitle: "#C2E4E7",
         bottom: "#3E99A8"
     },
     red: {
-        title: "#E37449",
+        title: "#E88154",
         subtitle: "#E69F81",
         bottom: "#C45F45"
     },
     yellow: {
-        title: "#F7C53C",
+        title: "#F8CC45",
         subtitle: "#FEF5CD",
         bottom: "#E2AA0F"
     },
@@ -38,14 +38,14 @@ class CardClosedTrade extends Component {
             color: this.props.color ? this.props.color : "blue",
             bookHave: this.props.bookHave ? this.props.bookHave : "History of India",
             bookWant: this.props.bookWant ? this.props.bookWant : "History of India"
-        }
-        this.printMessage = this.printMessage.bind(this)
-        this.renderCenter = this.renderCenter.bind(this)
-        this.onClickHandler = this.onClickHandler.bind(this)
+        };
+        this.printMessage = this.printMessage.bind(this);
+        this.renderCenter = this.renderCenter.bind(this);
+        this.onClickHandler = this.onClickHandler.bind(this);
     }
     
     printMessage(){
-        var type = this.props.color
+        var type = this.props.color;
         if (type === "blue"){
             return "NEW TRADE MATCH for "
         }
@@ -59,7 +59,7 @@ class CardClosedTrade extends Component {
     }
     
     renderCenter(){
-        var type = this.props.color
+        var type = this.props.color;
         if (type === "blue" || type === "red"){
             return (
                 <img className="centerImage" src={Loop}></img>
@@ -88,7 +88,7 @@ class CardClosedTrade extends Component {
 
     render()
     {
-        var color = this.state.color
+        var color = this.state.color;
         return (
             <div className="ctCard" onClick={()=>this.onClickHandler()} style={{backgroundColor: colorMap[color].title}}>
                 <div className="ctTop">

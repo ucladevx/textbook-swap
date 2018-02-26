@@ -1,3 +1,40 @@
+.filter_button_container{
+    margin-top: 3vh;
+}
+
+.filter_button{
+    background-color: #353535;
+    color: white;
+    border: 0;
+    margin: 1vw;
+    font-size: 100%;
+    cursor: pointer;
+}
+
+.active_filter{
+    border-bottom: 1px solid white;
+}
+
+.filter_button:focus{
+    outline: none;
+}
+
+.requested_filter{
+    color: #f8cc45;
+}
+
+.matched_filter{
+    color: #52b9d1;
+}
+
+.rejected_filter{
+    color: #e88154;
+}
+
+.completed_filter{
+    color: #5dce53;
+}
+
 @media only screen and (min-width : 768px) {
     .dashboardContainer{
         background-color: azure;
@@ -6,7 +43,7 @@
     }
 
     .topBar{
-        background-color: darkgrey;
+        background-color: #333333;
         width: 100%;
         height: 300px;;
     }
@@ -19,6 +56,7 @@
     /*    padding-left: 0.5%;*/
     /*    padding-right: 0.5%;*/
     }
+
 }
 
 @media only screen and (max-width : 768px) {
@@ -29,7 +67,7 @@
     }
 
     .topBar{
-        background-color: darkgrey;
+        background-color: #333333;
         width: 100%;
         height: 25vh;
     }

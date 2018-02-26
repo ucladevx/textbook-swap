@@ -10,22 +10,22 @@ class CardContainer extends Component {
     constructor(props) {
         super(props);
 //        this.cardClicked = this.cardClicked.bind(this)
-        this.generateList = this.generateList.bind(this)
-        this.mapStatusToColor = this.mapStatusToColor.bind(this)
-        this.mapFilterToColorToColor = this.mapFilterToColor.bind(this)
+        this.generateList = this.generateList.bind(this);
+        this.mapStatusToColor = this.mapStatusToColor.bind(this);
+        this.mapFilterToColorToColor = this.mapFilterToColor.bind(this);
     }
     
     generateList(){
-        var cards = this.props.cards
-        var filter = this.props.filter
+        var cards = this.props.cards;
+        var filter = this.props.filter;
         if (!cards){
             return (<div></div>)
         }
         
-        console.log("Cards", cards)
+        console.log("Cards", cards);
         
-        if (filter != "ALL"){
-                cards = cards.filter(card => this.mapStatusToColor(card.status) === this.mapFilterToColor(filter))
+        if (filter !== "ALL"){
+                cards = cards.filter(card => this.mapStatusToColor(card.status) === this.mapFilterToColor(filter));
                 console.log("After filter", filter, cards)
         }
         
@@ -64,7 +64,7 @@ class CardContainer extends Component {
         if (status === 'W' || status === 'P')
             return "blue";
         if (status === 'N')
-            return "yellow"
+            return "yellow";
     }
     
     mapFilterToColor(status){
@@ -74,6 +74,8 @@ class CardContainer extends Component {
             return "red";
         if (status === 'MATCHED')
             return "blue";
+        if (status === 'ACCEPTED')
+            return "green";
     }
 
     render() {

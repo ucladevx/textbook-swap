@@ -97,10 +97,13 @@ class Dashboard extends Component{
             <div className="dashboardContainer">
                 <div className="topBar">
                     <p>Hi {this.props.user.name}, this is your dashboard</p>
-                    <button onClick={()=>this.setFilter("ALL")}>ALL</button>
-                    <button onClick={()=>this.setFilter("REQUESTED")}>REQUESTED</button>
-                    <button onClick={()=>this.setFilter("MATCHED")}>MATCHED</button>
-                    <button onClick={()=>this.setFilter("REJECTED")}>REJECTED</button>
+                    <div className="filter_button_container">
+                        <button className={"filter_button all_filter " + (this.state.filter === "ALL" ? "active_filter" : "")} onClick={()=>this.setFilter("ALL")}>ALL</button>
+                        <button className={"filter_button requested_filter " + (this.state.filter === "REQUESTED" ? "active_filter" : "")} onClick={()=>this.setFilter("REQUESTED")}>REQUESTED</button>
+                        <button className={"filter_button matched_filter " + (this.state.filter === "MATCHED" ? "active_filter" : "")} onClick={()=>this.setFilter("MATCHED")}>MATCHED</button>
+                        <button className={"filter_button rejected_filter " + (this.state.filter === "REJECTED" ? "active_filter" : "")} onClick={()=>this.setFilter("REJECTED")}>REJECTED</button>
+                        <button className={"filter_button completed_filter " + (this.state.filter === "COMPLETED" ? "active_filter" : "")} onClick={()=>this.setFilter("COMPLETED")}>COMPLETED</button>
+                    </div>
                 </div>
                 <Modal
                   isOpen={this.state.formModalIsOpen}

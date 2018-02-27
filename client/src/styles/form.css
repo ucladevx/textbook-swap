@@ -184,7 +184,6 @@
     .confirmTradeContainer {
         display: inline-block;
         flex-direction: row;
-        height: 65%;
         position: relative;
         font-size: 12px;
         overflow: none;
@@ -221,6 +220,14 @@
 
     .confirmTradeContainer .minSummaryCell {
         border-bottom: 2px solid rgb(255, 255, 255);
+    }
+
+    .confirmTradePage .transitionButtonRow {
+        margin-top: 15%;
+        position: relative;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     .ownedBookSummary, .ownedBookSummary > .summaryContainer {
@@ -407,7 +414,7 @@
     .confirmTradeContainer {
         display: flex;
         flex-direction: row;
-        height: 80%;
+        height: 70%;
         position: relative;
         margin-top: 3%;
         font-size: 12px;

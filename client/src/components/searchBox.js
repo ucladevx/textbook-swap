@@ -15,6 +15,7 @@ class searchBox extends Component{
             backspaceRemoves: true,
 			multi: this.props.multi,
             value: this.props.initState,
+            selected_offered_book: this.props.selected_offered_book,  // book that owner selected as "offered" book
             owned_books: []  // books owned by the user
         }
         this.onChange = this.onChange.bind(this)
@@ -56,8 +57,6 @@ class searchBox extends Component{
 
     // Do no filtering, just return all options (except already selected ones)
     filterOptions(options, filter, currentValues) {
-        console.log("filter options user owned books", this.state.owned_books);
-
         // get list of book_ids that cannot be valid options
         let invalid_book_ids = []; 
         // book_ids that have already been selected as options
@@ -69,6 +68,11 @@ class searchBox extends Component{
         // user's owned books cannot be options
         for (let j = 0; j < this.state.owned_books.length; j++) {
             invalid_book_ids.push(this.state.owned_books[j].book_id);
+        }
+        // the offered book that the user selected cannot be an option (for a new trade)
+        if (this.state.selected_offered_book != null) {
+            console.log("selected offered book", this.state.selected_offered_book);
+            invalid_book_ids.push(this.state.selected_offered_book.book_id);
         }
 
         console.log("invalid book ids", invalid_book_ids);

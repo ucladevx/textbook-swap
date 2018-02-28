@@ -36,10 +36,10 @@ class Dashboard extends Component{
         console.log("Component Did Mount");
         this.props.userLogin
     }
-    
+
     constructor(props){
-        super(props)
-        
+        super(props);
+
         this.state = {
           formModalIsOpen: false,
           detailModalIsOpen: false,
@@ -63,7 +63,7 @@ class Dashboard extends Component{
         this.openRejectAlert = this.openRejectAlert.bind(this);
         this.openWaitAlert = this.openWaitAlert.bind(this);
     }
-    
+
     openFormModal() {
         this.setState({formModalIsOpen: true});
     }
@@ -86,8 +86,7 @@ class Dashboard extends Component{
     
     closeFormModal() {
         this.setState({formModalIsOpen: false});
-    }
-    
+    }    
     closeEditModal() {
         this.setState({editModalIsOpen: false});
     }
@@ -99,11 +98,11 @@ class Dashboard extends Component{
     closeDetailModal() {
         this.setState({detailModalIsOpen: false});
     }
-    
+
     setFilter(type) {
         this.setState({filter: type});
     }
-    
+
     selectCard(card){
         this.setState({
             selectedCard: card
@@ -121,7 +120,7 @@ class Dashboard extends Component{
                 />
             </div>
             )
-        } 
+        }
         return (
             <div className="dashboardContainer">
                 <div className="topBar">
@@ -138,17 +137,17 @@ class Dashboard extends Component{
                 >
                     <Form onComplete={this.closeFormModal}></Form>
                 </Modal>
-                
+
                 <Modal
                   isOpen={this.state.detailModalIsOpen}
                   onRequestClose={this.closeDetailModal}
                   style={customStyles}
                 >
-                
-                <TradeDetail 
+                    <TradeDetail
                         bookHave={this.state.selectedCard ? this.state.selectedCard.bookHave : null}
                         bookWant={this.state.selectedCard ? this.state.selectedCard.bookWant : null}
-                        onComplete={this.closeFormModal}></TradeDetail>
+                        onComplete={this.closeFormModal}>
+                     </TradeDetail>
                 </Modal>
                 
                 <Modal
@@ -222,8 +221,8 @@ class Dashboard extends Component{
                 />
                 
                 <div className="cardContainer">
-                     <CardContainer 
-                         cards={this.props.user.trades} 
+                     <CardContainer
+                         cards={this.props.user.trades}
                          openFormModal={this.openFormModal}
                          openDetailModal={this.openDetailModal}
                          openEditModal={this.openEditModal}

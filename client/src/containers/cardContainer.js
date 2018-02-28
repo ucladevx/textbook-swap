@@ -97,22 +97,22 @@ class CardContainer extends Component {
     
     mapStatusToColor(status){
         if (status === 'A')
-            return "green"
+            return "green";
         if (status === 'R')
-            return "red"
+            return "red";
         if (status === 'W' || status === 'P')
-            return "blue"
-        if (status == 'N')
+            return "blue";
+        if (status === 'N')
             return "yellow"
     }
     
     mapFilterToColor(status){
         if (status === 'REQUESTED')
-            return "yellow"
+            return "yellow";
         if (status === 'REJECTED')
-            return "red"
+            return "red";
         if (status === 'MATCHED')
-            return "blue"
+            return "blue";
     }
 
     render() {

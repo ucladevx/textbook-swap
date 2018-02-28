@@ -10,7 +10,6 @@
 
     .ciImage{
         object-fit: contain;
-/*        max-height: 10vw;*/
         height: 16vh;
     }
 }

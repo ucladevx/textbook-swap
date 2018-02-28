@@ -9,10 +9,10 @@ export default function(state = null, action){
             var obj = action.payload
             
             // COMMENT THIS OUT
-            obj.trades[0].status = 'A'
-            obj.trades[1].status = 'W'
-            obj.trades[2].status = 'R'
-            obj.trades[3].status = 'P'
+//            obj.trades[0].status = 'A'
+//            obj.trades[1].status = 'W'
+//            obj.trades[2].status = 'R'
+//            obj.trades[3].status = 'P'
             
             return obj || false
         default:

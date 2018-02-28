@@ -21,6 +21,7 @@ class searchBox extends Component{
         this.toggleBackspaceRemoves = this.toggleBackspaceRemoves.bind(this)
         this.toggleCreatable = this.toggleCreatable.bind(this)
         this.getBooks = this.getBooks.bind(this)
+        this.filterOptions = this.filterOptions.bind(this)
     }
 
     // Take this from parent, so that state is saved in the form itself
@@ -48,53 +49,22 @@ class searchBox extends Component{
         }
     }
 
-    // 
-
-/*
-    stuff(e){
-		var input = e
-        if (input.length >= 3){
-            axios.get(ROOT+'/api/search/search_textbooks?search_input='+input)
-                .then((res) => {
-                    console.log(searchResults)
-                    var ownedBooksSet = new Set()
-                    var displayList = []
-                    if (res.data.status == 0){
-                        var searchResults = res.data.data
-                        console.log(searchResults)
-                        //TODO: Clear the search result UI state
-                        console.log("Making user request")
-                        axios.get(ROOT+'/api/owned_books/get_owned_cards?user_id=user')
-                            .then((userData) => {
-
-                                var userBooksInfo = userData.data;
-                                console.log(userBooksInfo);
-							    for (var j = 0; j < userBooksInfo.length; j++) {
-								    ownedBooksSet.add(userBooksInfo[j]["book_id"]);
-								    console.log(userBooksInfo[j]["book_id"]);
-							     }
-
-                                for (var i = 0; i < searchResults.length; i++){
-                                    var book_id = searchResults[i]["book_id"];
-								    if (!ownedBooksSet.has(book_id)) {
-                                        var title = searchResults[i]["title"];
-									    var author = searchResults[i]["author"];
-									    var isbn = searchResults[i]["isbn"];
-									    var img_url = searchResults[i]["img_url"];
-                                        displayList.push({title, author, isbn, img_url})
-                                    }
-                                }
-                                this.setState({search: displayList})
-                            })
-                            .catch((e)=>console.log(e))
-                        this.setState({search: searchResults})
-                        return (searchResults)
+    // Do no filtering, just return all options (except already selected ones)
+    filterOptions(options, filter, currentValues) {
+        for (var i = 0; i < options.length; i++) {
+            // check if option has already been selected
+            if (currentValues != null) {
+                for (var j = 0; j < currentValues.length; j++) {
+                    if (options[i] != null && options[i].book_id === currentValues[j].book_id) {  
+                        // delete selected options
+                        options.splice(i, 1);
                     }
-                })
-                .catch((e)=>console.log(e))
-        }
-	}
-    */
+                }
+            }
+            // TODO: check if option is already one of the user's owned books       
+        } 
+        return options;
+    }
 
     gotoUser (value, event) {
 		console.log("Selected", value)
@@ -123,12 +93,14 @@ class searchBox extends Component{
                     multi={this.state.multi}
                     value={this.state.value}
                     onChange={this.onChange}
-                    onValueClick={this.gotoUser} // TODO: this makes the value a link in the search bar, so remove later?
+                    // onValueClick={this.gotoUser} // TODO: this makes the value a link in the search bar, so remove later?
                     valueKey="book_id"
                     labelKey="title"
                     loadOptions={this.getBooks}
                     backspaceRemoves={this.state.backspaceRemoves}
                     placeholder="Search by title, professor or class"
+                    cache={false}
+                    filterOptions={this.filterOptions}
             />
 			</div>
 		);

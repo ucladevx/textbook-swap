@@ -76,32 +76,36 @@ class Form extends Component{
     }
 
     wrangle(profClassInfo){
-        var profSet = new Set();
-        // set of classes
-        var classSet = new Set();
-        var profs =""
-        var classes=""
-        // successful query
-            // create strings of professors and classes
-            for (var i = 0; i < profClassInfo.length; i++) {
-                // professor name already seen
-                if (!profSet.has(profClassInfo[i]["professor_name"])) {
-                    profs = profs + profClassInfo[i]["professor_name"] + ", ";;
-                    profSet.add(profClassInfo[i]["professor_name"]);
-                }
 
-                // class name already seen
-                if (!classSet.has(profClassInfo[i]["class_name"])) {
-                    classes = classes + profClassInfo[i]["class_name"] + ", ";;
-                    classSet.add(profClassInfo[i]["class_name"]);
-                }
-            // get rid of extraneous ", " at the end
-            profs = profs.substring(0, profs.length - 2);
-            classes = classes.substring(0, classes.length - 2);
-            return ({
-                profs, classes
-            })
+        console.log("prof class info", profClassInfo);
+
+        var profSet = new Set();
+        var classSet = new Set();
+        var profs ="";
+        var classes="";
+        // successful query
+        // create strings of professors and classes
+        for (var i = 0; i < profClassInfo.length; i++) {
+            // professor name already seen
+            if (!profSet.has(profClassInfo[i]["professor_name"])) {
+                profs = profs + profClassInfo[i]["professor_name"] + ", ";
+                profSet.add(profClassInfo[i]["professor_name"]);
+            }
+
+            // class name already seen
+            if (!classSet.has(profClassInfo[i]["class_name"])) {
+                classes = classes + profClassInfo[i]["class_name"] + ", ";
+                classSet.add(profClassInfo[i]["class_name"]);
+            }
         }
+
+        // get rid of extraneous ", " at the end
+        profs = profs.substring(0, profs.length - 2);
+        classes = classes.substring(0, classes.length - 2);
+
+        return ({
+            profs, classes
+        })
     }
 
     processOffer(value){
@@ -301,7 +305,7 @@ class Form extends Component{
                     )
                 case 4:
                      return (
-                         <div className="formContents">
+                         <div className="formContents confirmTradePage">
                             <h1 className="formTitle">NEW TRADE</h1>
                             <h3 className="formMessage">Confirm your trades!</h3>
                             <div className='confirmTradeContainer'>

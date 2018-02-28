@@ -10,13 +10,19 @@ const found_trades_id = require('./found_trades_id');
 const emailer = require('./emailer.js');
 const logger = require('tracer').colorConsole();
 
-var edges = {}; // adjacency list of all nodes
-var matched = {}; // already matched nodes
 var tradeID = 0; // current trade ID
+var edges;
+var matched;
 
 exports.run_algorithm = function(){
     logger.log("running algorithm");
+    edges = {}; // adjacency list of all nodes
+    matched = {}; // already matched nodes
+    logger.log(edges);
+    logger.log(matched);
     load_data(function(){
+        logger.log(edges);
+        logger.log(matched);
         for(var i = 2; i <= 4; i++){
             var keys = Object.keys(edges);
             for(var j = 0; j < keys.length; j++){

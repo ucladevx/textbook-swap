@@ -13,6 +13,7 @@ const cookie = require('cookie-parser');
 const session = require('express-session');
 const require_login = require('connect-ensure-login');
 const logger = require('tracer').colorConsole();
+const cors = require('cors');
 
 /*
  * Constants
@@ -43,6 +44,7 @@ const bookToClassController = require('./controllers/api/book_to_class');
 const bookInfoController = require('./controllers/api/book_info');
 const foundTradesController = require('./controllers/api/found_trades');
 const runAlgorithmController = require('./controllers/api/run_algorithm');
+const userInfoController = require('./controllers/api/user_info');
 
 /*
  * API keys and Passport configuration.
@@ -70,6 +72,14 @@ const app = express();
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
+
+/*
+ * Cross origin resource sharing
+ */
+ app.use(cors({
+   credentials: true,
+   origin: 'http://localhost:5000'
+ }));
 
 /*
  * Use application-level middleware for common functionality, including logging, parsing, and session handling.
@@ -126,6 +136,9 @@ app.get('/api/book_to_class/get_prof_class_info', bookToClassController.get_prof
 // Book info
 app.get('/api/book_info/get_book_info', bookInfoController.get_book_info);
 app.get('/api/book_info/get_pair_book_info', bookInfoController.get_pair_book_info);
+
+// Get user info
+app.get('/api/user_info', userInfoController.get_user_info);
 
 // Found trades
 app.post('/api/found_trades/update_status_accepted', foundTradesController.update_status_accepted);

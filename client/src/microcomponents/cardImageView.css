@@ -1,0 +1,53 @@
+@media only screen and (min-width : 768px) {
+    .ciContainer{
+    /*    background-color: cornflowerblue;*/
+    }
+
+    .ciImageBox{
+    /*    background-color: skyblue;*/
+        padding: 12px;
+    }
+
+    .ciImage{
+        object-fit: contain;
+        height: 16vh;
+    }
+
+    .ciText{
+        margin-top: 5px;
+        font-size: 0.8em;
+        color: white;
+        text-transform: uppercase;
+        word-wrap: break-word;
+        overflow: hidden;
+        height: 2.8em;
+        line-height: 1.4em;
+    }
+}
+
+@media only screen and (max-width : 768px) {
+    .ciContainer{
+    /*    background-color: cornflowerblue;*/
+    }
+
+    .ciImageBox{
+    /*    background-color: skyblue;*/
+        padding: 12px;
+    }
+
+    .ciImage{
+        object-fit: contain;
+        max-height: 13vh;
+    }
+
+    .ciText{
+        margin-top: 5px;
+        font-size: 0.8em;
+        color: white;
+        text-transform: uppercase;
+        word-wrap: break-word;
+        overflow: hidden;
+        height: 2.8em;
+        line-height: 1.4em;
+    }
+}

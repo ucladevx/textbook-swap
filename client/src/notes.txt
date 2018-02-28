@@ -1,0 +1,17 @@
+React that's left:
+1. Edit trade detail popup
+2. Approve/Reject buttons --> check API route...
+
+HTML/CSS that's left
+1. Fix Desktop:
+    - Dashboard
+        - Top Bar
+        - cardImageDetail
+    - New Trade 
+        - summary.css
+        - minSummary.css
+        
+2. Everything in Mobile :0
+    - shouldn't be THAT hard since we've used flexbox...
+    
+3. Shadows and Animations (if we want)

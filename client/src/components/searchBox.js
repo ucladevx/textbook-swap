@@ -14,7 +14,8 @@ class searchBox extends Component{
         this.state = {
             backspaceRemoves: true,
 			multi: this.props.multi,
-            value: this.props.initState
+            value: this.props.initState,
+            owned_books: []  // books owned by the user
         }
         this.onChange = this.onChange.bind(this)
         this.gotoUser = this.gotoUser.bind(this)
@@ -42,7 +43,11 @@ class searchBox extends Component{
             .then((json) => {
                 axios.get(ROOT+'/api/owned_books/get_owned_cards?user_id=user')
                     .then((userData) => {
-                        console.log(userData.data)
+                        console.log("user's owned books: ", userData.data.data)
+                        // fetch the owned books for the user
+                        this.setState({
+                            owned_books: userData.data.data,
+                        });
                     })
                 return { options: json.data };
             })
@@ -51,17 +56,36 @@ class searchBox extends Component{
 
     // Do no filtering, just return all options (except already selected ones)
     filterOptions(options, filter, currentValues) {
-        for (var i = 0; i < options.length; i++) {
-            // check if option has already been selected
-            if (currentValues != null) {
-                for (var j = 0; j < currentValues.length; j++) {
-                    if (options[i] != null && options[i].book_id === currentValues[j].book_id) {  
-                        // delete selected options
-                        options.splice(i, 1);
-                    }
+        console.log("filter options user owned books", this.state.owned_books);
+
+        // get list of book_ids that cannot be valid options
+        let invalid_book_ids = []; 
+        // book_ids that have already been selected as options
+        if (currentValues != null) {
+            for (let i = 0; i < currentValues.length; i++) {
+                invalid_book_ids.push(currentValues[i].book_id);
+            }
+        }
+        // user's owned books cannot be options
+        for (let j = 0; j < this.state.owned_books.length; j++) {
+            invalid_book_ids.push(this.state.owned_books[j].book_id);
+        }
+
+        console.log("invalid book ids", invalid_book_ids);
+
+        let k = 0; 
+        while (k < options.length) {
+            let haveDeleted = false;
+            for (let l = 0; l < invalid_book_ids.length; l++) {
+                if (options[k] != null && options[k].book_id === invalid_book_ids[l]) {  
+                    // delete selected options
+                    options.splice(k, 1);
+                    haveDeleted = true;
+                    break;
                 }
             }
-            // TODO: check if option is already one of the user's owned books       
+            // only increment k if we haven't deleted
+            if (!haveDeleted) { k++; }
         } 
         return options;
     }

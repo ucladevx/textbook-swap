@@ -8,7 +8,7 @@ import '../styles/cardPendingTrade.css'
 import CardImageView from '../microcomponents/cardImageView'
 
 var colorMap = {
-    yellow: {
+    N: {
         title: "#F7C53C",
         subtitle: "#FEF5CD",
         bottom: "#E2AA0F"
@@ -51,7 +51,7 @@ class CardPendingTrade extends Component {
                         <div className="ptAuthor">{this.props.bookHave.author}</div>
                     </div>
                 </div>
-                <div className="ptBottom" style={{backgroundColor: colorMap[color].bottom}}>
+                <div className="ctBottom" style={{backgroundColor: colorMap[color].bottom}}>
                     {this.props.booksWant.length} book{this.props.booksWant.length != 1 ? "s" : ""} wanted in exchange
                 </div>
             </div>

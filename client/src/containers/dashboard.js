@@ -44,6 +44,7 @@ class Dashboard extends Component{
           formModalIsOpen: false,
           detailModalIsOpen: false,
           editModalIsOpen: false,
+          approveAlert: false,
           selectedCard: null,
           approveAlert: false,
           rejectAlert: false,
@@ -60,6 +61,7 @@ class Dashboard extends Component{
         this.selectCard = this.selectCard.bind(this);
         this.openApproveAlert = this.openApproveAlert.bind(this);
         this.openRejectAlert = this.openRejectAlert.bind(this);
+        this.openWaitAlert = this.openWaitAlert.bind(this);
     }
     
     openFormModal() {
@@ -68,6 +70,10 @@ class Dashboard extends Component{
     
     openApproveAlert() {
         this.setState({approveAlert: true});
+    }
+    
+    openWaitAlert() {
+        this.setState({waitAlert: true});
     }
     
     openRejectAlert() {
@@ -156,12 +162,15 @@ class Dashboard extends Component{
                         onComplete={this.closeEditModal}>
                     </EditTrade>
                 </Modal>
-
+                
                 <SweetAlert
                     show={this.state.approveAlert}
-                    title="Yay! This trade has been completed"
+                    type="success"
+                    title="This trade has been completed"
                     text="You have been emailed the details of your trade loop"
                     showCancelButton
+                    cancelButtonText="Back"
+                    confirmButtonText="Dismiss Card"
                     onConfirm={() => {
                       console.log('confirm');
                       this.setState({ approveAlert: false });
@@ -173,12 +182,15 @@ class Dashboard extends Component{
                     onEscapeKey={() => this.setState({ approveAlert: false })}
                     onOutsideClick={() => this.setState({ approveAlert: false })}
                 />
-                
+                                
                 <SweetAlert
                     show={this.state.rejectAlert}
-                    title="Damn! This trade has been rejected by a member of the loop"
-                    text="Do you want to add this trade again?"
+                    type="error"
+                    title="This trade has been rejected by a member of the loop"
+                    text="Would you like to add the trade again?"
                     showCancelButton
+                    cancelButtonText="Dismiss Card"
+                    confirmButtonText="Create Trade"
                     onConfirm={() => {
                       console.log('confirm');
                       this.setState({ rejectAlert: false });
@@ -191,6 +203,24 @@ class Dashboard extends Component{
                     onOutsideClick={() => this.setState({ rejectAlert: false })}
                 />
                 
+                <SweetAlert
+                    show={this.state.waitAlert}
+                    type="info"
+                    title="We're waiting for other members of the loop to confirm the trade"
+                    text="You will be emailed trade details soon"
+                    confirmButtonText="Okay"
+                    onConfirm={() => {
+                      console.log('confirm');
+                      this.setState({ waitAlert: false });
+                    }}
+                    onCancel={() => {
+                      console.log('cancel');
+                      this.setState({ waitAlert: false });
+                    }}
+                    onEscapeKey={() => this.setState({ waitAlert: false })}
+                    onOutsideClick={() => this.setState({ waitAlert: false })}
+                />
+                
                 <div className="cardContainer">
                      <CardContainer 
                          cards={this.props.user.trades} 
@@ -201,6 +231,7 @@ class Dashboard extends Component{
                          selectCard={this.selectCard}
                          approveAlert={this.openApproveAlert}
                          rejectAlert={this.openRejectAlert}
+                         waitAlert={this.openWaitAlert}
                     />
                 </div>
             </div>

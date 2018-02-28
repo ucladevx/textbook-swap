@@ -298,7 +298,6 @@ class EditTrade extends Component{
                                 </div>
                             </div>
                             <div className="transitionButtonRow">
-                                {/*NEED TO SAVE PREVIOUS STATE TO ENABLE CANCEL...*/}
                                 <button className="formPrev" onClick={()=>this.cancelTrade()}>CANCEL</button>
                                 {
                                     this.state.want != null &&

@@ -10,13 +10,9 @@
 
     .ciImage{
         object-fit: contain;
-        max-height: 10vw;
+/*        max-height: 10vw;*/
+        height: 16vh;
     }
-
-    .ciText{
-        padding-top: 5px;
-        color: white;
-        }
 }
 
 @media only screen and (max-width : 768px) {
@@ -31,11 +27,17 @@
 
     .ciImage{
         object-fit: contain;
-        max-height: 15vh;
+        max-height: 13vh;
     }
+}
 
-    .ciText{
-        padding-top: 5px;
-        color: white;
-        }
+.ciText{
+    margin-top: 5px;
+    font-size: 0.8em;
+    color: white;
+    text-transform: uppercase;
+    word-wrap: break-word;
+    overflow: hidden;
+    height: 2.8em;
+    line-height: 1.4em;
 }

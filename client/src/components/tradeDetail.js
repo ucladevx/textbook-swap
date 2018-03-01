@@ -16,12 +16,11 @@ const ROOT = 'http://localhost:3000'
 axios.defaults.withCredentials = true;
 
 class TradeDetail extends Component {
-    
+
     constructor(props) {
         super(props);
         this.state = {
             page: 0,
-            trade: null,
             acceptAlert: false,
             rejectAlert: false
         }
@@ -29,7 +28,7 @@ class TradeDetail extends Component {
         this.getTrade = this.getTrade.bind(this)
         this.getTrade()
     }
-    
+
     getTrade(){
         var owned_book = this.props.bookHave.book_id
         axios.get(ROOT+'/api/found_trades/get_trade_by_book_owned', {
@@ -38,45 +37,46 @@ class TradeDetail extends Component {
             }
         })
         .then((res) => {
-            console.log(res)
-            if (res.status === 0){
+            console.log(res.data)
+            if (res.data.status === 0){
                 this.setState({
                     trade: res.data.data[0]
                 })
             }
         })
     }
-    
+
     acceptTrade(){
+        console.log("ID to Accept:", this.state.trade.id);
         var trade = this.state.trade
         if (!trade) return
-        
+
         axios.post(ROOT+'/api/found_trades/update_status_accepted', {
             trade_id: trade.id,
-            owned_book: trade.book_have, 
-            target_user: trade.target_id, 
+            owned_book: trade.book_have,
+            target_user: trade.target_id,
             wanted_book: trade.book_want
         })
         .then((res) => {
-            window.location.reload();
+            console.log(res.data);
         })
     }
-    
+
     rejectTrade(){
         var trade = this.state.trade
         if (!trade) return
 
         axios.post(ROOT+'/api/found_trades/update_status_rejected', {
             trade_id: trade.id,
-            owned_book: trade.book_have, 
-            target_user: trade.target_id, 
+            owned_book: trade.book_have,
+            target_user: trade.target_id,
             wanted_book: trade.book_want
         })
         .then((res) => {
             window.location.reload();
         })
     }
-    
+
     generateDetail(){
         var page = this.state.page
         if (page === 0){
@@ -102,7 +102,7 @@ class TradeDetail extends Component {
                             title="Are you sure you want to accept the trade?"
                             text="You will be emailed trade details once all members of the loop have confirmed!"
                             cancelButtonText="Cancel"
-                            confirmButtonText="Accept Trade"
+                            confirmButtonText="Confirm"
                             showCancelButton
                             onConfirm={() => {
                               console.log('confirm');
@@ -122,7 +122,7 @@ class TradeDetail extends Component {
                             type="warning"
                             showCancelButton
                             cancelButtonText="Cancel"
-                            confirmButtonText="Reject Trade"
+                            confirmButtonText="Confirm"
                             confirmButtonColor="#DD6B55"
                             onConfirm={() => {
                               console.log('confirm');
@@ -146,7 +146,7 @@ class TradeDetail extends Component {
                         <h3>Are you sure you want to reject the trade?</h3>
                     </div>
                     <div className="tdButtonRow">
-                        <button onClick={()=>this.setState({page: 0})} 
+                        <button onClick={()=>this.setState({page: 0})}
                             className="rejectButton">No... Take me back</button>
                         <button className="acceptButton">Yes</button>
                     </div>
@@ -168,7 +168,7 @@ class TradeDetail extends Component {
             )
         }
     }
-    
+
     render() {
         return (
             <div className="tdContainer">

@@ -285,6 +285,7 @@ class Form extends Component{
                                     onChange={this.processWant}
                                     multi={true}
                                     initState={this.state.want}
+                                    selected_offered_book={this.state.offer}
                                 />
 
                                 <div className="searchResults">

@@ -14,21 +14,21 @@ class CardContainer extends Component {
         this.mapStatusToColor = this.mapStatusToColor.bind(this);
         this.mapFilterToColorToColor = this.mapFilterToColor.bind(this);
     }
-    
+
     generateList(){
         var cards = this.props.cards;
         var filter = this.props.filter;
         if (!cards){
             return (<div></div>)
         }
-        
+
         console.log("Cards", cards);
 
         if (filter !== "ALL"){
                 cards = cards.filter(card => this.mapStatusToColor(card.status) === this.mapFilterToColor(filter));
                 console.log("After filter", filter, cards)
         }
-        
+
         return cards.map((card, key) => {
             if (card.status === 'N'){
                 return (
@@ -41,7 +41,7 @@ class CardContainer extends Component {
                     ></CardPendingTrade>
                 )
             }
-            
+
             if (card.status === 'A'){
                 return (
                     <CardClosedTrade
@@ -96,7 +96,7 @@ class CardContainer extends Component {
         })
     }
     // TODO: Separate W and P
-    
+
     mapStatusToColor(status){
         if (status === 'A')
             return "green";
@@ -107,7 +107,7 @@ class CardContainer extends Component {
         if (status === 'N')
             return "yellow";
     }
-    
+
     mapFilterToColor(status){
         if (status === 'REQUESTED')
             return "yellow";
@@ -115,7 +115,7 @@ class CardContainer extends Component {
             return "red";
         if (status === 'MATCHED')
             return "blue";
-        if (status === 'ACCEPTED')
+        if (status === 'COMPLETED')
             return "green";
     }
 

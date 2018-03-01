@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import Plus from '../new_images/plus.png'
 import Loop from '../new_images/loop.png'
 import Tick from '../new_images/tick.png'
 import HalfLoop from '../new_images/halfLoop.png'
@@ -9,7 +8,7 @@ import '../styles/cardPendingTrade.css'
 import CardImageView from '../microcomponents/cardImageView'
 
 var colorMap = {
-    yellow: {
+    N: {
         title: "#F7C53C",
         subtitle: "#FEF5CD",
         bottom: "#E2AA0F"
@@ -19,49 +18,15 @@ var colorMap = {
 class CardPendingTrade extends Component {
     constructor(props) {
         super(props);
-//        this.printMessage = this.printMessage.bind(this)
-//        this.renderCenter = this.renderCenter.bind(this)
         this.onClickHandler = this.onClickHandler.bind(this)
     }
     
-    printMessage(){
-        var type = this.props.color
-        if (type === "blue"){
-            return "NEW TRADE MATCH for "
-        }
-        else if (type === "green"){
-            return "COMPLETED trade for "
-        }
-        else if (type === "red"){
-            return "REJECTED trade for "
-        }
-        else return "PENDING MATCH for "
-    }
-    
-    renderCenter(){
-        var type = this.props.color
-        if (type === "blue" || type === "red"){
-            return (
-                <img className="centerImage" src={Loop}></img>
-            )
-        }
-        else if (type === "green") {
-            return (
-                <img className="centerImage" src={Tick}></img>
-            )
-        }
-        else if (type === "yellow") {
-            return (
-                <img className="centerHalfLoop" src={HalfLoop}></img>
-            )
-        }
-    }
-    
     onClickHandler(){
-        return
+        console.log("Clicked Edit...")
+
         this.props.selectCard({
-            bookHave: this.state.bookHave,
-            bookWant: this.state.bookWant
+            bookHave: this.props.bookHave,
+            booksWant: this.props.booksWant
         })
         
         this.props.onClick()

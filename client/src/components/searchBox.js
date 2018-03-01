@@ -14,13 +14,16 @@ class searchBox extends Component{
         this.state = {
             backspaceRemoves: true,
 			multi: this.props.multi,
-            value: this.props.initState
+            value: this.props.initState,
+            selected_offered_book: this.props.selected_offered_book,  // book that owner selected as "offered" book
+            owned_books: []  // books owned by the user
         }
         this.onChange = this.onChange.bind(this)
         this.gotoUser = this.gotoUser.bind(this)
         this.toggleBackspaceRemoves = this.toggleBackspaceRemoves.bind(this)
         this.toggleCreatable = this.toggleCreatable.bind(this)
         this.getBooks = this.getBooks.bind(this)
+        this.filterOptions = this.filterOptions.bind(this)
     }
 
     // Take this from parent, so that state is saved in the form itself
@@ -41,60 +44,55 @@ class searchBox extends Component{
             .then((json) => {
                 axios.get(ROOT+'/api/owned_books/get_owned_cards?user_id=user')
                     .then((userData) => {
-                        console.log(userData.data)
+                        console.log("user's owned books: ", userData.data.data)
+                        // fetch the owned books for the user
+                        this.setState({
+                            owned_books: userData.data.data,
+                        });
                     })
                 return { options: json.data };
             })
         }
     }
 
-    // 
-
-/*
-    stuff(e){
-		var input = e
-        if (input.length >= 3){
-            axios.get(ROOT+'/api/search/search_textbooks?search_input='+input)
-                .then((res) => {
-                    console.log(searchResults)
-                    var ownedBooksSet = new Set()
-                    var displayList = []
-                    if (res.data.status == 0){
-                        var searchResults = res.data.data
-                        console.log(searchResults)
-                        //TODO: Clear the search result UI state
-                        console.log("Making user request")
-                        axios.get(ROOT+'/api/owned_books/get_owned_cards?user_id=user')
-                            .then((userData) => {
-
-                                var userBooksInfo = userData.data;
-                                console.log(userBooksInfo);
-							    for (var j = 0; j < userBooksInfo.length; j++) {
-								    ownedBooksSet.add(userBooksInfo[j]["book_id"]);
-								    console.log(userBooksInfo[j]["book_id"]);
-							     }
-
-                                for (var i = 0; i < searchResults.length; i++){
-                                    var book_id = searchResults[i]["book_id"];
-								    if (!ownedBooksSet.has(book_id)) {
-                                        var title = searchResults[i]["title"];
-									    var author = searchResults[i]["author"];
-									    var isbn = searchResults[i]["isbn"];
-									    var img_url = searchResults[i]["img_url"];
-                                        displayList.push({title, author, isbn, img_url})
-                                    }
-                                }
-                                this.setState({search: displayList})
-                            })
-                            .catch((e)=>console.log(e))
-                        this.setState({search: searchResults})
-                        return (searchResults)
-                    }
-                })
-                .catch((e)=>console.log(e))
+    // Do no filtering, just return all options (except already selected ones)
+    filterOptions(options, filter, currentValues) {
+        // get list of book_ids that cannot be valid options
+        let invalid_book_ids = []; 
+        // book_ids that have already been selected as options
+        if (currentValues != null) {
+            for (let i = 0; i < currentValues.length; i++) {
+                invalid_book_ids.push(currentValues[i].book_id);
+            }
         }
-	}
-    */
+        // user's owned books cannot be options
+        for (let j = 0; j < this.state.owned_books.length; j++) {
+            invalid_book_ids.push(this.state.owned_books[j].book_id);
+        }
+        // the offered book that the user selected cannot be an option (for a new trade)
+        if (this.state.selected_offered_book != null) {
+            console.log("selected offered book", this.state.selected_offered_book);
+            invalid_book_ids.push(this.state.selected_offered_book.book_id);
+        }
+
+        console.log("invalid book ids", invalid_book_ids);
+
+        let k = 0; 
+        while (k < options.length) {
+            let haveDeleted = false;
+            for (let l = 0; l < invalid_book_ids.length; l++) {
+                if (options[k] != null && options[k].book_id === invalid_book_ids[l]) {  
+                    // delete selected options
+                    options.splice(k, 1);
+                    haveDeleted = true;
+                    break;
+                }
+            }
+            // only increment k if we haven't deleted
+            if (!haveDeleted) { k++; }
+        } 
+        return options;
+    }
 
     gotoUser (value, event) {
 		console.log("Selected", value)
@@ -123,12 +121,14 @@ class searchBox extends Component{
                     multi={this.state.multi}
                     value={this.state.value}
                     onChange={this.onChange}
-                    onValueClick={this.gotoUser} // TODO: this makes the value a link in the search bar, so remove later?
+                    // onValueClick={this.gotoUser} // TODO: this makes the value a link in the search bar, so remove later?
                     valueKey="book_id"
                     labelKey="title"
                     loadOptions={this.getBooks}
                     backspaceRemoves={this.state.backspaceRemoves}
                     placeholder="Search by title, professor or class"
+                    cache={false}
+                    filterOptions={this.filterOptions}
             />
 			</div>
 		);

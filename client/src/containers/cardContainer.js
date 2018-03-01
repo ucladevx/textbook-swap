@@ -23,7 +23,7 @@ class CardContainer extends Component {
         }
         
         console.log("Cards", cards);
-        
+
         if (filter !== "ALL"){
                 cards = cards.filter(card => this.mapStatusToColor(card.status) === this.mapFilterToColor(filter));
                 console.log("After filter", filter, cards)
@@ -33,25 +33,66 @@ class CardContainer extends Component {
             if (card.status === 'N'){
                 return (
                     <CardPendingTrade
-                        color="yellow"
+                        color={card.status}
                         bookHave={card.book_have}
                         booksWant={card.book_want}
-                        onClick={this.props.openDetailModal}
+                        onClick={this.props.openEditModal}
                         selectCard={this.props.selectCard}
                     ></CardPendingTrade>
                 )
             }
             
-            return (
-                <CardClosedTrade 
-                    color={this.mapStatusToColor(card.status)}
+            if (card.status === 'A'){
+                return (
+                    <CardClosedTrade
+                    color={card.status}
                     bookHave={card.book_have}
                     bookWant={card.book_want[0]}
-                    onClick={this.props.openDetailModal}
+                    onClick={this.props.approveAlert}
                     selectCard={this.props.selectCard}
                     >
                 </CardClosedTrade>
-            )
+                )
+            }
+
+            if (card.status === 'R'){
+                return (
+                    <CardClosedTrade
+                    color={card.status}
+                    bookHave={card.book_have}
+                    bookWant={card.book_want[0]}
+                    onClick={this.props.rejectAlert}
+                    selectCard={this.props.selectCard}
+                    >
+                </CardClosedTrade>
+                )
+            }
+
+            if (card.status === 'W') {
+                return (
+                    <CardClosedTrade
+                        color={card.status}
+                        bookHave={card.book_have}
+                        bookWant={card.book_want[0]}
+                        onClick={this.props.waitAlert}
+                        selectCard={this.props.selectCard}
+                        >
+                    </CardClosedTrade>
+                )
+            }
+
+            if (card.status === 'P') {
+                return (
+                    <CardClosedTrade
+                        color={card.status}
+                        bookHave={card.book_have}
+                        bookWant={card.book_want[0]}
+                        onClick={this.props.openDetailModal}
+                        selectCard={this.props.selectCard}
+                        >
+                    </CardClosedTrade>
+                )
+            }
         })
     }
     // TODO: Separate W and P

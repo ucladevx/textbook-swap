@@ -21,8 +21,8 @@ class Summary extends Component{
                         <p>Title: {book.title}</p>
                         <p>Author: {book.author}</p>
                         <p>ISBN: {book.isbn}</p>
-                        <p>Class: <span style={{color:'rgb(58, 193, 215)'}}>{book.details.classes}</span> </p>
-                        <p>Prof: <span style={{color:'rgb(58, 193, 215)'}}>{book.details.profs}</span> </p>
+                        <p>Class: <span style={{color:'rgb(58, 193, 215)'}}>{book.details && book.details.classes}</span> </p>
+                        <p>Prof: <span style={{color:'rgb(58, 193, 215)'}}>{book.details && book.details.profs}</span> </p>
                     </div>
                 </div>
                 )
@@ -40,8 +40,8 @@ class Summary extends Component{
                         <p>Title: {book.title}</p>
                         <p>Author: {book.author}</p>
                         <p>ISBN: {book.isbn}</p>
-                        <p>Class: <span style={{color:'rgb(58, 193, 215)'}}>{book.details.classes}</span> </p>
-                        <p>Prof: <span style={{color:'rgb(58, 193, 215)'}}>{book.details.profs}</span> </p>
+                        {book.details && <p>Class: <span style={{color:'rgb(58, 193, 215)'}}>{book.details.classes}</span> </p>}
+                        {book.details && <p>Prof: <span style={{color:'rgb(58, 193, 215)'}}>{book.details && book.details.profs}</span> </p>}
                     </div>
                 </div>
                 )

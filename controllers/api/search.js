@@ -33,6 +33,8 @@ exports.search_textbooks = function(req, res) {
 	                logger.error("Error querying database", error_status);
 	            }
 
+                logger.log("found textbook search data: ", books_data);
+
 	            // return the info for all the books
 	            res.json({status: error_status, data: books_data});
             });

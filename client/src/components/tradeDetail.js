@@ -1,7 +1,12 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
+import SweetAlert from 'sweetalert-react';
+
 import CardDetailView from '../microcomponents/cardDetailView'
+
 import '../styles/tradeDetail.css'
+import '../styles/vendors/sweetalert.css'
+
 import Loop from '../new_images/loop_black.png'
 import Tick from '../new_images/tick_black.png'
 import HalfLoop from '../new_images/halfLoop_black.png'
@@ -14,15 +19,18 @@ class TradeDetail extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            type: "blue",
             page: 0,
-            trade: null
+            trade: null,
+            acceptAlert: false,
+            rejectAlert: false
         }
         this.generateDetail = this.generateDetail.bind(this)
         this.getTrade = this.getTrade.bind(this)
         this.getTrade()
     }
     
+    // THIS IS INCOMPLETE....
+
     getTrade(){
         var owned_book = this.props.bookHave.book_id
         axios.get(ROOT+'/api/found_trades/get_trade_by_book_owned', {
@@ -30,6 +38,7 @@ class TradeDetail extends Component {
         })
         .then((res) => {
             if (res.status === 0){
+                console.log("Got Trade", res.data)
                 this.setState({
                     trade: res.data[0]
                 })
@@ -84,8 +93,39 @@ class TradeDetail extends Component {
                         </div>
                     </div>
                     <div className="tdButtonRow">
-                        <button onClick={()=>this.setState({page: 1})} className="rejectButton">REJECT</button>
-                        <button onClick={()=>this.setState({page: 2})} className="acceptButton">ACCEPT</button>
+                        <button onClick={()=>this.setState({rejectAlert: true})} className="rejectButton">REJECT</button>
+                        <button onClick={()=>this.setState({acceptAlert: true})} className="acceptButton">ACCEPT</button>
+                        <SweetAlert
+                            show={this.state.acceptAlert}
+                            title="Sure you want to accept the trade?"
+                            text="You will be emailed trade details once all members of the loop have confirmed!"
+                            showCancelButton
+                            onConfirm={() => {
+                              console.log('confirm');
+                              this.acceptTrade()
+                            }}
+                            onCancel={() => {
+                              console.log('cancel');
+                              this.setState({ acceptAlert: false });
+                            }}
+                            onEscapeKey={() => this.setState({ acceptAlert: false })}
+                            onOutsideClick={() => this.setState({ acceptAlert: false })}
+                        />
+                        <SweetAlert
+                            show={this.state.rejectAlert}
+                            title="Sure you want to reject the trade?"
+                            showCancelButton
+                            onConfirm={() => {
+                              console.log('confirm');
+                              this.rejectTrade()
+                            }}
+                            onCancel={() => {
+                              console.log('cancel');
+                              this.setState({ rejectAlert: false });
+                            }}
+                            onEscapeKey={() => this.setState({ rejectAlert: false })}
+                            onOutsideClick={() => this.setState({ rejectAlert: false })}
+                        />
                     </div>
                 </div>
             )
@@ -108,7 +148,7 @@ class TradeDetail extends Component {
             return (
                 <div className="tdDetailContents">
                     <div className="tdDetailTextContainer">
-                        <h3>Are you sure you want accept the trade?</h3>
+                        <h3>Are you sure you want to accept the trade?</h3>
                         <h3>You will be emailed the details of the other members in your trade loop on confirmation.</h3>
                     </div>
                     <div className="tdButtonRow">

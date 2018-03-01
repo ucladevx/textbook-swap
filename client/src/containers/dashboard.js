@@ -4,12 +4,18 @@ import {connect} from 'react-redux'
 import NavBar from '../components/navbar'
 import CardContainer from '../containers/cardContainer'
 import '../styles/dashboard.css'
+import '../styles/vendors/sweetalert.css'
 import {userLogin} from '../actions';
+
+import Loading from '../new_images/loading.gif'
+import { ClipLoader } from 'react-spinners';
 
 import Form from '../components/form'
 import Modal from 'react-modal';
 import TradeDetail from '../components/tradeDetail'
 import BookshelfImage from '../img/Bookshelf_Dashboard.svg'
+import EditTrade from '../components/editTrade'
+import SweetAlert from 'sweetalert-react';
 
 const customStyles = {
   overlay: {
@@ -38,38 +44,56 @@ class Dashboard extends Component{
         this.state = {
           formModalIsOpen: false,
           detailModalIsOpen: false,
+          editModalIsOpen: false,
+          approveAlert: false,
           selectedCard: null,
+          approveAlert: false,
+          rejectAlert: false,
           filter: "ALL"
         };
 
         this.openFormModal = this.openFormModal.bind(this);
         this.openDetailModal = this.openDetailModal.bind(this);
-        this.afterOpenFormModal = this.afterOpenFormModal.bind(this);
-        this.afterOpenDetailModal = this.afterOpenDetailModal.bind(this);
+        this.openEditModal = this.openEditModal.bind(this);
         this.closeFormModal = this.closeFormModal.bind(this);
         this.closeDetailModal = this.closeDetailModal.bind(this);
+        this.closeEditModal = this.closeEditModal.bind(this);
         this.setFilter = this.setFilter.bind(this);
         this.selectCard = this.selectCard.bind(this);
+        this.openApproveAlert = this.openApproveAlert.bind(this);
+        this.openRejectAlert = this.openRejectAlert.bind(this);
+        this.openWaitAlert = this.openWaitAlert.bind(this);
     }
 
     openFormModal() {
         this.setState({formModalIsOpen: true});
     }
 
-    afterOpenFormModal() {
-    // references are now sync'd and can be accessed.
+    openApproveAlert() {
+        this.setState({approveAlert: true});
+    }
+
+    openWaitAlert() {
+        this.setState({waitAlert: true});
+    }
+
+    openRejectAlert() {
+        this.setState({rejectAlert: true});
+    }
+
+     openEditModal() {
+        this.setState({editModalIsOpen: true});
     }
 
     closeFormModal() {
         this.setState({formModalIsOpen: false});
     }
+    closeEditModal() {
+        this.setState({editModalIsOpen: false});
+    }
 
     openDetailModal() {
         this.setState({detailModalIsOpen: true});
-    }
-
-    afterOpenDetailModal() {
-    // references are now sync'd and can be accessed.
     }
 
     closeDetailModal() {
@@ -89,8 +113,12 @@ class Dashboard extends Component{
     render(){
         if (this.props.user == null){
             return (
-            <div className="dashboardContainer">
-                Loading...
+            <div className="loadingContainer">
+                <ClipLoader
+                    color={'#52b9d1'}
+                    loading={true}
+                    size={60}
+                />
             </div>
             )
         }
@@ -113,7 +141,6 @@ class Dashboard extends Component{
                 </div>
                 <Modal
                   isOpen={this.state.formModalIsOpen}
-                  onAfterOpen={this.afterOpenFormModal}
                   onRequestClose={this.closeFormModal}
                   style={customStyles}
                 >
@@ -122,23 +149,97 @@ class Dashboard extends Component{
 
                 <Modal
                   isOpen={this.state.detailModalIsOpen}
-                  onAfterOpen={this.afterOpenDetailModal}
                   onRequestClose={this.closeDetailModal}
                   style={customStyles}
                 >
                     <TradeDetail
                         bookHave={this.state.selectedCard ? this.state.selectedCard.bookHave : null}
                         bookWant={this.state.selectedCard ? this.state.selectedCard.bookWant : null}
-                        onComplete={this.closeFormModal}></TradeDetail>
+                        onComplete={this.closeFormModal}>
+                     </TradeDetail>
                 </Modal>
+
+                <Modal
+                  isOpen={this.state.editModalIsOpen}
+                  onRequestClose={this.closeEditModal}
+                  style={customStyles}
+                >
+                    <EditTrade
+                        offer={this.state.selectedCard ? this.state.selectedCard.bookHave : null}
+                        want={this.state.selectedCard ? this.state.selectedCard.booksWant : null}
+                        onComplete={this.closeEditModal}>
+                    </EditTrade>
+                </Modal>
+
+                <SweetAlert
+                    show={this.state.approveAlert}
+                    type="success"
+                    title="This trade has been completed"
+                    text="You have been emailed the details of your trade loop"
+                    showCancelButton
+                    cancelButtonText="Back"
+                    confirmButtonText="Dismiss Card"
+                    onConfirm={() => {
+                      console.log('confirm');
+                      this.setState({ approveAlert: false });
+                    }}
+                    onCancel={() => {
+                      console.log('cancel');
+                      this.setState({ approveAlert: false });
+                    }}
+                    onEscapeKey={() => this.setState({ approveAlert: false })}
+                    onOutsideClick={() => this.setState({ approveAlert: false })}
+                />
+
+                <SweetAlert
+                    show={this.state.rejectAlert}
+                    type="error"
+                    title="This trade has been rejected by a member of the loop"
+                    text="Would you like to add the trade again?"
+                    showCancelButton
+                    cancelButtonText="Dismiss Card"
+                    confirmButtonText="Create Trade"
+                    onConfirm={() => {
+                      console.log('confirm');
+                      this.setState({ rejectAlert: false });
+                    }}
+                    onCancel={() => {
+                      console.log('cancel');
+                      this.setState({ rejectAlert: false });
+                    }}
+                    onEscapeKey={() => this.setState({ rejectAlert: false })}
+                    onOutsideClick={() => this.setState({ rejectAlert: false })}
+                />
+
+                <SweetAlert
+                    show={this.state.waitAlert}
+                    type="info"
+                    title="We're waiting for other members of the loop to confirm the trade"
+                    text="You will be emailed trade details soon"
+                    confirmButtonText="Okay"
+                    onConfirm={() => {
+                      console.log('confirm');
+                      this.setState({ waitAlert: false });
+                    }}
+                    onCancel={() => {
+                      console.log('cancel');
+                      this.setState({ waitAlert: false });
+                    }}
+                    onEscapeKey={() => this.setState({ waitAlert: false })}
+                    onOutsideClick={() => this.setState({ waitAlert: false })}
+                />
 
                 <div className="cardContainer">
                      <CardContainer
                          cards={this.props.user.trades}
                          openFormModal={this.openFormModal}
                          openDetailModal={this.openDetailModal}
+                         openEditModal={this.openEditModal}
                          filter={this.state.filter}
                          selectCard={this.selectCard}
+                         approveAlert={this.openApproveAlert}
+                         rejectAlert={this.openRejectAlert}
+                         waitAlert={this.openWaitAlert}
                     />
                 </div>
             </div>

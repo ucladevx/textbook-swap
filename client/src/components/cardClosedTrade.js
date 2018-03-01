@@ -4,32 +4,39 @@ import Plus from '../new_images/plus.png'
 import Loop from '../new_images/loop.png'
 import Tick from '../new_images/tick.png'
 import HalfLoop from '../new_images/halfLoop.png'
+import Clock from '../new_images/waiting.png'
+import Cross from '../new_images/cross.png'
 import '../styles/cardClosedTrade.css'
 
 import CardImageView from '../microcomponents/cardImageView'
 
 var colorMap = {
-    blue: {
+    P: {
         title: "#52B9D1",
         subtitle: "#C2E4E7",
         bottom: "#3E99A8"
     },
-    red: {
+    W: {
+        title: "#52B9D1",
+        subtitle: "#C2E4E7",
+        bottom: "#3E99A8"
+    },
+    R: {
         title: "#E88154",
         subtitle: "#E69F81",
         bottom: "#C45F45"
     },
-    yellow: {
+    N: {
         title: "#F8CC45",
         subtitle: "#FEF5CD",
         bottom: "#E2AA0F"
     },
-    green: {
+    A: {
         title: "#5ECE54",
         subtitle: "#A7EFA0",
         bottom: "#4BB242"
     }
-}
+};
 
 class CardClosedTrade extends Component {
     constructor(props) {
@@ -46,42 +53,51 @@ class CardClosedTrade extends Component {
     
     printMessage(){
         var type = this.props.color;
-        if (type === "blue"){
+        if (type === "P"){
             return "NEW TRADE MATCH for "
         }
-        else if (type === "green"){
+        else if (type === 'A'){
             return "COMPLETED trade for "
         }
-        else if (type === "red"){
+        else if (type === 'R'){
             return "REJECTED trade for "
+        }
+        else if (type === 'W') {
+            return "WAITING TO CONFIRM "
         }
         else return "PENDING MATCH for "
     }
     
     renderCenter(){
         var type = this.props.color;
-        if (type === "blue" || type === "red"){
+        if (type === 'P'){
             return (
                 <img className="centerImage" src={Loop}></img>
             )
         }
-        else if (type === "green") {
+        else if (type === 'A') {
             return (
                 <img className="centerImage" src={Tick}></img>
             )
         }
-        else if (type === "yellow") {
+        else if (type === 'R') {
             return (
-                <img className="centerHalfLoop" src={HalfLoop}></img>
+                <img className="centerCross" src={Cross}></img>
             )
         }
+       else if (type === 'W') {
+           return (
+                <img className="centerImage" src={Clock}></img>
+            )
+       }
     }
     
     onClickHandler(){
         this.props.selectCard({
             bookHave: this.state.bookHave,
-            bookWant: this.state.bookWant
-        })
+            bookWant: this.state.bookWant,
+            color: this.props.color
+        });
         
         this.props.onClick()
     }
@@ -89,6 +105,7 @@ class CardClosedTrade extends Component {
     render()
     {
         var color = this.state.color;
+        {console.log("Color", color, colorMap)}
         return (
             <div className="ctCard" onClick={()=>this.onClickHandler()} style={{backgroundColor: colorMap[color].title}}>
                 <div className="ctTop">

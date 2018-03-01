@@ -12,22 +12,22 @@ import CardImageView from '../microcomponents/cardImageView'
 
 var colorMap = {
     P: {
-        title: "#47AFCB",
+        title: "#52B9D1",
         subtitle: "#C2E4E7",
         bottom: "#3E99A8"
     },
     W: {
-        title: "#47AFCB",
+        title: "#52B9D1",
         subtitle: "#C2E4E7",
         bottom: "#3E99A8"
     },
     R: {
-        title: "#E37449",
+        title: "#E88154",
         subtitle: "#E69F81",
         bottom: "#C45F45"
     },
     N: {
-        title: "#F7C53C",
+        title: "#F8CC45",
         subtitle: "#FEF5CD",
         bottom: "#E2AA0F"
     },
@@ -36,7 +36,7 @@ var colorMap = {
         subtitle: "#A7EFA0",
         bottom: "#4BB242"
     }
-}
+};
 
 class CardClosedTrade extends Component {
     constructor(props) {
@@ -45,14 +45,15 @@ class CardClosedTrade extends Component {
             color: this.props.color ? this.props.color : "blue",
             bookHave: this.props.bookHave ? this.props.bookHave : "History of India",
             bookWant: this.props.bookWant ? this.props.bookWant : "History of India"
-        }
-        this.printMessage = this.printMessage.bind(this)
-        this.renderCenter = this.renderCenter.bind(this)
+        };
+        this.printMessage = this.printMessage.bind(this);
+        this.renderCenter = this.renderCenter.bind(this);
+        this.onClickHandler = this.onClickHandler.bind(this);
     }
     
     printMessage(){
-        var type = this.props.color
-        if (type === 'P'){
+        var type = this.props.color;
+        if (type === "P"){
             return "NEW TRADE MATCH for "
         }
         else if (type === 'A'){
@@ -67,8 +68,8 @@ class CardClosedTrade extends Component {
         else return "PENDING MATCH for "
     }
     
-   renderCenter(){
-        var type = this.props.color
+    renderCenter(){
+        var type = this.props.color;
         if (type === 'P'){
             return (
                 <img className="centerImage" src={Loop}></img>
@@ -96,14 +97,14 @@ class CardClosedTrade extends Component {
             bookHave: this.state.bookHave,
             bookWant: this.state.bookWant,
             color: this.props.color
-        })
+        });
         
         this.props.onClick()
     }
 
     render()
     {
-        var color = this.state.color
+        var color = this.state.color;
         {console.log("Color", color, colorMap)}
         return (
             <div className="ctCard" onClick={()=>this.onClickHandler()} style={{backgroundColor: colorMap[color].title}}>

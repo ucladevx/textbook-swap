@@ -13,6 +13,7 @@ import { ClipLoader } from 'react-spinners';
 import Form from '../components/form'
 import Modal from 'react-modal';
 import TradeDetail from '../components/tradeDetail'
+import BookshelfImage from '../img/Bookshelf_Dashboard.svg'
 import EditTrade from '../components/editTrade'
 import SweetAlert from 'sweetalert-react';
 
@@ -73,34 +74,34 @@ class Dashboard extends Component{
     openFormModal() {
         this.setState({formModalIsOpen: true});
     }
-    
+
     openApproveAlert() {
         this.setState({approveAlert: true});
     }
-    
+
     openWaitAlert() {
         this.setState({waitAlert: true});
     }
-    
+
     openRejectAlert() {
         this.setState({rejectAlert: true});
     }
-    
+
      openEditModal() {
         this.setState({editModalIsOpen: true});
     }
-    
+
     closeFormModal() {
         this.setState({formModalIsOpen: false});
-    }    
+    }
     closeEditModal() {
         this.setState({editModalIsOpen: false});
     }
-    
+
     openDetailModal() {
         this.setState({detailModalIsOpen: true});
     }
-    
+
     closeDetailModal() {
         this.setState({detailModalIsOpen: false});
     }
@@ -148,8 +149,8 @@ class Dashboard extends Component{
             return (
             <div className="loadingContainer">
                 <ClipLoader
-                    color={'#52b9d1'} 
-                    loading={true} 
+                    color={'#52b9d1'}
+                    loading={true}
                     size={60}
                 />
             </div>
@@ -158,11 +159,19 @@ class Dashboard extends Component{
         return (
             <div className="dashboardContainer">
                 <div className="topBar">
-                    <p>Hi {this.props.user.name}, this is your dashboard</p>
-                    <button onClick={()=>this.setFilter("ALL")}>ALL</button>
-                    <button onClick={()=>this.setFilter("REQUESTED")}>REQUESTED</button>
-                    <button onClick={()=>this.setFilter("MATCHED")}>MATCHED</button>
-                    <button onClick={()=>this.setFilter("REJECTED")}>REJECTED</button>
+                    <div className="col-md-3">
+                        <h4 className="welcome_text">Hi {this.props.user.name}, welcome to your bookshelf!</h4>
+                    </div>
+                    <div className="col-md-6 filter_button_container">
+                        <button className={"filter_button all_filter " + (this.state.filter === "ALL" ? "active_filter" : "")} onClick={()=>this.setFilter("ALL")}>ALL</button>
+                        <button className={"filter_button requested_filter " + (this.state.filter === "REQUESTED" ? "active_filter" : "")} onClick={()=>this.setFilter("REQUESTED")}>REQUESTED</button>
+                        <button className={"filter_button matched_filter " + (this.state.filter === "MATCHED" ? "active_filter" : "")} onClick={()=>this.setFilter("MATCHED")}>MATCHED</button>
+                        <button className={"filter_button rejected_filter " + (this.state.filter === "REJECTED" ? "active_filter" : "")} onClick={()=>this.setFilter("REJECTED")}>REJECTED</button>
+                        <button className={"filter_button completed_filter " + (this.state.filter === "COMPLETED" ? "active_filter" : "")} onClick={()=>this.setFilter("COMPLETED")}>COMPLETED</button>
+                    </div>
+                    <div className="col-md-3">
+                        <img alt="LOOP" className="bookshelf_image" src={BookshelfImage}/>
+                    </div>
                 </div>
                 <Modal
                   isOpen={this.state.formModalIsOpen}
@@ -183,19 +192,19 @@ class Dashboard extends Component{
                         onComplete={this.closeFormModal}>
                      </TradeDetail>
                 </Modal>
-                
+
                 <Modal
                   isOpen={this.state.editModalIsOpen}
                   onRequestClose={this.closeEditModal}
                   style={customStyles}
                 >
-                    <EditTrade 
+                    <EditTrade
                         offer={this.state.selectedCard ? this.state.selectedCard.bookHave : null}
                         want={this.state.selectedCard ? this.state.selectedCard.booksWant : null}
                         onComplete={this.closeEditModal}>
                     </EditTrade>
                 </Modal>
-                
+
                 <SweetAlert
                     show={this.state.approveAlert}
                     type="success"
@@ -208,7 +217,7 @@ class Dashboard extends Component{
                     onEscapeKey={() => this.setState({ approveAlert: false })}
                     onOutsideClick={() => this.setState({ approveAlert: false })}
                 />
-                                
+
                 <SweetAlert
                     show={this.state.rejectAlert}
                     type="error"
@@ -228,7 +237,7 @@ class Dashboard extends Component{
                     onEscapeKey={() => this.setState({ rejectAlert: false })}
                     onOutsideClick={() => this.setState({ rejectAlert: false })}
                 />
-                
+
                 <SweetAlert
                     show={this.state.waitAlert}
                     type="info"
@@ -246,7 +255,7 @@ class Dashboard extends Component{
                     onEscapeKey={() => this.setState({ waitAlert: false })}
                     onOutsideClick={() => this.setState({ waitAlert: false })}
                 />
-                
+
                 <div className="cardContainer">
                      <CardContainer
                          cards={this.props.user.trades}

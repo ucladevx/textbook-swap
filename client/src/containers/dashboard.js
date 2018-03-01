@@ -16,6 +16,10 @@ import TradeDetail from '../components/tradeDetail'
 import EditTrade from '../components/editTrade'
 import SweetAlert from 'sweetalert-react';
 
+import axios from 'axios'
+const ROOT = 'http://localhost:3000'
+axios.defaults.withCredentials = true;
+
 const customStyles = {
   overlay: {
       backgroundColor: 'rgba(114, 114, 114, 0.75)'
@@ -62,6 +66,8 @@ class Dashboard extends Component{
         this.openApproveAlert = this.openApproveAlert.bind(this);
         this.openRejectAlert = this.openRejectAlert.bind(this);
         this.openWaitAlert = this.openWaitAlert.bind(this);
+        this.dismissReject = this.dismissReject.bind(this);
+        this.dismissAccept = this.dismissAccept.bind(this);
     }
 
     openFormModal() {
@@ -107,6 +113,34 @@ class Dashboard extends Component{
         this.setState({
             selectedCard: card
         })
+    }
+    
+    dismissReject(){
+        var ownedBook = this.state.selectedCard.bookHave.book_id
+        axios.post(ROOT+'/api/found_trades/dismiss_rejected_trade', {
+            ownedBook
+        })
+        .then((res) => {
+            if(res.data.status === 0){
+                console.log('successfully removed owned book from owned_books');
+            }
+            else if(res.data.status === 1)
+            {
+                console.log('db connection error for removing from owned_books');
+            }
+            else if(res.data.status === 2)
+            {
+                console.log('db query error for removing from found_trades');
+            }
+            else if(res.data.status === 3){
+                console.log('wanted book already removed from found_trades');
+            }
+            window.location.reload();
+        })
+    }
+    
+    dismissAccept(){
+        console.log("Dismiss Accepted Trade from DB...")
     }
 
     render(){
@@ -165,17 +199,10 @@ class Dashboard extends Component{
                 <SweetAlert
                     show={this.state.approveAlert}
                     type="success"
-                    title="This trade has been completed"
+                    title="This trade is complete!"
                     text="You have been emailed the details of your trade loop"
-                    showCancelButton
-                    cancelButtonText="Back"
-                    confirmButtonText="Dismiss Card"
+                    confirmButtonText="Okay"
                     onConfirm={() => {
-                      console.log('confirm');
-                      this.setState({ approveAlert: false });
-                    }}
-                    onCancel={() => {
-                      console.log('cancel');
                       this.setState({ approveAlert: false });
                     }}
                     onEscapeKey={() => this.setState({ approveAlert: false })}
@@ -186,16 +213,16 @@ class Dashboard extends Component{
                     show={this.state.rejectAlert}
                     type="error"
                     title="This trade has been rejected by a member of the loop"
-                    text="Would you like to add the trade again?"
+                    text="If you would still like to trade this book, please add it again."
                     showCancelButton
-                    cancelButtonText="Dismiss Card"
-                    confirmButtonText="Create Trade"
+                    cancelButtonText="Back"
+                    confirmButtonText="Dismiss Card"
                     onConfirm={() => {
-                      console.log('confirm');
+                      this.dismissReject()
+                      console.log('back');
                       this.setState({ rejectAlert: false });
                     }}
                     onCancel={() => {
-                      console.log('cancel');
                       this.setState({ rejectAlert: false });
                     }}
                     onEscapeKey={() => this.setState({ rejectAlert: false })}

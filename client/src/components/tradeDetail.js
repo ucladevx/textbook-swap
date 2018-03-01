@@ -16,6 +16,7 @@ const ROOT = 'http://localhost:3000'
 axios.defaults.withCredentials = true;
 
 class TradeDetail extends Component {
+    
     constructor(props) {
         super(props);
         this.state = {
@@ -29,18 +30,18 @@ class TradeDetail extends Component {
         this.getTrade()
     }
     
-    // THIS IS INCOMPLETE....
-
     getTrade(){
         var owned_book = this.props.bookHave.book_id
         axios.get(ROOT+'/api/found_trades/get_trade_by_book_owned', {
-            owned_book
+            params: {
+                owned_book
+            }
         })
         .then((res) => {
+            console.log(res)
             if (res.status === 0){
-                console.log("Got Trade", res.data)
                 this.setState({
-                    trade: res.data[0]
+                    trade: res.data.data[0]
                 })
             }
         })
@@ -97,8 +98,11 @@ class TradeDetail extends Component {
                         <button onClick={()=>this.setState({acceptAlert: true})} className="acceptButton">ACCEPT</button>
                         <SweetAlert
                             show={this.state.acceptAlert}
-                            title="Sure you want to accept the trade?"
+                            type="warning"
+                            title="Are you sure you want to accept the trade?"
                             text="You will be emailed trade details once all members of the loop have confirmed!"
+                            cancelButtonText="Cancel"
+                            confirmButtonText="Accept Trade"
                             showCancelButton
                             onConfirm={() => {
                               console.log('confirm');
@@ -113,8 +117,13 @@ class TradeDetail extends Component {
                         />
                         <SweetAlert
                             show={this.state.rejectAlert}
-                            title="Sure you want to reject the trade?"
+                            title="Are you sure you want to reject the trade?"
+                            text="If you still would like to trade this book, please add it again."
+                            type="warning"
                             showCancelButton
+                            cancelButtonText="Cancel"
+                            confirmButtonText="Reject Trade"
+                            confirmButtonColor="#DD6B55"
                             onConfirm={() => {
                               console.log('confirm');
                               this.rejectTrade()

@@ -9,6 +9,7 @@ import {userLogin} from '../actions';
 import Form from '../components/form'
 import Modal from 'react-modal';
 import TradeDetail from '../components/tradeDetail'
+import BookshelfImage from '../img/Bookshelf_Dashboard.svg'
 
 const customStyles = {
   overlay: {
@@ -96,13 +97,18 @@ class Dashboard extends Component{
         return (
             <div className="dashboardContainer">
                 <div className="topBar">
-                    <p>Hi {this.props.user.name}, this is your dashboard</p>
-                    <div className="filter_button_container">
+                    <div className="col-md-3">
+                        <h4 className="welcome_text">Hi {this.props.user.name}, welcome to your bookshelf!</h4>
+                    </div>
+                    <div className="col-md-6 filter_button_container">
                         <button className={"filter_button all_filter " + (this.state.filter === "ALL" ? "active_filter" : "")} onClick={()=>this.setFilter("ALL")}>ALL</button>
                         <button className={"filter_button requested_filter " + (this.state.filter === "REQUESTED" ? "active_filter" : "")} onClick={()=>this.setFilter("REQUESTED")}>REQUESTED</button>
                         <button className={"filter_button matched_filter " + (this.state.filter === "MATCHED" ? "active_filter" : "")} onClick={()=>this.setFilter("MATCHED")}>MATCHED</button>
                         <button className={"filter_button rejected_filter " + (this.state.filter === "REJECTED" ? "active_filter" : "")} onClick={()=>this.setFilter("REJECTED")}>REJECTED</button>
                         <button className={"filter_button completed_filter " + (this.state.filter === "COMPLETED" ? "active_filter" : "")} onClick={()=>this.setFilter("COMPLETED")}>COMPLETED</button>
+                    </div>
+                    <div className="col-md-3">
+                        <img alt="LOOP" className="bookshelf_image" src={BookshelfImage}/>
                     </div>
                 </div>
                 <Modal

@@ -186,7 +186,8 @@
         flex-direction: row;
         position: relative;
         font-size: 12px;
-        overflow: none;
+        overflow: scroll;
+        height: 70%;
         background-color: rgb(236, 236, 236);
     }
 

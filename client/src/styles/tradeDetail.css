@@ -1,114 +1,239 @@
-.tdContainer{
-    background-color: #47AFCB;
-    width: 70vw;
-    height: 70vh;
-    align-items: center;
-    justify-content: center;    
+@media only screen and (min-width : 768px) {
+    .tdContainer{
+        background-color: #47AFCB;
+        width: 70vw;
+        height: 70vh;
+        align-items: center;
+        justify-content: center;    
+    }
+
+    /* need this to make sure that setting heights by percentages for child elements works */
+    /*
+    .tdDetailContents {
+        background-color: cadetblue;
+        height: 60%;
+    }
+
+    .tdDetailContainer{
+        height: 80%;
+        background-color: rgb(254, 254, 254);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+        overflow: auto;
+        padding: 5%;
+    }
+    */
+
+    .tdDetailContainer{
+        width: 85%;
+        min-height: 70%;
+        background-color: white;
+        margin: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+    }
+
+    .tdDetailTextContainer{
+        background-color: rgb(254, 254, 254);
+        overflow: auto;
+        margin-left: 5%;
+        margin-right: 5%;
+        padding-top: 10%;
+        padding-bottom: 10%;
+        text-align: center;
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+
+    .tdTitle{
+        color: white;
+        text-align: center;
+        padding: 3%;
+        font-size: 2em;
+    }
+
+    .tdLeft{
+        flex: 2;
+        margin: 5%;
+        justify-content: center;
+        align-items: center;
+        width: 30%;
+        height: 100%;
+    }
+
+    .tdCenter{
+        width: 20%;
+        flex: 1;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .tdRight{
+        flex: 2;
+        margin: 5%;
+        justify-content: center;
+        align-items: center;
+        width: 30%;
+        height: 100%;
+    }
+
+    .tdImage {
+        width: 40%;
+    }
+
+    /* navigation buttons */
+    .tdButtonRow {
+        position: absolute;
+        bottom: 5%;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+        width: 100%;
+    }
+
+    .rejectButton {
+        background-color: #E37449;
+        border: 0px;
+        color: white;
+        margin-top: 3%;
+        padding: 10px;
+        font-size: 1.1em;
+        margin-right: 5%;
+    }
+
+    .acceptButton {
+        background-color: #4BB242;
+        border: 0px;
+        color: white;
+        margin-top: 3%;
+        padding: 10px;
+        font-size: 1.1em;
+    }
 }
 
-/* need this to make sure that setting heights by percentages for child elements works */
-/*
-.tdDetailContents {
-    background-color: cadetblue;
-    height: 60%;
-}
+@media only screen and (max-width : 768px) {
+    .tdContainer{
+        background-color: #47AFCB;
+        width: 100vw;
+        height: 60vh;
+        align-items: center;
+        justify-content: center;    
+    }
 
-.tdDetailContainer{
-    height: 80%;
-    background-color: rgb(254, 254, 254);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-    overflow: auto;
-    padding: 5%;
-}
-*/
+    /* need this to make sure that setting heights by percentages for child elements works */
+    /*
+    .tdDetailContents {
+        background-color: cadetblue;
+        height: 60%;
+    }
 
-.tdDetailContainer{
-    width: 85%;
-    min-height: 70%;
-    background-color: white;
-    margin: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-}
+    .tdDetailContainer{
+        height: 80%;
+        background-color: rgb(254, 254, 254);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+        overflow: auto;
+        padding: 5%;
+    }
+    */
 
-.tdDetailTextContainer{
-    background-color: rgb(254, 254, 254);
-    overflow: auto;
-    margin-left: 5%;
-    margin-right: 5%;
-    padding-top: 10%;
-    padding-bottom: 10%;
-    text-align: center;
-    padding-left: 5%;
-    padding-right: 5%;
-}
+    .tdDetailContainer{
+        width: 85%;
+        min-height: 70%;
+        background-color: white;
+        margin: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+    }
 
-.tdTitle{
-    color: white;
-    text-align: center;
-    padding: 3%;
-    font-size: 2em;
-}
+    .tdDetailTextContainer{
+        background-color: rgb(254, 254, 254);
+        overflow: auto;
+        margin-left: 5%;
+        margin-right: 5%;
+        padding-top: 10%;
+        padding-bottom: 10%;
+        text-align: center;
+        padding-left: 5%;
+        padding-right: 5%;
+    }
 
-.tdLeft{
-    flex: 2;
-    margin: 5%;
-    justify-content: center;
-    align-items: center;
-}
+    .tdTitle{
+        color: white;
+        text-align: center;
+        padding: 3%;
+        font-size: 2em;
+    }
 
-.tdCenter{
-    width: 5%;
-    flex: 1;
-    justify-content: center;
-    align-items: center;
-}
+    .tdLeft{
+        flex: 2;
+        margin: 5%;
+        justify-content: center;
+        align-items: center;
+        width: 35%;
+        height: 100%;
+    }
 
-.tdRight{
-    flex: 2;
-    margin: 5%;
-    justify-content: center;
-    align-items: center;
-}
+    .tdCenter{
+        width: 10%;
+        flex: 1;
+        justify-content: center;
+        align-items: center;
+    }
 
-.tdImage {
-    width: 40%;
-}
+    .tdRight{
+        flex: 2;
+        margin: 5%;
+        justify-content: center;
+        align-items: center;
+        width: 35%;
+        height: 100%;
+    }
 
-/* navigation buttons */
-.tdButtonRow {
-    position: absolute;
-    bottom: 5%;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-    width: 100%;
-}
+    .tdImage {
+        width: 40%;
+    }
 
-.rejectButton {
-    background-color: #E37449;
-    border: 0px;
-    color: white;
-    margin-top: 3%;
-    padding: 10px;
-    font-size: 1.1em;
-    margin-right: 5%;
-}
+    /* navigation buttons */
+    .tdButtonRow {
+        position: absolute;
+        bottom: 5%;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+        width: 100%;
+    }
 
-.acceptButton {
-    background-color: #4BB242;
-    border: 0px;
-    color: white;
-    margin-top: 3%;
-    padding: 10px;
-    font-size: 1.1em;
+    .rejectButton {
+        background-color: #E37449;
+        border: 0px;
+        color: white;
+        margin-top: 3%;
+        padding: 10px;
+        font-size: 1.1em;
+        margin-right: 5%;
+    }
+
+    .acceptButton {
+        background-color: #4BB242;
+        border: 0px;
+        color: white;
+        margin-top: 3%;
+        padding: 10px;
+        font-size: 1.1em;
+    }
 }
 
 

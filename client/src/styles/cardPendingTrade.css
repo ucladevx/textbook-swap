@@ -2,7 +2,7 @@
     .ptCard{
         box-shadow: -5px 5px 20px -5px rgba(0,0,0,0.5);
         height: 30vh;
-        width: 95vw;
+        width: 90vw;
         background-color: white;
     /*    display: flex;*/
     /*    flex-direction: column;*/
@@ -48,7 +48,8 @@
     .ptBottom{
         color: white;
         text-align: center;
-        padding-right: 5px;
+        font-size: 12px;
+        padding: 5px;
     }
 
     .ptTitle{
@@ -114,9 +115,8 @@
     .ptBottom{
         color: white;
         text-align: center;
-        padding-right: 5px;
         font-size: 12px;
-        line-height: 30px;
+        padding: 5px;
     }
 
     .ptTitle{

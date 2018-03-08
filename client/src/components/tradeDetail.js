@@ -10,6 +10,7 @@ import '../styles/vendors/sweetalert.css'
 import Loop from '../new_images/loop_black.png'
 import Tick from '../new_images/tick_black.png'
 import HalfLoop from '../new_images/halfLoop_black.png'
+import request from 'request';
 
 import axios from 'axios'
 const ROOT = 'http://localhost:3000'
@@ -26,6 +27,8 @@ class TradeDetail extends Component {
         }
         this.generateDetail = this.generateDetail.bind(this)
         this.getTrade = this.getTrade.bind(this)
+        this.acceptTrade = this.acceptTrade.bind(this)
+        this.rejectTrade = this.rejectTrade.bind(this)
         this.getTrade()
     }
 
@@ -47,18 +50,19 @@ class TradeDetail extends Component {
     }
 
     acceptTrade(){
-        console.log("ID to Accept:", this.state.trade.id);
+        console.log("ID to Accept:", this.state.trade.trade_id);
         var trade = this.state.trade
         if (!trade) return
 
         axios.post(ROOT+'/api/found_trades/update_status_accepted', {
-            trade_id: trade.id,
+            trade_id: trade.trade_id,
             owned_book: trade.book_have,
             target_user: trade.target_id,
             wanted_book: trade.book_want
         })
         .then((res) => {
             console.log(res.data);
+            window.location.reload();
         })
     }
 
@@ -67,7 +71,7 @@ class TradeDetail extends Component {
         if (!trade) return
 
         axios.post(ROOT+'/api/found_trades/update_status_rejected', {
-            trade_id: trade.id,
+            trade_id: trade.trade_id,
             owned_book: trade.book_have,
             target_user: trade.target_id,
             wanted_book: trade.book_want
@@ -139,6 +143,8 @@ class TradeDetail extends Component {
                 </div>
             )
         }
+        
+        /*
         if (page === 1){
             return (
                 <div className="tdDetailContents">
@@ -167,6 +173,7 @@ class TradeDetail extends Component {
                 </div>
             )
         }
+        */
     }
 
     render() {

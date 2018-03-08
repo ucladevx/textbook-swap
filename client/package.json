@@ -24,6 +24,7 @@
     "redux-form": "^7.1.1",
     "redux-promise": "^0.5.3",
     "redux-thunk": "^2.2.0",
+    "request": "^2.83.0",
     "sweetalert-react": "^0.4.11"
   },
   "scripts": {

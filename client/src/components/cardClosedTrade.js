@@ -103,7 +103,6 @@ class CardClosedTrade extends Component {
             return <div></div>
         }
         var color = this.props.color;
-        {console.log("Color", color, colorMap)}
         return (
             <div className="ctCard" onClick={()=>this.onClickHandler()} style={{backgroundColor: colorMap[color].title}}>
                 <div className="ctTop">

@@ -12,12 +12,6 @@ import '../styles/form.css'
 const ROOT = 'http://localhost:3000'
 axios.defaults.withCredentials = true;
 
-/*
-TODO:
-- Autoscroll
-- Relationship status, route for money trades
-*/
-
 class EditTrade extends Component{
     componentDidMount(){
         var values =  this.props.want
@@ -181,7 +175,6 @@ class EditTrade extends Component{
         var booksAdd = this.state.newWant
         var j = 0;
         var total = booksAdd.length
-        console.log("REACHED CALLBACK")
         booksAdd.forEach((book) => {
             axios.post(ROOT+'/api/possible_trades/add', {
                 user_id: "user",
@@ -202,7 +195,6 @@ class EditTrade extends Component{
                 j++
 
                 if (j === total){
-                    console.log("done...")
                     window.location.reload();
                 }
             })
@@ -252,7 +244,7 @@ class EditTrade extends Component{
     deleteTrade(){
         axios.post(ROOT+'/api/owned_books/remove', {
             user_id: "user",
-            owned_book_id: this.state.offer.book_id
+            book_id: this.state.offer.book_id
         })
             .then((res) => {
             console.log(res.data)
@@ -271,7 +263,6 @@ class EditTrade extends Component{
             else {
                 console.log('owned book error status', res.data.status);
             }
-            console.log('DELETED...')
             window.location.reload();
         })
     }

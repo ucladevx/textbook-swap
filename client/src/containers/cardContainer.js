@@ -22,11 +22,9 @@ class CardContainer extends Component {
             return (<div></div>)
         }
 
-        console.log("Cards", cards);
-
         if (filter !== "ALL"){
                 cards = cards.filter(card => this.mapStatusToColor(card.status) === this.mapFilterToColor(filter));
-                console.log("After filter", filter, cards)
+//                console.log("After filter", filter, cards)
         }
 
         return cards.map((card, key) => {

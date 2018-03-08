@@ -23,13 +23,67 @@ class TradeDetail extends Component {
         this.state = {
             page: 0,
             acceptAlert: false,
-            rejectAlert: false
+            rejectAlert: false,
+            swal: {
+              show: false,
+              status: null,
+              type: null,
+              text: null,
+              title: null,
+              confirmButtonText: null,
+              cancelButtonText:null,
+              onConfirm: null,
+              confirmButtonColor: null
+          }
         }
         this.generateDetail = this.generateDetail.bind(this)
         this.getTrade = this.getTrade.bind(this)
         this.acceptTrade = this.acceptTrade.bind(this)
         this.rejectTrade = this.rejectTrade.bind(this)
+        this.openSwal = this.openSwal.bind(this)
+        this.handleAlert = this.handleAlert.bind(this)
         this.getTrade()
+    }
+    
+    openSwal(type) {
+        if (type === 'A'){
+            this.setState({swal : {
+                          show: true,
+                          status: 'A',
+                          type: "warning",
+                          title: "Are you sure you want to accept the trade?",
+                          text: "You will be emailed trade details once all members of the loop have confirmed!",
+                          confirmButtonText: "Accept Trade",
+                          cancelButtonText: "Cancel",
+                        }})
+        }
+        else if (type === 'R'){
+            this.setState({swal : {
+                          show: true,
+                          status: 'R',
+                          type: "warning",
+                          title: "Are you sure you want to reject the trade?",
+                          text: "If you would still like to trade this book, please add it again.",
+                          confirmButtonText: "Reject Trade",
+                          cancelButtonText: "Back",
+                          confirmButtonColor: "#DD6B55"
+                        }})
+        }
+    }
+    
+    handleAlert(){
+        var status = this.state.swal.status
+        
+        if (!status){
+            return
+        }
+        
+        if (status === 'A'){
+            this.acceptTrade()
+        }
+        else if (status === 'R'){
+            this.rejectTrade()
+        }
     }
 
     getTrade(){
@@ -98,85 +152,29 @@ class TradeDetail extends Component {
                         </div>
                     </div>
                     <div className="tdButtonRow">
-                        <button onClick={()=>this.setState({rejectAlert: true})} className="rejectButton">REJECT</button>
-                        <button onClick={()=>this.setState({acceptAlert: true})} className="acceptButton">ACCEPT</button>
+                        <button onClick={()=>this.openSwal('R')} className="rejectButton">REJECT</button>
+                        <button onClick={()=>this.openSwal('A')} className="acceptButton">ACCEPT</button>
                         <SweetAlert
-                            show={this.state.acceptAlert}
-                            type="warning"
-                            title="Are you sure you want to accept the trade?"
-                            text="You will be emailed trade details once all members of the loop have confirmed!"
-                            cancelButtonText="Cancel"
-                            confirmButtonText="Confirm"
-                            showCancelButton
-                            onConfirm={() => {
-                              console.log('confirm');
-                              this.acceptTrade()
-                            }}
-                            onCancel={() => {
-                              console.log('cancel');
-                              this.setState({ acceptAlert: false });
-                            }}
-                            onEscapeKey={() => this.setState({ acceptAlert: false })}
-                            onOutsideClick={() => this.setState({ acceptAlert: false })}
-                        />
-                        <SweetAlert
-                            show={this.state.rejectAlert}
-                            title="Are you sure you want to reject the trade?"
-                            text="If you still would like to trade this book, please add it again."
-                            type="warning"
-                            showCancelButton
-                            cancelButtonText="Cancel"
-                            confirmButtonText="Confirm"
-                            confirmButtonColor="#DD6B55"
-                            onConfirm={() => {
-                              console.log('confirm');
-                              this.rejectTrade()
-                            }}
-                            onCancel={() => {
-                              console.log('cancel');
-                              this.setState({ rejectAlert: false });
-                            }}
-                            onEscapeKey={() => this.setState({ rejectAlert: false })}
-                            onOutsideClick={() => this.setState({ rejectAlert: false })}
+                            show={this.state.swal.show}
+                            type={this.state.swal.type}
+                            title={this.state.swal.title}
+                            text={this.state.swal.text}
+                            showCancelButton={this.state.swal.cancelButtonText}
+                            confirmButtonColor={this.state.swal.confirmButtonColor}
+                            cancelButtonText={this.state.swal.cancelButtonText}
+                            confirmButtonText={this.state.swal.confirmButtonText}
+                            onConfirm={() => this.handleAlert(this.state.swal.status)}
+                            onCancel={() => this.setState({ swal: {show: false} })}
+                            onEscapeKey={() => this.setState({ swal: {show: false} })}
+                            onOutsideClick={() => this.setState({ swal: {show: false} })}
                         />
                     </div>
                 </div>
             )
         }
-        
-        /*
-        if (page === 1){
-            return (
-                <div className="tdDetailContents">
-                    <div className="tdDetailTextContainer">
-                        <h3>Are you sure you want to reject the trade?</h3>
-                    </div>
-                    <div className="tdButtonRow">
-                        <button onClick={()=>this.setState({page: 0})}
-                            className="rejectButton">No... Take me back</button>
-                        <button className="acceptButton">Yes</button>
-                    </div>
-                </div>
-            )
-        }
-        if (page === 2){
-            return (
-                <div className="tdDetailContents">
-                    <div className="tdDetailTextContainer">
-                        <h3>Are you sure you want to accept the trade?</h3>
-                        <h3>You will be emailed the details of the other members in your trade loop on confirmation.</h3>
-                    </div>
-                    <div className="tdButtonRow">
-                        <button onClick={()=>this.setState({page: 0})} className="rejectButton">No... Take me back</button>
-                        <button className="acceptButton">Yes</button>
-                    </div>
-                </div>
-            )
-        }
-        */
-    }
-
-    render() {
+  }
+                        
+  render() {
         return (
             <div className="tdContainer">
                 <div className="tdTitle">MATCHED TRADE</div>

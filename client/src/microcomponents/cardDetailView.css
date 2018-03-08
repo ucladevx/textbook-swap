@@ -23,6 +23,8 @@
     font-size: 1.2em;
     color: black;
     text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 img {

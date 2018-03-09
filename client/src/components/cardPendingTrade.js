@@ -36,9 +36,9 @@ class CardPendingTrade extends Component {
     {
         var color = this.props.color
         return (
-            <div className="ctCard" onClick={()=>this.onClickHandler()} style={{backgroundColor: colorMap[color].title}}>
-                <div className="ctTop">
-                    <div className="ctLeft">
+            <div className="ptCard" onClick={()=>this.onClickHandler()} style={{backgroundColor: colorMap[color].title}}>
+                <div className="ptTop">
+                    <div className="ptLeft">
                         <CardImageView 
                             title=""
                             imgUrl={this.props.bookHave.img_url}
@@ -51,7 +51,7 @@ class CardPendingTrade extends Component {
                         <div className="ptAuthor">{this.props.bookHave.author}</div>
                     </div>
                 </div>
-                <div className="ctBottom" style={{backgroundColor: colorMap[color].bottom}}>
+                <div className="ptBottom" style={{backgroundColor: colorMap[color].bottom}}>
                     {this.props.booksWant.length} book{this.props.booksWant.length != 1 ? "s" : ""} wanted in exchange
                 </div>
             </div>

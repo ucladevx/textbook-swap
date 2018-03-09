@@ -235,7 +235,7 @@ class Form extends Component{
                         <div className="formContents">
                             <h1 className="formTitle">NEW TRADE</h1>
                             <h3 className="formMessage">Select the book you can offer.</h3>
-                                <div className="ownedBookSearchAndResults">
+                                <div className="ownedBookSearchAndResults" ref="ownedBookSearch">
                                     <div>
                                         <SearchBox
                                             onChange={this.processOffer}
@@ -256,7 +256,16 @@ class Form extends Component{
                             <div className="transitionButtonRow">
                                 {
                                     this.state.offer != null &&
-                                    <button className="formNext" onClick={()=>this.setPage({option, screen: screen+2})}>Next</button>
+                                    <button className="formNext" 
+                                        onClick={
+                                            ()=> {
+                                                this.setPage({option, screen: screen+2});
+                                                this.refs.ownedBookSearch.scrollTop = 0;
+                                            }
+                                        }
+                                    >
+                                    Next
+                                    </button>
                                 }
 
                             </div>
@@ -280,7 +289,7 @@ class Form extends Component{
                         <div className="formContents wantedBooksPage">
                             <h1 className="formTitle">NEW TRADE</h1>
                             <h3 className="formMessage">Select the book(s) you want to receive in return.</h3>
-                            <div className="searchBoxAndResults">
+                            <div className="searchBoxAndResults" ref="wantedBookSearch">
                                 <SearchBox
                                     onChange={this.processWant}
                                     multi={true}
@@ -296,10 +305,28 @@ class Form extends Component{
                                 </div>
                             </div>
                             <div className="transitionButtonRow">
-                                <button className="formPrev" onClick={()=>this.setPage({option, screen: screen-2})}>Previous</button>
+                                <button className="formPrev" 
+                                    onClick={
+                                        ()=>{
+                                            this.setPage({option, screen: screen-2});
+                                            this.refs.wantedBookSearch.scrollTop = 0;
+                                        }
+                                    }
+                                >
+                                Previous
+                                </button>
                                 {
                                     this.state.want != null &&
-                                    <button className="formNext" onClick={()=>this.setPage({option, screen: screen+1})}>Next</button>
+                                    <button className="formNext" 
+                                        onClick={
+                                            ()=>{
+                                                this.setPage({option, screen: screen+1});
+                                                this.refs.wantedBookSearch.scrollTop = 0;
+                                            }
+                                        }
+                                    >
+                                    Next
+                                    </button>
                                 }
                             </div>
                         </div>
@@ -309,7 +336,7 @@ class Form extends Component{
                          <div className="formContents confirmTradePage">
                             <h1 className="formTitle">NEW TRADE</h1>
                             <h3 className="formMessage">Confirm your trades!</h3>
-                            <div className='confirmTradeContainer'>
+                            <div className='confirmTradeContainer' ref="confirmTradeContainer">
                                 <div className='confirmTradeLeft'>
                                     <h4> OFFERING </h4>
                                     <div className="ownedBookSummary">
@@ -317,12 +344,21 @@ class Form extends Component{
                                     </div>
                                 </div>
                                 <div className='confirmTradeRight'>
-                                    <h4> TRADES </h4>
+                                    <h4> WANTED </h4>
                                     <MinSummary books={this.state.want}/>
                                 </div>
                             </div>
                             <div className="transitionButtonRow">
-                                <button className="formPrev" onClick={()=>this.setPage({option, screen: screen-1})}>Previous</button>
+                                <button className="formPrev" 
+                                    onClick={
+                                        ()=>{
+                                            this.setPage({option, screen: screen-1});
+                                            this.refs.confirmTradeContainer.scrollTop = 0;
+                                        }
+                                    }
+                                >
+                                Previous
+                                </button>
                                 <button className="formNext" onClick={()=>this.createTrade("TRADE")}>Create Trade</button>
                             </div>
                          </div>

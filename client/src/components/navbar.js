@@ -17,9 +17,10 @@ const NavBar = () => {
         </Navbar.Header>
         <Navbar.Collapse>
             <Nav pullRight>
-                <NavItem eventKey={1} href="#">CONTACT US</NavItem>
-                <NavItem eventKey={2} href="#">ABOUT</NavItem>
-                <NavItem eventKey={2} href="#">LOGIN</NavItem>
+                <NavItem eventKey={1} href="#">ABOUT</NavItem>
+                <NavItem eventKey={2} href="mailto:loop.textbook.swap@gmail.com">CONTACT US</NavItem>
+                <NavItem eventKey={3} href="https://goo.gl/forms/Dogs4uqvED1LIq1r1">BUG REPORTING</NavItem>
+                <NavItem eventKey={4} href="#">LOGOUT</NavItem>
             </Nav>
         </Navbar.Collapse>
     </Navbar>

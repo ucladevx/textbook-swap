@@ -13,17 +13,17 @@ class CardImageView extends Component {
             title: this.props.title ? this.props.title : null
         }
     }
-    
+
     render()
     {
         return (
             <div className="ciContainer" style={{backgroundColor: this.props.titleColor}}>
                 <div className="ciImageBox" style={{backgroundColor: this.props.subtitleColor}}>
-                    <img src={this.state.imgUrl} className="ciImage"></img>
+                    <img src={this.props.imgUrl} className="ciImage"></img>
                 </div>
                 {
                     this.props.title &&
-                    <p className="ciText">{this.state.title}</p>
+                    <p className="ciText">{this.props.title}</p>
                 }
             </div>
             )

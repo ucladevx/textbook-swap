@@ -6,7 +6,8 @@ export default function(state = null, action){
         case USER_LOGIN:
             console.log("Received Login Action");
             console.log(action.payload);
-            return action.payload || false
+            var obj = action.payload
+            return obj || false
         default:
             return state;
     }

@@ -33,7 +33,7 @@ exports.add_book = function(req, res) {
     graph_edges.add_owned_book_edges(user_id, book_id, function(status, rows) {
         if (status == utilities.graph_edges_errors.DB_SUCCESS)
             logger.log("Successfully inserted graph edges for owned book in the database!");
-        else if (status == utilities.possible_trades_errors.DB_QUERY_ERROR) 
+        else if (status == utilities.possible_trades_errors.DB_QUERY_ERROR)
             logger.log("Error inserting graph edges for owned book in database!");
     });
 };

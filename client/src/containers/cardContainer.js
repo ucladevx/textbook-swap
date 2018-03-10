@@ -10,70 +10,111 @@ class CardContainer extends Component {
     constructor(props) {
         super(props);
 //        this.cardClicked = this.cardClicked.bind(this)
-        this.generateList = this.generateList.bind(this)
-        this.mapStatusToColor = this.mapStatusToColor.bind(this)
-        this.mapFilterToColorToColor = this.mapFilterToColor.bind(this)
+        this.generateList = this.generateList.bind(this);
+        this.mapStatusToColor = this.mapStatusToColor.bind(this);
+        this.mapFilterToColorToColor = this.mapFilterToColor.bind(this);
     }
-    
+
     generateList(){
-        var cards = this.props.cards
-        var filter = this.props.filter
+        var cards = this.props.cards;
+        var filter = this.props.filter;
         if (!cards){
             return (<div></div>)
         }
-        
-        console.log("Cards", cards)
-        
-        if (filter != "ALL"){
-                cards = cards.filter(card => this.mapStatusToColor(card.status) === this.mapFilterToColor(filter))
-                console.log("After filter", filter, cards)
+
+        if (filter !== "ALL"){
+                cards = cards.filter(card => this.mapStatusToColor(card.status) === this.mapFilterToColor(filter));
+//                console.log("After filter", filter, cards)
         }
-        
+
         return cards.map((card, key) => {
             if (card.status === 'N'){
                 return (
                     <CardPendingTrade
-                        color="yellow"
+                        color={card.status}
                         bookHave={card.book_have}
                         booksWant={card.book_want}
-                        onClick={this.props.openDetailModal}
+                        onClick={this.props.openEditModal}
                         selectCard={this.props.selectCard}
                     ></CardPendingTrade>
                 )
             }
-            
-            return (
-                <CardClosedTrade 
-                    color={this.mapStatusToColor(card.status)}
+
+            if (card.status === 'A'){
+                return (
+                    <CardClosedTrade
+                    color={card.status}
                     bookHave={card.book_have}
                     bookWant={card.book_want[0]}
-                    onClick={this.props.openDetailModal}
+                    onClick={this.props.approveAlert}
                     selectCard={this.props.selectCard}
                     >
                 </CardClosedTrade>
-            )
+                )
+            }
+
+            if (card.status === 'R'){
+                return (
+                    <CardClosedTrade
+                    color={card.status}
+                    bookHave={card.book_have}
+                    bookWant={card.book_want[0]}
+                    onClick={this.props.rejectAlert}
+                    selectCard={this.props.selectCard}
+                    >
+                </CardClosedTrade>
+                )
+            }
+
+            if (card.status === 'W') {
+                return (
+                    <CardClosedTrade
+                        color={card.status}
+                        bookHave={card.book_have}
+                        bookWant={card.book_want[0]}
+                        onClick={this.props.waitAlert}
+                        selectCard={this.props.selectCard}
+                        >
+                    </CardClosedTrade>
+                )
+            }
+
+            if (card.status === 'P') {
+                return (
+                    <CardClosedTrade
+                        color={card.status}
+                        bookHave={card.book_have}
+                        bookWant={card.book_want[0]}
+                        onClick={this.props.openDetailModal}
+                        selectCard={this.props.selectCard}
+                        >
+                    </CardClosedTrade>
+                )
+            }
         })
     }
     // TODO: Separate W and P
-    
+
     mapStatusToColor(status){
         if (status === 'A')
-            return "green"
+            return "green";
         if (status === 'R')
-            return "red"
+            return "red";
         if (status === 'W' || status === 'P')
-            return "blue"
-        if (status == 'N')
-            return "yellow"
+            return "blue";
+        if (status === 'N')
+            return "yellow";
     }
-    
+
     mapFilterToColor(status){
         if (status === 'REQUESTED')
-            return "yellow"
+            return "yellow";
         if (status === 'REJECTED')
-            return "red"
+            return "red";
         if (status === 'MATCHED')
-            return "blue"
+            return "blue";
+        if (status === 'COMPLETED')
+            return "green";
     }
 
     render() {

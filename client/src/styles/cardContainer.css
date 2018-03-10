@@ -9,7 +9,8 @@
         justify-content: center;
         flex-wrap: wrap;
         flex-flow: row wrap;
-        margin-top: -17vh;
+        margin-top: -23vh;
+        position: relative;
     }
     .cardSection{
         height: auto;
@@ -29,6 +30,8 @@
     justify-content: center;
     flex-direction: column;
     margin-top: -17vh;
-}
+    position: relative;
+
+    }
 }
 

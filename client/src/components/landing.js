@@ -35,8 +35,6 @@ const Landing = () => {
       }
   }
   
-  
-
   return (
       <div>
         <Default>

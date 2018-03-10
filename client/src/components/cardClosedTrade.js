@@ -1,9 +1,6 @@
 import React, {Component} from 'react'
-import {connect} from 'react-redux'
-import Plus from '../new_images/plus.png'
 import Loop from '../new_images/loop.png'
 import Tick from '../new_images/tick.png'
-import HalfLoop from '../new_images/halfLoop.png'
 import Clock from '../new_images/waiting.png'
 import Cross from '../new_images/cross.png'
 import '../styles/cardClosedTrade.css'
@@ -104,7 +101,6 @@ class CardClosedTrade extends Component {
     render()
     {
         var color = this.state.color
-        {console.log("Color", color, colorMap)}
         return (
             <div className="ctCard" onClick={()=>this.onClickHandler()} style={{backgroundColor: colorMap[color].title}}>
                 <div className="ctTop">

@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { Navbar, Nav, MenuItem, NavItem, NavDropdown } from 'react-bootstrap'
-import { Link } from "react-router-dom";
+import {withRouter} from "react-router-dom";
+import { Navbar, Nav, NavItem } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.css'
 import {connect} from 'react-redux'
-import {userLogin} from '../actions';
 
 import '../styles/navbar.css'
 
@@ -30,10 +29,11 @@ class NavBar extends Component {
             case 5:
                 console.log("Login")
                 window.location.replace("http://localhost:3000/login/facebook");
+                break
         }
     }
     
-     render() {
+    render() {
         return (
             <Navbar collapseOnSelect fluid={true} onSelect={key => this.handleSelect(key)} fixedTop={false}>
                 <Navbar.Header>
@@ -47,9 +47,12 @@ class NavBar extends Component {
                 </Navbar.Header>
                 <Navbar.Collapse>
                     <Nav pullRight>
-                        <NavItem eventKey={1}>ABOUT</NavItem>
+                        {
+                            (true || this.props.location.pathname === "/") &&
+                            <NavItem eventKey={1}>ABOUT</NavItem>
+                        }
                         <NavItem eventKey={2}>CONTACT US</NavItem>
-                        <NavItem eventKey={3}>BUG REPORTING</NavItem>
+                        <NavItem eventKey={3}>REPORT A BUG</NavItem>
                         {
                             this.props.user != null ?
                             <NavItem eventKey={4}>LOGOUT</NavItem> :
@@ -68,5 +71,5 @@ function mapStateToProps(state){
     }
 }
 
-export default connect(mapStateToProps)(NavBar)
+export default connect(mapStateToProps)(withRouter(NavBar))
 

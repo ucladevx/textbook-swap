@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import {connect} from 'react-redux';
 import {withRouter} from "react-router-dom";
 import axios from 'axios'
 
@@ -278,7 +277,6 @@ class EditTrade extends Component{
 
     getChild(page){
         var option = page.option
-        var screen = page.screen
 
         if (option === "trade"){
             switch (page.screen){

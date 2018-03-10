@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import {connect} from 'react-redux'
 import SweetAlert from 'sweetalert-react';
 
 import CardDetailView from '../microcomponents/cardDetailView'
@@ -8,8 +7,6 @@ import '../styles/tradeDetail.css'
 import '../styles/vendors/sweetalert.css'
 
 import Loop from '../new_images/loop_black.png'
-import Tick from '../new_images/tick_black.png'
-import HalfLoop from '../new_images/halfLoop_black.png'
 
 import axios from 'axios'
 const ROOT = 'http://localhost:3000'
@@ -86,7 +83,7 @@ class TradeDetail extends Component {
                             <CardDetailView book={this.props.bookHave}></CardDetailView>
                         </div>
                         <div className="tdCenter">
-                            <img src={Loop} className="tdImage"></img>
+                            <img src={Loop} alt="Loop" className="tdImage"></img>
                         </div>
                         <div className="tdRight">
                             <CardDetailView book={this.props.bookWant}></CardDetailView>

@@ -1,8 +1,5 @@
 import React, {Component} from 'react'
-import {withRouter} from "react-router-dom";
-import {connect} from 'react-redux'
 import './cardImageView.css'
-import BookImage from '../new_images/bookTemplate.jpg'
 
 class CardImageView extends Component {
     constructor(props) {

@@ -278,7 +278,7 @@ class EditTrade extends Component{
                         <div className="formContents">
                             <h1 className="formTitle">EDIT TRADE</h1>
                             <h3 className="formMessage">Modify the books you want to add to your trades.</h3>
-                            <div className="searchBoxAndResults">
+                            <div className="searchBoxAndResults" ref="editSearchBox">
                                 <SearchBox
                                     onChange={this.processWant}
                                     multi={true}
@@ -293,7 +293,16 @@ class EditTrade extends Component{
                                 </div>
                             </div>
                             <div className="transitionButtonRow">
-                                <button className="formPrev" onClick={()=>this.cancelTrade()}>CANCEL</button>
+                                <button className="formPrev" 
+                                    onClick={
+                                        ()=> {
+                                            this.cancelTrade();
+                                            this.refs.editSearchBox.scrollTop = 0;
+                                        }
+                                    }
+                                >
+                                CANCEL
+                                </button>
                                 {
                                     this.state.want != null &&
                                     this.state.want != this.state.newWant &&
@@ -307,7 +316,7 @@ class EditTrade extends Component{
                      return (
                          <div className="formContents">
                             <h1 className="formTitle">TRADE INFO</h1>
-                            <div className='confirmTradeContainer'>
+                            <div className='confirmTradeContainer' ref="confirmTradeContainer">
                                 <div className='confirmTradeLeft'>
                                     <h4> OFFERING </h4>
                                     <div className="ownedBookSummary">
@@ -320,7 +329,16 @@ class EditTrade extends Component{
                                 </div>
                             </div>
                             <div className="transitionButtonRow">
-                                <button className="formPrev" onClick={()=>this.setPage({option, screen: 2})}>EDIT TRADE</button>
+                                <button className="formPrev" 
+                                    onClick={
+                                        ()=>{
+                                            this.setPage({option, screen: 2});
+                                            this.refs.confirmTradeContainer.scrollTop = 0;
+                                        }
+                                    }
+                                >
+                                EDIT TRADE
+                                </button>
                                 <button className="formNext" onClick={()=>this.deleteTrade()}>DELETE</button>
                             </div>
                          </div>

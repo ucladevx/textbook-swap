@@ -1,16 +1,18 @@
 @media only screen and (min-width : 768px) {
     .ciContainer{
     /*    background-color: cornflowerblue;*/
+        height: 100%;
     }
 
     .ciImageBox{
     /*    background-color: skyblue;*/
-        padding: 12px;
+        padding: 8px;
+        height: 100%;
     }
 
     .ciImage{
         object-fit: contain;
-        height: 16vh;
+        height: 100%;
     }
 }
 

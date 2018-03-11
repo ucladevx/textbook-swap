@@ -1,8 +1,4 @@
 import React, {Component} from 'react'
-import {connect} from 'react-redux'
-import Loop from '../new_images/loop.png'
-import Tick from '../new_images/tick.png'
-import HalfLoop from '../new_images/halfLoop.png'
 import '../styles/cardPendingTrade.css'
 
 import CardImageView from '../microcomponents/cardImageView'

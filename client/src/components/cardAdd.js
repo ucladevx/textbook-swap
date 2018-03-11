@@ -1,14 +1,8 @@
 import React, {Component} from 'react'
-import {connect} from 'react-redux'
-import OldPlus from '../img/grey_plus.png'
 import Plus from '../new_images/plus.png'
 import '../styles/cardAdd.css'
 
 class CardAdd extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     render()
     {
         return (

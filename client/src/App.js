@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {BrowserRouter, Route, Switch} from 'react-router-dom'
+import {BrowserRouter, Route} from 'react-router-dom'
 import {connect} from 'react-redux';
 
 import NavBar from './components/navbar'
@@ -7,7 +7,6 @@ import Footer from './components/footer'
 import Home from './containers/home'
 import Dashboard from './containers/dashboard'
 import Form from './components/form'
-import SearchBox from './components/searchBox'
 import TradeDetail from './components/tradeDetail'
 
 class App extends Component {

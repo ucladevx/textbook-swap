@@ -254,6 +254,7 @@
 .transitionButtonRow button {
 	float:bottom;
 	position:relative;
+	padding: 6px 12px;
 }
 
 .wantedBooksList {

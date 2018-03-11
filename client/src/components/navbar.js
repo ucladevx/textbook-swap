@@ -13,7 +13,7 @@ class NavBar extends Component {
     handleSelect(key){
         switch (key) {
             case 1:
-                window.location.replace('http://localhost:5000/guide');
+                this.props.history.push('/guide')
                 break
             case 2:
                 window.location.replace('mailto:loop.textbook.swap@gmail.com');
@@ -40,7 +40,7 @@ class NavBar extends Component {
                     <Navbar.Brand>
                         <img 
                             alt="LOOP" 
-                            onClick={()=>window.location.replace("http://localhost:5000/")}
+                            onClick={()=>this.props.history.push('/')}
                             className="navbar-logo" src={NavBarLogo}/>
                     </Navbar.Brand>
                     <Navbar.Toggle />

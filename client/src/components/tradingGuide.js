@@ -20,19 +20,19 @@ class TradingGuide extends Component{
     render(){
         return (
             <div className="App">
-                <div class = "guide">
-                	<div class="container-fluid initial_info">
+                <div className = "guide">
+                	<div className="container-fluid initial_info">
                         <h1 id='loop_title' >Loop Trading Guide</h1>
-                		<div class="row what_is_loop">
-                			<div class="col-md-6">
-                                <div class="trade_desc">
+                		<div className="row what_is_loop">
+                			<div className="col-md-6">
+                                <div className="trade_desc">
                     				<h2>What is Loop? </h2>
                     				<p >
                     					Loop is an innovative way for students to trade textbooks! 
                                         Users pick what textbooks they want and what theyre willing 
                                         to trade for them, and our algorithm will do the rest. <br/><br/>
                                         For example, 
-                    					<ul class="loop_list"> 
+                    					<ul className="loop_list"> 
                     						<li>You have book A, but want book B </li>
                     						<li>John has book B, but wants book C </li>
                     						<li>Terry has book A, but wants book A </li>
@@ -47,36 +47,36 @@ class TradingGuide extends Component{
                     				</p>
                                 </div>
                 			</div>
-                            <div class="col-md-6 loop_anim">
+                            <div className="col-md-6 loop_anim">
                                 <img src={loop_anim}/>
                             </div>
                 		</div>
                 	</div>
                 </div>
-                <div class="how_works">
-                	<div class="container-fluid">
+                <div className="how_works">
+                	<div className="container-fluid">
                 		<h2>How It Works</h2>
-                		<div class="row">
-                			<div class=" descr col-md-6">
+                		<div className="row">
+                			<div className=" descr col-md-6">
                 				<h3>Step 1: Choose the book you are willing to offer. </h3>
                                 <p> You can search by title, ISBN, author,
     class name, or professor name. </p>
                 			</div>
-                			<div class="col-md-6">
-                				<img class='step' src={step1}/>
+                			<div className="col-md-6">
+                				<img className='step' src={step1}/>
                 			</div>
                 		</div>
-                		<div class="row next_step step_2">
-                			<div class="col-md-6">
-                				<img class='step' src={step2}/>
+                		<div className="row next_step step_2">
+                			<div className="col-md-6">
+                				<img className='step' src={step2}/>
                 			</div>
-                			<div class="descr col-md-6">
+                			<div className="descr col-md-6">
                 				<h3>Step 2:  Choose the book(s) you want to receive in return. </h3>
                                 <p> You can select multiple books that you would like to potentially receive in return. However, our trading algorithm will only find one-to-one swaps, so you will only receive one of your wanted books in return. </p>
                 			</div>
                 		</div>
-                		<div class="row next_step">
-                			<div class="col-md-6 descr">
+                		<div className="row next_step">
+                			<div className="col-md-6 descr">
                 				<h3>Step 3: Confirm and submit the trade. </h3>
                                 <p> 
                                     We'll send you an email once a trade is found! <br />
@@ -85,8 +85,8 @@ class TradingGuide extends Component{
                                     exhchange the books. 
                                  </p>
                 			</div>
-                			<div class="col-md-6">
-                				<img class='step' src={step3}/>
+                			<div className="col-md-6">
+                				<img className='step' src={step3}/>
                             </div>
                 		</div>
                 	</div>

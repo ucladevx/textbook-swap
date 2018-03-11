@@ -159,7 +159,7 @@ class TradeDetail extends Component {
                             type={this.state.swal.type}
                             title={this.state.swal.title}
                             text={this.state.swal.text}
-                            showCancelButton={this.state.swal.cancelButtonText}
+                            showCancelButton={this.state.swal.cancelButtonText != null}
                             confirmButtonColor={this.state.swal.confirmButtonColor}
                             cancelButtonText={this.state.swal.cancelButtonText}
                             confirmButtonText={this.state.swal.confirmButtonText}

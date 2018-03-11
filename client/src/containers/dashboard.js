@@ -49,7 +49,6 @@ class Dashboard extends Component{
           formModalIsOpen: false,
           detailModalIsOpen: false,
           editModalIsOpen: false,
-          approveAlert: false,
           selectedCard: null,
           approveAlert: false,
           rejectAlert: false,
@@ -74,7 +73,7 @@ class Dashboard extends Component{
         this.closeEditModal = this.closeEditModal.bind(this);
         this.setFilter = this.setFilter.bind(this);
         this.selectCard = this.selectCard.bind(this);
-        this.dismissReject = this.dismissReject.bind(this);
+        this.dismissFoundTrade = this.dismissFoundTrade.bind(this);
         this.dismissAccept = this.dismissAccept.bind(this);
         this.openSwal = this.openSwal.bind(this);
         this.handleAlert = this.handleAlert.bind(this);
@@ -92,9 +91,9 @@ class Dashboard extends Component{
                           status: 'A',
                           type: "success",
                           title: "This trade is complete!",
-                          text: "You have been emailed the details of your trade loop",
-                          confirmButtonText: "Okay",
-                          cancelButtonText: null,
+                          text: "You have been emailed the details of your trade loop. When the trade has been resolved, you may dismiss this card.",
+                          confirmButtonText: "Dismiss Card",
+                          cancelButtonText: "Back",
                         }})
         }
         else if (type === 'R'){
@@ -179,10 +178,19 @@ class Dashboard extends Component{
             selectedCard: card
         })
     }
-    
-    dismissReject(){
-        var ownedBook = this.state.selectedCard.bookHave
-        axios.post(ROOT+'/api/found_trades/dismiss_rejected_trade', {
+
+    dismissFoundTrade(tradeStatus){
+        var route = '/api/found_trades/';
+        if(tradeStatus === 'R'){
+            route += 'dismiss_rejected_trade';
+
+        }
+        else if(tradeStatus === 'A'){
+            route += 'dismiss_accepted_trade';
+
+        }
+        var ownedBook = this.state.selectedCard.bookHave;
+        axios.post(ROOT+route, {
             owned_book: ownedBook.book_id
         })
         .then((res) => {
@@ -216,13 +224,13 @@ class Dashboard extends Component{
         }
         
         if (status === 'A'){
-            this.setState({ swal: {show: false}})
+            this.dismissFoundTrade('A')
         }
         else if (status === 'W'){
             this.setState({ swal: {show: false}})
         }
         else if (status === 'R'){
-            this.dismissReject()
+            this.dismissFoundTrade('R')
         }
         else if (status === 'REJECT'){
             this.rejectTrade()
@@ -261,6 +269,9 @@ class Dashboard extends Component{
         }
 
         if (status === 'R'){
+            this.setState({ swal: {show: false}})
+        }
+        else if (status === 'A'){
             this.setState({ swal: {show: false}})
         }
         else if (status === 'W'){

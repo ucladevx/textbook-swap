@@ -120,3 +120,22 @@ exports.dismiss_rejected_trade = function(req, res) {
         res.json({status: status});
     });
 };
+
+/*
+ * POST /api/found_trades/dismiss_accepted_trade
+ * Removes a found trade by user_id and book_have
+ */
+exports.dismiss_accepted_trade = function(req, res) {
+    var user_id = req.user.id;
+    var owned_book = req.body.owned_book;
+
+    found_trades.remove_trade_by_book_owned(user_id, owned_book, function(status){
+        if (status == utilities.found_trades_errors.DB_SUCCESS)
+            logger.log("Successfully dismissed accepted trade!");
+        else{
+            logger.log("DB error")
+        }
+
+        res.json({status: status});
+    });
+};

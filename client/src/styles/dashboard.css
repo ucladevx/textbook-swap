@@ -78,6 +78,10 @@
 }
 
 @media only screen and (max-width : 768px) {
+    .bookshelf_image{
+        display: none;
+    }
+
     .dashboardContainer{
         background-color: azure;
         height: 100%;

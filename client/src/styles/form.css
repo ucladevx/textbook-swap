@@ -165,11 +165,12 @@
     .transitionButtonRow button {
         background-color: rgb(253, 206, 48);
         border-color: rgb(253, 206, 48);
-        border-radius: 0;
+        border: 0;
         box-shadow: none;
         outline: none;
         color: #ffffff;
         margin: 0% 5%;
+        padding: 6px 12px;
     }
 
     /* want books search box and results */
@@ -402,11 +403,12 @@
     .transitionButtonRow button {
         background-color: rgb(253, 206, 48);
         border-color: rgb(253, 206, 48);
-        border-radius: 0;
+        border: 0;
         box-shadow: none;
         outline: none;
         color: #ffffff;
         margin: 0% 5%;
+        padding: 6px 12px;
     }
 
     /* want books search box and results */

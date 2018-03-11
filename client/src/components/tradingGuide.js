@@ -21,12 +21,12 @@ class TradingGuide extends Component{
         return (
             <div className="App">
                 <div class = "guide">
-                	<div class="row initial_info">
+                	<div class="container-fluid initial_info">
                         <h1 id='loop_title' >Loop Trading Guide</h1>
-                		<div class="col-md-6">
-                			<div class="row">
+                		<div class="row what_is_loop">
+                			<div class="col-md-6">
                                 <div class="trade_desc">
-                    				<h2>What is loop? </h2>
+                    				<h2>What is Loop? </h2>
                     				<p >
                     					Loop is an innovative way for students to trade textbooks! 
                                         Users pick what textbooks they want and what theyre willing 
@@ -47,41 +47,37 @@ class TradingGuide extends Component{
                     				</p>
                                 </div>
                 			</div>
-                		</div>
-                		<div class="col-md-6 loop_anim">
-                			<img src={loop_anim}/>
+                            <div class="col-md-6 loop_anim">
+                                <img src={loop_anim}/>
+                            </div>
                 		</div>
                 	</div>
                 </div>
                 <div class="how_works">
-                	<div class="row">
-                		<h2>How it works</h2>
+                	<div class="container-fluid">
+                		<h2>How It Works</h2>
                 		<div class="row">
-                			<div class=" descr col-md-4">
-                				<h3>1. Choose what book you are willing to trade. </h3>
+                			<div class=" descr col-md-6">
+                				<h3>Step 1: Choose the book you are willing to offer. </h3>
                                 <p> You can search by title, ISBN, author,
-    class name, or professor name </p>
+    class name, or professor name. </p>
                 			</div>
-                			<div class="col-md-8">
-                				Animation <br/>
+                			<div class="col-md-6">
                 				<img class='step' src={step1}/>
                 			</div>
                 		</div>
-                		<div class="row next_step">
+                		<div class="row next_step step_2">
                 			<div class="col-md-6">
-                 				Animation <br/>
                 				<img class='step' src={step2}/>
                 			</div>
-                			<div class="descr col-md-4">
-                				<h3>2.  Choose the books you want </h3>
-                                <p> You should choose the books you would be willing to receive a one​ ​to​ ​one​ swap for the
-    book you chose in step 1 </p>
+                			<div class="descr col-md-6">
+                				<h3>Step 2:  Choose the book(s) you want to receive in return. </h3>
+                                <p> You can select multiple books that you would like to potentially receive in return. However, our trading algorithm will only find one-to-one swaps, so you will only receive one of your wanted books in return. </p>
                 			</div>
-                            <div class="col-md-2"></div>
                 		</div>
                 		<div class="row next_step">
                 			<div class="col-md-6 descr">
-                				<h3> 3. Submit the trade </h3>
+                				<h3>Step 3: Confirm and submit the trade. </h3>
                                 <p> 
                                     We'll send you an email once a trade is found! <br />
                                     This email will contain the contact information of the other people 
@@ -90,7 +86,6 @@ class TradingGuide extends Component{
                                  </p>
                 			</div>
                 			<div class="col-md-6">
-    	           				Animation <br/>
                 				<img class='step' src={step3}/>
                             </div>
                 		</div>

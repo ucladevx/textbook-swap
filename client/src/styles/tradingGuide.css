@@ -6,3 +6,66 @@ img#loop_logo {
 	padding-top: 10%;
 	max-height: 150px;
 }
+
+#loop_title {
+	font-weight: bold;
+	text-align: center;
+	font-size: 400%;
+}
+
+/*body {
+	background-color: #ECECEC;
+}*/
+
+ul,ol {
+	list-style-type: none;
+}
+
+h2 {
+	font-weight: bold;
+	text-align: center;
+	font-size: 300%;
+}
+
+h3 {
+	font-size: 200%;
+}
+
+.guide {
+	padding: 2%;
+	background-color:  #ECECEC;
+	height: 95%;
+}
+
+.initial_info {
+	height: 70vh;
+}
+
+.loop_anim {
+	padding-top: 20vh;
+}
+
+p {
+	text-align: left;
+	font-size: 125%;
+}
+
+.trade_desc {
+	padding-left: 10%;
+	padding-right: 10%;
+	padding-top: 7vh;
+}
+
+.how_works {
+	padding-top: 5vh;
+	padding: 2%;
+}
+
+.next_step {
+	padding-top: 5vh;
+}
+
+.descr {
+	padding-left: 5vw;
+	padding-right: 5vw;
+}

@@ -7,6 +7,8 @@ import SearchBox from './searchBox'
 import Summary from './summary'
 import MinSummary from './minSummary'
 
+import TopRightBookshelfImage from '../img/Bookshelf_NewTrade1.svg'
+
 import '../styles/form.css'
 
 const ROOT = 'http://localhost:3000'
@@ -276,8 +278,11 @@ class EditTrade extends Component{
                 case 2:
                     return (
                         <div className="formContents">
-                            <h1 className="formTitle">EDIT TRADE</h1>
-                            <h3 className="formMessage">Modify the books you want to add to your trades.</h3>
+                            <div className="formHeader">
+                                <h1 className="formTitle">EDIT TRADE</h1>
+                                <img className="topRightBookshelfImage" src={TopRightBookshelfImage}/>
+                            </div>
+                            <h3 className="formMessage">Modify the book(s) you want to receive.</h3>
                             <div className="searchBoxAndResults" ref="editSearchBox">
                                 <SearchBox
                                     onChange={this.processWant}
@@ -314,8 +319,12 @@ class EditTrade extends Component{
                     )
                 case 1:
                      return (
-                         <div className="formContents">
-                            <h1 className="formTitle">TRADE INFO</h1>
+                         <div className="formContents confirmTradePage">
+                            <div className="formHeader">
+                                <h1 className="formTitle">TRADE INFO</h1>
+                                <img className="topRightBookshelfImage" src={TopRightBookshelfImage}/>
+                            </div>
+                            <h3 className="formMessage">Edit or delete this trade using the buttons below.</h3>
                             <div className='confirmTradeContainer' ref="confirmTradeContainer">
                                 <div className='confirmTradeLeft'>
                                     <h4> OFFERING </h4>

@@ -161,7 +161,7 @@
     .transitionButtonRow button {
         background-color: rgb(253, 206, 48);
         border-color: rgb(253, 206, 48);
-        border-radius: 0;
+        border: 0;
         box-shadow: none;
         outline: none;
         color: #ffffff;

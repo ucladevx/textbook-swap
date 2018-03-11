@@ -346,7 +346,7 @@ class Form extends Component{
                                 <h1 className="formTitle">NEW TRADE</h1>
                                 <img className="topRightBookshelfImage" src={TopRightBookshelfImage}/>
                             </div>
-                            <h3 className="formMessage">Confirm your trades!</h3>
+                            <h3 className="formMessage">Confirm your trade information!</h3>
                             <div className='confirmTradeContainer' ref="confirmTradeContainer">
                                 <div className='confirmTradeLeft'>
                                     <h4> OFFERING </h4>

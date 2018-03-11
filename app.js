@@ -146,6 +146,7 @@ app.post('/api/found_trades/update_status_rejected', foundTradesController.updat
 app.get('/api/found_trades/get_trade_by_wanted_book', foundTradesController.get_trade_by_wanted_book);
 app.get('/api/found_trades/get_trade_by_book_owned', foundTradesController.get_trade_by_book_owned);
 app.post('/api/found_trades/dismiss_rejected_trade', foundTradesController.dismiss_rejected_trade);
+app.post('/api/found_trades/dismiss_accepted_trade', foundTradesController.dismiss_accepted_trade);
 
 // Algorithm (FOR DEVELOPMENT ONLY)
 app.get('/api/algorithm/run', runAlgorithmController.run_algorithm);

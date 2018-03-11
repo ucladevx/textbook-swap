@@ -61,6 +61,7 @@ class Dashboard extends Component{
               text: null,
               title: null,
               confirmButtonText: null,
+              showCancelButton: false,
               cancelButtonText:null,
               onConfirm: null
           }
@@ -92,6 +93,7 @@ class Dashboard extends Component{
                           title: "This trade is complete!",
                           text: "You have been emailed the details of your trade loop",
                           confirmButtonText: "Okay",
+                          showCancelButton: false,
                           cancelButtonText: null,
                         }})
         }
@@ -103,6 +105,7 @@ class Dashboard extends Component{
                           title: "This trade has been rejected by a member of the loop",
                           text: "If you would still like to trade this book, please add it again.",
                           confirmButtonText: "Dismiss Card",
+                          showCancelButton: true,
                           cancelButtonText: "Back",
                         }})
         }
@@ -114,6 +117,7 @@ class Dashboard extends Component{
                           title: "We're waiting for other members of the loop to confirm the trade",
                           text: "You will be emailed trade details soon",
                           confirmButtonText: "Okay",
+                          showCancelButton: false,
                           cancelButtonText: null,
                         }})
         }
@@ -281,13 +285,14 @@ class Dashboard extends Component{
                     title={this.state.swal.title}
                     text={this.state.swal.text}
                     confirmButtonText={this.state.swal.confirmButtonText}
-                    showCancelButton={this.state.swal.cancelButtonText}
+                    showCancelButton={this.state.swal.showCancelButton}
                     cancelButtonText={this.state.swal.cancelButtonText}
                     onConfirm={() => this.handleAlert(this.state.swal.status)}
                     onEscapeKey={() => this.setState({ swal: {show: false} })}
                     onOutsideClick={() => this.setState({ swal: {show: false} })}
                 />
-                
+                {console.log(this.state.swal)}
+
                 <div className="cardContainer">
                      <CardContainer
                          cards={this.props.user.trades}

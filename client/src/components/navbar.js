@@ -13,7 +13,7 @@ class NavBar extends Component {
     handleSelect(key){
         switch (key) {
             case 1:
-                console.log("Show about page")
+                window.location.replace('http://localhost:3000/guide');
                 break
             case 2:
                 window.location.replace('mailto:loop.textbook.swap@gmail.com');

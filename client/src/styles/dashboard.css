@@ -43,6 +43,15 @@
     color: white;
 }
 
+.loadingContainer {
+    width: 100vw;
+    height: 92vh;
+    background-color: whitesmoke;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 @media only screen and (min-width : 768px) {
     .dashboardContainer{
         background-color: azure;
@@ -59,27 +68,24 @@
 
     .cardContainer{
         background-color: whitesmoke;
-        height: auto;
         padding-top: 4%;
         padding-bottom: 4%;
-    /*    padding-left: 0.5%;*/
-    /*    padding-right: 0.5%;*/
+        min-height: 60vh;
     }
 
-}
-
-.loadingContainer {
-    width: 100vw;
-    height: 92vh;
-    background-color: whitesmoke;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 @media only screen and (max-width : 1000px) {
     .bookshelf_image{
         display: none;
+    }
+
+    .topBar{
+        height: 25vh;
+    }
+
+    .cardContainer{
+        min-height: 75vh;
     }
 }
 
@@ -102,7 +108,6 @@
         height: auto;
         padding-top: 4%;
         padding-bottom: 4%;
-    /*    padding-left: 0.5%;*/
-    /*    padding-right: 0.5%;*/
+        min-height: 75vh;
     }
 }

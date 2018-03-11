@@ -7,6 +7,8 @@ import SearchBox from './searchBox'
 import Summary from './summary'
 import MinSummary from './minSummary'
 
+import TopRightBookshelfImage from '../img/Bookshelf_NewTrade1.svg'
+
 import '../styles/form.css'
 
 const ROOT = 'http://localhost:3000'
@@ -233,7 +235,10 @@ class Form extends Component{
                 case 1:
                     return (
                         <div className="formContents">
-                            <h1 className="formTitle">NEW TRADE</h1>
+                            <div className="formHeader">
+                                <h1 className="formTitle">NEW TRADE</h1>
+                                <img className="topRightBookshelfImage" src={TopRightBookshelfImage}/>
+                            </div>
                             <h3 className="formMessage">Select the book you can offer.</h3>
                                 <div className="ownedBookSearchAndResults" ref="ownedBookSearch">
                                     <div>
@@ -287,7 +292,10 @@ class Form extends Component{
                 case 3:
                     return (
                         <div className="formContents wantedBooksPage">
-                            <h1 className="formTitle">NEW TRADE</h1>
+                            <div className="formHeader">
+                                <h1 className="formTitle">NEW TRADE</h1>
+                                <img className="topRightBookshelfImage" src={TopRightBookshelfImage}/>
+                            </div>
                             <h3 className="formMessage">Select the book(s) you want to receive in return.</h3>
                             <div className="searchBoxAndResults" ref="wantedBookSearch">
                                 <SearchBox
@@ -334,8 +342,11 @@ class Form extends Component{
                 case 4:
                      return (
                          <div className="formContents confirmTradePage">
-                            <h1 className="formTitle">NEW TRADE</h1>
-                            <h3 className="formMessage">Confirm your trades!</h3>
+                            <div className="formHeader">
+                                <h1 className="formTitle">NEW TRADE</h1>
+                                <img className="topRightBookshelfImage" src={TopRightBookshelfImage}/>
+                            </div>
+                            <h3 className="formMessage">Confirm your trade information!</h3>
                             <div className='confirmTradeContainer' ref="confirmTradeContainer">
                                 <div className='confirmTradeLeft'>
                                     <h4> OFFERING </h4>

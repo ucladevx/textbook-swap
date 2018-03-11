@@ -43,6 +43,13 @@
         height: 80%;
         overflow: hidden;
         text-overflow: ellipsis;
+        display: flex;
+        align-items: center;
+        margin-right: 5%;
+    }
+
+    .ptBookInfo {
+        margin: auto;
     }
 
     .ptBottom{
@@ -110,6 +117,13 @@
         height: 100%;
         overflow: hidden;
         text-overflow: ellipsis;
+        display: flex;
+        align-items: center;
+        margin-right: 5%;
+    }
+
+    .ptBookInfo {
+        margin: auto;
     }
 
     .ptBottom{

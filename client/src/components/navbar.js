@@ -72,4 +72,3 @@ function mapStateToProps(state){
 }
 
 export default connect(mapStateToProps)(withRouter(NavBar))
-

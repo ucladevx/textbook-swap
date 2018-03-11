@@ -10,23 +10,24 @@ class CardContainer extends Component {
     constructor(props) {
         super(props);
 //        this.cardClicked = this.cardClicked.bind(this)
-        this.generateList = this.generateList.bind(this)
-        this.mapStatusToColor = this.mapStatusToColor.bind(this)
-        this.mapFilterToColorToColor = this.mapFilterToColor.bind(this)
+        this.generateList = this.generateList.bind(this);
+        this.mapStatusToColor = this.mapStatusToColor.bind(this);
+        this.mapFilterToColorToColor = this.mapFilterToColor.bind(this);
     }
-    
+
     generateList(){
-        var cards = this.props.cards
-        var filter = this.props.filter
+        var cards = this.props.cards;
+        var filter = this.props.filter;
         if (!cards){
             return (<div></div>)
         }
-                
+
         if (filter !== "ALL"){
-                cards = cards.filter(card => this.mapStatusToColor(card.status) === this.mapFilterToColor(filter))
-                console.log("After filter", filter, cards)
+                cards = cards.filter(card => this.mapStatusToColor(card.status) === this.mapFilterToColor(filter));
+//                console.log("After filter", filter, cards)
+
         }
-        
+
         return cards.map((card, key) => {
             if (card.status === 'N'){
                 return (
@@ -39,10 +40,10 @@ class CardContainer extends Component {
                     ></CardPendingTrade>
                 )
             }
-            
+
             if (card.status === 'A'){
                 return (
-                    <CardClosedTrade 
+                    <CardClosedTrade
                     color={card.status}
                     bookHave={card.book_have}
                     bookWant={card.book_want[0]}
@@ -52,10 +53,10 @@ class CardContainer extends Component {
                 </CardClosedTrade>
                 )
             }
-            
+
             if (card.status === 'R'){
                 return (
-                    <CardClosedTrade 
+                    <CardClosedTrade
                     color={card.status}
                     bookHave={card.book_have}
                     bookWant={card.book_want[0]}
@@ -65,10 +66,10 @@ class CardContainer extends Component {
                 </CardClosedTrade>
                 )
             }
-            
+
             if (card.status === 'W') {
                 return (
-                    <CardClosedTrade 
+                    <CardClosedTrade
                         color={card.status}
                         bookHave={card.book_have}
                         bookWant={card.book_want[0]}
@@ -78,10 +79,10 @@ class CardContainer extends Component {
                     </CardClosedTrade>
                 )
             }
-            
+
             if (card.status === 'P') {
                 return (
-                    <CardClosedTrade 
+                    <CardClosedTrade
                         color={card.status}
                         bookHave={card.book_have}
                         bookWant={card.book_want[0]}
@@ -94,7 +95,7 @@ class CardContainer extends Component {
         })
     }
     // TODO: Separate W and P
-    
+
     mapStatusToColor(status){
         if (status === 'A')
             return "green";
@@ -103,9 +104,9 @@ class CardContainer extends Component {
         if (status === 'W' || status === 'P')
             return "blue";
         if (status === 'N')
-            return "yellow"
+            return "yellow";
     }
-    
+
     mapFilterToColor(status){
         if (status === 'REQUESTED')
             return "yellow";
@@ -113,6 +114,8 @@ class CardContainer extends Component {
             return "red";
         if (status === 'MATCHED')
             return "blue";
+        if (status === 'COMPLETED')
+            return "green";
     }
 
     render() {

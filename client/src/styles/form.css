@@ -74,6 +74,10 @@
         margin-bottom: 5%;
     }
 
+    .topRightBookshelfImage {
+        display: none;
+    }
+
     /*
      * First page of the form
      */
@@ -313,6 +317,12 @@
         margin-bottom: 5%;
     }
 
+    .topRightBookshelfImage {
+        float: right;
+        margin-top: -4vw;
+        width: 25%;
+    }
+
     /*
      * First page of the form
      */
@@ -450,6 +460,10 @@
 
     .confirmTradeContainer .minSummaryCell {
         border-bottom: 2px solid rgb(255, 255, 255);
+    }
+
+    .confirmTradePage .formMessage {
+        padding-bottom: 0%;
     }
 
     .ownedBookSummary, .ownedBookSummary > .summaryContainer {

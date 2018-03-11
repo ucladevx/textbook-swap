@@ -117,13 +117,18 @@ exports.send_accepted_trade_email = function (trade_id, next) {
 };
 
 exports.create_text_and_send_accepted_email = function(emails, replacements) {
-    var trade_info = "The trade information is as follows:\n";
+    trade_info = ["", "", "", ""]
+
     for (var i = 0; i < replacements.length; i++) {
-        trade_info += replacements[i].owner_user_name + "\n\xA0Owned book: " + replacements[i].owned_book_name + "\n\xA0Desired book: "
-            + replacements[i].target_book_name + "\n\xA0";
+        trade_info[i] += replacements[i].owner_user_name + " - Owned book: " + replacements[i].owned_book_name + ", Desired book: "
+            + replacements[i].target_book_name;
     }
     logger.log(trade_info);
-    var replacement_text = {trade_info_text : trade_info};
+    var replacement_text = {trade_info_text_one : trade_info[0],
+                            trade_info_text_two: trade_info[1],
+                            trade_info_text_three: trade_info[2],
+                            trade_info_text_four: trade_info[3]
+                            };
     var template = handlebars.compile(accepted_email_html);
     var custom_html = template(replacement_text);
     logger.log(emails);

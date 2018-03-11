@@ -1,17 +1,15 @@
 @media only screen and (min-width : 768px){
     .cardGrid{
-    /*    background-color: red;*/
         height: auto;
         display: flex;
-    /*    padding-left: 1%;*/
-    /*    padding-right: 1%;*/
-        align-items: center;
-        justify-content: center;
+        justify-content: flex-start;
         flex-wrap: wrap;
         flex-flow: row wrap;
         margin-top: -23vh;
         position: relative;
+        margin-left: 1.5%;
     }
+
     .cardSection{
         height: auto;
         padding-top: 3%;
@@ -19,19 +17,21 @@
     }
 }
 
+@media only screen and (max-width : 1000px) {
+    .cardGrid {
+        margin-top: -12vh;
+    }
+}
+
 @media only screen and (max-width : 768px){
     .cardGrid{
-/*    background-color: red;*/
     height: auto;
     display: flex;
-/*    padding-left: 1%;*/
-/*    padding-right: 1%;*/
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    margin-top: -17vh;
     position: relative;
-
+    margin-top: -5vh;
     }
 }
 

@@ -1,8 +1,4 @@
 import React, {Component} from 'react'
-import {connect} from 'react-redux'
-import Loop from '../new_images/loop.png'
-import Tick from '../new_images/tick.png'
-import HalfLoop from '../new_images/halfLoop.png'
 import '../styles/cardPendingTrade.css'
 
 import CardImageView from '../microcomponents/cardImageView'
@@ -47,8 +43,10 @@ class CardPendingTrade extends Component {
                         </CardImageView>
                     </div>
                     <div className="ptRight">
-                        <div className="ptTitle">{this.props.bookHave.title}</div>
-                        <div className="ptAuthor">{this.props.bookHave.author}</div>
+                        <div className="ptBookInfo">
+                            <div className="ptTitle">{this.props.bookHave.title}</div>
+                            <div className="ptAuthor">{this.props.bookHave.author}</div>
+                        </div>
                     </div>
                 </div>
                 <div className="ptBottom" style={{backgroundColor: colorMap[color].bottom}}>

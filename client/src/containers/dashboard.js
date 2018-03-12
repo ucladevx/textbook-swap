@@ -47,7 +47,6 @@ class Dashboard extends Component{
           formModalIsOpen: false,
           detailModalIsOpen: false,
           editModalIsOpen: false,
-          approveAlert: false,
           selectedCard: null,
           rejectAlert: false,
           filter: "ALL",
@@ -71,10 +70,12 @@ class Dashboard extends Component{
         this.closeEditModal = this.closeEditModal.bind(this);
         this.setFilter = this.setFilter.bind(this);
         this.selectCard = this.selectCard.bind(this);
-        this.dismissReject = this.dismissReject.bind(this);
+        this.dismissFoundTrade = this.dismissFoundTrade.bind(this);
         this.dismissAccept = this.dismissAccept.bind(this);
         this.openSwal = this.openSwal.bind(this);
         this.handleAlert = this.handleAlert.bind(this);
+        this.handleCancel = this.handleCancel.bind(this);
+        this.rejectTrade = this.rejectTrade.bind(this);
         this.openApproveAlert = this.openApproveAlert.bind(this);
         this.openRejectAlert = this.openRejectAlert.bind(this);
         this.openWaitAlert = this.openWaitAlert.bind(this);
@@ -87,9 +88,9 @@ class Dashboard extends Component{
                           status: 'A',
                           type: "success",
                           title: "This trade is complete!",
-                          text: "You have been emailed the details of your trade loop",
-                          confirmButtonText: "Okay",
-                          cancelButtonText: null,
+                          text: "You have been emailed the details of your trade loop. When the trade has been resolved, you may dismiss this card.",
+                          confirmButtonText: "Dismiss Card",
+                          cancelButtonText: "Back",
                         }})
         }
         else if (type === 'R'){
@@ -111,7 +112,19 @@ class Dashboard extends Component{
                           title: "We're waiting for other members of the loop to confirm the trade",
                           text: "You will be emailed trade details soon",
                           confirmButtonText: "Okay",
-                          cancelButtonText: null,
+                          cancelButtonText: "Reject Trade",
+                        }})
+        }
+        else if (type === 'REJECT'){
+            this.setState({swal : {
+                          show: true,
+                          status: 'REJECT',              
+                          type: "warning",
+                          title: "Are you sure you want to reject the trade?",
+                          text: "The loop will be broken",
+                          confirmButtonText: "Reject Trade",
+                          cancelButtonText: "Back",
+                          confirmButtonColor: "#DD6B55"
                         }})
         }
     }
@@ -162,10 +175,19 @@ class Dashboard extends Component{
             selectedCard: card
         })
     }
-    
-    dismissReject(){
-        var ownedBook = this.state.selectedCard.bookHave
-        axios.post(ROOT+'/api/found_trades/dismiss_rejected_trade', {
+
+    dismissFoundTrade(tradeStatus){
+        var route = '/api/found_trades/';
+        if(tradeStatus === 'R'){
+            route += 'dismiss_rejected_trade';
+
+        }
+        else if(tradeStatus === 'A'){
+            route += 'dismiss_accepted_trade';
+
+        }
+        var ownedBook = this.state.selectedCard.bookHave;
+        axios.post(ROOT+route, {
             owned_book: ownedBook.book_id
         })
         .then((res) => {
@@ -199,15 +221,64 @@ class Dashboard extends Component{
         }
         
         if (status === 'A'){
-            this.setState({ swal: {show: false}})
+            this.dismissFoundTrade('A')
         }
         else if (status === 'W'){
             this.setState({ swal: {show: false}})
         }
         else if (status === 'R'){
-            this.dismissReject()
+            this.dismissFoundTrade('R')
+        }
+        else if (status === 'REJECT'){
+            this.rejectTrade()
         }
     }
+    
+    rejectTrade(){
+        var owned_book = this.state.selectedCard.bookHave.book_id
+        axios.get(ROOT+'/api/found_trades/get_trade_by_book_owned', {
+            params: {
+                owned_book
+            }
+        })
+        .then((res) => {
+            if (res.data.status === 0){
+                var trade = res.data.data[0]
+                if (!trade) return
+                axios.post(ROOT+'/api/found_trades/update_status_rejected', {
+                    trade_id: trade.trade_id,
+                    owned_book: trade.book_have,
+                    target_user: trade.target_id,
+                    wanted_book: trade.book_want
+                })
+                .then((res) => {
+                    window.location.reload();
+                })
+            }
+        })
+    }
+    
+    handleCancel(){
+        var status = this.state.swal.status
+        
+        if (!status){
+            return
+        }
+
+        if (status === 'R'){
+            this.setState({ swal: {show: false}})
+        }
+        else if (status === 'A'){
+            this.setState({ swal: {show: false}})
+        }
+        else if (status === 'W'){
+            this.openSwal('REJECT')
+        }
+        else if (status === 'REJECT'){
+            this.setState({ swal: {show: false}})
+        }
+    }
+    
     
 
     render(){
@@ -278,11 +349,13 @@ class Dashboard extends Component{
                     title={this.state.swal.title}
                     text={this.state.swal.text}
                     confirmButtonText={this.state.swal.confirmButtonText}
-                    showCancelButton={this.state.swal.cancelButtonText}
+                    showCancelButton={this.state.swal.cancelButtonText != null}
+                    onCancel={() => this.handleCancel()}
                     cancelButtonText={this.state.swal.cancelButtonText}
-                    onConfirm={() => this.handleAlert(this.state.swal.status)}
+                    onConfirm={() => this.handleAlert()}
                     onEscapeKey={() => this.setState({ swal: {show: false} })}
                     onOutsideClick={() => this.setState({ swal: {show: false} })}
+                    confirmButtonColor={this.state.swal.confirmButtonColor}
                 />
                 
                 <div className="cardContainer">

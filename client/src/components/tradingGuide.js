@@ -29,15 +29,14 @@ class TradingGuide extends Component{
                     				<h2>What is Loop? </h2>
                     				<p >
                     					Loop is an innovative way for students to trade textbooks! 
-                                        Users pick what textbooks they want and what theyre willing 
+                                        Users pick what textbooks they want and what they're willing 
                                         to trade for them, and our algorithm will do the rest. <br/><br/>
-                                        For example, 
-                    					<ul className="loop_list"> 
-                    						<li>You have book A, but want book B </li>
-                    						<li>John has book B, but wants book C </li>
-                    						<li>Terry has book A, but wants book A </li>
-                    					</ul><br />
-                                        By comparing book lists of all of our users, Loop uses a 
+                                        For example, <br />
+                    					&emsp; You have book A, but want book B.  <br />
+                    					&emsp; John has book B, but wants book C. <br />
+                    					&emsp; Terry has book A, but wants book A. <br />
+                    					<br />
+                                        By comparing the book lists of all of our users, Loop uses a 
                                         sophisticated algorithm to automatically generates the smartest
                                         trade circles that maximize the number of people who get what they want,
                                         with almost no effort involved on the part of the user.
@@ -82,7 +81,7 @@ class TradingGuide extends Component{
                                     We'll send you an email once a trade is found! <br />
                                     This email will contain the contact information of the other people 
                                     involved in the trade. Reach out to them to schedule a meetup to 
-                                    exhchange the books. 
+                                    exchange the books. 
                                  </p>
                 			</div>
                 			<div className="col-md-6">

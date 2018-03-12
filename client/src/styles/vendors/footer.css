@@ -63,6 +63,11 @@
 
 }
 
+.social-networks p {
+    text-align: center;
+    font-size: 100%;
+}
+
 #myFooter .facebook:hover{
 	color:#0077e2;
 }

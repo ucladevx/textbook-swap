@@ -8,6 +8,7 @@ import Home from './containers/home'
 import Dashboard from './containers/dashboard'
 import Form from './components/form'
 import TradeDetail from './components/tradeDetail'
+import TradingGuide from './components/tradingGuide'
 
 class App extends Component {
     componentDidMount(){
@@ -18,26 +19,24 @@ class App extends Component {
     return (
         <BrowserRouter>
             <div className="App">
-                <NavBar></NavBar>
                 <Route exact path="/" component={() => (
-                        <Home/>
+                        <div>
+                            <NavBar></NavBar>
+                            <Home/>
+                        </div>
                     )}>
                 </Route>
                 <Route exact path="/bookshelf" component={() => (
                         <div>
+                            <NavBar></NavBar>
                             <Dashboard></Dashboard>
                         </div>
                 )}>
                 </Route>
-                <Route exact path="/new" component={() => (
+                <Route exact path="/guide" component={() => (
                         <div>
-                            <Form></Form>
-                        </div>
-                )}>
-                </Route>
-                <Route exact path="/detail" component={() => (
-                        <div>
-                            <TradeDetail></TradeDetail>
+                            <NavBar></NavBar>
+                            <TradingGuide></TradingGuide>
                         </div>
                 )}>
                 </Route>

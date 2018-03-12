@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ucladevx/textbook-swap.git"
+    "url": "git+https://github.com/ucladevx/textbook-swap.git"
   },
   "keywords": [
     "loops",
@@ -52,5 +52,8 @@
   },
   "devDependencies": {
     "mocha": "^5.0.0"
+  },
+  "directories": {
+    "test": "test"
   }
 }

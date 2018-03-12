@@ -67,9 +67,6 @@ const Landing = () => {
                 People who get matched up with a trade can then meet up in person to complete the exchange.
                 <br></br>
                 <br></br>
-                Don't want to trade textbooks, but just want to buy or sell them with or for cash? No problem! When adding a book to your lists, just specify that you want to trade books for cash (or vice versa), and set a price that you're willing to accept.
-                <br></br>
-                <br></br>
             </div>
       </section>
       </div>

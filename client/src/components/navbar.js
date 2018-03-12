@@ -13,7 +13,7 @@ class NavBar extends Component {
     handleSelect(key){
         switch (key) {
             case 1:
-                console.log("Show about page")
+                this.props.history.push('/guide')
                 break
             case 2:
                 window.location.replace('mailto:loop.textbook.swap@gmail.com');
@@ -30,6 +30,9 @@ class NavBar extends Component {
                 console.log("Login")
                 window.location.replace("http://localhost:3000/login/facebook");
                 break
+            case 6:
+                this.props.history.push('/bookshelf')
+                break
         }
     }
     
@@ -40,7 +43,7 @@ class NavBar extends Component {
                     <Navbar.Brand>
                         <img 
                             alt="LOOP" 
-                            onClick={()=>window.location.replace("http://localhost:5000/")}
+                            onClick={()=>this.props.history.push('/')}
                             className="navbar-logo" src={NavBarLogo}/>
                     </Navbar.Brand>
                     <Navbar.Toggle />
@@ -55,8 +58,12 @@ class NavBar extends Component {
                         <NavItem eventKey={3}>REPORT A BUG</NavItem>
                         {
                             this.props.user != null ?
-                            <NavItem eventKey={4}>LOGOUT</NavItem> :
-                            <NavItem eventKey={5}>LOGIN</NavItem>
+                                (
+                                    this.props.location.pathname === "/" || this.props.location.pathname === "/guide" ? 
+                                    <NavItem eventKey={6}>MY BOOKSHELF</NavItem> :
+                                    <NavItem eventKey={4}>LOGOUT</NavItem>
+                                ) :
+                                <NavItem eventKey={5}>LOGIN</NavItem>
                         }
                     </Nav>
                 </Navbar.Collapse>

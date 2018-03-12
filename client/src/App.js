@@ -19,31 +19,23 @@ class App extends Component {
     return (
         <BrowserRouter>
             <div className="App">
-                <NavBar></NavBar>
                 <Route exact path="/" component={() => (
-                        <Home/>
+                        <div>
+                            <NavBar></NavBar>
+                            <Home/>
+                        </div>
                     )}>
                 </Route>
                 <Route exact path="/bookshelf" component={() => (
                         <div>
+                            <NavBar></NavBar>
                             <Dashboard></Dashboard>
-                        </div>
-                )}>
-                </Route>
-                <Route exact path="/new" component={() => (
-                        <div>
-                            <Form></Form>
-                        </div>
-                )}>
-                </Route>
-                <Route exact path="/detail" component={() => (
-                        <div>
-                            <TradeDetail></TradeDetail>
                         </div>
                 )}>
                 </Route>
                 <Route exact path="/guide" component={() => (
                         <div>
+                            <NavBar></NavBar>
                             <TradingGuide></TradingGuide>
                         </div>
                 )}>

@@ -1,7 +1,13 @@
 /* navbar */
 
 .navbar{
+/*    opacity: 0.6;*/
+    transition: all ease-out;
+    background: #52b9d1;
+    border: 0;
+    border-color: #52b9d1;
     margin-bottom: 0px;
+    border-radius: 0px;
 }
 
 .navbar-logo{
@@ -9,14 +15,6 @@
     vertical-align: middle;
     padding: 10px;
     padding-left: 2em;
-}
-
-.navbar{
-/*    opacity: 0.6;*/
-    transition: all ease-out;
-    background: #52b9d1;
-    border: 0;
-    border-color: #52b9d1;
 }
 
 .navbar-toggle{

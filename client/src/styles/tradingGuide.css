@@ -1,0 +1,162 @@
+@media only screen and (min-width : 768px) {
+	.step {
+		height: 150%;
+	}
+
+	img#loop_logo {
+		padding-top: 10%;
+		max-height: 150px;
+	}
+
+	#loop_title {
+		font-weight: bold;
+		text-align: center;
+		font-size: 400%;
+	}
+
+	ul,ol {
+		list-style-type: none;
+	}
+
+	h2 {
+		font-weight: bold;
+		text-align: center;
+		font-size: 300%;
+		margin-bottom: 30px;
+	}
+
+	h3 {
+		font-size: 200%;
+	}
+
+	.guide {
+		padding: 2%;
+		background-color:  #ECECEC;
+		height: 95%;
+	}
+
+	.loop_anim {
+		padding-top: 15vh;
+	}
+
+	p {
+		text-align: left;
+		font-size: 125%;
+	}
+
+	.trade_desc {
+		padding-left: 10%;
+		padding-right: 10%;
+		padding-top: 3vh;
+		padding-bottom: 5vh;
+	}
+
+	.how_works {
+		padding-top: 5vh;
+		padding: 2%;
+	}
+
+	.how_works .row {
+		margin: 5vh 0vw;
+	}
+
+	.how_works h3 {
+		text-align: left;
+	}
+
+	.next_step {
+		padding-top: 5vh;
+	}
+
+	.descr {
+		padding-left: 5vw;
+		padding-right: 5vw;
+	}
+}
+
+@media only screen and (max-width : 992px) {
+	.step_2 {
+		display: flex; 
+		flex-flow: column-reverse;
+	}
+
+	.loop_anim {
+		padding-top: 0vh;
+	}
+}
+
+@media only screen and (max-width : 768px) {
+	.step {
+		height: 150%;
+	}
+
+	img#loop_logo {
+		padding-top: 10%;
+		max-height: 150px;
+	}
+
+	#loop_title {
+		font-weight: bold;
+		text-align: center;
+		font-size: 400%;
+	}
+
+	ul,ol {
+		list-style-type: none;
+	}
+
+	h2 {
+		font-weight: bold;
+		text-align: center;
+		font-size: 300%;
+		margin-bottom: 30px;
+	}
+
+	h3 {
+		font-size: 200%;
+	}
+
+	.guide {
+		padding: 2%;
+		background-color:  #ECECEC;
+		height: 95%;
+	}
+
+	p {
+		text-align: left;
+		font-size: 125%;
+	}
+
+	.trade_desc {
+		padding-left: 10%;
+		padding-right: 10%;
+		padding-top: 3vh;
+		padding-bottom: 5vh;
+	}
+
+	.how_works {
+		padding-top: 5vh;
+		padding: 2%;
+	}
+
+	.how_works .row {
+		margin: 5vh 0vw;
+	}
+
+	.how_works h3 {
+		text-align: left;
+	}
+
+	.how_works img {
+		max-width: 80vw;
+	}
+
+	.next_step {
+		padding-top: 5vh;
+	}
+
+	.descr {
+		padding-left: 5vw;
+		padding-right: 5vw;
+	}
+}

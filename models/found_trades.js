@@ -7,6 +7,7 @@ const pg = require('pg');
 const utilities = require('../utilities');
 const found_trades = require('./found_trades');
 const logger = require('tracer').colorConsole();
+const emailer = require('./emailer');
 
 /*
  *  Purpose: Add a loop graph edge into the database
@@ -266,6 +267,11 @@ exports.update_status_accepted = function(trade_id, user_id, owned_book, target_
                     }
 
                     logger.log("set all edges to A");
+
+                    emailer.send_accepted_trade_email(trade_id, function(result){
+                            if(result) logger.log("Accepted trade email successfully sent");
+                            else logger.log("Accepted trade email failed");
+                    });
 
                     return next(utilities.found_trades_errors.DB_SUCCESS, matched);
                 });

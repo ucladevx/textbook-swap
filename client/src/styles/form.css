@@ -74,6 +74,10 @@
         margin-bottom: 5%;
     }
 
+    .topRightBookshelfImage {
+        display: none;
+    }
+
     /*
      * First page of the form
      */
@@ -161,11 +165,12 @@
     .transitionButtonRow button {
         background-color: rgb(253, 206, 48);
         border-color: rgb(253, 206, 48);
-        border-radius: 0;
+        border: 0;
         box-shadow: none;
         outline: none;
         color: #ffffff;
         margin: 0% 5%;
+        padding: 6px 12px;
     }
 
     /* want books search box and results */
@@ -313,6 +318,12 @@
         margin-bottom: 5%;
     }
 
+    .topRightBookshelfImage {
+        float: right;
+        margin-top: -4vw;
+        width: 25%;
+    }
+
     /*
      * First page of the form
      */
@@ -392,11 +403,12 @@
     .transitionButtonRow button {
         background-color: rgb(253, 206, 48);
         border-color: rgb(253, 206, 48);
-        border-radius: 0;
+        border: 0;
         box-shadow: none;
         outline: none;
         color: #ffffff;
         margin: 0% 5%;
+        padding: 6px 12px;
     }
 
     /* want books search box and results */
@@ -450,6 +462,10 @@
 
     .confirmTradeContainer .minSummaryCell {
         border-bottom: 2px solid rgb(255, 255, 255);
+    }
+
+    .confirmTradePage .formMessage {
+        padding-bottom: 0%;
     }
 
     .ownedBookSummary, .ownedBookSummary > .summaryContainer {

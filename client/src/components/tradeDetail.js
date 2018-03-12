@@ -145,7 +145,7 @@ class TradeDetail extends Component {
                             <CardDetailView book={this.props.bookHave}></CardDetailView>
                         </div>
                         <div className="tdCenter">
-                            <img src={Loop} className="tdImage"></img>
+                            <img src={Loop} alt="Loop" className="tdImage"></img>
                         </div>
                         <div className="tdRight">
                             <CardDetailView book={this.props.bookWant}></CardDetailView>

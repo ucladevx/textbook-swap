@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {BrowserRouter, Route, Switch} from 'react-router-dom'
+import {BrowserRouter, Route} from 'react-router-dom'
 import {connect} from 'react-redux';
 
 import NavBar from './components/navbar'
@@ -7,8 +7,8 @@ import Footer from './components/footer'
 import Home from './containers/home'
 import Dashboard from './containers/dashboard'
 import Form from './components/form'
-import SearchBox from './components/searchBox'
 import TradeDetail from './components/tradeDetail'
+import TradingGuide from './components/tradingGuide'
 
 class App extends Component {
     componentDidMount(){
@@ -19,26 +19,24 @@ class App extends Component {
     return (
         <BrowserRouter>
             <div className="App">
-                <NavBar></NavBar>
                 <Route exact path="/" component={() => (
-                        <Home/>
+                        <div>
+                            <NavBar></NavBar>
+                            <Home/>
+                        </div>
                     )}>
                 </Route>
                 <Route exact path="/bookshelf" component={() => (
                         <div>
+                            <NavBar></NavBar>
                             <Dashboard></Dashboard>
                         </div>
                 )}>
                 </Route>
-                <Route exact path="/new" component={() => (
+                <Route exact path="/guide" component={() => (
                         <div>
-                            <Form></Form>
-                        </div>
-                )}>
-                </Route>
-                <Route exact path="/detail" component={() => (
-                        <div>
-                            <TradeDetail></TradeDetail>
+                            <NavBar></NavBar>
+                            <TradingGuide></TradingGuide>
                         </div>
                 )}>
                 </Route>

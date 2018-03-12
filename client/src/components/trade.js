@@ -6,7 +6,7 @@ import axios from 'axios'
 import SearchBox from './searchBox'
 import Summary from './summary'
 
-import '../styles/trade.css'
+import '../styles/tradingGuide.css'
 
 class Trade extends Component{
     constructor(props){

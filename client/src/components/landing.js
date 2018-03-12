@@ -13,14 +13,10 @@ import Animation from '../new_images/loop-animation.gif'
 import '../styles/home.css'
 
 // Responsive
-const Desktop = ({ children }) => <Responsive minWidth={992} children={children} />;
-const Tablet = ({ children }) => <Responsive minWidth={768} maxWidth={992} children={children} />;
+// const Desktop = ({ children }) => <Responsive minWidth={992} children={children} />;
+// const Tablet = ({ children }) => <Responsive minWidth={768} maxWidth={992} children={children} />;
 const Mobile = ({ children }) => <Responsive maxWidth={768} children={children} />;
 const Default = ({ children }) => <Responsive minWidth={768} children={children} />;
-
-const responseFacebook = (response) => {
-  console.log(response);
-}
 
 const Landing = () => {
   var mobileStyles = {
@@ -35,8 +31,6 @@ const Landing = () => {
       }
   }
   
-  
-
   return (
       <div>
         <Default>
@@ -71,9 +65,6 @@ const Landing = () => {
                 <br></br>
                 <br></br>
                 People who get matched up with a trade can then meet up in person to complete the exchange.
-                <br></br>
-                <br></br>
-                Don't want to trade textbooks, but just want to buy or sell them with or for cash? No problem! When adding a book to your lists, just specify that you want to trade books for cash (or vice versa), and set a price that you're willing to accept.
                 <br></br>
                 <br></br>
             </div>

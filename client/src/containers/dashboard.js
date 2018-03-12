@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import {withRouter} from "react-router-dom";
 import {connect} from 'react-redux'
-import NavBar from '../components/navbar'
 import CardContainer from '../containers/cardContainer'
 import '../styles/dashboard.css'
 import '../styles/vendors/sweetalert.css'
 import {userLogin} from '../actions';
 
-import Loading from '../new_images/loading.gif'
 import { ClipLoader } from 'react-spinners';
 
 import Form from '../components/form'
@@ -50,7 +48,6 @@ class Dashboard extends Component{
           detailModalIsOpen: false,
           editModalIsOpen: false,
           selectedCard: null,
-          approveAlert: false,
           rejectAlert: false,
           filter: "ALL",
           swal: {

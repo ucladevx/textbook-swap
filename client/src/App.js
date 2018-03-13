@@ -29,14 +29,14 @@ class App extends Component {
                 <Route exact path="/bookshelf" component={() => (
                         <div>
                             <NavBar></NavBar>
-                            <Dashboard></Dashboard>
+                            <Dashboard new={false}></Dashboard>
                         </div>
                 )}>
                 </Route>
                 <Route exact path="/bookshelf_new" component={() => (
                         <div>
                             <NavBar></NavBar>
-                            <Dashboard></Dashboard>
+                            <Dashboard new={true}></Dashboard>
                         </div>
                 )}>
                 </Route>

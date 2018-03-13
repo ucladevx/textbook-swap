@@ -33,6 +33,13 @@ class App extends Component {
                         </div>
                 )}>
                 </Route>
+                <Route exact path="/bookshelf_new" component={() => (
+                        <div>
+                            <NavBar></NavBar>
+                            <Dashboard></Dashboard>
+                        </div>
+                )}>
+                </Route>
                 <Route exact path="/guide" component={() => (
                         <div>
                             <NavBar></NavBar>

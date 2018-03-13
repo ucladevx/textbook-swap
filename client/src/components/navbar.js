@@ -52,7 +52,7 @@ class NavBar extends Component {
                     <Nav pullRight>
                         {
                             (true || this.props.location.pathname === "/") &&
-                            <NavItem eventKey={1}>ABOUT</NavItem>
+                            <NavItem eventKey={1}>TRADING GUIDE</NavItem>
                         }
                         <NavItem eventKey={2}>CONTACT US</NavItem>
                         <NavItem eventKey={3}>REPORT A BUG</NavItem>

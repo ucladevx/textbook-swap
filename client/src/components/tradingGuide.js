@@ -36,7 +36,7 @@ class TradingGuide extends Component{
                                         For example, <br />
                     					&emsp; You have book A, but want book B.  <br />
                     					&emsp; John has book B, but wants book C. <br />
-                    					&emsp; Terry has book A, but wants book A. <br />
+                    					&emsp; Terry has book C, but wants book A. <br />
                     					<br />
                                         By comparing the book lists of all of our users, Loop uses a 
                                         sophisticated algorithm to automatically generates the smartest

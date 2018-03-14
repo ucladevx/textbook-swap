@@ -20,6 +20,7 @@
     .formMessage{
         font-size: 1.25em;
         text-align: left;
+        margin-bottom: 1.5em;
     }
 
     .formBox{
@@ -192,8 +193,9 @@
         position: relative;
         font-size: 12px;
         overflow: scroll;
-        height: 70%;
+        height: 65%;
         background-color: rgb(236, 236, 236);
+        width: 100%;
     }
 
     .confirmTradeLeft {

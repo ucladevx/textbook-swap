@@ -78,7 +78,7 @@ app.set('view engine', 'pug');
  */
  app.use(cors({
    credentials: true,
-   origin: 'http://localhost:5000'
+   origin: 'http://www.loop-trading.com'
  }));
 
 /*

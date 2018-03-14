@@ -36,14 +36,14 @@ const Landing = () => {
         <Default>
             <div className="hero" style={desktopStyles.hero}>
                 <div className="heroText">
-                    <a className="button button-default" href="/login/facebook" role="button">LOGIN WITH FACEBOOK</a>
+                    <a className="button button-default" href="http://www.loop-trading.com:3000/login/facebook" role="button">LOGIN WITH FACEBOOK</a>
                 </div>
             </div>
         </Default>
         <Mobile>
             <div className="hero" style={mobileStyles.hero}>
                 <div className="heroText">
-                    <a className="button button-default" href="/login/facebook" role="button">LOGIN WITH FACEBOOK</a>
+                    <a className="button button-default" href="http://www.loop-trading.com:3000/login/facebook" role="button">LOGIN WITH FACEBOOK</a>
                 </div>
             </div>
         </Mobile>

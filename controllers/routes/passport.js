@@ -9,7 +9,7 @@ const users = require('../../models/users');
 exports.loginReturn = function (req, res) {
     users.add_new_user(req.user.id, req.user.displayName, req.user.emails[0].value, function(){
         // res.redirect('http://localhost:5000/bookshelf')
-        res.redirect('http://www.loop-trading.com:5000/bookshelf');
+        res.redirect('http://www.loop-trading.com/bookshelf');
     });
 };
 

@@ -9,6 +9,8 @@ import step1 from "../img/step1.gif";
 import step2 from "../img/step2.gif";
 import step3 from "../img/step3.gif";
 import loop_anim from "../img/loop-animation.gif";
+import accept_trade from "../img/accept-trade.gif";
+import reject_trade from "../img/reject-trade.gif";
 
 import '../styles/tradingGuide.css'
 
@@ -54,7 +56,7 @@ class TradingGuide extends Component{
                 </div>
                 <div className="how_works">
                 	<div className="container-fluid">
-                		<h2>How It Works</h2>
+                		<h2>How Do I Create a New Trade?</h2>
                 		<div className="row">
                 			<div className=" descr col-md-6">
                 				<h3>Step 1: Choose the book you are willing to offer. </h3>
@@ -78,10 +80,7 @@ class TradingGuide extends Component{
                 			<div className="col-md-6 descr">
                 				<h3>Step 3: Confirm and submit the trade. </h3>
                                 <p> 
-                                    We'll send you an email once a trade is found! <br />
-                                    This email will contain the contact information of the other people 
-                                    involved in the trade. Reach out to them to schedule a meetup to 
-                                    exchange the books. 
+                                    The trade will be added to your bookshelf. You can modify the trade anytime by clicking on the trade card on the bookshelf and editing the books you want to receive in return, or you can also delete the trade completely. Our trade matching algorithm is run every night, and we will send you an email once a trade is found!
                                  </p>
                 			</div>
                 			<div className="col-md-6">
@@ -89,6 +88,30 @@ class TradingGuide extends Component{
                             </div>
                 		</div>
                 	</div>
+                </div>
+                <div className="what_happens_next">
+                    <div className="container-fluid">
+                        <h2>What Happens Next?</h2>
+                        <div className="row">
+                            <div className=" descr col-md-6">
+                                <h3> <span style={{color:'#5dce53'}}>Accepting</span> a Matched Trade</h3>
+                                <p> If you would like to proceed with a matched trade, then you can accept it by clicking on the trade card. After all members of the trade loop accept the matched trade, you will receive an email telling you that your trade has been completed. This email will be a group email that contains the contact information of the other people in your trade loop, so you can coordinate meeting up in person to exchange the textbooks.
+                                </p>
+                            </div>
+                            <div className="col-md-6">
+                                <img className='step' src={accept_trade}/>
+                            </div>
+                        </div>
+                        <div className="row next_step step_2">
+                            <div className="col-md-6">
+                                <img className='step' src={reject_trade}/>
+                            </div>
+                            <div className="descr col-md-6">
+                                <h3><span style={{color:'#e88154'}}>Rejecting</span> a Matched Trade</h3>
+                                <p> If you no longer want to proceed with a matched trade (even after previously accepting it), then you can reject it by clicking on the trade card. If anyone in the trade loop rejects the matched trade, then the whole trade loop is broken and everyone in the trade loop is notified by email. You can click a rejected trade card to remove it from your bookshelf and later re-create it as a new trade if you want. </p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         )

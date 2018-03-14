@@ -51,17 +51,21 @@
 		padding-bottom: 5vh;
 	}
 
-	.how_works {
+	.how_works, .what_happens_next {
 		padding-top: 5vh;
 		padding: 2%;
 	}
 
-	.how_works .row {
+	.how_works .row, .what_happens_next .row {
 		margin: 5vh 0vw;
 	}
 
-	.how_works h3 {
+	.how_works h3, .what_happens_next h3 {
 		text-align: left;
+	}
+
+	.how_works img, .what_happens_next img {
+		width: 100%;
 	}
 
 	.next_step {
@@ -71,6 +75,10 @@
 	.descr {
 		padding-left: 5vw;
 		padding-right: 5vw;
+	}
+
+	.what_happens_next {
+		background-color:  #ECECEC;
 	}
 }
 
@@ -134,20 +142,20 @@
 		padding-bottom: 5vh;
 	}
 
-	.how_works {
+	.how_works, .what_happens_next {
 		padding-top: 5vh;
 		padding: 2%;
 	}
 
-	.how_works .row {
+	.how_works .row, .what_happens_next .row {
 		margin: 5vh 0vw;
 	}
 
-	.how_works h3 {
+	.how_works h3, .what_happens_next h3 {
 		text-align: left;
 	}
 
-	.how_works img {
+	.how_works img, .loop_anim img, .what_happens_next img {
 		max-width: 80vw;
 	}
 
@@ -158,5 +166,9 @@
 	.descr {
 		padding-left: 5vw;
 		padding-right: 5vw;
+	}
+
+	.what_happens_next {
+		background-color:  #ECECEC;
 	}
 }

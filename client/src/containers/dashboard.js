@@ -16,7 +16,7 @@ import EditTrade from '../components/editTrade'
 import SweetAlert from 'sweetalert-react';
 
 import axios from 'axios'
-const ROOT = 'http://loop-trading.com'
+const ROOT = 'http://www.loop-trading.com'
 axios.defaults.withCredentials = true;
 
 const customStyles = {

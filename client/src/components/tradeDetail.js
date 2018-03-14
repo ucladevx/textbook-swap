@@ -13,7 +13,7 @@ import HalfLoop from '../new_images/halfLoop_black.png'
 import request from 'request';
 
 import axios from 'axios'
-const ROOT = 'http://www.loop-trading.com'
+const ROOT = 'http://www.loop-trading.com:3000'
 axios.defaults.withCredentials = true;
 
 class TradeDetail extends Component {

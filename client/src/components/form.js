@@ -10,7 +10,7 @@ import TopRightBookshelfImage from '../img/Bookshelf_NewTrade1.svg'
 
 import '../styles/form.css'
 
-const ROOT = 'http://www.loop-trading.com'
+const ROOT = 'http://www.loop-trading.com:3000'
 axios.defaults.withCredentials = true;
 
 /*

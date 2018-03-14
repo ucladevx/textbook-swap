@@ -4,7 +4,7 @@ import axios from 'axios';
 import fetch from 'isomorphic-fetch';
 import 'react-select/dist/react-select.css';
 
-const ROOT = 'http://www.loop-trading.com'
+const ROOT = 'http://www.loop-trading.com:3000'
 
 axios.defaults.withCredentials = true;
 

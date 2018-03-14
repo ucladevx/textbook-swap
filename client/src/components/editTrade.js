@@ -10,7 +10,7 @@ import TopRightBookshelfImage from '../img/Bookshelf_NewTrade1.svg'
 
 import '../styles/form.css'
 
-const ROOT = 'http://localhost:3000'
+const ROOT = 'http://loop-trading.com'
 axios.defaults.withCredentials = true;
 
 class EditTrade extends Component{

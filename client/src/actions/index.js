@@ -1,7 +1,7 @@
 import axios from 'axios'
 import {USER_LOGIN} from './types'
 
-const ROOT = 'http://localhost:3000'
+const ROOT = 'http://loop-trading.com'
 
 // We use middlewares for the dispatch stuff w/ async network requests
 

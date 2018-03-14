@@ -10,7 +10,7 @@ import NavBarLogo from '../img/new_logo_navbar.svg'
 
 import axios from 'axios'
 
-const ROOT = 'http://localhost:3000'
+const ROOT = 'http://loop-trading.com'
 axios.defaults.withCredentials = true;
 
 
@@ -39,11 +39,11 @@ class NavBar extends Component {
                 break
             case 4:
                 console.log("Logout")
-                window.location.replace("http://localhost:3000/logout/facebook");
+                window.location.replace("http://loop-trading.com/logout/facebook");
                 break   
             case 5:
                 console.log("Login")
-                window.location.replace("http://localhost:3000/login/facebook");
+                window.location.replace("http://loop-trading.com/login/facebook");
                 break
             case 6:
                 this.props.history.push('/bookshelf')

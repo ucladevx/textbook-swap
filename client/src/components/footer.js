@@ -10,10 +10,10 @@ const Footer = () => {
     return (
         <footer id="myFooter">
         <div className="social-networks">
-            <a href="#" className="twitter"><Facebook/></a>
-            <a href="#" className="facebook"><Twitter></Twitter></a>
+            <a href="#" className="facebook"><Facebook/></a>
+            <a href="#" className="twitter"><Twitter></Twitter></a>
             <a href="#" className="google"><Google></Google></a>
-            <p>© 2017 Loop UCLA DevX </p>
+            <p>© 2018 Loop UCLA DevX </p>
         </div>
     </footer> 
     )

@@ -69,15 +69,15 @@
 }
 
 #myFooter .facebook:hover{
-	color:#0077e2;
+	color:#3B5998;
 }
 
 #myFooter .google:hover{
-	color:#ef1a1a;
+	color:#db3236;
 }
 
 #myFooter .twitter:hover{
-	color: #00aced;
+	color:#1dcaff;
 }
 
 @media screen and (max-width: 767px){

@@ -58,7 +58,7 @@ class NavBar extends Component {
                     <Navbar.Brand>
                         <img 
                             alt="LOOP" 
-                            onClick={()=>this.runAlgorithm()}
+                            onClick={()=>{ this.runAlgorithm(); this.props.history.push('/') } }
                             className="navbar-logo" src={NavBarLogo}/>
                         
                         {

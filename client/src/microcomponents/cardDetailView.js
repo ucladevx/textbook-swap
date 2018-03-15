@@ -6,9 +6,11 @@ class CardDetailView extends Component {
     {
         return (
             <div className="cdContainer">
-                <div className="cdText"><span>{this.props.book.title}</span></div>
-                <div className="cdText"><span>{this.props.book.author}</span></div>
-                <div className="cdText">ISBN: {this.props.book.isbn}</div>
+                <div className="cdTextSection">
+                    <div className="cdText"><span>{this.props.book.title}</span></div>
+                    <div className="cdText"><span>{this.props.book.author}</span></div>
+                    <div className="cdText">ISBN: {this.props.book.isbn}</div>
+                </div>
                 <div className="cdImageBox">
                     <img src={this.props.book.img_url} className="cdImage"></img>
                 </div>

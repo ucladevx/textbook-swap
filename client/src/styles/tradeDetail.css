@@ -6,29 +6,14 @@
         align-items: center;
         justify-content: center;    
     }
-
-    /* need this to make sure that setting heights by percentages for child elements works */
-    /*
+    
     .tdDetailContents {
-        background-color: cadetblue;
         height: 60%;
     }
 
     .tdDetailContainer{
-        height: 80%;
-        background-color: rgb(254, 254, 254);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: row;
-        overflow: auto;
-        padding: 5%;
-    }
-    */
-
-    .tdDetailContainer{
         width: 85%;
-        min-height: 70%;
+        height: 100%;
         background-color: white;
         margin: auto;
         display: flex;
@@ -58,7 +43,7 @@
 
     .tdLeft{
         flex: 2;
-        margin: 5%;
+        padding: 5%;
         justify-content: center;
         align-items: center;
         width: 30%;
@@ -74,7 +59,7 @@
 
     .tdRight{
         flex: 2;
-        margin: 5%;
+        padding: 5%;
         justify-content: center;
         align-items: center;
         width: 30%;
@@ -115,6 +100,7 @@
         padding: 10px;
         font-size: 1.1em;
     }
+
 }
 
 @media only screen and (max-width : 768px) {
@@ -125,29 +111,14 @@
         align-items: center;
         justify-content: center;    
     }
-
-    /* need this to make sure that setting heights by percentages for child elements works */
-    /*
+    
     .tdDetailContents {
-        background-color: cadetblue;
         height: 60%;
     }
 
     .tdDetailContainer{
-        height: 80%;
-        background-color: rgb(254, 254, 254);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: row;
-        overflow: auto;
-        padding: 5%;
-    }
-    */
-
-    .tdDetailContainer{
         width: 85%;
-        min-height: 70%;
+        height: 100%;
         background-color: white;
         margin: auto;
         display: flex;
@@ -177,7 +148,7 @@
 
     .tdLeft{
         flex: 2;
-        margin: 5%;
+        padding: 5%;
         justify-content: center;
         align-items: center;
         width: 35%;
@@ -193,7 +164,7 @@
 
     .tdRight{
         flex: 2;
-        margin: 5%;
+        padding: 5%;
         justify-content: center;
         align-items: center;
         width: 35%;

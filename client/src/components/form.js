@@ -295,7 +295,9 @@ class Form extends Component{
                                 <h1 className="formTitle">NEW TRADE</h1>
                                 <img className="topRightBookshelfImage" src={TopRightBookshelfImage}/>
                             </div>
-                            <h3 className="formMessage">Select the book(s) you want to receive in return.</h3>
+                            <h3 className="formMessage">Select the book(s) you would be willing to receive in return. <br/>
+                                You will only receive one of these books in exchange.
+                            </h3>
                             <div className="searchBoxAndResults" ref="wantedBookSearch">
                                 <SearchBox
                                     onChange={this.processWant}

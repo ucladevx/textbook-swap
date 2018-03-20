@@ -108,7 +108,7 @@ class TradingGuide extends Component{
                             </div>
                             <div className="descr col-md-6">
                                 <h3><span style={{color:'#e88154'}}>Rejecting</span> a Matched Trade</h3>
-                                <p> If you no longer want to proceed with a matched trade (even after previously accepting it), then you can reject it by clicking on the trade card. If anyone in the trade loop rejects the matched trade, then the whole trade loop is broken and everyone in the trade loop is notified by email. You can click a rejected trade card to remove it from your bookshelf and later re-create it as a new trade if you want. </p>
+                                <p> If you no longer want to proceed with a matched trade (even after previously accepting it), then you can reject it by clicking on the trade card. If anyone in the trade loop rejects the matched trade, then the whole trade loop is broken and everyone in the trade loop is notified by email. You can click a rejected trade card to remove it from your bookshelf and if you want, later re-create it as a new trade. </p>
                             </div>
                         </div>
                     </div>

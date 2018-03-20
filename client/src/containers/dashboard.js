@@ -109,10 +109,11 @@ class Dashboard extends Component{
                           show: true,
                           status: 'W',              
                           type: "info",
-                          title: "We're waiting for other members of the loop to confirm the trade",
-                          text: "You will be emailed trade details soon",
+                          title: "We're waiting for other members to confirm",
+                          text: "You will be emailed trade details soon.",
                           confirmButtonText: "Okay",
                           cancelButtonText: "Reject Trade",
+                          cancelButtonColor: "rgb(221, 107, 85)"
                         }})
         }
         else if (type === 'REJECT'){
@@ -121,7 +122,7 @@ class Dashboard extends Component{
                           status: 'REJECT',              
                           type: "warning",
                           title: "Are you sure you want to reject the trade?",
-                          text: "The loop will be broken",
+                          text: "The loop will be broken.",
                           confirmButtonText: "Reject Trade",
                           cancelButtonText: "Back",
                           confirmButtonColor: "#DD6B55"

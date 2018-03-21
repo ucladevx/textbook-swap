@@ -139,10 +139,10 @@ function process(visited){
         });
         emailer.setup_potential_trade_email(visited[i][0], visited[i][1], visited[i + 1][0], visited[i + 1][1], function(err, email_data){
             if(err) {
-                console.log(err);
+                logger.log(err);
             }
             else {
-                console.log(email_data);
+                logger.log(email_data);
                 emailer.send_potential_trade_email(email_data);
             }
         });

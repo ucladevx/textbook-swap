@@ -8,8 +8,23 @@ import '../styles/navbar.css'
 
 import NavBarLogo from '../img/new_logo_navbar.svg'
 
+import axios from 'axios'
+
+const ROOT = 'http://localhost:3000'
+axios.defaults.withCredentials = true;
+
+
 class NavBar extends Component {
-    
+    runAlgorithm(){
+        console.log("RUN")
+        axios.get(ROOT+'/api/algorithm/run')
+        .then((res) => {
+            window.location.reload()
+        })
+        .catch((e) => console.log(e))
+    }
+
+
     handleSelect(key){
         switch (key) {
             case 1:
@@ -43,8 +58,18 @@ class NavBar extends Component {
                     <Navbar.Brand>
                         <img 
                             alt="LOOP" 
+                            onClick={()=>{ this.runAlgorithm(); this.props.history.push('/') } }
+                            className="navbar-logo" src={NavBarLogo}/>
+                        
+                        {
+                            /*
+                            <img 
+                            alt="LOOP" 
                             onClick={()=>this.props.history.push('/')}
                             className="navbar-logo" src={NavBarLogo}/>
+                            */
+                        }
+                        
                     </Navbar.Brand>
                     <Navbar.Toggle />
                 </Navbar.Header>
@@ -52,7 +77,7 @@ class NavBar extends Component {
                     <Nav pullRight>
                         {
                             (true || this.props.location.pathname === "/") &&
-                            <NavItem eventKey={1}>ABOUT</NavItem>
+                            <NavItem eventKey={1}>TRADING GUIDE</NavItem>
                         }
                         <NavItem eventKey={2}>CONTACT US</NavItem>
                         <NavItem eventKey={3}>REPORT A BUG</NavItem>

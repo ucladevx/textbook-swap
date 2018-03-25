@@ -327,7 +327,7 @@ class Dashboard extends Component{
                         <button className={"filter_button rejected_filter " + (this.state.filter === "REJECTED" ? "active_filter" : "")} onClick={()=>this.setFilter("REJECTED")}>REJECTED</button>
                         <button className={"filter_button completed_filter " + (this.state.filter === "COMPLETED" ? "active_filter" : "")} onClick={()=>this.setFilter("COMPLETED")}>COMPLETED</button>
                     </div>
-                    <div className="col-md-3">
+                    <div className="col-md-3 bookshelf-image-col">
                         <img alt="LOOP" className="bookshelf_image" src={BookshelfImage}/>
                     </div>
                 </div>

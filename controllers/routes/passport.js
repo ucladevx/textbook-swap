@@ -4,11 +4,16 @@
 
 const initModel = require('../../models/init');
 const users = require('../../models/users');
+const utilities = require('../../utilities');
 
 // output user profile info to console and redirect user to profile page
 exports.loginReturn = function (req, res) {
-    users.add_new_user(req.user.id, req.user.displayName, req.user.emails[0].value, function(){
-        res.redirect('http://localhost:5000/bookshelf')
+    users.add_new_user(req.user.id, req.user.displayName, req.user.emails[0].value, function(status){
+        if (status === utilities.users_errors.DB_SUCCESS) {
+            res.redirect('http://localhost:5000/bookshelf_new');
+            return;
+        }
+        res.redirect('http://localhost:5000/bookshelf');
     });
 };
 

@@ -38,6 +38,10 @@ class Dashboard extends Component{
     componentDidMount(){
         console.log("Component Did Mount");
         this.props.userLogin
+
+        if (this.props.new === true){
+            this.openSwal('NEW USER')
+        }
     }
 
     constructor(props){
@@ -80,7 +84,7 @@ class Dashboard extends Component{
         this.openRejectAlert = this.openRejectAlert.bind(this);
         this.openWaitAlert = this.openWaitAlert.bind(this);
     }
-    
+
     openSwal(type) {
         if (type === 'A'){
             this.setState({swal : {
@@ -107,10 +111,10 @@ class Dashboard extends Component{
         else if (type === 'W'){
             this.setState({swal : {
                           show: true,
-                          status: 'W',              
+                          status: 'W',
                           type: "info",
                           title: "We're waiting for other members of the loop to confirm the trade",
-                          text: "You will be emailed trade details soon",
+                          text: "You will be emailed trade details soon.",
                           confirmButtonText: "Okay",
                           cancelButtonText: "Reject Trade",
                         }})
@@ -118,13 +122,23 @@ class Dashboard extends Component{
         else if (type === 'REJECT'){
             this.setState({swal : {
                           show: true,
-                          status: 'REJECT',              
+                          status: 'REJECT',
                           type: "warning",
                           title: "Are you sure you want to reject the trade?",
-                          text: "The loop will be broken",
+                          text: "The loop will be broken.",
                           confirmButtonText: "Reject Trade",
                           cancelButtonText: "Back",
                           confirmButtonColor: "#DD6B55"
+                        }})
+        }
+        else if (type === 'NEW USER'){
+            this.setState({swal : {
+                          show: true,
+                          status: 'NEW USER',
+                          title: "Welcome to Loop!",
+                          text: "Get started by checking out the trading guide.",
+                          confirmButtonText: "Sure",
+                          cancelButtonText: "No thanks",
                         }})
         }
     }
@@ -136,24 +150,24 @@ class Dashboard extends Component{
     openEditModal() {
         this.setState({editModalIsOpen: true});
     }
-    
+
     openApproveAlert(){
         this.openSwal('A')
     }
-    
+
     openRejectAlert(){
         this.openSwal('R')
     }
-    
+
     openWaitAlert(){
         this.openSwal('W')
     }
-    
+
 
     closeFormModal() {
         this.setState({formModalIsOpen: false});
     }
-    
+
     closeEditModal() {
         this.setState({editModalIsOpen: false});
     }
@@ -208,18 +222,18 @@ class Dashboard extends Component{
             window.location.reload();
         })
     }
-    
+
     dismissAccept(){
         console.log("Dismiss Accepted Trade from DB...")
     }
-    
+
     handleAlert(){
         var status = this.state.swal.status
-        
+
         if (!status){
             return
         }
-        
+
         if (status === 'A'){
             this.dismissFoundTrade('A')
         }
@@ -232,8 +246,12 @@ class Dashboard extends Component{
         else if (status === 'REJECT'){
             this.rejectTrade()
         }
+        else if (status === 'NEW USER'){
+            this.setState({ swal: {show: false}})
+            this.props.history.push('/guide')
+        }
     }
-    
+
     rejectTrade(){
         var owned_book = this.state.selectedCard.bookHave.book_id
         axios.get(ROOT+'/api/found_trades/get_trade_by_book_owned', {
@@ -257,10 +275,10 @@ class Dashboard extends Component{
             }
         })
     }
-    
+
     handleCancel(){
         var status = this.state.swal.status
-        
+
         if (!status){
             return
         }
@@ -277,9 +295,12 @@ class Dashboard extends Component{
         else if (status === 'REJECT'){
             this.setState({ swal: {show: false}})
         }
+        else if (status === 'NEW USER'){
+            this.setState({ swal: {show: false}})
+        }
     }
-    
-    
+
+
 
     render(){
         if (this.props.user == null){
@@ -310,7 +331,7 @@ class Dashboard extends Component{
                         <img alt="LOOP" className="bookshelf_image" src={BookshelfImage}/>
                     </div>
                 </div>
-                
+
                 <Modal
                   isOpen={this.state.formModalIsOpen}
                   onRequestClose={this.closeFormModal}
@@ -342,7 +363,7 @@ class Dashboard extends Component{
                         onComplete={this.closeEditModal}>
                     </EditTrade>
                 </Modal>
-                
+
                 <SweetAlert
                     show={this.state.swal.show}
                     type={this.state.swal.type}
@@ -357,7 +378,7 @@ class Dashboard extends Component{
                     onOutsideClick={() => this.setState({ swal: {show: false} })}
                     confirmButtonColor={this.state.swal.confirmButtonColor}
                 />
-                
+
                 <div className="cardContainer">
                      <CardContainer
                          cards={this.props.user.trades}

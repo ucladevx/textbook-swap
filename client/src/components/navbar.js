@@ -79,8 +79,7 @@ class NavBar extends Component {
                             (true || this.props.location.pathname === "/") &&
                             <NavItem eventKey={1}>TRADING GUIDE</NavItem>
                         }
-                        <NavItem eventKey={2}>CONTACT US</NavItem>
-                        <NavItem eventKey={3}>REPORT A BUG</NavItem>
+                        <NavItem eventKey={3}>CONTACT US</NavItem>
                         {
                             this.props.user != null ?
                                 (

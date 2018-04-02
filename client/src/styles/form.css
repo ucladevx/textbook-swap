@@ -71,11 +71,16 @@
      * First page of the form
      */
 
-     /* search box for user input */
-    .Select-control, .Select-placeholder, .Select.is-focused > .Select-control, .Select-value {
+    /* search box for user input */
+    .Select-control, .Select.is-focused > .Select-control, .Select-value {
         background-color: rgb(35, 188, 212);
         border-color: rgb(35, 188, 212);
         border-radius: 0;
+        color: rgb(255, 255, 255);
+    }
+
+    /* make text cursor appear when search box selected */
+    .Select-placeholder {
         color: rgb(255, 255, 255);
     }
 
@@ -300,11 +305,16 @@
      * First page of the form
      */
 
-     /* search box for user input */
-    .Select-control, .Select-placeholder, .Select.is-focused > .Select-control, .Select-value {
+    /* search box for user input */
+    .Select-control, .Select.is-focused > .Select-control, .Select-value {
         background-color: rgb(35, 188, 212);
         border-color: rgb(35, 188, 212);
         border-radius: 0;
+        color: rgb(255, 255, 255);
+    }
+
+    /* make text cursor appear when search box selected */
+    .Select-placeholder {
         color: rgb(255, 255, 255);
     }
 

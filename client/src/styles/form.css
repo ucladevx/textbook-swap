@@ -27,12 +27,6 @@
         background-color: lightgray;
     }
 
-    /*
-    .formPrev{
-        
-    }
-    */
-
     .formSummary{
         padding-top: 5%;
         background-color: coral;
@@ -51,12 +45,6 @@
         text-align: center;
         overflow: auto;
         padding: 5%;
-    }
-
-    .formInput{
-        display: block;
-        width: 80%;
-        align-self: center;
     }
 
     .formButton{
@@ -83,12 +71,23 @@
      * First page of the form
      */
 
-     /* search box for user input */
-    .Select-control, .Select-placeholder, .Select.is-focused > .Select-control, .Select-value {
+    /* search box for user input */
+    .Select-control, .Select.is-focused > .Select-control, .Select-value {
         background-color: rgb(35, 188, 212);
         border-color: rgb(35, 188, 212);
         border-radius: 0;
         color: rgb(255, 255, 255);
+    }
+
+    /* make text cursor appear when search box selected */
+    .Select-placeholder {
+        color: rgb(255, 255, 255, 0.7);
+    }
+
+    /* make placeholder text disappear when user clicks on search box */
+    .Select.is-open.is-focused.is-searchable .Select-placeholder, 
+    .Select.is-clearable.is-focused.is-searchable .Select-placeholder {
+        display: none;
     }
 
     /* search box and results */
@@ -135,12 +134,6 @@
         color: rgb(255, 255, 255);
         border-color: rgb(255, 255, 255);
     }
-
-    /* result from search box */
-    /*.Select-menu-outer {
-        max-height: 100%;
-        border-radius: 0;
-    }*/
 
     .Select-menu {
         max-height: 70%;
@@ -272,12 +265,6 @@
         background-color: lightgray;
     }
 
-    /*
-    .formPrev{
-        
-    }
-    */
-
     .formSummary{
         padding-top: 5%;
         background-color: coral;
@@ -296,12 +283,6 @@
         text-align: center;
         overflow: auto;
         padding: 5%;
-    }
-
-    .formInput{
-        display: block;
-        width: 80%;
-        align-self: center;
     }
 
     .formButton{
@@ -330,12 +311,23 @@
      * First page of the form
      */
 
-     /* search box for user input */
-    .Select-control, .Select-placeholder, .Select.is-focused > .Select-control, .Select-value {
+    /* search box for user input */
+    .Select-control, .Select.is-focused > .Select-control, .Select-value {
         background-color: rgb(35, 188, 212);
         border-color: rgb(35, 188, 212);
         border-radius: 0;
         color: rgb(255, 255, 255);
+    }
+
+    /* make text cursor appear when search box selected */
+    .Select-placeholder {
+        color: rgb(255, 255, 255, 0.7);
+    }
+
+    /* make placeholder text disappear when user clicks on search box */
+    .Select.is-open.is-focused.is-searchable .Select-placeholder, 
+    .Select.is-clearable.is-focused.is-searchable .Select-placeholder {
+        display: none;
     }
 
     /* search box and results */
@@ -374,12 +366,6 @@
         color: rgb(255, 255, 255);
         border-color: rgb(255, 255, 255);
     }
-
-    /* result from search box */
-    /*.Select-menu-outer {
-        max-height: 100%;
-        border-radius: 0;
-    }*/
 
     .Select-menu {
         max-height: 70%;

@@ -81,7 +81,13 @@
 
     /* make text cursor appear when search box selected */
     .Select-placeholder {
-        color: rgb(255, 255, 255);
+        color: rgb(255, 255, 255, 0.7);
+    }
+
+    /* make placeholder text disappear when user clicks on search box */
+    .Select.is-open.is-focused.is-searchable .Select-placeholder, 
+    .Select.is-clearable.is-focused.is-searchable .Select-placeholder {
+        display: none;
     }
 
     /* search box and results */
@@ -315,7 +321,13 @@
 
     /* make text cursor appear when search box selected */
     .Select-placeholder {
-        color: rgb(255, 255, 255);
+        color: rgb(255, 255, 255, 0.7);
+    }
+
+    /* make placeholder text disappear when user clicks on search box */
+    .Select.is-open.is-focused.is-searchable .Select-placeholder, 
+    .Select.is-clearable.is-focused.is-searchable .Select-placeholder {
+        display: none;
     }
 
     /* search box and results */

@@ -126,10 +126,10 @@ class searchBox extends Component{
                     labelKey="title"
                     loadOptions={this.getBooks}
                     backspaceRemoves={this.state.backspaceRemoves}
-                    placeholder="Search by title, professor or class"
+                    placeholder="Search by title, professor, class, or ISBN"
                     cache={false}
                     filterOptions={this.filterOptions}
-                    searchPromptText="Type in the box above to search"
+                    searchPromptText=""
             />
 			</div>
 		);

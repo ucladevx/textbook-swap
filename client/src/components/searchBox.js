@@ -129,6 +129,7 @@ class searchBox extends Component{
                     placeholder="Search by title, professor or class"
                     cache={false}
                     filterOptions={this.filterOptions}
+                    searchPromptText="Type in the box above to search"
             />
 			</div>
 		);

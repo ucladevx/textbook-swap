@@ -27,12 +27,6 @@
         background-color: lightgray;
     }
 
-    /*
-    .formPrev{
-        
-    }
-    */
-
     .formSummary{
         padding-top: 5%;
         background-color: coral;
@@ -51,12 +45,6 @@
         text-align: center;
         overflow: auto;
         padding: 5%;
-    }
-
-    .formInput{
-        display: block;
-        width: 80%;
-        align-self: center;
     }
 
     .formButton{
@@ -135,12 +123,6 @@
         color: rgb(255, 255, 255);
         border-color: rgb(255, 255, 255);
     }
-
-    /* result from search box */
-    /*.Select-menu-outer {
-        max-height: 100%;
-        border-radius: 0;
-    }*/
 
     .Select-menu {
         max-height: 70%;
@@ -272,12 +254,6 @@
         background-color: lightgray;
     }
 
-    /*
-    .formPrev{
-        
-    }
-    */
-
     .formSummary{
         padding-top: 5%;
         background-color: coral;
@@ -296,12 +272,6 @@
         text-align: center;
         overflow: auto;
         padding: 5%;
-    }
-
-    .formInput{
-        display: block;
-        width: 80%;
-        align-self: center;
     }
 
     .formButton{
@@ -374,12 +344,6 @@
         color: rgb(255, 255, 255);
         border-color: rgb(255, 255, 255);
     }
-
-    /* result from search box */
-    /*.Select-menu-outer {
-        max-height: 100%;
-        border-radius: 0;
-    }*/
 
     .Select-menu {
         max-height: 70%;
